@@ -1,46 +1,76 @@
 import { useEffect, useRef } from 'react';
-import { clsx } from '../lib/utils';
+import { Terminal } from 'lucide-react';
 
-interface LogEntry {
+export interface LogEntry {
+  id: number;
   text: string;
   level?: string;
   time: number;
 }
 
+const levelStyle: Record<string, string> = {
+  error: 'text-[#FF3366]',
+  warn:  'text-[#FFA500]',
+  info:  'text-[#00ff66]',
+};
+
 export function LogViewer({ logs }: { logs: LogEntry[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef(true);
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  const onScroll = () => {
+    const el = containerRef.current;
+    if (!el) return;
+    autoScrollRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 40;
+  };
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (autoScrollRef.current) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [logs.length]);
 
   return (
-    <div className="neon-card bg-[var(--color-bg-card)] backdrop-blur rounded-2xl border border-[var(--color-border)] p-5">
-      <h2 className="text-lg font-semibold flex items-center gap-2 mb-4 m-0">
-        <span className="w-1 h-5 bg-gradient-to-b from-accent to-amber rounded-full inline-block" />
-        Живой лог
-      </h2>
+    <div className="card flex flex-col" style={{borderRadius: '6px', maxHeight: '280px'}}>
+      <div className="px-3 py-2 border-b border-[rgba(204,0,0,0.3)] flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-1.5">
+          <Terminal className="w-3.5 h-3.5 text-[#FF3366]" />
+          <span className="cyber-text text-xs text-[#cccccc]">⛧ LOGS</span>
+        </div>
+        <span className="mono text-[9px] text-[#666666]">
+          [{logs.length}]
+        </span>
+      </div>
 
-      <div className="bg-black/50 rounded-xl p-4 max-h-[300px] overflow-y-auto font-['JetBrains_Mono',monospace] text-xs leading-relaxed">
-        {logs.length === 0 && (
-          <div className="text-text-secondary/50 text-center py-8">
-            Ожидание данных...
+      <div
+        ref={containerRef}
+        onScroll={onScroll}
+        className="terminal flex-1 min-h-0 px-3 py-2 overflow-y-auto text-xs leading-relaxed"
+      >
+        {logs.length === 0 ? (
+          <div className="text-[#666666] text-center py-10 mono">
+            <div className="mb-2 text-[#CC0000] text-lg">💀</div>
+            &gt; Awaiting souls...
           </div>
+        ) : (
+          logs.map(log => (
+            <div key={log.id} className="flex gap-2 font-['Source_Code_Pro',monospace] hover:bg-[rgba(204,0,0,0.05)] px-2 py-0.5 -mx-2 rounded transition-colors">
+              <span className="text-[#666666] shrink-0 select-none tabular-nums text-[10px]">
+                [{new Date(log.time * 1000).toLocaleTimeString()}]
+              </span>
+              <span className={levelStyle[log.level ?? 'info'] ?? levelStyle.info}>
+                {log.text}
+              </span>
+            </div>
+          ))
         )}
-        {logs.map((log, i) => (
-          <div key={i} className={clsx(
-            'py-0.5 border-b border-[rgba(255,36,72,0.055)] last:border-0',
-            log.level === 'error' ? 'text-red' :
-            log.level === 'warn' ? 'text-amber' :
-            'text-text-secondary'
-          )}>
-            <span className="text-text-secondary/40 mr-2">
-              {new Date(log.time * 1000).toLocaleTimeString()}
-            </span>
-            {log.text}
-          </div>
-        ))}
         <div ref={bottomRef} />
+      </div>
+
+      <div className="terminal px-3 py-1.5 border-t border-[rgba(204,0,0,0.3)] flex items-center gap-2 shrink-0">
+        <span className="text-[#FF3366] mono text-[11px]">root@abyss:~#</span>
+        <span className="text-[#00ff66] mono text-[11px] animate-pulse">█</span>
       </div>
     </div>
   );

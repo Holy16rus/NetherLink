@@ -11,8 +11,9 @@ export interface Metrics {
   checking_progress: number;
   checking_total: number;
   live: number;
+  checker_rated: number;
+  checker_filtered: number;
   geo_checked: number;
-  ping_checked: number;
   selected: number;
   countries: number;
 }

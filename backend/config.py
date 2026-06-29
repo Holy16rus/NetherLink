@@ -2,14 +2,28 @@ import os
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+# Load .env if present (no dependency on python-dotenv)
+_ROOT = Path(__file__).resolve().parent.parent
+_env_file = _ROOT / ".env"
+if _env_file.exists():
+    for _line in _env_file.read_text("utf-8").splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _key, _, _val = _line.partition("=")
+            os.environ.setdefault(_key.strip(), _val.strip())
+
+ROOT = _ROOT
 SOURCES_FILE = ROOT / "sources.json"
 OUTPUT_FILE = ROOT / "HolyVPN.yaml"
 WEB_DIR = ROOT / "web"
 
-PROXYCHECK_KEY = "3m01d6-0h1849-93710l-xo271j"
-GLOBALPING_KEY = "yzjphexhdtnzlb2syywsqhqhbnfgianu"
+# API keys — set via .env file (see .env.example)
+PROXYCHECK_KEY: str = os.environ.get("PROXYCHECK_KEY", "")
+GLOBALPING_KEY: str = os.environ.get("GLOBALPING_KEY", "")
+CHECKER_NET_KEY: str = os.environ.get("CHECKER_NET_KEY", "")
 
+# Concurrency / performance tuning
+CHECK_CONCURRENCY = int(os.environ.get("CHECK_CONCURRENCY", "200"))  # было 100
 CHECK_BATCH_SIZE = 1000
 GLOBALPING_BATCH = 50
 TIMEOUT = 15
@@ -34,6 +48,13 @@ COUNTRY_NAMES_RU = {
 
 def load_sources():
     if not SOURCES_FILE.exists():
+        # Fall back to example file so the app works out of the box
+        example = ROOT / "sources.example.json"
+        if example.exists():
+            try:
+                return json.loads(example.read_text("utf-8"))
+            except Exception:
+                pass
         return {"sources": [], "local_files": ["proxy.txt"]}
     try:
         data = json.loads(SOURCES_FILE.read_text("utf-8"))

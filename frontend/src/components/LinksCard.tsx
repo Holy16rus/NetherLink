@@ -1,56 +1,66 @@
 import { useState } from 'react';
-import { Link, Copy, Download } from 'lucide-react';
+import { Copy, Download, Link2 } from 'lucide-react';
 
 export function LinksCard() {
   const subUrl = `${window.location.protocol}//${window.location.host}/sub`;
-  const [copiedSub, setCopiedSub] = useState(false);
-  const [copiedFile, setCopiedFile] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const copyToClipboard = async (text: string, setter: (v: boolean) => void) => {
+  const copy = async () => {
     try {
-      await navigator.clipboard.writeText(text);
-      setter(true);
-      setTimeout(() => setter(false), 2000);
+      await navigator.clipboard.writeText(subUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {}
   };
 
   return (
-    <div className="neon-card bg-[var(--color-bg-card)] backdrop-blur rounded-2xl border border-[var(--color-border)] p-5">
-      <h2 className="text-lg font-semibold flex items-center gap-2 mb-4 m-0">
-        <Link className="w-5 h-5 text-accent" />
-        Ссылки для подключения
-      </h2>
+    <div className="card" style={{borderRadius: '6px'}}>
+      <div className="px-3 py-2 border-b border-[rgba(204,0,0,0.3)] flex items-center gap-1.5">
+        <Link2 className="w-3.5 h-3.5 text-[#FF3366]" />
+        <span className="cyber-text text-xs text-[#cccccc]">⛧ ENDPOINTS</span>
+      </div>
 
-      <div className="space-y-3">
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-black/30 border border-[var(--color-border)]">
-          <div className="w-9 h-9 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
-            <Copy className="w-4 h-4 text-accent" />
-          </div>
+      <div className="divide-y divide-[rgba(204,0,0,0.2)]">
+        <div className="px-3 py-2 flex items-center gap-2">
+          <Copy className="w-3.5 h-3.5 text-[#999999] shrink-0" />
           <div className="flex-1 min-w-0">
-            <div className="text-xs text-text-secondary mb-0.5">Подписка для FLClash / Clash</div>
-            <div className="text-sm font-mono text-accent truncate">{subUrl}</div>
+            <div className="mono text-[8px] text-[#666666] mb-0.5 uppercase">
+              SUB URL
+            </div>
+            <div className="mono text-[11px] text-[#cccccc] truncate">
+              {subUrl}
+            </div>
           </div>
-          <button onClick={() => copyToClipboard(subUrl, setCopiedSub)}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0
-              bg-accent/10 text-accent border border-accent/30 hover:bg-accent/20 hover:scale-[1.02]"
+          <button
+            onClick={copy}
+            className="cyber-text text-[9px] px-2 py-1 rounded-sm shrink-0
+              bg-[rgba(204,0,0,0.15)] border border-[rgba(255,51,102,0.4)]
+              text-[#FF3366] hover:bg-[rgba(255,51,102,0.25)]
+              transition-all btn-glow"
           >
-            {copiedSub ? '✓ Скопировано' : 'Копировать'}
+            {copied ? '✓' : 'COPY'}
           </button>
         </div>
 
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-black/30 border border-[var(--color-border)]">
-          <div className="w-9 h-9 rounded-lg bg-amber/15 flex items-center justify-center shrink-0">
-            <Download className="w-4 h-4 text-amber" />
-          </div>
+        <div className="px-3 py-2 flex items-center gap-2">
+          <Download className="w-3.5 h-3.5 text-[#999999] shrink-0" />
           <div className="flex-1 min-w-0">
-            <div className="text-xs text-text-secondary mb-0.5">YAML конфиг файл</div>
-            <div className="text-sm font-mono text-amber truncate">/api/download</div>
+            <div className="mono text-[8px] text-[#666666] mb-0.5 uppercase">
+              CONFIG YAML
+            </div>
+            <div className="mono text-[11px] text-[#cccccc]">
+              /api/download
+            </div>
           </div>
-          <a href="/api/download" target="_blank"
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all shrink-0 no-underline inline-block
-              bg-amber/10 text-amber border border-amber/30 hover:bg-amber/20 hover:scale-[1.02]"
+          <a
+            href="/api/download"
+            target="_blank"
+            className="cyber-text text-[9px] px-2 py-1 rounded-sm shrink-0 no-underline
+              bg-gradient-to-r from-[#CC0000] to-[#8B0000] border border-[#FF3366]
+              text-white hover:from-[#FF3366] hover:to-[#CC0000]
+              transition-all btn-glow inline-block"
           >
-            Скачать
+            GET
           </a>
         </div>
       </div>

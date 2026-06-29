@@ -1,0 +1,27 @@
+{
+  "sources": [
+    {
+      "url": "https://github.com/TheSpeedX/PROXY-List",
+      "enabled": true
+    },
+    {
+      "url": "https://github.com/proxifly/free-proxy-list",
+      "enabled": true
+    },
+    {
+      "url": "https://github.com/VPN-Subcription-Links/ClashX-V2Ray-TopFreeProxy",
+      "enabled": true
+    },
+    {
+      "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all",
+      "enabled": true
+    },
+    {
+      "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks5&timeout=10000&country=all",
+      "enabled": true
+    }
+  ],
+  "local_files": [
+    "proxy.txt"
+  ]
+}

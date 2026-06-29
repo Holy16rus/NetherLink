@@ -1,48 +1,58 @@
-import { useState, useCallback, useEffect } from 'react';
-import { Download } from 'lucide-react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Download, Shield } from 'lucide-react';
+
 import { StatusHeader } from './components/StatusHeader';
 import { MetricsPanel, ProgressBar } from './components/MetricCard';
-import { ProxyGlobe } from './components/ProxyGlobe';
 import { Controls, GenerateOptions } from './components/Controls';
 import { SourcesPanel } from './components/SourcesPanel';
+import { ProxyDataPanel } from './components/ProxyDataPanel';
 import { LinksCard } from './components/LinksCard';
-import { LogViewer } from './components/LogViewer';
-import { ProxySource, Metrics, EngineStatus, GlobePoint } from './types';
+import { LogViewer, LogEntry } from './components/LogViewer';
 import { useSSE } from './hooks/useSSE';
 
-const API_BASE = '/api';
+import { ProxySource, Metrics, EngineStatus } from './types';
 
-interface LogEntry {
-  text: string;
-  level?: string;
-  time: number;
-}
+const API = '/api';
+let _logId = 0;
+
+const EMPTY_METRICS: Metrics = {
+  total_sources: 0, current_source: 0,
+  candidates: 0,    deduped: 0,
+  checking_progress: 0, checking_total: 0,
+  live: 0,          checker_rated: 0, checker_filtered: 0,
+  geo_checked: 0,   selected: 0,
+  countries: 0,
+};
 
 export default function App() {
-  const [sources, setSources] = useState<ProxySource[]>([]);
-  const [metrics, setMetrics] = useState<Metrics>({
-    total_sources: 0, current_source: 0, candidates: 0, deduped: 0,
-    checking_progress: 0, checking_total: 0, live: 0, geo_checked: 0,
-    ping_checked: 0, selected: 0, countries: 0,
-  });
-  const [status, setStatus] = useState<EngineStatus>('idle');
+  const [sources,   setSources]   = useState<ProxySource[]>([]);
+  const [metrics,   setMetrics]   = useState<Metrics>(EMPTY_METRICS);
+  const [status,    setStatus]    = useState<EngineStatus>('idle');
   const [statusMsg, setStatusMsg] = useState('Ожидание');
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [geoPoints, setGeoPoints] = useState<GlobePoint[]>([]);
+  const [logs,      setLogs]      = useState<LogEntry[]>([]);
   const [isRunning, setIsRunning] = useState(false);
+  const [mode,       setMode]      = useState<'full' | 'from-data'>('full');
+  const [selectedDatasets, setSelectedDatasets] = useState<string[]>([]);
 
+  const statusRef = useRef(EMPTY_METRICS);
+  statusRef.current = metrics;
+
+  // Fetch config
   useEffect(() => {
-    fetch(`${API_BASE}/config`)
+    fetch(`${API}/config`)
       .then((r) => r.json())
       .then((cfg) => setSources(cfg.sources || []))
       .catch(() => {});
   }, []);
 
+  // SSE handlers
   const handleStatus = useCallback((data: Record<string, unknown>) => {
     const s = data.status as EngineStatus;
     setStatus(s);
     setStatusMsg((data.message as string) || '');
     setIsRunning(s === 'running');
+    // Clear reconnecting state when we receive a real status
+    setReconnecting(false);
   }, []);
 
   const handleMetrics = useCallback((data: Record<string, unknown>) => {
@@ -52,6 +62,7 @@ export default function App() {
   const handleLog = useCallback((data: Record<string, unknown>) => {
     setLogs((prev) => {
       const entry: LogEntry = {
+        id: ++_logId,
         text: (data.text as string) || '',
         level: data.level as string,
         time: Date.now() / 1000,
@@ -61,46 +72,71 @@ export default function App() {
     });
   }, []);
 
-  const handleGeoPoints = useCallback((data: Record<string, unknown>) => {
-    const points = Array.isArray(data.points) ? data.points : [];
-    setGeoPoints(points.filter((p): p is GlobePoint => {
-      if (!p || typeof p !== 'object') return false;
-      const point = p as Record<string, unknown>;
-      return typeof point.lat === 'number' && typeof point.lon === 'number';
-    }));
-  }, []);
+  const [reconnecting, setReconnecting] = useState(false);
 
-  const handleError = useCallback(() => {
-    setStatus('error');
-    setStatusMsg('Потеря соединения с сервером');
-  }, []);
-
-  useSSE(`${API_BASE}/stream`, {
+  useSSE(`${API}/stream`, {
     status: handleStatus,
     metrics: handleMetrics,
     log: handleLog,
-    geo_points: handleGeoPoints,
-    error: handleError,
-    __error: handleError,
+    __open: () => {
+      if (reconnecting) {
+        setReconnecting(false);
+        // Восстановили соединение — запрашиваем текущий статус
+        fetch(`${API}/status`)
+          .then(r => r.json())
+          .then(s => {
+            const st = s.status as EngineStatus;
+            setStatus(st);
+            setStatusMsg('');
+            setIsRunning(st === 'running');
+            if (s.metrics) setMetrics(prev => ({ ...prev, ...s.metrics }));
+          })
+          .catch(() => {});
+      }
+    },
+    __error: () => {
+      setReconnecting(true);
+      setStatus('error');
+      setStatusMsg('Соединение оборвано, переподключаюсь...');
+    },
   });
 
   const startGenerate = async (opts: GenerateOptions) => {
     setLogs([]);
-    setGeoPoints([]);
-    setMetrics({
-      total_sources: 0, current_source: 0, candidates: 0, deduped: 0,
-      checking_progress: 0, checking_total: 0, live: 0, geo_checked: 0,
-      ping_checked: 0, selected: 0, countries: 0,
-    });
+    setMetrics(EMPTY_METRICS);
+
+    if (mode === 'from-data' && selectedDatasets.length > 0) {
+      try {
+        const resp = await fetch(`${API}/generate-from-data`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            datasets: selectedDatasets,
+            limit: opts.limit,
+            selection: opts.selection,
+            prefer_socks5: true,
+          }),
+        });
+        if (!resp.ok) {
+          const err = await resp.json();
+          setStatus('error');
+          setStatusMsg(err.detail || 'Ошибка запуска');
+        }
+      } catch (e) {
+        setStatus('error');
+        setStatusMsg(String(e));
+      }
+      return;
+    }
 
     try {
-      await fetch(`${API_BASE}/config`, {
+      await fetch(`${API}/config`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sources }),
       });
 
-      const resp = await fetch(`${API_BASE}/generate`, {
+      const resp = await fetch(`${API}/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -108,9 +144,9 @@ export default function App() {
           max_checks: opts.maxChecks,
           timeout: opts.timeout,
           selection: opts.selection,
+          prefer_socks5: true,
         }),
       });
-
       if (!resp.ok) {
         const err = await resp.json();
         setStatus('error');
@@ -123,11 +159,11 @@ export default function App() {
   };
 
   const cancelGenerate = async () => {
-    await fetch(`${API_BASE}/cancel`, { method: 'POST' });
+    await fetch(`${API}/cancel`, { method: 'POST' });
   };
 
   const saveSources = async () => {
-    await fetch(`${API_BASE}/config`, {
+    await fetch(`${API}/config`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sources }),
@@ -136,74 +172,83 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <div className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,36,72,0.035) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,36,72,0.035) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      />
+      <div className="grid-overlay" />
+      <main className="relative z-[2] max-w-7xl mx-auto px-3 sm:px-4 pt-12 pb-8">
+        <div className="space-y-3">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch">
+            <StatusHeader status={status} message={statusMsg} reconnecting={reconnecting} />
+            <LinksCard />
+          </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto p-4 sm:p-6 space-y-4">
-        <StatusHeader status={status} message={statusMsg} />
-
-        <LinksCard />
-
-        <div className="space-y-4">
           <Controls
             onGenerate={startGenerate}
             onCancel={cancelGenerate}
             isRunning={isRunning}
-          />
-        </div>
+            mode={mode}
+            onModeChange={setMode}
+            selectedDataset={selectedDatasets.length > 0 ? selectedDatasets.join(', ') : null}
+          /> 
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2">
-            <div className="neon-card bg-[var(--color-bg-card)] backdrop-blur rounded-2xl border border-[var(--color-border)] p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold flex items-center gap-2 m-0">
-                  <span className="w-1 h-5 bg-gradient-to-b from-accent to-amber rounded-full inline-block" />
-                  Статус проверки
-                </h2>
-                <a href="/api/download"
-                  className="px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer transition-all
-                    bg-white/10 text-text-primary border border-[var(--color-border)]
-                    hover:bg-white/15 hover:scale-[1.02] no-underline inline-block flex items-center gap-1.5"
-                  target="_blank"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Скачать
-                </a>
-              </div>
-              <MetricsPanel metrics={metrics as unknown as Record<string, number>} />
-              {metrics.checking_total > 0 && (
-                <div className="mt-3">
-                  <div className="flex justify-between text-xs text-text-secondary mb-1">
-                    <span>Проверка прокси</span>
-                    <span>{metrics.checking_progress} / {metrics.checking_total}</span>
-                  </div>
-                  <ProgressBar current={metrics.checking_progress} total={metrics.checking_total} />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+            <div className="lg:col-span-2 space-y-3">
+              <div className="card p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="font-display text-sm font-semibold flex items-center gap-2 m-0">
+                    <Shield className="w-3.5 h-3.5 text-accent" />
+                    Soul Collection
+                  </h2>
+                  <a href="/api/download"
+                    className="btn-holy flex items-center gap-1 px-2.5 py-1 rounded text-[10px] no-underline"
+                    target="_blank"
+                  >
+                    <Download className="w-3 h-3" />
+                    Extract
+                  </a>
                 </div>
-              )}
-              <div className="mt-3 h-[300px]">
-                <ProxyGlobe liveCount={metrics.live} isActive={isRunning} points={geoPoints} />
+                <MetricsPanel metrics={metrics as unknown as Record<string, number>} />
+                {metrics.checking_total > 0 && (
+                  <div className="mt-3">
+                    <ProgressBar current={metrics.checking_progress} total={metrics.checking_total} />
+                  </div>
+                )}
               </div>
+
+              <LogViewer logs={logs} />
+            </div>
+
+            <div className="lg:col-span-1 min-h-0 space-y-3">
+              {mode === 'full' ? (
+                <SourcesPanel
+                  sources={sources}
+                  onUpdate={setSources}
+                  onSave={saveSources}
+                />
+              ) : (
+                <ProxyDataPanel
+                  selected={selectedDatasets}
+                  onToggle={(dataset) => {
+                    setSelectedDatasets(prev =>
+                      prev.includes(dataset)
+                        ? prev.filter(d => d !== dataset)
+                        : [...prev, dataset]
+                    );
+                    setMode('from-data');
+                  }}
+                  disabled={isRunning}
+                />
+              )}
             </div>
           </div>
-
-          <div className="space-y-4">
-            <SourcesPanel
-              sources={sources}
-              onUpdate={setSources}
-              onSave={saveSources}
-            />
-          </div>
         </div>
+      </main>
 
-        <LogViewer logs={logs} />
-      </div>
+      <footer className="relative z-[2] text-center py-4 text-[var(--color-text-dim)] text-[10px] mt-4"
+        style={{fontFamily: 'var(--font-mono)'}}>
+        <div className="mb-1 text-[#CC0000] text-sm">⛧</div>
+        root@abyss:~# <span className="text-accent">summon_proxy()</span>
+        <br />
+        <span style={{opacity: 0.5}}>Connection to Heaven... FAILED</span>
+      </footer>
     </div>
   );
 }

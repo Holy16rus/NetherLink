@@ -9,8 +9,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 
-from backend.config import OUTPUT_FILE, SOURCES_FILE, load_sources, save_sources
+from backend.config import OUTPUT_FILE, SOURCES_FILE, ROOT, load_sources, save_sources
 from backend.engine import ProxyEngine
+from backend.pipeline import parse_live_file
 
 app = FastAPI(title="HolyVPN Proxy Generator")
 
@@ -34,6 +35,7 @@ class GeneratePayload(BaseModel):
     max_checks: int = 10000
     timeout: float = 10
     selection: str = "fastest"
+    prefer_socks5: bool = True
 
 
 @app.get("/api/config")
@@ -68,6 +70,7 @@ async def start_generate(payload: GeneratePayload):
         "max_checks": max(0, payload.max_checks),
         "timeout": max(1, payload.timeout),
         "selection": payload.selection if payload.selection in {"fastest", "balanced"} else "fastest",
+        "prefer_socks5": bool(payload.prefer_socks5),
     }
 
     asyncio.create_task(engine.run(sources, local_files, opts))
@@ -80,6 +83,84 @@ async def cancel_generate():
         engine.cancel()
         return {"ok": True, "message": "Отменяем..."}
     return {"ok": False, "message": "Нет активной генерации"}
+
+
+@app.get("/api/proxy-data")
+async def list_proxy_data():
+    """Список сохранённых слепков Proxy-Data."""
+    data_dir = ROOT / "Proxy-Data"
+    if not data_dir.is_dir():
+        return {"entries": []}
+    entries = []
+    for d in sorted(data_dir.iterdir(), reverse=True):
+        if not d.is_dir():
+            continue
+        meta = {}
+        meta_file = d / "meta.json"
+        if meta_file.is_file():
+            try:
+                meta = json.loads(meta_file.read_text("utf-8"))
+            except Exception:
+                pass
+        entries.append({
+            "name": d.name,
+            "live": meta.get("live", 0),
+            "checked": meta.get("checked", 0),
+            "candidates": meta.get("candidates", 0),
+            "sources": meta.get("sources", 0),
+            "timestamp": meta.get("timestamp", ""),
+        })
+    return {"entries": entries}
+
+
+class GenerateFromDataPayload(BaseModel):
+    datasets: list[str]
+    limit: int = 500
+    selection: str = "fastest"
+    prefer_socks5: bool = True
+
+
+@app.post("/api/generate-from-data")
+async def start_generate_from_data(payload: GenerateFromDataPayload):
+    if engine.is_running:
+        raise HTTPException(409, "Генерация уже запущена")
+
+    if not payload.datasets:
+        raise HTTPException(400, "Не выбрано ни одного датасета")
+
+    all_nodes: list[dict] = []
+    seen = set()
+    for ds in payload.datasets:
+        dataset_dir = ROOT / "Proxy-Data" / ds
+        if not dataset_dir.is_dir():
+            raise HTTPException(404, f"Датасет не найден: {ds}")
+
+        live_file = dataset_dir / "live.txt"
+        if not live_file.is_file():
+            raise HTTPException(404, f"live.txt не найден: {ds}")
+
+        nodes = parse_live_file(live_file)
+        for n in nodes:
+            key = (n.get("protocol"), n.get("server"), n.get("port"))
+            if key not in seen:
+                seen.add(key)
+                all_nodes.append(n)
+
+    if not all_nodes:
+        raise HTTPException(400, "Датасеты пусты")
+
+    label = ", ".join(payload.datasets[:3])
+    if len(payload.datasets) > 3:
+        label += f" +{len(payload.datasets) - 3}"
+
+    opts = {
+        "limit": max(1, payload.limit),
+        "selection": payload.selection if payload.selection in {"fastest", "balanced"} else "fastest",
+        "prefer_socks5": bool(payload.prefer_socks5),
+    }
+
+    asyncio.create_task(engine.run_from_nodes(all_nodes, opts, source_label=label))
+    return {"ok": True, "loaded": len(all_nodes)}
 
 
 @app.get("/api/stream")

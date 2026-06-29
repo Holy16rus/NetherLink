@@ -1,5 +1,3 @@
-import random
-
 COUNTRY_NAMES_RU = {
     "AE": "ОАЭ", "AR": "Аргентина", "AT": "Австрия", "AU": "Австралия",
     "BE": "Бельгия", "BG": "Болгария", "BR": "Бразилия", "CA": "Канада",
@@ -21,6 +19,7 @@ COUNTRY_NAMES_RU = {
 def flag_emoji(code):
     if not code or len(code) != 2 or not code.isalpha():
         return ""
+    code = code.upper()
     return chr(ord(code[0]) + 127397) + chr(ord(code[1]) + 127397)
 
 
@@ -29,13 +28,26 @@ def yaml_quote(value):
     return f'"{text}"'
 
 
-def latency_sort_key(node):
-    return (int(node.get("latency_ms", 999999999)), str(node.get("server", "")), int(node.get("port", 0)))
+def protocol_bonus(protocol):
+    p = str(protocol or "").lower()
+    if p == "socks5":
+        return -500
+    if p in ("http", "https"):
+        return 200
+    return 0
 
 
-def select_nodes(nodes, limit, strategy="fastest"):
+def latency_sort_key(node, prefer_socks=False):
+    raw = node.get("latency_ms")
+    base = int(raw) if raw is not None else 999999999
+    if prefer_socks and raw is not None:
+        base += protocol_bonus(node.get("protocol", ""))
+    return (base, str(node.get("server", "")), int(node.get("port", 0)))
+
+
+def select_nodes(nodes, limit, strategy="fastest", prefer_socks=False):
     if strategy == "fastest":
-        return sorted(nodes, key=latency_sort_key)[:limit]
+        return sorted(nodes, key=lambda n: latency_sort_key(n, prefer_socks))[:limit]
 
     by_country = {}
     for node in nodes:
@@ -44,8 +56,8 @@ def select_nodes(nodes, limit, strategy="fastest"):
 
     selected = []
     for pool in by_country.values():
-        pool.sort(key=latency_sort_key)
-    countries = sorted(by_country.keys(), key=lambda c: latency_sort_key(by_country[c][0]))
+        pool.sort(key=lambda n: latency_sort_key(n, prefer_socks))
+    countries = sorted(by_country.keys(), key=lambda c: latency_sort_key(by_country[c][0], prefer_socks))
 
     while countries and len(selected) < limit:
         next_round = []
@@ -57,7 +69,7 @@ def select_nodes(nodes, limit, strategy="fastest"):
                 next_round.append(c)
         countries = next_round
 
-    return sorted(selected, key=latency_sort_key)
+    return sorted(selected, key=lambda n: latency_sort_key(n, prefer_socks))
 
 
 def node_name(node, used_names):
@@ -68,8 +80,10 @@ def node_name(node, used_names):
     speed = f" {int(latency)}ms" if latency is not None else ""
     base = f"{flag + ' ' if flag else ''}{cname}{speed}"
     name = base
+    counter = 2
     while name in used_names:
-        name = f"{base}-{random.randint(10, 99)}"
+        name = f"{base}-{counter}"
+        counter += 1
     used_names.add(name)
     return name
 
@@ -146,10 +160,28 @@ def generate_config(nodes):
             lines.append(f"    uuid: {yaml_quote(node.get('uuid', ''))}")
             if node.get("flow"):
                 lines.append(f"    flow: {yaml_quote(node['flow'])}")
-            lines.append(f"    network: {yaml_quote(node.get('network', 'tcp'))}")
+            network = node.get("network", "tcp")
+            lines.append(f"    network: {yaml_quote(network)}")
             lines.append(f"    tls: {str(bool(node.get('tls'))).lower()}")
             if node.get("servername"):
                 lines.append(f"    servername: {yaml_quote(node['servername'])}")
+            if network == "ws" and (node.get("ws_path") or node.get("ws_host")):
+                lines.append("    ws-opts:")
+                if node.get("ws_path"):
+                    lines.append(f"      path: {yaml_quote(node['ws_path'])}")
+                if node.get("ws_host"):
+                    lines.append("      headers:")
+                    lines.append(f"        Host: {yaml_quote(node['ws_host'])}")
+            elif network in ("xhttp", "splithttp") and (node.get("ws_path") or node.get("ws_host")):
+                lines.append("    ws-opts:")
+                if node.get("ws_path"):
+                    lines.append(f"      path: {yaml_quote(node['ws_path'])}")
+                if node.get("ws_host"):
+                    lines.append("      headers:")
+                    lines.append(f"        Host: {yaml_quote(node['ws_host'])}")
+            elif network == "grpc" and node.get("grpc_service_name"):
+                lines.append("    grpc-opts:")
+                lines.append(f"      grpc-service-name: {yaml_quote(node['grpc_service_name'])}")
         elif protocol == "trojan":
             lines.append(f"    password: {yaml_quote(node.get('password', ''))}")
             lines.append("    skip-cert-verify: true")
@@ -171,7 +203,7 @@ def generate_config(nodes):
     ])
 
     for c, names in sorted(by_country.items(), key=lambda x: (-len(x[1]), x[0])):
-        cname = COUNTRY_NAMES_RU.get(c, "Неизвестно")
+        cname = COUNTRY_NAMES_RU.get(c.upper() if c else c, "Неизвестно")
         flag = flag_emoji(c)
         group_name = f"{flag + ' ' if flag else ''}{cname}"
         lines.append(f"      - {yaml_quote(group_name)}")
@@ -191,7 +223,7 @@ def generate_config(nodes):
     lines.append("")
 
     for c, names in sorted(by_country.items(), key=lambda x: (-len(x[1]), x[0])):
-        cname = COUNTRY_NAMES_RU.get(c, "Неизвестно")
+        cname = COUNTRY_NAMES_RU.get(c.upper() if c else c, "Неизвестно")
         flag = flag_emoji(c)
         group_name = f"{flag + ' ' if flag else ''}{cname}"
         lines.append(f"  - name: {yaml_quote(group_name)}")

@@ -1,26 +1,6 @@
 {
   "sources": [
     {
-      "url": "https://github.com/TheSpeedX/PROXY-List",
-      "enabled": true
-    },
-    {
-      "url": "https://github.com/proxifly/free-proxy-list",
-      "enabled": true
-    },
-    {
-      "url": "https://github.com/VPN-Subcription-Links/ClashX-V2Ray-TopFreeProxy",
-      "enabled": true
-    },
-    {
-      "url": "https://github.com/oxylabs/free-proxy-list",
-      "enabled": true
-    },
-    {
-      "url": "https://free.redscrape.com/api/proxies?format=json",
-      "enabled": true
-    },
-    {
       "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all",
       "enabled": true
     },
@@ -29,23 +9,131 @@
       "enabled": true
     },
     {
-      "url": "https://gist.githubusercontent.com/oneclickvpnkeys/26630c1f32a8c0ac8e92f6646e15e95c/raw/FRAGMENT.txt",
+      "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks4&timeout=10000&country=all",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/socks5.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/socks4.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS5_RAW.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS4_RAW.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks5.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/http.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/elliottophellia/proxylist/main/proxies.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://www.proxy-list.download/api/v1/get?type=http",
+      "enabled": true
+    },
+    {
+      "url": "https://www.proxy-list.download/api/v1/get?type=socks5",
+      "enabled": true
+    },
+    {
+      "url": "https://www.proxy-list.download/api/v1/get?type=socks4",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mertguvencli/http-proxy-list/main/proxy-list/data.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/socks5/data.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/socks4/data.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/dpangestuw/Free-Proxy/main/README.md",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://github.com/VPN-Subcription-Links/ClashX-V2Ray-TopFreeProxy",
       "enabled": true
     },
     {
       "url": "https://github.com/zloi-user/hideip.me",
-      "enabled": false
+      "enabled": true
     },
     {
-      "url": "https://github.com/Surfboardv2ray/TGParse",
-      "enabled": false
-    },
-    {
-      "url": "https://github.com/sevcator/5ubscrpt10n",
-      "enabled": false
-    },
-    {
-      "url": "https://github.com/Surfboardv2ray/Proxy-sorter",
+      "url": "https://github.com/Anonym0usWork1221/Free-Proxies",
       "enabled": false
     },
     {
@@ -53,16 +141,48 @@
       "enabled": false
     },
     {
-      "url": "https://github.com/Anonym0usWork1221/Free-Proxies",
+      "url": "https://github.com/Surfboardv2ray/Proxy-sorter",
       "enabled": false
     },
     {
-      "url": "https://github.com/elliottophellia/proxylist",
+      "url": "https://github.com/Surfboardv2ray/TGParse",
       "enabled": false
     },
     {
-      "url": "https://github.com/dpangestuw/Free-Proxy",
+      "url": "https://gist.githubusercontent.com/oneclickvpnkeys/26630c1f32a8c0ac8e92f6646e15e95c/raw/FRAGMENT.txt",
       "enabled": false
+    },
+    {
+      "url": "https://github.com/sevcator/5ubscrpt10n",
+      "enabled": false
+    },
+    {
+      "url": "https://github.com/oxylabs/free-proxy-list",
+      "enabled": false
+    },
+    {
+      "url": "https://raw.githubusercontent.com/sevushyamamoto-stack/9341be7a058e132154d407d082a60fb1/raw/mysub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kort0881/vpn-vless-configs-russia/main/githubmirror/clean/vless.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pog7x/vpn-configs/master/githubmirror/1.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://free.redscrape.com/api/proxies?format=json",
+      "enabled": true
     }
   ],
   "local_files": [

@@ -2,6 +2,8 @@ import asyncio
 import ssl
 import time
 
+from backend.config import CHECK_CONCURRENCY
+
 HTTP_TEST_HOST = "www.gstatic.com"
 HTTP_TEST_REQUEST = (
     f"GET http://{HTTP_TEST_HOST}/generate_204 HTTP/1.1\r\n"
@@ -30,15 +32,18 @@ async def tcp_check(node, timeout):
 
 async def http_check(node, timeout):
     started = time.perf_counter()
+    is_https = node.get("protocol", "").lower() == "https"
     try:
-        reader, writer = await asyncio.wait_for(
-            asyncio.open_connection(node["server"], int(node["port"])), timeout=timeout
-        )
-        if node.get("protocol", "").lower() == "https":
+        if is_https:
             ctx = ssl._create_unverified_context()
-            writer = asyncio.wrap_fastapi(writer)  # fallback
             reader, writer = await asyncio.wait_for(
-                asyncio.open_connection(node["server"], int(node["port"]), ssl=ctx), timeout=timeout
+                asyncio.open_connection(node["server"], int(node["port"]), ssl=ctx),
+                timeout=timeout,
+            )
+        else:
+            reader, writer = await asyncio.wait_for(
+                asyncio.open_connection(node["server"], int(node["port"])),
+                timeout=timeout,
             )
         writer.write(HTTP_TEST_REQUEST)
         await writer.drain()
@@ -131,13 +136,16 @@ async def check_node(node, timeout, cancel_event):
     if cancel_event.is_set():
         return None
     protocol = node.get("protocol", "").lower()
+    # Complex protocols (VMess/VLESS/Trojan/SS/Hysteria2) only get TCP check
+    # — use a shorter timeout since we're just testing reachability
+    effective_timeout = timeout if protocol in {"http", "https", "socks5"} else min(timeout, 5)
     try:
         if protocol in {"http", "https"}:
-            latency = await http_check(node, timeout)
+            latency = await http_check(node, effective_timeout)
         elif protocol == "socks5":
-            latency = await socks5_check(node, timeout)
+            latency = await socks5_check(node, effective_timeout)
         else:
-            latency = await tcp_check(node, timeout)
+            latency = await tcp_check(node, effective_timeout)
     except Exception:
         return None
     if latency is None:
@@ -150,7 +158,7 @@ async def check_node(node, timeout, cancel_event):
 async def check_batch(nodes, timeout, cancel_event, progress_cb=None):
     live = []
     total = len(nodes)
-    sem = asyncio.Semaphore(200)
+    sem = asyncio.Semaphore(CHECK_CONCURRENCY)
 
     async def check_one(node):
         if cancel_event.is_set():

@@ -25,17 +25,25 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install httpx
+        run: pip install -r requirements.txt
+
+      - name: Download GeoIP database
+        env:
+          GEOIP_LICENSE_KEY: ${{ secrets.GEOIP_LICENSE_KEY }}
+        run: python -m backend.download_geoip
+        continue-on-error: true
 
       - name: Run proxy generator
         run: python -m backend.headless
 
       - name: Deploy config to gh-pages branch
         run: |
+          cp HolyVPN.yaml /tmp/HolyVPN.yaml
           git config user.name "HolyVPN Bot"
           git config user.email "bot@holyvpn.local"
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
           git rm -rf . 2>/dev/null; true
+          cp /tmp/HolyVPN.yaml HolyVPN.yaml
           git add HolyVPN.yaml
           git commit -m "Auto-generate proxy config $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push origin gh-pages
