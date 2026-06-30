@@ -199,7 +199,7 @@ def generate_config(nodes):
         "  - name: PROXY",
         "    type: select",
         "    proxies:",
-        "      - Auto-Смена",
+        f"      - {yaml_quote('Auto-Смена')}",
     ])
 
     for c, names in sorted(by_country.items(), key=lambda x: (-len(x[1]), x[0])):
@@ -211,7 +211,7 @@ def generate_config(nodes):
     lines.append("")
 
     lines.extend([
-        "  - name: Auto-Смена",
+        f"  - name: {yaml_quote('Auto-Смена')}",
         "    type: url-test",
         "    url: http://www.gstatic.com/generate_204",
         "    interval: 300",
