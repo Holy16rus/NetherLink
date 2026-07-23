@@ -3,7 +3,7 @@ import json
 import os
 import mimetypes
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -35,7 +35,6 @@ class GeneratePayload(BaseModel):
     max_checks: int = 10000
     timeout: float = 10
     selection: str = "fastest"
-    prefer_socks5: bool = True
 
 
 @app.get("/api/config")
@@ -70,7 +69,6 @@ async def start_generate(payload: GeneratePayload):
         "max_checks": max(0, payload.max_checks),
         "timeout": max(1, payload.timeout),
         "selection": payload.selection if payload.selection in {"fastest", "balanced"} else "fastest",
-        "prefer_socks5": bool(payload.prefer_socks5),
     }
 
     asyncio.create_task(engine.run(sources, local_files, opts))
@@ -117,7 +115,6 @@ class GenerateFromDataPayload(BaseModel):
     datasets: list[str]
     limit: int = 500
     selection: str = "fastest"
-    prefer_socks5: bool = True
 
 
 @app.post("/api/generate-from-data")
@@ -156,7 +153,6 @@ async def start_generate_from_data(payload: GenerateFromDataPayload):
     opts = {
         "limit": max(1, payload.limit),
         "selection": payload.selection if payload.selection in {"fastest", "balanced"} else "fastest",
-        "prefer_socks5": bool(payload.prefer_socks5),
     }
 
     asyncio.create_task(engine.run_from_nodes(all_nodes, opts, source_label=label))
@@ -192,6 +188,20 @@ async def get_status():
     }
 
 
+@app.get("/api/configs")
+async def list_configs():
+    configs = []
+    patterns = ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
+                "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
+                "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json",
+                "live.txt"]
+    for name in patterns:
+        fp = ROOT / name
+        if fp.exists():
+            configs.append({"name": name, "size": fp.stat().st_size, "type": "clash" if name.endswith(".yaml") else "v2ray" if "v2ray" in name else "singbox" if "singbox" in name else "txt"})
+    return {"configs": configs}
+
+
 @app.get("/api/download")
 async def download_config():
     if not OUTPUT_FILE.exists():
@@ -203,9 +213,61 @@ async def download_config():
     )
 
 
+@app.get("/api/download/{config_name}")
+async def download_named_config(config_name: str):
+    allowed = ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
+               "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
+               "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json",
+               "live.txt"]
+    if config_name not in allowed:
+        raise HTTPException(404, "Неизвестный конфиг")
+    fp = ROOT / config_name
+    if not fp.exists():
+        raise HTTPException(404, "Конфиг ещё не сгенерирован")
+    mime = "application/yaml" if config_name.endswith(".yaml") else "application/json" if config_name.endswith(".json") else "text/plain"
+    return FileResponse(path=str(fp), filename=config_name, media_type=mime)
+
+
+CLIENT_MAP = {
+    "clash": ("yaml", "application/yaml"),
+    "meta": ("yaml", "application/yaml"),
+    "mihomo": ("yaml", "application/yaml"),
+    "stash": ("yaml", "application/yaml"),
+    "v2ray": ("json", "application/json"),
+    "v2raytun": ("json", "application/json"),
+    "v2rayng": ("json", "application/json"),
+    "v2box": ("json", "application/json"),
+    "hiddify": ("json", "application/json"),
+    "hiddifynext": ("json", "application/json"),
+    "singbox": ("json", "application/json"),
+    "sing-box": ("json", "application/json"),
+}
+
+
+def _detect_client(user_agent: str) -> str:
+    ua = user_agent.lower()
+    if any(x in ua for x in ("hiddify", "hiddifynext")):
+        return "hiddify"
+    if any(x in ua for x in ("sing-box", "singbox")):
+        return "singbox"
+    if any(x in ua for x in ("v2ray", "v2rayn", "v2raytun")):
+        return "v2ray"
+    if any(x in ua for x in ("clash", "meta", "mihomo", "stash", "cfw")):
+        return "clash"
+    return "clash"
+
+
+def _pick_config(client: str, size: str):
+    if client in ("v2ray", "v2raytun", "v2rayng", "v2box"):
+        return f"NetherLink-{size}-v2ray.json"
+    if client in ("hiddify", "hiddifynext", "singbox", "sing-box"):
+        return f"NetherLink-{size}-singbox.json"
+    return f"NetherLink-{size}.yaml"
+
+
 @app.get("/sub")
 @app.get("/subscription")
-async def subscription():
+async def subscription(format: str = ""):
     if not OUTPUT_FILE.exists():
         raise HTTPException(404, "Конфиг ещё не сгенерирован")
     return FileResponse(
@@ -216,6 +278,66 @@ async def subscription():
             "Content-Disposition": f"inline; filename={OUTPUT_FILE.name}",
             "Cache-Control": "no-store",
         },
+    )
+
+
+@app.get("/sub/500")
+@app.get("/subscription/500")
+async def subscription_500():
+    """500 прокси — всегда FLClash (YAML). Другие клиенты не тянут столько."""
+    fp = ROOT / "NetherLink.yaml"
+    if not fp.exists():
+        raise HTTPException(404, "Конфиг ещё не сгенерирован")
+    return FileResponse(
+        path=str(fp), filename="NetherLink-500.yaml",
+        media_type="application/yaml",
+        headers={"Content-Disposition": "inline; filename=NetherLink-500.yaml", "Cache-Control": "no-store"},
+    )
+
+
+@app.get("/sub/100")
+@app.get("/subscription/100")
+async def subscription_100(request: Request, format: str = ""):
+    """100 прокси — авто-определение клиента."""
+    client = _detect_client(request.headers.get("user-agent", ""))
+    if format:
+        client = {"clash": "clash", "v2ray": "v2ray", "singbox": "singbox"}.get(format.lower(), client)
+    config_name = _pick_config(client, "100")
+    fp = ROOT / config_name
+    if not fp.exists():
+        fp = ROOT / "NetherLink-100.yaml"
+        config_name = "NetherLink-100.yaml"
+        if not fp.exists():
+            raise HTTPException(404, "Конфиг 100 ещё не сгенерирован")
+    ext = config_name.split(".")[-1]
+    mime = "application/json" if ext == "json" else "application/yaml"
+    return FileResponse(
+        path=str(fp), filename=config_name,
+        media_type=mime,
+        headers={"Content-Disposition": f"inline; filename={config_name}", "Cache-Control": "no-store"},
+    )
+
+
+@app.get("/sub/50")
+@app.get("/subscription/50")
+async def subscription_50(request: Request, format: str = ""):
+    """50 прокси — авто-определение клиента."""
+    client = _detect_client(request.headers.get("user-agent", ""))
+    if format:
+        client = {"clash": "clash", "v2ray": "v2ray", "singbox": "singbox"}.get(format.lower(), client)
+    config_name = _pick_config(client, "50")
+    fp = ROOT / config_name
+    if not fp.exists():
+        fp = ROOT / "NetherLink-50.yaml"
+        config_name = "NetherLink-50.yaml"
+        if not fp.exists():
+            raise HTTPException(404, "Конфиг 50 ещё не сгенерирован")
+    ext = config_name.split(".")[-1]
+    mime = "application/json" if ext == "json" else "application/yaml"
+    return FileResponse(
+        path=str(fp), filename=config_name,
+        media_type=mime,
+        headers={"Content-Disposition": f"inline; filename={config_name}", "Cache-Control": "no-store"},
     )
 
 

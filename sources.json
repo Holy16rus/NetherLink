@@ -29,15 +29,11 @@
       "enabled": true
     },
     {
-      "url": "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
+      "url": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt",
       "enabled": true
     },
     {
-      "url": "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt",
-      "enabled": true
-    },
-    {
-      "url": "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt",
+      "url": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt",
       "enabled": true
     },
     {
@@ -54,6 +50,10 @@
     },
     {
       "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS4_RAW.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_RAW.txt",
       "enabled": true
     },
     {
@@ -113,6 +113,14 @@
       "enabled": true
     },
     {
+      "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/https/data.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/all/data.txt",
+      "enabled": true
+    },
+    {
       "url": "https://raw.githubusercontent.com/dpangestuw/Free-Proxy/main/README.md",
       "enabled": true
     },
@@ -133,32 +141,12 @@
       "enabled": true
     },
     {
-      "url": "https://github.com/Anonym0usWork1221/Free-Proxies",
-      "enabled": false
+      "url": "https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/master/proxies.txt",
+      "enabled": true
     },
     {
-      "url": "https://github.com/ProxyScraper/ProxyScraper",
-      "enabled": false
-    },
-    {
-      "url": "https://github.com/Surfboardv2ray/Proxy-sorter",
-      "enabled": false
-    },
-    {
-      "url": "https://github.com/Surfboardv2ray/TGParse",
-      "enabled": false
-    },
-    {
-      "url": "https://gist.githubusercontent.com/oneclickvpnkeys/26630c1f32a8c0ac8e92f6646e15e95c/raw/FRAGMENT.txt",
-      "enabled": false
-    },
-    {
-      "url": "https://github.com/sevcator/5ubscrpt10n",
-      "enabled": false
-    },
-    {
-      "url": "https://github.com/oxylabs/free-proxy-list",
-      "enabled": false
+      "url": "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt",
+      "enabled": true
     },
     {
       "url": "https://raw.githubusercontent.com/sevushyamamoto-stack/9341be7a058e132154d407d082a60fb1/raw/mysub.txt",
@@ -182,6 +170,38 @@
     },
     {
       "url": "https://free.redscrape.com/api/proxies?format=json",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/blacklist.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/non_ru.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/HalyavusVPNUS/halyava-vpn-buy/refs/heads/main/vpnus.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/feat/ai-crawler-v2/nodes/merged.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://spys.me/proxy.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://spys.me/socks.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://sunny9577.github.io/proxy-scraper/proxies.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ProxyScraper/ProxyScraper/master/proxies.txt",
       "enabled": true
     }
   ],

@@ -1,3 +1,5 @@
+import json
+
 COUNTRY_NAMES_RU = {
     "AE": "ОАЭ", "AR": "Аргентина", "AT": "Австрия", "AU": "Австралия",
     "BE": "Бельгия", "BG": "Болгария", "BR": "Бразилия", "CA": "Канада",
@@ -12,7 +14,7 @@ COUNTRY_NAMES_RU = {
     "PT": "Португалия", "RO": "Румыния", "RU": "Россия", "SE": "Швеция",
     "SG": "Сингапур", "SK": "Словакия", "TH": "Таиланд", "TR": "Турция",
     "TW": "Тайвань", "UA": "Украина", "US": "США", "VN": "Вьетнам",
-    "ZA": "ЮАР",
+    "ZA": "ЮАР", "ZZ": "Неизвестно",
 }
 
 
@@ -28,37 +30,23 @@ def yaml_quote(value):
     return f'"{text}"'
 
 
-def protocol_bonus(protocol):
-    p = str(protocol or "").lower()
-    if p == "socks5":
-        return -500
-    if p in ("http", "https"):
-        return 200
-    return 0
-
-
-def latency_sort_key(node, prefer_socks=False):
+def latency_sort_key(node):
     raw = node.get("latency_ms")
     base = int(raw) if raw is not None else 999999999
-    if prefer_socks and raw is not None:
-        base += protocol_bonus(node.get("protocol", ""))
     return (base, str(node.get("server", "")), int(node.get("port", 0)))
 
 
-def select_nodes(nodes, limit, strategy="fastest", prefer_socks=False):
+def select_nodes(nodes, limit, strategy="fastest"):
     if strategy == "fastest":
-        return sorted(nodes, key=lambda n: latency_sort_key(n, prefer_socks))[:limit]
-
+        return sorted(nodes, key=latency_sort_key)[:limit]
     by_country = {}
     for node in nodes:
         c = node.get("country", "ZZ")
         by_country.setdefault(c, []).append(node)
-
     selected = []
     for pool in by_country.values():
-        pool.sort(key=lambda n: latency_sort_key(n, prefer_socks))
-    countries = sorted(by_country.keys(), key=lambda c: latency_sort_key(by_country[c][0], prefer_socks))
-
+        pool.sort(key=latency_sort_key)
+    countries = sorted(by_country.keys(), key=lambda c: latency_sort_key(by_country[c][0]))
     while countries and len(selected) < limit:
         next_round = []
         for c in countries:
@@ -68,8 +56,7 @@ def select_nodes(nodes, limit, strategy="fastest", prefer_socks=False):
             if pool:
                 next_round.append(c)
         countries = next_round
-
-    return sorted(selected, key=lambda n: latency_sort_key(n, prefer_socks))
+    return sorted(selected, key=latency_sort_key)
 
 
 def node_name(node, used_names):
@@ -93,7 +80,7 @@ def clash_type(protocol):
     return mapping.get(protocol, protocol)
 
 
-def generate_config(nodes):
+def generate_config_clash(nodes):
     used_names = set()
     by_country = {}
     proxy_names = []
@@ -112,19 +99,16 @@ def generate_config(nodes):
         "",
         "proxies:",
     ]
-
     for node in nodes:
         name = node_name(node, used_names)
         node["name"] = name
         proxy_names.append(name)
         c = node.get("country") or "ZZ"
         by_country.setdefault(c, []).append(name)
-
         lines.append(f"  - name: {yaml_quote(name)}")
         lines.append(f"    type: {clash_type(node['protocol'].lower())}")
         lines.append(f"    server: {node['server']}")
         lines.append(f"    port: {int(node['port'])}")
-
         protocol = node["protocol"].lower()
         if protocol in {"http", "https"}:
             if protocol == "https":
@@ -193,7 +177,6 @@ def generate_config(nodes):
             if node.get("servername"):
                 lines.append(f"    sni: {yaml_quote(node['servername'])}")
         lines.append("")
-
     lines.extend([
         "proxy-groups:",
         "  - name: PROXY",
@@ -201,7 +184,6 @@ def generate_config(nodes):
         "    proxies:",
         f"      - {yaml_quote('Auto-Смена')}",
     ])
-
     for c, names in sorted(by_country.items(), key=lambda x: (-len(x[1]), x[0])):
         cname = COUNTRY_NAMES_RU.get(c.upper() if c else c, "Неизвестно")
         flag = flag_emoji(c)
@@ -209,7 +191,6 @@ def generate_config(nodes):
         lines.append(f"      - {yaml_quote(group_name)}")
     lines.append("      - DIRECT")
     lines.append("")
-
     lines.extend([
         f"  - name: {yaml_quote('Auto-Смена')}",
         "    type: url-test",
@@ -221,7 +202,6 @@ def generate_config(nodes):
     for name in proxy_names:
         lines.append(f"      - {yaml_quote(name)}")
     lines.append("")
-
     for c, names in sorted(by_country.items(), key=lambda x: (-len(x[1]), x[0])):
         cname = COUNTRY_NAMES_RU.get(c.upper() if c else c, "Неизвестно")
         flag = flag_emoji(c)
@@ -233,7 +213,6 @@ def generate_config(nodes):
             lines.append(f"      - {yaml_quote(name)}")
         lines.append("      - DIRECT")
         lines.append("")
-
     lines.extend([
         "rules:",
         "  - DOMAIN-SUFFIX,google.com,PROXY",
@@ -256,5 +235,105 @@ def generate_config(nodes):
         "  - MATCH,DIRECT",
         "",
     ])
-
     return "\n".join(lines)
+
+
+def generate_config_v2ray(nodes):
+    out = {}
+    for node in nodes:
+        proto = node["protocol"].lower()
+        if proto in ("http", "https"):
+            v = {"protocol": "http", "settings": {"servers": [{"address": node["server"], "port": int(node["port"])}]}}
+            if node.get("username"):
+                v["settings"]["servers"][0]["users"] = [{"user": node["username"], "pass": node.get("password", "")}]
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
+        elif proto == "socks5":
+            v = {"protocol": "socks", "settings": {"servers": [{"address": node["server"], "port": int(node["port"])}]}}
+            if node.get("username"):
+                v["settings"]["servers"][0]["users"] = [{"user": node["username"], "pass": node.get("password", "")}]
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
+        elif proto == "vmess":
+            v = {"protocol": "vmess", "settings": {"vnext": [{"address": node["server"], "port": int(node["port"]), "users": [{"id": node.get("uuid", ""), "alterId": int(node.get("alterId", 0)), "security": node.get("cipher", "auto")}]}]}}
+            if node.get("network") and node["network"] != "tcp":
+                v["streamSettings"] = {"network": node["network"]}
+                if node.get("ws_path"):
+                    v["streamSettings"]["wsSettings"] = {"path": node["ws_path"]}
+                if node.get("tls"):
+                    v["streamSettings"]["security"] = "tls"
+                    if node.get("servername"):
+                        v["streamSettings"]["tlsSettings"] = {"serverName": node["servername"]}
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
+        elif proto == "trojan":
+            v = {"protocol": "trojan", "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "password": node.get("password", "")}]}}
+            if node.get("servername"):
+                v["streamSettings"] = {"security": "tls", "tlsSettings": {"serverName": node["servername"], "allowInsecure": True}}
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
+    return json.dumps(out, ensure_ascii=False, indent=2)
+
+
+def generate_config_singbox(nodes):
+    out_obfs = {}
+    for node in nodes:
+        proto = node["protocol"].lower()
+        tag = node.get("name", f"{node['server']}:{node['port']}")
+        if proto in ("http", "https"):
+            v = {"type": "http", "server": node["server"], "server_port": int(node["port"])}
+            if node.get("username"):
+                v["username"] = node["username"]
+                v["password"] = node.get("password", "")
+            out_obfs[tag] = v
+        elif proto == "socks5":
+            v = {"type": "socks", "server": node["server"], "server_port": int(node["port"])}
+            if node.get("username"):
+                v["username"] = node["username"]
+                v["password"] = node.get("password", "")
+            out_obfs[tag] = v
+        elif proto == "vmess":
+            v = {"type": "vmess", "server": node["server"], "server_port": int(node["port"]), "uuid": node.get("uuid", ""), "alter_id": int(node.get("alterId", 0)), "security": node.get("cipher", "auto")}
+            if node.get("tls"):
+                v["tls"] = {"enabled": True, "server_name": node.get("servername", node["server"]), "insecure": True}
+            out_obfs[tag] = v
+        elif proto == "trojan":
+            v = {"type": "trojan", "server": node["server"], "server_port": int(node["port"]), "password": node.get("password", ""), "tls": {"enabled": True, "server_name": node.get("servername", node["server"]), "insecure": True}}
+            out_obfs[tag] = v
+    return json.dumps(out_obfs, ensure_ascii=False, indent=2)
+
+
+def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None):
+    configs = {}
+    configs["NetherLink.yaml"] = generate_config_clash(nodes)
+    if top_nodes_100:
+        configs["NetherLink-100.yaml"] = generate_config_clash(top_nodes_100)
+    if top_nodes_50:
+        configs["NetherLink-50.yaml"] = generate_config_clash(top_nodes_50)
+
+    configs["NetherLink-v2ray.json"] = generate_config_v2ray(nodes)
+    if top_nodes_100:
+        configs["NetherLink-100-v2ray.json"] = generate_config_v2ray(top_nodes_100)
+    if top_nodes_50:
+        configs["NetherLink-50-v2ray.json"] = generate_config_v2ray(top_nodes_50)
+
+    configs["NetherLink-singbox.json"] = generate_config_singbox(nodes)
+    if top_nodes_100:
+        configs["NetherLink-100-singbox.json"] = generate_config_singbox(top_nodes_100)
+    if top_nodes_50:
+        configs["NetherLink-50-singbox.json"] = generate_config_singbox(top_nodes_50)
+
+    live_lines = []
+    for n in nodes:
+        if not n.get("server") or not n.get("port"):
+            continue
+        proto = n.get("protocol", "http").lower()
+        server = n["server"]
+        port = n["port"]
+        user = n.get("username")
+        password = n.get("password")
+        if user and password:
+            live_lines.append(f"{proto}://{user}:{password}@{server}:{port}")
+        elif user:
+            live_lines.append(f"{proto}://{user}@{server}:{port}")
+        else:
+            live_lines.append(f"{proto}://{server}:{port}")
+    configs["live.txt"] = "\n".join(live_lines)
+
+    return configs

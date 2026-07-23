@@ -1,23 +1,18 @@
-name: Generate Proxy Config
+name: Recheck Top Proxies
 
 on:
   schedule:
-    - cron: "0 */10 * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - sources.json
-      - backend/**
 
 concurrency:
   group: netherlink-state-branch
   cancel-in-progress: false
 
 jobs:
-  generate:
+  recheck:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 15
     permissions:
       contents: write
 
@@ -46,40 +41,23 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Download GeoIP database
-        env:
-          GEOIP_LICENSE_KEY: ${{ secrets.GEOIP_LICENSE_KEY }}
-        run: python -m backend.download_geoip
-        continue-on-error: true
-
-      - name: Restore proxy history from state branch
+      - name: Restore state
         run: |
           git fetch origin state 2>/dev/null && git show origin/state:proxy-history.json > proxy-history.json || echo "{}" > proxy-history.json
 
-      - name: Run proxy generator
-        run: python -m backend.headless
-
-      - name: Deploy all configs to gh-pages branch
+      - name: Download current configs from gh-pages
         run: |
-          mkdir -p /tmp/deploy
-          for f in NetherLink*.yaml NetherLink*.json live.txt; do
-            [ -f "$f" ] && cp "$f" "/tmp/deploy/$f"
-          done
-          git config user.name "NetherLink Bot"
-          git config user.email "bot@netherlink.local"
-          git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf . 2>/dev/null || true
-          if ls /tmp/deploy/* 1>/dev/null 2>&1; then
-            cp /tmp/deploy/* .
-          fi
-          git add -A
-          git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push --force origin gh-pages
+          curl -fsSL -o NetherLink.yaml     "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/NetherLink.yaml"     || echo "No main"
+          curl -fsSL -o NetherLink-100.yaml "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/NetherLink-100.yaml" || echo "No top-100"
+          curl -fsSL -o NetherLink-50.yaml  "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/NetherLink-50.yaml"  || echo "No top-50"
 
-      - name: Commit proxy history to state branch
+      - name: Run recheck
+        run: python -m backend.recheck_headless
+
+      - name: Commit updated state
         if: success()
         run: |
-          git config user.name "NetherLink Bot"
+          git config user.name "NetherLink Recheck Bot"
           git config user.email "bot@netherlink.local"
           set +e
           PUSHED=false
@@ -118,3 +96,19 @@ json.dump(old, open('proxy-history.json', 'w'), ensure_ascii=False)
             exit 1
           fi
           set -e
+
+      - name: Deploy rechecked configs to gh-pages
+        if: success()
+        run: |
+          mkdir -p /tmp/recheck-deploy
+          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt; do
+            [ -f "$f" ] && cp "$f" "/tmp/recheck-deploy/$f"
+          done
+          git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
+          git rm -rf . 2>/dev/null || true
+          if ls /tmp/recheck-deploy/* 1>/dev/null 2>&1; then
+            cp /tmp/recheck-deploy/* .
+          fi
+          git add -A
+          git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git push --force origin gh-pages

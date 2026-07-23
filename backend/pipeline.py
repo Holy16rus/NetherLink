@@ -17,28 +17,28 @@ from pathlib import Path
 from typing import Callable, Awaitable
 
 from backend.config import OUTPUT_FILE, CHECK_CONCURRENCY, ROOT
-from backend.parser import dedupe
 from backend.scraper import collect_local_files, discover_repo_files, fetch_and_parse
-from backend.checker import check_node
+from backend.checker import check_node, speed_test_node, protocol_check
 from backend.services import geoip_batch
-from backend.generator import select_nodes, generate_config
+from backend.generator import select_nodes, generate_configs
 from backend.web_sources import fetch_web_proxies
+from backend.state import record_check_results, filter_stable, save_history
 
 LIVE_PROXY_RE = re.compile(
     r"^(?P<proto>[a-z][a-z0-9]*)://(?:([^:@]+)(?::([^@]*))?@)?(?P<server>[^:]+):(?P<port>\d+)$"
 )
-_QUEUE_SENTINEL = None  # сигнал завершения producer-а
+_QUEUE_SENTINEL = None
 
 EmitFn = Callable[[str, dict], Awaitable[None]]
+
+PROTOCOL_CHECK_CONCURRENCY = 15
+TCP_CONCURRENCY = CHECK_CONCURRENCY
 
 
 async def _noop(event: str, data: dict) -> None:
     pass
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Producer: сканирует источники, пушит ноды в очередь
-# ──────────────────────────────────────────────────────────────────────────────
 
 async def _produce(
     sources: list[str],
@@ -49,9 +49,6 @@ async def _produce(
     emit: EmitFn,
     per_repo_limit: int = 80,
 ):
-    """Собирает прокси из всех источников и кладёт батчами в queue."""
-
-    # Локальные файлы — быстро, делаем первыми
     local_nodes = await collect_local_files(local_files)
     if local_nodes:
         metrics["candidates"] += len(local_nodes)
@@ -65,21 +62,18 @@ async def _produce(
     total_sources = len(sources)
     metrics["total_sources"] = total_sources
 
-    # Семафор на параллельные HTTP-запросы к источникам
-    src_sem = asyncio.Semaphore(6)   # 6 репозиториев одновременно
-    file_sem = asyncio.Semaphore(20) # 20 файлов одновременно
+    src_sem = asyncio.Semaphore(6)
+    file_sem = asyncio.Semaphore(20)
 
     async def process_source(idx: int, source: str):
         if cancel_event.is_set():
             return
-
         async with src_sem:
             metrics["current_source"] = idx + 1
             await emit("status", {
                 "status": "running",
                 "message": f"[{idx+1}/{total_sources}] {source[:60]}...",
             })
-
             try:
                 files = await discover_repo_files(source, per_repo_limit, cancel_event)
             except Exception as e:
@@ -105,9 +99,6 @@ async def _produce(
     await queue.put(_QUEUE_SENTINEL)
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Consumer: читает из очереди, дедуплицирует, проверяет
-# ──────────────────────────────────────────────────────────────────────────────
 
 async def _consume(
     queue: asyncio.Queue,
@@ -115,41 +106,32 @@ async def _consume(
     opts: dict,
     metrics: dict,
     emit: EmitFn,
-) -> list[dict]:
-    """Читает батчи из очереди, дедуплицирует и проверяет каждый батч."""
-
+) -> tuple[list[dict], list[dict]]:
+    """Возвращает (live_nodes, all_checked_nodes)."""
     timeout = opts.get("timeout", 10)
     max_checks = opts.get("max_checks", 0)
     limit = opts.get("limit", 100)
-    # Stop checking early once we have 3× the requested limit — plenty to select from
     early_stop = limit * 3 if limit > 0 else 0
 
-    seen_keys: set = set()      # для инкрементной дедупликации
+    seen_keys: set = set()
     live_nodes: list[dict] = []
+    all_checked: list[dict] = []
 
-    # Семафор для check_node — разделяем с producer-ом
-    check_sem = asyncio.Semaphore(CHECK_CONCURRENCY)
-
-    pending_nodes: list[dict] = []  # буфер перед проверкой
+    check_sem = asyncio.Semaphore(TCP_CONCURRENCY)
+    pending_nodes: list[dict] = []
 
     async def flush_pending():
-        """Проверяет накопленный буфер."""
         nonlocal pending_nodes
         if not pending_nodes or cancel_event.is_set():
             pending_nodes = []
             return
-
         batch = pending_nodes
         pending_nodes = []
-
-        # Обрезаем батч до max_checks если лимит задан
         remaining = max_checks - metrics["checking_total"] if max_checks > 0 else None
         if remaining is not None and len(batch) > remaining:
             batch = batch[:remaining]
-
         if not batch:
             return
-
         metrics["checking_total"] += len(batch)
 
         async def check_one(node):
@@ -170,13 +152,12 @@ async def _consume(
             metrics["checking_progress"] += 1
             metrics["live"] = len(live_nodes)
             await emit("metrics", dict(metrics))
-            # Early stop: we have enough live nodes
             if early_stop > 0 and len(live_nodes) >= early_stop:
                 for t in tasks:
                     t.cancel()
                 break
 
-    FLUSH_BATCH = 150  # было 500 — начинаем проверять раньше
+    FLUSH_BATCH = 150
 
     await emit("log", {"level": "info", "text": f"Consumer: max_checks={max_checks}, limit={opts.get('limit', '?')}"})
 
@@ -184,10 +165,8 @@ async def _consume(
         try:
             batch = await asyncio.wait_for(queue.get(), timeout=1.0)
         except asyncio.TimeoutError:
-            # producer ещё работает, проверим буфер если накопился
             if len(pending_nodes) >= FLUSH_BATCH // 2:
                 await flush_pending()
-            # Если лимит достигнут — выходим
             if max_checks > 0 and metrics["checking_total"] >= max_checks:
                 await flush_pending()
                 await emit("log", {"level": "info", "text": f"Достигнут max_checks={max_checks}, проверено {metrics['checking_total']}"})
@@ -195,14 +174,12 @@ async def _consume(
             continue
 
         if batch is _QUEUE_SENTINEL:
-            # Producer закончил — сливаем остаток
             await flush_pending()
             break
 
         if cancel_event.is_set():
             break
 
-        # Инкрементная дедупликация
         new_nodes = []
         for node in batch:
             proto = node.get("protocol", "").lower()
@@ -219,24 +196,135 @@ async def _consume(
             seen_keys.add(key)
             new_nodes.append(node)
 
+        all_checked.extend(new_nodes)
         metrics["deduped"] = len(seen_keys)
         pending_nodes.extend(new_nodes)
 
-        # Проверяем батч как только накопили FLUSH_BATCH уникальных
         if len(pending_nodes) >= FLUSH_BATCH:
-            # Уважаем max_checks
             if max_checks > 0 and metrics["checking_total"] >= max_checks:
                 await emit("log", {"level": "info", "text": f"max_checks={max_checks} достигнут, выход"})
                 break
             else:
                 await flush_pending()
 
-    return live_nodes
+    return live_nodes, all_checked
 
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Основной pipeline
-# ──────────────────────────────────────────────────────────────────────────────
+async def _protocol_check_batch(nodes, timeout, cancel_event, emit):
+    """Проверяет туннельные протоколы (VMess/VLESS/Trojan/SS/Hy2) через sing-box.
+    Только для нод, уже прошедших TCP-фильтр. Низкая конкурентность (15-20).
+    """
+    candidates = [n for n in nodes if n.get("protocol", "").lower() in ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")]
+    non_tunnel = [n for n in nodes if n.get("protocol", "").lower() in ("http", "https", "socks5")]
+    if not candidates:
+        await emit("log", {"level": "info", "text": "Нет туннельных прокси для протокольной проверки"})
+        return nodes
+
+    await emit("log", {"level": "info", "text": f"Protocol check: {len(candidates)} туннельных (sing-box), {PROTOCOL_CHECK_CONCURRENCY} параллельно..."})
+
+    sem = asyncio.Semaphore(PROTOCOL_CHECK_CONCURRENCY)
+    passed = []
+
+    async def check_one(node):
+        if cancel_event.is_set():
+            return None
+        async with sem:
+            latency = await protocol_check(node, timeout, cancel_event)
+            if latency is not None:
+                node["latency_ms"] = latency
+                return node
+            return None
+
+    tasks = [asyncio.create_task(check_one(n)) for n in candidates]
+    for coro in asyncio.as_completed(tasks):
+        if cancel_event.is_set():
+            for t in tasks:
+                t.cancel()
+            break
+        result = await coro
+        if result:
+            passed.append(result)
+
+    await emit("log", {"level": "info", "text": f"Protocol check: {len(passed)}/{len(candidates)} прошли sing-box"})
+    return non_tunnel + passed
+
+
+async def _speed_test_batch(nodes, timeout, cancel_event, emit):
+    if not nodes:
+        return nodes
+    testable = [n for n in nodes if n.get("protocol", "").lower() in ("http", "https", "socks5")]
+    if not testable:
+        return nodes
+
+    await emit("log", {"level": "info", "text": f"Speed test: {len(testable)} прокси..."})
+
+    sem = asyncio.Semaphore(50)
+    checked = 0
+
+    async def test_one(node):
+        nonlocal checked
+        if cancel_event.is_set():
+            return None
+        async with sem:
+            result = await speed_test_node(node, timeout, cancel_event)
+            checked += 1
+            if checked % 10 == 0:
+                await emit("log", {"level": "info", "text": f"Speed test: {checked}/{len(testable)}"})
+            return result
+
+    tasks = [test_one(n) for n in testable]
+    results = await asyncio.gather(*tasks)
+    speed_map = {id(n): r for n, r in zip(testable, results) if r is not None}
+
+    for node in nodes:
+        sid = id(node)
+        if sid in speed_map:
+            node["speed_mbps"] = speed_map[sid]
+
+    fast = sum(1 for n in nodes if n.get("speed_mbps") is not None and n["speed_mbps"] > 0)
+    await emit("log", {"level": "info", "text": f"Speed test: {fast}/{len(testable)} имеют скорость"})
+    return nodes
+
+
+async def _recheck_top_nodes(nodes, limit, timeout, cancel_event, emit):
+    if not nodes or limit <= 0:
+        return nodes
+
+    top = sorted(nodes, key=lambda n: (
+        -(n.get("speed_mbps") or 0),
+        n.get("latency_ms") or 999999
+    ))[:limit]
+
+    await emit("log", {"level": "info", "text": f"Re-check: перепроверка топ-{len(top)} прокси..."})
+
+    sem = asyncio.Semaphore(30)
+    rechecked = []
+
+    async def recheck_one(node):
+        if cancel_event.is_set():
+            return None
+        async with sem:
+            result = await check_node(node, timeout, cancel_event)
+            if result:
+                speed = await speed_test_node(result, timeout, cancel_event)
+                if speed is not None:
+                    result["speed_mbps"] = speed
+                return result
+            return None
+
+    tasks = [asyncio.create_task(recheck_one(n)) for n in top]
+    for coro in asyncio.as_completed(tasks):
+        if cancel_event.is_set():
+            for t in tasks:
+                t.cancel()
+            break
+        result = await coro
+        if result:
+            rechecked.append(result)
+
+    await emit("log", {"level": "info", "text": f"Re-check: {len(rechecked)}/{len(top)} живы после перепроверки"})
+    return rechecked
+
 
 async def run_pipeline(
     sources: list[str],
@@ -262,10 +350,8 @@ async def run_pipeline(
 
     await emit("status", {"status": "running", "message": "Параллельный сбор и проверка прокси..."})
 
-    # Очередь между producer и consumer
     queue: asyncio.Queue = asyncio.Queue(maxsize=50)
 
-    # ── Web-источники (JSON API) — быстро, делаем до основных источников ──
     if opts.get("use_web_sources", True):
         await emit("status", {"status": "running", "message": "Сбор прокси с web-источников..."})
         try:
@@ -277,26 +363,31 @@ async def run_pipeline(
         except Exception as e:
             await emit("log", {"level": "warn", "text": f"Web-источники ошибка: {e}"})
 
-    # Запускаем producer и consumer параллельно
     producer_task = asyncio.create_task(
         _produce(sources, local_files, queue, cancel_event, metrics, emit)
     )
+
+    producer_time_budget = opts.get("producer_timeout", 180)
+    producer_limited = asyncio.ensure_future(
+        asyncio.wait_for(producer_task, timeout=producer_time_budget)
+    )
+
     consumer_task = asyncio.create_task(
         _consume(queue, cancel_event, opts, metrics, emit)
     )
 
-    # Ждём consumer (завершится первым при max_checks), затем гасим producer
     live_nodes: list[dict] = []
+    all_checked: list[dict] = []
     was_cancelled = cancel_event.is_set()
     try:
-        live_nodes = await consumer_task
+        live_nodes, all_checked = await consumer_task
     finally:
-        if not producer_task.done():
-            cancel_event.set()
-            producer_task.cancel()
+        if not producer_limited.done():
             try:
-                await producer_task
-            except (asyncio.CancelledError, Exception):
+                cancel_event.set()
+                producer_limited.cancel()
+                await producer_limited
+            except (asyncio.CancelledError, asyncio.TimeoutError, Exception):
                 pass
         if not was_cancelled:
             cancel_event.clear()
@@ -307,12 +398,21 @@ async def run_pipeline(
     metrics["live"] = len(live_nodes)
     await emit("metrics", dict(metrics))
     await emit("log", {"level": "info",
-                       "text": f"Живых прокси: {len(live_nodes)} / {metrics['checking_total']} проверено"})
+                       "text": f"Живых прокси после TCP: {len(live_nodes)} / {metrics['checking_total']} проверено"})
 
     if not live_nodes:
         return {"status": "error", "message": "Нет живых прокси", "selected": [], "metrics": metrics}
 
-    # ── Сохраняем живые прокси ─────────────────────────────────────────────
+    if all_checked:
+        record_check_results(live_nodes, all_checked)
+        await emit("log", {"level": "info", "text": "История сохранена в proxy-history.json"})
+
+    timeout = opts.get("timeout", 10)
+    live_nodes = await _protocol_check_batch(live_nodes, timeout, cancel_event, emit)
+
+    if not live_nodes:
+        return {"status": "error", "message": "Нет живых после протокольной проверки", "selected": [], "metrics": metrics}
+
     now = datetime.now()
     ts_dir = now.strftime("%H-%M_%d.%m.%y")
     history_dir = ROOT / "Proxy-Data" / ts_dir
@@ -333,21 +433,16 @@ async def run_pipeline(
 
     text = "\n".join(lines)
 
-    # liveproxy.txt — всегда последний снимок
     try:
         (ROOT / "liveproxy.txt").write_text(text, "utf-8")
-        await emit("log", {"level": "info",
-                           "text": f"liveproxy.txt → {len(lines)} шт."})
+        await emit("log", {"level": "info", "text": f"liveproxy.txt → {len(lines)} шт."})
     except Exception as e:
-        await emit("log", {"level": "warn",
-                           "text": f"liveproxy.txt: {e}"})
+        await emit("log", {"level": "warn", "text": f"liveproxy.txt: {e}"})
 
-    # Proxy-Data/ЧЧ-ММ_ДД.ММ.ГГ/live.txt + meta.json + nodes.json — история
     try:
         history_dir.mkdir(parents=True, exist_ok=True)
         (history_dir / "live.txt").write_text(text, "utf-8")
 
-        # Сохраняем полные ноды (с latency_ms) для быстрой перезагрузки
         saved_nodes = []
         for n in live_nodes:
             sn = {
@@ -361,6 +456,8 @@ async def run_pipeline(
                 sn["password"] = n["password"]
             if n.get("latency_ms") is not None:
                 sn["latency_ms"] = n["latency_ms"]
+            if n.get("speed_mbps") is not None:
+                sn["speed_mbps"] = n["speed_mbps"]
             saved_nodes.append(sn)
         (history_dir / "nodes.json").write_text(
             json.dumps(saved_nodes, ensure_ascii=False), "utf-8")
@@ -377,21 +474,17 @@ async def run_pipeline(
         (history_dir / "meta.json").write_text(
             json.dumps(meta, indent=2, ensure_ascii=False), "utf-8")
 
-        await emit("log", {"level": "info",
-                           "text": f"Proxy-Data/{ts_dir}/ → {len(lines)} шт."})
+        await emit("log", {"level": "info", "text": f"Proxy-Data/{ts_dir}/ → {len(lines)} шт."})
     except Exception as e:
-        await emit("log", {"level": "warn",
-                           "text": f"Proxy-Data: {e}"})
+        await emit("log", {"level": "warn", "text": f"Proxy-Data: {e}"})
 
     if cancel_event.is_set():
         return {"status": "cancelled", "message": "Отменено", "selected": [], "metrics": metrics}
 
-    # ── GeoIP ────────────────────────────────────────────────────────────────
     use_local = (ROOT / "GeoIP" / "GeoLite2-Country.mmdb").is_file()
     await emit("status", {"status": "running", "message": f"GeoIP ({len(live_nodes)} прокси, {'локально' if use_local else 'ip-api.com'})..."})
 
     unique_ips = list(dict.fromkeys(n.get("server", "") for n in live_nodes if n.get("server")))
-
     geo_data = await geoip_batch(unique_ips, cancel_event)
 
     metrics["geo_checked"] = len(geo_data)
@@ -416,13 +509,20 @@ async def run_pipeline(
     ]
     await emit("geo_points", {"points": geo_points})
 
-    # ── Финальный отбор ────────────────────────────────────────────────────────
+    await emit("status", {"status": "running", "message": "Speed test всех живых прокси..."})
+    live_nodes = await _speed_test_batch(live_nodes, timeout, cancel_event, emit)
+
+    stable_nodes = filter_stable(live_nodes)
+    await emit("log", {"level": "info", "text": f"История: {len(stable_nodes)}/{len(live_nodes)} стабильны (success_rate >= 0.6 за последние 5 запусков)"})
+
     await emit("status", {"status": "running", "message": "Финальный отбор..."})
 
     limit = opts.get("limit", 100)
     strategy = opts.get("selection", "fastest")
-    prefer_socks = opts.get("prefer_socks5", True)
-    selected = select_nodes(live_nodes, limit, strategy, prefer_socks=prefer_socks)
+
+    selected = select_nodes(stable_nodes, limit, strategy)
+    if len(selected) < limit:
+        selected = select_nodes(live_nodes, limit, strategy)
 
     countries = {n.get("country", "ZZ") for n in selected}
     metrics["selected"] = len(selected)
@@ -435,20 +535,45 @@ async def run_pipeline(
                        "text": f"Отобрано: {len(selected)} (SOCKS5:{socks5} HTTP:{http} др:{other})"})
     await emit("metrics", dict(metrics))
 
-    # ── Сохранение ─────────────────────────────────────────────────────────────
-    OUTPUT_FILE.write_text(generate_config(selected), "utf-8")
+    await emit("status", {"status": "running", "message": "Формирование топ-100 и топ-50..."})
+
+    fast_nodes = sorted(stable_nodes, key=lambda n: (
+        0 if n.get("speed_mbps") is not None and n["speed_mbps"] > 0 else 1,
+        -(n.get("speed_mbps") or 0),
+        n.get("latency_ms") or 999999,
+    ))
+    if len(fast_nodes) < 100:
+        fast_nodes = sorted(live_nodes, key=lambda n: (
+            0 if n.get("speed_mbps") is not None and n["speed_mbps"] > 0 else 1,
+            -(n.get("speed_mbps") or 0),
+            n.get("latency_ms") or 999999,
+        ))
+
+    top_100 = select_nodes(fast_nodes, min(100, len(fast_nodes)), strategy)
+    top_50 = select_nodes(fast_nodes, min(50, len(fast_nodes)), strategy)
+
+    top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
+    top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
+
+    configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked)
+
+    for name, content in configs.items():
+        file_path = ROOT / name
+        file_path.write_text(content, "utf-8")
+        await emit("log", {"level": "info", "text": f"{name} → {len(content)} байт"})
 
     return {
         "status": "done",
-        "message": f"Готово: {len(selected)} прокси, {len(countries)} стран",
+        "message": f"Готово: {len(selected)} прокси, {len(countries)} стран, configs: {', '.join(configs.keys())}",
         "selected": selected,
+        "top_100": top_100_rechecked,
+        "top_50": top_50_rechecked,
         "metrics": metrics,
+        "configs": list(configs.keys()),
     }
 
 
 def parse_live_file(path: Path) -> list[dict]:
-    """Парсит live.txt (или nodes.json если есть) обратно в список proxy-нод."""
-    # Предпочитаем nodes.json — там сохранены latency_ms
     nodes_json = path.parent / "nodes.json" if path.name == "live.txt" else None
     if nodes_json and nodes_json.is_file():
         try:
@@ -485,7 +610,6 @@ async def run_pipeline_from_nodes(
     emit: EmitFn = _noop,
     source_label: str = "Proxy-Data",
 ) -> dict:
-    """Запускает pipeline начиная с GeoIP на готовых нодах (пропускает сбор и проверку)."""
     metrics = {
         "total_sources": 0,
         "current_source": 0,
@@ -509,10 +633,8 @@ async def run_pipeline_from_nodes(
     if cancel_event.is_set():
         return {"status": "cancelled", "message": "Отменено", "selected": [], "metrics": metrics}
 
-    # ── GeoIP ───────────────────────────────────────────────────────────────
     use_local = (ROOT / "GeoIP" / "GeoLite2-Country.mmdb").is_file()
     await emit("status", {"status": "running", "message": f"GeoIP ({len(live_nodes)} прокси, {'MaxMind локально' if use_local else 'ip-api.com'})..."})
-    await emit("log", {"level": "info", "text": f"GeoIP: {'MaxMind (локально)' if use_local else 'ip-api.com (API)'}"})
 
     unique_ips = list(dict.fromkeys(n.get("server", "") for n in live_nodes if n.get("server")))
     geo_data = await geoip_batch(unique_ips, cancel_event)
@@ -532,20 +654,25 @@ async def run_pipeline_from_nodes(
 
     known = sum(1 for n in live_nodes if n.get("country") != "ZZ")
     await emit("log", {"level": "info", "text": f"GeoIP: {known}/{len(live_nodes)} определено"})
-
     geo_points = [
         {"lat": n["lat"], "lon": n["lon"], "country": n.get("country", "ZZ"), "latency_ms": n.get("latency_ms")}
         for n in live_nodes if n.get("lat") is not None and n.get("lon") is not None
     ]
     await emit("geo_points", {"points": geo_points})
 
-    # ── Финальный отбор ────────────────────────────────────────────────────
+    timeout = opts.get("timeout", 10)
+    live_nodes = await _speed_test_batch(live_nodes, timeout, cancel_event, emit)
+
+    stable_nodes = filter_stable(live_nodes)
+    await emit("log", {"level": "info", "text": f"История: {len(stable_nodes)}/{len(live_nodes)} стабильны"})
+
     await emit("status", {"status": "running", "message": "Финальный отбор..."})
 
     limit = opts.get("limit", 100)
     strategy = opts.get("selection", "fastest")
-    prefer_socks = opts.get("prefer_socks5", True)
-    selected = select_nodes(live_nodes, limit, strategy, prefer_socks=prefer_socks)
+    selected = select_nodes(stable_nodes, limit, strategy)
+    if len(selected) < limit:
+        selected = select_nodes(live_nodes, limit, strategy)
 
     countries = {n.get("country", "ZZ") for n in selected}
     metrics["selected"] = len(selected)
@@ -556,13 +683,31 @@ async def run_pipeline_from_nodes(
     other  = len(selected) - socks5 - http
     await emit("log", {"level": "info",
                        "text": f"Отобрано: {len(selected)} (SOCKS5:{socks5} HTTP:{http} др:{other})"})
-    await emit("metrics", dict(metrics))
 
-    OUTPUT_FILE.write_text(generate_config(selected), "utf-8")
+    fast_nodes = sorted(stable_nodes if len(stable_nodes) >= 100 else live_nodes, key=lambda n: (
+        0 if n.get("speed_mbps") is not None and n["speed_mbps"] > 0 else 1,
+        -(n.get("speed_mbps") or 0),
+        n.get("latency_ms") or 999999,
+    ))
+    top_100 = select_nodes(fast_nodes, min(100, len(fast_nodes)), strategy)
+    top_50 = select_nodes(fast_nodes, min(50, len(fast_nodes)), strategy)
+
+    top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
+    top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
+
+    configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked)
+
+    for name, content in configs.items():
+        file_path = ROOT / name
+        file_path.write_text(content, "utf-8")
+        await emit("log", {"level": "info", "text": f"{name} → {len(content)} байт"})
 
     return {
         "status": "done",
         "message": f"Готово: {len(selected)} прокси, {len(countries)} стран",
         "selected": selected,
+        "top_100": top_100_rechecked,
+        "top_50": top_50_rechecked,
         "metrics": metrics,
+        "configs": list(configs.keys()),
     }

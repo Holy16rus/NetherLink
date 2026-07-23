@@ -114,7 +114,6 @@ export default function App() {
             datasets: selectedDatasets,
             limit: opts.limit,
             selection: opts.selection,
-            prefer_socks5: true,
           }),
         });
         if (!resp.ok) {
@@ -144,7 +143,6 @@ export default function App() {
           max_checks: opts.maxChecks,
           timeout: opts.timeout,
           selection: opts.selection,
-          prefer_socks5: true,
         }),
       });
       if (!resp.ok) {

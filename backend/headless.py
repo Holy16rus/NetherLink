@@ -5,12 +5,11 @@ import asyncio
 import sys
 import time
 
-from backend.config import OUTPUT_FILE, load_sources
+from backend.config import OUTPUT_FILE, ROOT, load_sources
 from backend.pipeline import run_pipeline
 
 
 async def _emit(event: str, data: dict) -> None:
-    """Простой stdout-вывод вместо SSE."""
     if event == "status":
         msg = data.get("message", "")
         status = data.get("status", "")
@@ -21,7 +20,7 @@ async def _emit(event: str, data: dict) -> None:
         prefix = {"error": "[!]", "warn": "[~]"}.get(level, "   ")
         print(f"  {prefix} {data.get('text', '')}")
     elif event == "metrics":
-        pass  # headless не нужен real-time метрик в stdout
+        pass
     elif event == "geo_points":
         pts = len(data.get("points", []))
         if pts:
@@ -41,10 +40,10 @@ async def run():
 
     opts = {
         "limit": 500,
-        "max_checks": 10000,
+        "max_checks": 20000,
         "timeout": 8,
         "selection": "fastest",
-        "prefer_socks5": True,
+        "producer_timeout": 180,
     }
 
     cancel = asyncio.Event()
@@ -63,8 +62,13 @@ async def run():
     if status == "done":
         countries = m.get("countries", 0)
         selected = m.get("selected", 0)
+        configs = result.get("configs", [])
         print(f"\n[+] Done: {selected} proxies, {countries} countries")
-        print(f"[+] Config saved: {OUTPUT_FILE}")
+        print(f"[+] Generated configs: {', '.join(configs)}")
+        for name in configs:
+            fp = ROOT / name
+            if fp.exists():
+                print(f"    - {name} ({fp.stat().st_size} bytes)")
     elif status == "error":
         print(f"\n[!] Failed: {result['message']}", file=sys.stderr)
         sys.exit(1)

@@ -45,6 +45,9 @@ class ProxyEngine:
                 await self.emit("done", {
                     "path": str(OUTPUT_FILE),
                     "count": result["metrics"]["selected"],
+                    "configs": result.get("configs", []),
+                    "top_100": len(result.get("top_100", [])),
+                    "top_50": len(result.get("top_50", [])),
                 })
             elif result["status"] == "cancelled":
                 await self.emit("status", {"status": "cancelled", "message": "Отменено"})
@@ -79,6 +82,9 @@ class ProxyEngine:
                 await self.emit("done", {
                     "path": str(OUTPUT_FILE),
                     "count": result["metrics"]["selected"],
+                    "configs": result.get("configs", []),
+                    "top_100": len(result.get("top_100", [])),
+                    "top_50": len(result.get("top_50", [])),
                 })
             elif result["status"] == "cancelled":
                 await self.emit("status", {"status": "cancelled", "message": "Отменено"})
