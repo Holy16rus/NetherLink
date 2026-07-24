@@ -1,16 +1,115 @@
 {
-  "🇺🇸 США 30ms": {
-    "protocol": "http",
+  "🇺🇸 США 140ms": {
+    "protocol": "socks",
     "settings": {
       "servers": [
         {
-          "address": "213.188.208.179",
-          "port": 80
+          "address": "142.54.226.214",
+          "port": 4145
         }
       ]
     }
   },
-  "🇺🇸 США 33ms": {
+  "🇺🇸 США 141ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.228.193",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 141ms-2": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "104.200.152.30",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 148ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "68.71.249.158",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 148ms-2": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.239.1",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 148ms-3": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.229.249",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 149ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.232.6",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 149ms-2": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "104.37.135.145",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 149ms-3": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "68.71.242.118",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 74ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "52.34.243.150",
+          "port": 8080
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 97ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -21,18 +120,7 @@
       ]
     }
   },
-  "🇺🇸 США 40ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "207.244.248.97",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 64ms": {
+  "🇺🇸 США 114ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -43,29 +131,7 @@
       ]
     }
   },
-  "🇺🇸 США 96ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "165.138.86.202",
-          "port": 8080
-        }
-      ]
-    }
-  },
-  "🇷🇺 Россия 71ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "147.45.60.252",
-          "port": 1081
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 74ms": {
+  "🇺🇸 США 131ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -76,40 +142,7 @@
       ]
     }
   },
-  "🇷🇺 Россия 79ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "147.45.60.250",
-          "port": 1081
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 80ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "64.23.188.3",
-          "port": 3128
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 111ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "157.254.194.57",
-          "port": 1080
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 78ms": {
+  "🇺🇸 США 134ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -125,13 +158,35 @@
     "settings": {
       "servers": [
         {
-          "address": "52.34.243.150",
-          "port": 8080
+          "address": "174.137.134.182",
+          "port": 2999
         }
       ]
     }
   },
-  "🇺🇸 США 52ms": {
+  "🇺🇸 США 134ms-2": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "157.254.194.57",
+          "port": 1080
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 128ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "207.244.248.97",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 86ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -142,84 +197,7 @@
       ]
     }
   },
-  "🇨🇴 Колумбия 178ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "190.0.246.213",
-          "port": 4040
-        }
-      ]
-    }
-  },
-  "🇨🇴 Колумбия 173ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "190.0.246.210",
-          "port": 4040
-        }
-      ]
-    }
-  },
-  "🇬🇧 Великобритания 209ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "86.53.163.185",
-          "port": 10002
-        }
-      ]
-    }
-  },
-  "🇳🇱 Нидерланды 221ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "193.23.194.116",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇩🇪 Германия 237ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "161.35.223.141",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇫🇷 Франция 252ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "152.228.217.116",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇳🇱 Нидерланды 234ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "95.211.64.139",
-          "port": 8889
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 56ms": {
+  "🇺🇸 США 109ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -230,51 +208,7 @@
       ]
     }
   },
-  "🇺🇸 США 52ms-2": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "34.43.46.91",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇩🇪 Германия 259ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "80.74.54.148",
-          "port": 3128
-        }
-      ]
-    }
-  },
-  "🇩🇪 Германия 347ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "138.68.96.6",
-          "port": 8888
-        }
-      ]
-    }
-  },
-  "🇫🇷 Франция 256ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "82.66.54.40",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 79ms": {
+  "🇺🇸 США 136ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -285,51 +219,7 @@
       ]
     }
   },
-  "🇺🇸 США 86ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "159.65.230.46",
-          "port": 8888
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 161ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "69.55.49.177",
-          "port": 38182
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 55ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "172.171.83.26",
-          "port": 8080
-        }
-      ]
-    }
-  },
-  "🇲🇽 Мексика 176ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "205.164.192.115",
-          "port": 999
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 41ms": {
+  "🇺🇸 США 134ms-3": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -340,18 +230,7 @@
       ]
     }
   },
-  "🇺🇸 США 163ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "23.175.248.21",
-          "port": 1080
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 88ms": {
+  "🇺🇸 США 197ms": {
     "protocol": "socks",
     "settings": {
       "servers": [
@@ -362,7 +241,7 @@
       ]
     }
   },
-  "🇺🇸 США 216ms": {
+  "🇺🇸 США 60ms": {
     "protocol": "socks",
     "settings": {
       "servers": [
@@ -373,7 +252,29 @@
       ]
     }
   },
-  "🇺🇸 США 98ms": {
+  "🇺🇸 США 167ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "15.204.57.89",
+          "port": 1080
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 170ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "168.184.84.85",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 175ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -384,145 +285,57 @@
       ]
     }
   },
-  "🇫🇷 Франция 5268ms": {
+  "🇲🇽 Мексика 179ms": {
     "protocol": "http",
     "settings": {
       "servers": [
         {
-          "address": "37.187.74.125",
-          "port": 80
+          "address": "205.164.192.115",
+          "port": 999
         }
       ]
     }
   },
-  "🇷🇺 Россия 132ms": {
+  "🇺🇸 США 24ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "23.228.86.236",
+          "port": 8081
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 15ms": {
     "protocol": "socks",
     "settings": {
       "servers": [
         {
-          "address": "147.45.60.139",
-          "port": 1082
+          "address": "141.148.158.143",
+          "port": 1080
         }
       ]
     }
   },
-  "🇺🇸 США 137ms": {
+  "🇺🇸 США 142ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "50.205.246.13",
+          "port": 443
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 127ms": {
     "protocol": "http",
     "settings": {
       "servers": [
         {
           "address": "50.205.246.13",
           "port": 8080
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 154ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "50.205.246.13",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 131ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "50.205.246.13",
-          "port": 443
-        }
-      ]
-    }
-  },
-  "🇷🇺 Россия 4145ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "147.45.60.246",
-          "port": 1081
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 1548ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "103.7.138.17",
-          "port": 1080
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 3241ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "178.130.47.43",
-          "port": 1081
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 12538ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "178.130.47.43",
-          "port": 1082
-        }
-      ]
-    }
-  },
-  "🇬🇧 Великобритания 4333ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "81.168.119.85",
-          "port": 443
-        }
-      ]
-    }
-  },
-  "🇺🇸 США 223ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "144.24.47.42",
-          "port": 1080
-        }
-      ]
-    }
-  },
-  "🇨🇦 Канада 5150ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "38.49.210.79",
-          "port": 40000
-        }
-      ]
-    }
-  },
-  "🇷🇺 Россия 288ms": {
-    "protocol": "socks",
-    "settings": {
-      "servers": [
-        {
-          "address": "147.45.60.136",
-          "port": 1082
         }
       ]
     }
