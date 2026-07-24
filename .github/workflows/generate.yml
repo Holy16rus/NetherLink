@@ -90,6 +90,7 @@ jobs:
             git show origin/state:proxy-history.json > /tmp/state-old.json 2>/dev/null || echo '{}' > /tmp/state-old.json
             [ -f proxy-history.json ] && cp proxy-history.json /tmp/state-new.json || echo '{}' > /tmp/state-new.json
             python3 backend/merge_history.py /tmp/state-old.json /tmp/state-new.json
+            git branch -D state-new 2>/dev/null || true
             git checkout --orphan state-new
             git rm -rf . 2>/dev/null || true
             cp proxy-history.json .
