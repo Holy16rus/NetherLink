@@ -41,9 +41,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Restore state
+      - name: Restore state from gh-pages
         run: |
-          git fetch origin state 2>/dev/null && git show origin/state:proxy-history.json > proxy-history.json || echo "{}" > proxy-history.json
+          curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/proxy-history.json" -o proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
 
       - name: Download current configs from gh-pages
         run: |
@@ -54,42 +54,6 @@ jobs:
       - name: Run recheck
         run: python -m backend.recheck_headless
 
-      - name: Commit updated state
-        if: success()
-        run: |
-          git config user.name "NetherLink Recheck Bot"
-          git config user.email "bot@netherlink.local"
-          set +e
-          PUSHED=false
-          for attempt in 1 2 3; do
-            echo "State commit attempt $attempt/3"
-            git fetch origin state 2>/dev/null
-            BEFORE_SHA=$(git rev-parse origin/state 2>/dev/null || echo "")
-            git show origin/state:proxy-history.json > /tmp/state-old.json 2>/dev/null || echo '{}' > /tmp/state-old.json
-            [ -f proxy-history.json ] && cp proxy-history.json /tmp/state-new.json || echo '{}' > /tmp/state-new.json
-            python3 backend/merge_history.py /tmp/state-old.json /tmp/state-new.json
-            git branch -D state-new 2>/dev/null || true
-            git checkout --orphan state-new
-            git rm -rf . 2>/dev/null || true
-            cp proxy-history.json .
-            git add proxy-history.json
-            git commit -m "Update proxy state $(date -u +'%Y-%m-%d %H:%M UTC')"
-            if [ -z "$BEFORE_SHA" ]; then
-              git push --force origin state-new:state && PUSHED=true && break
-            else
-              if git push --force-with-lease=state:$BEFORE_SHA origin state-new:state 2>/dev/null; then
-                PUSHED=true; break
-              fi
-            fi
-            echo "Push conflict — retry in 3s..."
-            sleep 3
-          done
-          if [ "$PUSHED" != "true" ]; then
-            echo "::error::Failed to push state after 3 attempts — history data lost for this run"
-            exit 1
-          fi
-          set -e
-
       - name: Deploy rechecked configs to gh-pages
         if: success()
         run: |
@@ -97,6 +61,9 @@ jobs:
           for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt; do
             [ -f "$f" ] && cp "$f" "/tmp/recheck-deploy/$f"
           done
+          [ -f proxy-history.json ] && cp proxy-history.json /tmp/recheck-deploy/proxy-history.json
+          git config user.name "NetherLink Recheck Bot"
+          git config user.email "bot@netherlink.local"
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
           git rm -rf . 2>/dev/null || true
           if ls /tmp/recheck-deploy/* 1>/dev/null 2>&1; then

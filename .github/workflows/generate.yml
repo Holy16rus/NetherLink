@@ -52,9 +52,9 @@ jobs:
         run: python -m backend.download_geoip
         continue-on-error: true
 
-      - name: Restore proxy history from state branch
+      - name: Restore proxy history from gh-pages
         run: |
-          git fetch origin state 2>/dev/null && git show origin/state:proxy-history.json > proxy-history.json || echo "{}" > proxy-history.json
+          curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/proxy-history.json" -o proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
 
       - name: Run proxy generator
         run: python -m backend.headless
@@ -65,6 +65,7 @@ jobs:
           for f in NetherLink*.yaml NetherLink*.json live.txt; do
             [ -f "$f" ] && cp "$f" "/tmp/deploy/$f"
           done
+          [ -f proxy-history.json ] && cp proxy-history.json /tmp/deploy/proxy-history.json
           git config user.name "NetherLink Bot"
           git config user.email "bot@netherlink.local"
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
@@ -75,39 +76,3 @@ jobs:
           git add -A
           git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin gh-pages
-
-      - name: Commit proxy history to state branch
-        if: success()
-        run: |
-          git config user.name "NetherLink Bot"
-          git config user.email "bot@netherlink.local"
-          set +e
-          PUSHED=false
-          for attempt in 1 2 3; do
-            echo "State commit attempt $attempt/3"
-            git fetch origin state 2>/dev/null
-            BEFORE_SHA=$(git rev-parse origin/state 2>/dev/null || echo "")
-            git show origin/state:proxy-history.json > /tmp/state-old.json 2>/dev/null || echo '{}' > /tmp/state-old.json
-            [ -f proxy-history.json ] && cp proxy-history.json /tmp/state-new.json || echo '{}' > /tmp/state-new.json
-            python3 backend/merge_history.py /tmp/state-old.json /tmp/state-new.json
-            git branch -D state-new 2>/dev/null || true
-            git checkout --orphan state-new
-            git rm -rf . 2>/dev/null || true
-            cp proxy-history.json .
-            git add proxy-history.json
-            git commit -m "Update proxy state $(date -u +'%Y-%m-%d %H:%M UTC')"
-            if [ -z "$BEFORE_SHA" ]; then
-              git push --force origin state-new:state && PUSHED=true && break
-            else
-              if git push --force-with-lease=state:$BEFORE_SHA origin state-new:state 2>/dev/null; then
-                PUSHED=true; break
-              fi
-            fi
-            echo "Push conflict — retry in 3s..."
-            sleep 3
-          done
-          if [ "$PUSHED" != "true" ]; then
-            echo "::error::Failed to push state after 3 attempts — history data lost for this run"
-            exit 1
-          fi
-          set -e
