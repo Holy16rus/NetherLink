@@ -555,7 +555,7 @@ async def run_pipeline(
     top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
     top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
 
-    configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked)
+    configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked, all_live_nodes=live_nodes)
 
     for name, content in configs.items():
         file_path = ROOT / name
@@ -695,7 +695,7 @@ async def run_pipeline_from_nodes(
     top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
     top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
 
-    configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked)
+    configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked, all_live_nodes=live_nodes)
 
     for name, content in configs.items():
         file_path = ROOT / name

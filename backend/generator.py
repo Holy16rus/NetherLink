@@ -299,7 +299,7 @@ def generate_config_singbox(nodes):
     return json.dumps(out_obfs, ensure_ascii=False, indent=2)
 
 
-def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None):
+def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None, all_live_nodes=None):
     configs = {}
     configs["NetherLink.yaml"] = generate_config_clash(nodes)
     if top_nodes_100:
@@ -319,8 +319,9 @@ def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None):
     if top_nodes_50:
         configs["NetherLink-50-singbox.json"] = generate_config_singbox(top_nodes_50)
 
+    live_source = all_live_nodes if all_live_nodes else nodes
     live_lines = []
-    for n in nodes:
+    for n in live_source:
         if not n.get("server") or not n.get("port"):
             continue
         proto = n.get("protocol", "http").lower()
