@@ -67,15 +67,7 @@ jobs:
             BEFORE_SHA=$(git rev-parse origin/state 2>/dev/null || echo "")
             git show origin/state:proxy-history.json > /tmp/state-old.json 2>/dev/null || echo '{}' > /tmp/state-old.json
             [ -f proxy-history.json ] && cp proxy-history.json /tmp/state-new.json || echo '{}' > /tmp/state-new.json
-            python3 << 'PYEOF'
-import json
-old = json.load(open("/tmp/state-old.json"))
-new = json.load(open("/tmp/state-new.json"))
-for k, v in new.items():
-    old[k] = (old.get(k, []) + v)[-5:]
-old = {k: v for k, v in old.items() if len(v) >= 1}
-json.dump(old, open("proxy-history.json", "w"), ensure_ascii=False)
-PYEOF
+            python3 backend/merge_history.py /tmp/state-old.json /tmp/state-new.json
             git checkout --orphan state-new
             git rm -rf . 2>/dev/null || true
             cp proxy-history.json .
