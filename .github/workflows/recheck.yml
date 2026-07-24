@@ -65,10 +65,9 @@ jobs:
           git config user.name "NetherLink Recheck Bot"
           git config user.email "bot@netherlink.local"
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf . 2>/dev/null || true
-          if ls /tmp/recheck-deploy/* 1>/dev/null 2>&1; then
-            cp /tmp/recheck-deploy/* .
-          fi
+          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt proxy-history.json; do
+            [ -f "/tmp/recheck-deploy/$f" ] && cp "/tmp/recheck-deploy/$f" .
+          done
           git add -A
           git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
           git push --force origin gh-pages
