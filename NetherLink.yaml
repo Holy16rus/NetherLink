@@ -11,2568 +11,2564 @@ log-level: info
 external-controller: 127.0.0.1:9090
 
 proxies:
-  - name: "🇺🇸 США 25ms"
-    type: http
-    server: 137.66.1.45
-    port: 80
-
-  - name: "🇺🇸 США 36ms"
-    type: http
-    server: 64.112.184.210
-    port: 3128
-
-  - name: "🇺🇸 США 40ms"
-    type: http
-    server: 34.44.49.215
-    port: 80
-
-  - name: "🇺🇸 США 46ms"
-    type: http
-    server: 34.134.231.117
-    port: 3129
-
-  - name: "🇺🇸 США 48ms"
-    type: http
-    server: 174.137.134.182
-    port: 2999
-
-  - name: "🇺🇸 США 50ms"
+  - name: "🇺🇸 США 20ms"
     type: http
     server: 3.211.120.181
     port: 443
 
-  - name: "🇷🇺 Россия 51ms"
-    type: http
-    server: 147.45.60.246
-    port: 1081
-
-  - name: "🇺🇸 США 57ms"
-    type: http
-    server: 138.197.68.35
-    port: 4857
-
-  - name: "🇺🇸 США 61ms"
-    type: http
-    server: 167.99.124.118
-    port: 80
-
-  - name: "🇺🇸 США 70ms"
-    type: http
-    server: 207.244.248.97
-    port: 80
-
-  - name: "🇨🇦 Канада 72ms"
-    type: http
-    server: 51.79.63.111
-    port: 3128
-
-  - name: "🇺🇸 США 73ms"
-    type: http
-    server: 168.184.84.85
-    port: 80
-
-  - name: "🇨🇦 Канада 74ms"
-    type: http
-    server: 148.113.167.81
-    port: 3128
-
-  - name: "🇺🇸 США 74ms"
-    type: http
-    server: 34.43.46.91
-    port: 443
-
-  - name: "🇺🇸 США 75ms"
-    type: http
-    server: 8.221.126.184
-    port: 80
-
-  - name: "🇺🇸 США 76ms"
+  - name: "🇺🇸 США 26ms"
     type: http
     server: 142.93.202.130
     port: 3128
 
-  - name: "🇷🇺 Россия 76ms"
-    type: http
-    server: 147.45.60.241
-    port: 1082
-
-  - name: "🇺🇸 США 76ms-2"
-    type: http
-    server: 150.136.163.51
-    port: 80
-
-  - name: "🇺🇸 США 76ms-3"
-    type: http
-    server: 172.171.83.26
-    port: 8080
-
-  - name: "🇺🇸 США 76ms-4"
+  - name: "🇺🇸 США 27ms"
     type: http
     server: 20.83.140.251
     port: 8080
 
-  - name: "🇺🇸 США 76ms-5"
+  - name: "🇺🇸 США 27ms-2"
     type: http
-    server: 47.253.201.85
-    port: 7890
+    server: 64.112.184.210
+    port: 3128
 
-  - name: "🇺🇸 США 77ms"
-    type: http
-    server: 157.254.194.57
-    port: 1080
-
-  - name: "🇺🇸 США 77ms-2"
-    type: http
-    server: 34.43.46.91
-    port: 80
-
-  - name: "🇺🇸 США 78ms"
-    type: http
-    server: 159.65.245.255
-    port: 80
-
-  - name: "🇺🇸 США 78ms-2"
+  - name: "🇺🇸 США 35ms"
     type: http
     server: 174.138.119.88
     port: 80
 
-  - name: "🇺🇸 США 95ms"
+  - name: "🇺🇸 США 55ms"
     type: http
-    server: 165.138.86.202
-    port: 8080
-
-  - name: "🇨🇦 Канада 96ms"
-    type: socks5
-    server: 51.222.13.193
-    port: 10084
-
-  - name: "🇺🇸 США 97ms"
-    type: http
-    server: 50.205.246.13
+    server: 207.244.248.97
     port: 80
 
-  - name: "🇺🇸 США 100ms"
-    type: socks5
-    server: 207.148.0.35
-    port: 10808
-
-  - name: "🇲🇽 Мексика 103ms"
+  - name: "🇷🇺 Россия 58ms"
     type: http
-    server: 160.34.208.144
+    server: 147.45.60.246
+    port: 1081
+
+  - name: "🇺🇸 США 71ms"
+    type: http
+    server: 34.43.46.91
     port: 80
 
-  - name: "🇺🇸 США 107ms"
+  - name: "🇺🇸 США 73ms"
     type: http
-    server: 50.205.246.13
-    port: 8080
-
-  - name: "🇺🇸 США 109ms"
-    type: socks5
-    server: 66.253.43.134
-    port: 1080
-
-  - name: "🇺🇸 США 117ms"
-    type: http
-    server: 50.205.246.13
-    port: 443
-
-  - name: "🇨🇦 Канада 126ms"
-    type: socks5
-    server: 38.49.210.79
-    port: 40000
-
-  - name: "🇺🇸 США 129ms"
-    type: http
-    server: 52.34.243.150
-    port: 8080
-
-  - name: "🇺🇸 США 132ms"
-    type: http
-    server: 103.11.76.74
-    port: 8081
-
-  - name: "🇺🇸 США 140ms"
-    type: socks5
-    server: 23.175.248.21
-    port: 1080
-
-  - name: "🇨🇴 Колумбия 157ms"
-    type: http
-    server: 190.0.246.213
-    port: 4040
-
-  - name: "🇺🇸 США 171ms"
-    type: http
-    server: 34.94.46.8
-    port: 80
-
-  - name: "🇨🇴 Колумбия 173ms"
-    type: http
-    server: 190.0.246.210
-    port: 4040
-
-  - name: "🇺🇸 США 197ms"
-    type: socks5
-    server: 45.61.188.134
-    port: 44499
-
-  - name: "🇫🇷 Франция 199ms"
-    type: http
-    server: 152.228.217.116
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 205ms"
-    type: http
-    server: 95.211.174.135
+    server: 150.238.75.122
     port: 3128
 
-  - name: "🇬🇧 Великобритания 207ms"
-    type: http
-    server: 81.168.119.85
-    port: 443
-
-  - name: "🇳🇱 Нидерланды 208ms"
-    type: http
-    server: 193.23.194.116
-    port: 80
-
-  - name: "🇫🇷 Франция 210ms"
-    type: http
-    server: 46.35.9.110
-    port: 80
-
-  - name: "🇺🇸 США 213ms"
-    type: socks5
-    server: 23.254.233.221
-    port: 666
-
-  - name: "🇳🇱 Нидерланды 213ms"
-    type: http
-    server: 95.211.64.139
-    port: 8888
-
-  - name: "🇫🇷 Франция 216ms"
-    type: http
-    server: 206.245.131.160
-    port: 80
-
-  - name: "🇩🇪 Германия 222ms"
-    type: http
-    server: 138.68.96.6
-    port: 8888
-
-  - name: "🇩🇪 Германия 222ms-2"
-    type: http
-    server: 164.92.200.113
-    port: 80
-
-  - name: "🇧🇪 Бельгия 224ms"
-    type: http
-    server: 34.140.137.151
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 230ms"
-    type: http
-    server: 145.220.226.7
-    port: 8080
-
-  - name: "🇩🇪 Германия 230ms"
-    type: http
-    server: 168.119.153.216
-    port: 8888
-
-  - name: "🇪🇨 Неизвестно 233ms"
-    type: http
-    server: 181.39.25.196
-    port: 8118
-
-  - name: "🇫🇷 Франция 233ms"
-    type: http
-    server: 51.159.28.39
-    port: 80
-
-  - name: "🇫🇷 Франция 236ms"
-    type: http
-    server: 82.66.54.40
-    port: 80
-
-  - name: "🇩🇪 Германия 236ms"
-    type: http
-    server: 95.140.154.156
-    port: 1080
-
-  - name: "🇪🇨 Неизвестно 240ms"
-    type: http
-    server: 45.186.6.104
-    port: 3128
-
-  - name: "🇳🇱 Нидерланды 244ms"
-    type: http
-    server: 144.178.199.118
-    port: 8443
-
-  - name: "🇳🇱 Нидерланды 244ms-2"
-    type: http
-    server: 145.220.226.100
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 245ms"
-    type: http
-    server: 145.220.226.91
-    port: 8080
-
-  - name: "🇩🇪 Германия 246ms"
-    type: http
-    server: 138.201.89.155
-    port: 8080
-
-  - name: "🇵🇱 Польша 248ms"
-    type: http
-    server: 212.127.95.235
-    port: 8081
-
-  - name: "🇺🇸 США 249ms"
-    type: socks5
-    server: 144.24.47.42
-    port: 1080
-
-  - name: "🇺🇸 США 250ms"
-    type: socks5
-    server: 103.7.138.17
-    port: 1080
-
-  - name: "🇫🇷 Франция 250ms"
-    type: http
-    server: 51.68.153.51
-    port: 3128
-
-  - name: "🇳🇱 Нидерланды 251ms"
-    type: http
-    server: 145.220.226.8
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 252ms"
-    type: http
-    server: 145.220.226.234
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 253ms"
-    type: http
-    server: 145.220.226.171
-    port: 8080
-
-  - name: "🇵🇱 Польша 254ms"
-    type: http
-    server: 79.110.200.27
-    port: 8000
-
-  - name: "🇺🇦 Украина 255ms"
-    type: http
-    server: 176.111.37.5
-    port: 39811
-
-  - name: "🇵🇱 Польша 255ms"
-    type: http
-    server: 83.168.74.163
-    port: 8080
-
-  - name: "🇮🇹 Италия 255ms"
-    type: http
-    server: 87.121.148.126
-    port: 49200
-
-  - name: "🇺🇦 Украина 256ms"
-    type: http
-    server: 176.111.37.216
-    port: 39811
-
-  - name: "🇫🇷 Франция 256ms"
-    type: http
-    server: 37.59.125.131
-    port: 8888
-
-  - name: "🇵🇱 Польша 258ms"
-    type: http
-    server: 185.238.238.37
-    port: 58080
-
-  - name: "🇭🇰 Гонконг 262ms"
-    type: http
-    server: 45.155.226.177
-    port: 3128
-
-  - name: "🇷🇺 Россия 265ms"
-    type: http
-    server: 87.228.89.21
-    port: 80
-
-  - name: "🇺🇸 США 266ms"
-    type: socks5
-    server: 141.148.158.143
-    port: 1080
-
-  - name: "🇵🇱 Польша 269ms"
-    type: http
-    server: 79.110.202.131
-    port: 8081
-
-  - name: "🇵🇱 Польша 272ms"
-    type: http
-    server: 185.238.238.49
-    port: 58080
-
-  - name: "🇳🇱 Нидерланды 278ms"
-    type: http
-    server: 145.220.226.125
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 278ms-2"
-    type: http
-    server: 145.220.226.38
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 279ms"
-    type: http
-    server: 145.220.226.124
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 279ms-2"
-    type: http
-    server: 145.220.226.145
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 279ms-3"
-    type: http
-    server: 145.220.226.34
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 279ms-4"
-    type: http
-    server: 145.220.226.49
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 279ms-5"
-    type: http
-    server: 145.220.226.57
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 279ms-6"
-    type: http
-    server: 145.220.226.71
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 280ms"
-    type: http
-    server: 145.220.226.68
-    port: 8080
-
-  - name: "🇷🇺 Россия 281ms"
-    type: http
-    server: 46.47.197.210
-    port: 3128
-
-  - name: "🇮🇱 Израиль 281ms"
-    type: http
-    server: 62.90.70.144
-    port: 7443
-
-  - name: "🇩🇪 Германия 282ms"
-    type: http
-    server: 103.237.102.191
-    port: 11111
-
-  - name: "🇱🇹 Литва 283ms"
-    type: http
-    server: 45.153.4.154
-    port: 3128
-
-  - name: "🇫🇮 Финляндия 298ms"
-    type: http
-    server: 46.62.189.77
-    port: 8888
-
-  - name: "🇺🇸 США 300ms"
-    type: socks5
-    server: 68.71.249.158
-    port: 4145
-
-  - name: "🇺🇸 США 307ms"
-    type: socks5
-    server: 142.54.226.214
-    port: 4145
-
-  - name: "🇺🇸 США 310ms"
-    type: socks5
-    server: 162.253.68.97
-    port: 4145
-
-  - name: "🇺🇸 США 316ms"
+  - name: "🇺🇸 США 74ms"
     type: http
     server: 168.184.84.85
     port: 443
 
-  - name: "🇺🇸 США 316ms-2"
-    type: socks5
-    server: 68.71.240.210
-    port: 4145
-
-  - name: "🇦🇹 Австрия 317ms"
+  - name: "🇺🇸 США 83ms"
     type: http
-    server: 81.10.234.234
-    port: 80
-
-  - name: "🇺🇸 США 321ms"
-    type: socks5
-    server: 142.54.237.38
-    port: 4145
-
-  - name: "🇯🇵 Япония 323ms"
-    type: http
-    server: 45.146.163.31
-    port: 80
-
-  - name: "🇺🇦 Украина 334ms"
-    type: http
-    server: 159.224.232.194
-    port: 8888
-
-  - name: "🇰🇷 Южная Корея 337ms"
-    type: http
-    server: 220.116.142.217
-    port: 80
-
-  - name: "🇺🇸 США 339ms"
-    type: socks5
-    server: 68.71.251.134
-    port: 4145
-
-  - name: "🇷🇺 Россия 341ms"
-    type: http
-    server: 176.99.134.183
-    port: 8090
-
-  - name: "🇲🇦 Неизвестно 342ms"
-    type: http
-    server: 41.249.208.232
-    port: 30001
-
-  - name: "🇺🇸 США 347ms"
-    type: socks5
-    server: 67.201.39.14
-    port: 4145
-
-  - name: "🇰🇷 Южная Корея 348ms"
-    type: http
-    server: 43.203.195.46
-    port: 80
-
-  - name: "🇦🇷 Аргентина 351ms"
-    type: http
-    server: 168.194.34.196
-    port: 9001
-
-  - name: "🇺🇦 Украина 357ms"
-    type: http
-    server: 194.28.181.130
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 361ms"
-    type: http
-    server: 145.220.226.181
+    server: 157.230.178.216
     port: 8080
 
-  - name: "🇳🇱 Нидерланды 362ms"
+  - name: "🇺🇸 США 84ms"
     type: http
-    server: 145.220.226.1
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 363ms"
-    type: http
-    server: 145.220.226.98
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 365ms"
-    type: http
-    server: 145.220.226.130
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 365ms-2"
-    type: http
-    server: 145.220.226.177
-    port: 8080
-
-  - name: "🇹🇼 Тайвань 365ms"
-    type: http
-    server: 182.155.254.159
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 367ms"
-    type: http
-    server: 145.220.226.11
-    port: 8080
-
-  - name: "🇦🇺 Австралия 369ms"
-    type: http
-    server: 139.99.237.62
-    port: 80
-
-  - name: "🇰🇷 Южная Корея 373ms"
-    type: http
-    server: 1.231.81.166
-    port: 3128
-
-  - name: "🇨🇴 Колумбия 377ms"
-    type: socks5
-    server: 149.130.182.81
-    port: 1080
-
-  - name: "🇭🇰 Гонконг 379ms"
-    type: http
-    server: 43.99.100.108
-    port: 3128
-
-  - name: "🇭🇰 Гонконг 387ms"
-    type: http
-    server: 101.36.109.77
-    port: 8118
-
-  - name: "🇺🇸 США 396ms"
-    type: socks5
-    server: 72.37.217.3
-    port: 4145
-
-  - name: "🇰🇷 Южная Корея 397ms"
-    type: http
-    server: 183.110.216.159
-    port: 8091
-
-  - name: "🇰🇷 Южная Корея 403ms"
-    type: http
-    server: 183.109.79.187
-    port: 80
-
-  - name: "🇸🇬 Сингапур 406ms"
-    type: http
-    server: 103.164.55.81
-    port: 3128
-
-  - name: "🇰🇷 Южная Корея 407ms"
-    type: http
-    server: 183.110.216.128
-    port: 8091
-
-  - name: "🇰🇷 Южная Корея 408ms"
-    type: http
-    server: 183.110.216.159
-    port: 8090
-
-  - name: "🇰🇷 Южная Корея 411ms"
-    type: http
-    server: 183.110.216.128
-    port: 8090
-
-  - name: "🇷🇺 Россия 420ms"
-    type: http
-    server: 185.200.188.234
-    port: 10001
-
-  - name: "🇩🇪 Германия 421ms"
-    type: socks5
-    server: 138.124.51.85
-    port: 1080
-
-  - name: "🇸🇬 Сингапур 421ms"
-    type: http
-    server: 97.74.87.226
-    port: 80
-
-  - name: "🇮🇳 Индия 428ms"
-    type: http
-    server: 117.236.124.166
-    port: 3128
-
-  - name: "🇮🇶 Неизвестно 430ms"
-    type: socks5
-    server: 178.17.57.222
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 439ms"
-    type: http
-    server: 160.22.207.13
-    port: 8082
-
-  - name: "🇰🇷 Южная Корея 443ms"
-    type: http
-    server: 219.249.37.107
-    port: 8197
-
-  - name: "🇷🇺 Россия 444ms"
-    type: socks5
-    server: 147.45.221.111
-    port: 1082
-
-  - name: "🇨🇳 Китай 448ms"
-    type: http
-    server: 111.230.27.213
-    port: 3128
-
-  - name: "🇭🇰 Гонконг 450ms"
-    type: http
-    server: 8.210.93.183
-    port: 8213
-
-  - name: "🇮🇩 Индонезия 451ms"
-    type: http
-    server: 103.176.96.228
-    port: 8082
-
-  - name: "🇮🇳 Индия 451ms"
-    type: http
-    server: 27.34.242.98
-    port: 80
-
-  - name: "🇸🇬 Сингапур 452ms"
-    type: http
-    server: 34.87.80.221
-    port: 30000
-
-  - name: "🇬🇭 Неизвестно 455ms"
-    type: http
-    server: 197.255.126.69
-    port: 80
-
-  - name: "🇸🇬 Сингапур 456ms"
-    type: http
-    server: 139.99.95.120
-    port: 8080
-
-  - name: "🇺🇸 США 456ms"
-    type: socks5
-    server: 199.58.185.9
-    port: 4145
-
-  - name: "🇮🇩 Индонезия 457ms"
-    type: http
-    server: 103.176.97.206
-    port: 8082
-
-  - name: "🇸🇳 Неизвестно 460ms"
-    type: http
-    server: 196.1.97.198
-    port: 80
-
-  - name: "🇮🇩 Индонезия 462ms"
-    type: http
-    server: 103.176.97.192
-    port: 8082
-
-  - name: "🇮🇷 Неизвестно 467ms"
-    type: socks5
-    server: 206.123.156.234
-    port: 6125
-
-  - name: "🇮🇩 Индонезия 470ms"
-    type: http
-    server: 103.18.79.197
-    port: 8085
-
-  - name: "🇫🇮 Финляндия 473ms"
-    type: http
-    server: 109.120.184.202
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 473ms"
-    type: http
-    server: 160.22.24.74
-    port: 8082
-
-  - name: "🇮🇩 Индонезия 478ms"
-    type: http
-    server: 49.156.22.42
-    port: 8082
-
-  - name: "🇸🇨 Неизвестно 480ms"
-    type: socks5
-    server: 45.133.210.241
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 485ms"
-    type: http
-    server: 103.175.238.206
-    port: 8082
-
-  - name: "🇻🇳 Вьетнам 487ms"
-    type: http
-    server: 137.59.47.73
-    port: 3128
-
-  - name: "🇩🇪 Германия 495ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1085
-
-  - name: "🇭🇰 Гонконг 504ms"
-    type: http
-    server: 39.109.113.97
-    port: 4090
-
-  - name: "🇲🇾 Малайзия 509ms"
-    type: http
-    server: 219.93.101.62
-    port: 80
-
-  - name: "🇲🇾 Малайзия 510ms"
-    type: http
-    server: 219.93.101.63
-    port: 80
-
-  - name: "🇫🇷 Франция 512ms"
-    type: socks5
-    server: 109.123.251.109
-    port: 1080
-
-  - name: "🇩🇪 Германия 512ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1082
-
-  - name: "🇺🇸 США 512ms"
-    type: socks5
-    server: 192.252.220.92
-    port: 17328
-
-  - name: "🇺🇸 США 513ms"
-    type: socks5
-    server: 68.71.252.38
-    port: 4145
-
-  - name: "🇨🇳 Китай 514ms"
-    type: http
-    server: 115.239.234.43
-    port: 7302
-
-  - name: "🇺🇸 США 515ms"
-    type: socks5
-    server: 142.54.232.6
-    port: 4145
-
-  - name: "🇨🇳 Китай 517ms"
-    type: http
-    server: 47.112.25.109
-    port: 7890
-
-  - name: "🇹🇷 Турция 519ms"
-    type: socks5
-    server: 139.28.240.201
-    port: 1082
-
-  - name: "🇳🇱 Нидерланды 519ms"
-    type: socks5
-    server: 5.255.123.162
-    port: 1080
-
-  - name: "🇸🇬 Сингапур 520ms"
-    type: http
-    server: 140.245.99.105
-    port: 7890
-
-  - name: "🇩🇪 Германия 520ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1084
-
-  - name: "🇨🇳 Китай 522ms"
-    type: http
-    server: 219.132.37.53
-    port: 3128
-
-  - name: "🇨🇳 Китай 522ms-2"
-    type: http
-    server: 58.254.153.146
-    port: 17981
-
-  - name: "🇩🇪 Германия 524ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1081
-
-  - name: "🇬🇭 Неизвестно 530ms"
-    type: http
-    server: 156.38.112.11
-    port: 80
-
-  - name: "🇺🇸 США 531ms"
-    type: socks5
-    server: 192.111.135.18
-    port: 18301
-
-  - name: "🇺🇸 США 531ms-2"
-    type: http
-    server: 212.58.132.5
-    port: 8888
-
-  - name: "🇺🇸 США 532ms"
-    type: socks5
-    server: 192.111.129.145
-    port: 16894
-
-  - name: "🇧🇷 Бразилия 534ms"
-    type: socks5
-    server: 144.22.165.206
-    port: 1088
-
-  - name: "🇺🇸 США 537ms"
-    type: socks5
-    server: 199.229.254.129
-    port: 4145
-
-  - name: "🇫🇮 Финляндия 540ms"
-    type: http
-    server: 135.87.39.23
+    server: 50.205.246.13
     port: 443
 
-  - name: "🇺🇸 США 540ms"
-    type: socks5
-    server: 192.111.139.163
-    port: 19404
-
-  - name: "🇪🇸 Испания 540ms"
+  - name: "🇺🇸 США 97ms"
     type: http
-    server: 212.231.191.23
+    server: 157.254.194.57
+    port: 1080
+
+  - name: "🇺🇸 США 99ms"
+    type: http
+    server: 168.184.84.85
     port: 80
 
-  - name: "🇮🇳 Индия 540ms"
+  - name: "🇺🇸 США 100ms"
     type: http
-    server: 219.65.73.80
+    server: 34.44.49.215
     port: 80
 
-  - name: "🇫🇮 Финляндия 541ms"
+  - name: "🇺🇸 США 102ms"
     type: http
-    server: 135.87.39.23
-    port: 9443
-
-  - name: "🇳🇱 Нидерланды 541ms"
-    type: http
-    server: 145.220.226.249
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 541ms-2"
-    type: http
-    server: 145.220.226.25
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 541ms-3"
-    type: http
-    server: 145.220.226.29
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 541ms-4"
-    type: http
-    server: 145.220.226.9
-    port: 8080
-
-  - name: "🇨🇳 Китай 541ms"
-    type: http
-    server: 175.6.75.144
-    port: 10064
-
-  - name: "🇫🇮 Финляндия 542ms"
-    type: http
-    server: 135.87.39.23
+    server: 50.205.246.13
     port: 80
 
-  - name: "🇳🇱 Нидерланды 542ms"
-    type: http
-    server: 145.220.226.82
-    port: 8080
-
-  - name: "🇫🇮 Финляндия 542ms-2"
-    type: http
-    server: 37.27.6.46
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 544ms"
-    type: http
-    server: 145.220.226.142
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 544ms-2"
-    type: http
-    server: 145.220.226.160
-    port: 8080
-
-  - name: "🇺🇸 США 544ms"
+  - name: "🇺🇸 США 104ms"
     type: socks5
-    server: 192.252.215.2
-    port: 4145
+    server: 23.175.248.21
+    port: 1080
 
-  - name: "🇷🇺 Россия 544ms"
+  - name: "🇺🇸 США 114ms"
     type: http
-    server: 31.28.4.192
-    port: 80
-
-  - name: "🇹🇼 Тайвань 544ms"
-    type: http
-    server: 34.81.160.132
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 545ms"
-    type: http
-    server: 145.220.226.109
+    server: 50.205.246.13
     port: 8080
 
-  - name: "🇳🇱 Нидерланды 545ms-2"
+  - name: "🇺🇸 США 122ms"
     type: http
-    server: 145.220.226.120
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 545ms-3"
-    type: http
-    server: 145.220.226.169
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 545ms-4"
-    type: http
-    server: 145.220.226.236
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 545ms-5"
-    type: http
-    server: 145.220.226.253
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 545ms-6"
-    type: http
-    server: 145.220.226.61
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 545ms-7"
-    type: http
-    server: 145.220.226.87
-    port: 8080
-
-  - name: "🇵🇱 Польша 545ms"
-    type: http
-    server: 178.212.144.7
-    port: 80
-
-  - name: "🇩🇪 Германия 545ms"
-    type: http
-    server: 91.98.86.26
-    port: 8888
-
-  - name: "🇲🇲 Неизвестно 547ms"
-    type: http
-    server: 103.94.52.70
-    port: 3128
-
-  - name: "🇩🇪 Германия 547ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1088
-
-  - name: "🇮🇩 Индонезия 548ms"
-    type: http
-    server: 103.147.134.33
-    port: 8082
-
-  - name: "🇨🇳 Китай 548ms"
-    type: http
-    server: 115.231.181.40
-    port: 8128
-
-  - name: "🇫🇷 Франция 548ms"
-    type: socks5
-    server: 185.185.80.58
-    port: 1088
-
-  - name: "🇨🇳 Китай 550ms"
-    type: http
-    server: 183.248.129.5
-    port: 17981
-
-  - name: "🇨🇳 Китай 550ms-2"
-    type: http
-    server: 58.254.153.147
-    port: 17981
-
-  - name: "🇨🇦 Канада 551ms"
-    type: socks5
-    server: 198.8.94.170
-    port: 4145
-
-  - name: "🇸🇾 Неизвестно 551ms"
-    type: http
-    server: 205.209.64.196
-    port: 8080
-
-  - name: "🇮🇶 Неизвестно 552ms"
-    type: http
-    server: 185.135.69.34
-    port: 80
-
-  - name: "🇺🇸 США 552ms"
-    type: socks5
-    server: 192.111.129.150
-    port: 4145
-
-  - name: "🇨🇳 Китай 553ms"
-    type: http
-    server: 120.232.115.170
-    port: 17981
-
-  - name: "🇮🇷 Неизвестно 553ms"
-    type: http
-    server: 185.105.184.45
-    port: 1110
-
-  - name: "🇨🇳 Китай 554ms"
-    type: http
-    server: 115.120.12.177
-    port: 8888
-
-  - name: "🇨🇳 Китай 555ms"
-    type: http
-    server: 122.246.3.210
-    port: 17981
-
-  - name: "🇫🇷 Франция 559ms"
-    type: socks5
-    server: 144.91.121.61
-    port: 1088
-
-  - name: "🇺🇸 США 560ms"
-    type: socks5
-    server: 192.111.139.162
-    port: 4145
-
-  - name: "🇰🇿 Неизвестно 563ms"
-    type: http
-    server: 2.78.60.10
+    server: 34.134.231.117
     port: 3129
 
-  - name: "🇳🇱 Нидерланды 569ms"
+  - name: "🇨🇴 Колумбия 134ms"
     type: http
-    server: 145.220.226.164
-    port: 8080
+    server: 190.0.246.213
+    port: 4040
 
-  - name: "🇺🇸 США 570ms"
-    type: socks5
-    server: 70.166.65.160
-    port: 4145
-
-  - name: "🇨🇳 Китай 573ms"
+  - name: "🇺🇸 США 143ms"
     type: http
-    server: 125.122.35.253
-    port: 8086
-
-  - name: "🇺🇸 США 575ms"
-    type: socks5
-    server: 184.181.217.210
-    port: 4145
-
-  - name: "🇳🇱 Нидерланды 578ms"
-    type: http
-    server: 145.220.226.101
-    port: 8080
-
-  - name: "🇺🇸 США 578ms"
-    type: socks5
-    server: 184.178.172.13
-    port: 15311
-
-  - name: "🇺🇸 США 578ms-2"
-    type: socks5
-    server: 70.166.167.55
-    port: 57745
-
-  - name: "🇨🇳 Китай 579ms"
-    type: http
-    server: 113.249.101.125
-    port: 18255
-
-  - name: "🇨🇳 Китай 579ms-2"
-    type: http
-    server: 123.138.24.114
-    port: 8800
-
-  - name: "🇺🇸 США 579ms"
-    type: socks5
-    server: 184.181.217.213
-    port: 4145
-
-  - name: "🇩🇪 Германия 581ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1080
-
-  - name: "🇺🇸 США 581ms"
-    type: socks5
-    server: 174.64.199.82
-    port: 4145
-
-  - name: "🇺🇸 США 581ms-2"
-    type: socks5
-    server: 174.77.111.198
-    port: 49547
-
-  - name: "🇺🇸 США 581ms-3"
-    type: socks5
-    server: 98.182.171.161
-    port: 4145
-
-  - name: "🇯🇵 Япония 582ms"
-    type: socks5
-    server: 168.138.210.69
-    port: 1080
-
-  - name: "🇺🇸 США 582ms"
-    type: socks5
-    server: 184.178.172.3
-    port: 4145
-
-  - name: "🇺🇸 США 582ms-2"
-    type: socks5
-    server: 184.181.217.194
-    port: 4145
-
-  - name: "🇹🇭 Таиланд 582ms"
-    type: http
-    server: 202.28.194.139
-    port: 31280
-
-  - name: "🇺🇸 США 582ms-3"
-    type: socks5
-    server: 72.205.0.93
-    port: 4145
-
-  - name: "🇺🇸 США 582ms-4"
-    type: socks5
-    server: 72.206.74.126
-    port: 4145
-
-  - name: "🇺🇸 США 583ms"
-    type: socks5
-    server: 98.170.57.241
-    port: 4145
-
-  - name: "🇺🇸 США 587ms"
-    type: socks5
-    server: 174.75.211.222
-    port: 4145
-
-  - name: "🇻🇳 Вьетнам 588ms"
-    type: http
-    server: 113.160.132.26
-    port: 8080
-
-  - name: "🇺🇸 США 588ms"
-    type: socks5
-    server: 72.214.108.67
-    port: 4145
-
-  - name: "🇺🇸 США 589ms"
-    type: socks5
-    server: 72.223.188.67
-    port: 4145
-
-  - name: "🇺🇸 США 590ms"
-    type: socks5
-    server: 68.1.210.189
-    port: 4145
-
-  - name: "🇺🇸 США 590ms-2"
-    type: socks5
-    server: 72.195.34.60
-    port: 27391
-
-  - name: "🇨🇳 Китай 592ms"
-    type: http
-    server: 122.246.3.12
-    port: 17981
-
-  - name: "🇺🇸 США 593ms"
-    type: socks5
-    server: 98.175.31.222
-    port: 4145
-
-  - name: "🇺🇸 США 594ms"
-    type: socks5
-    server: 24.249.199.4
-    port: 4145
-
-  - name: "🇮🇷 Неизвестно 595ms"
-    type: http
-    server: 188.121.121.191
-    port: 3128
-
-  - name: "🇨🇳 Китай 595ms"
-    type: http
-    server: 27.185.218.213
-    port: 17981
-
-  - name: "🇨🇳 Китай 596ms"
-    type: http
-    server: 113.249.101.123
-    port: 18255
-
-  - name: "🇹🇭 Таиланд 597ms"
-    type: http
-    server: 47.81.56.193
-    port: 8888
-
-  - name: "🇺🇸 США 598ms"
-    type: socks5
-    server: 98.182.147.97
-    port: 4145
-
-  - name: "🇳🇱 Нидерланды 603ms"
-    type: http
-    server: 145.220.226.191
-    port: 8080
-
-  - name: "🇺🇸 США 610ms"
-    type: socks5
-    server: 184.178.172.11
-    port: 4145
-
-  - name: "🇮🇷 Неизвестно 611ms"
-    type: http
-    server: 185.118.153.110
-    port: 8080
-
-  - name: "🇺🇸 США 611ms"
-    type: socks5
-    server: 192.111.130.5
-    port: 17002
-
-  - name: "🇺🇸 США 622ms"
-    type: socks5
-    server: 184.178.172.23
-    port: 4145
-
-  - name: "🇺🇸 США 625ms"
-    type: socks5
-    server: 72.195.114.184
-    port: 4145
-
-  - name: "🇰🇿 Неизвестно 625ms"
-    type: http
-    server: 82.115.60.51
+    server: 137.66.1.45
     port: 80
 
-  - name: "🇩🇪 Германия 630ms"
-    type: socks5
-    server: 159.195.49.27
-    port: 1080
-
-  - name: "🇰🇬 Неизвестно 632ms"
-    type: http
-    server: 176.126.164.213
-    port: 80
-
-  - name: "🇺🇸 США 635ms"
-    type: socks5
-    server: 174.77.111.197
-    port: 4145
-
-  - name: "🇺🇸 США 642ms"
-    type: socks5
-    server: 193.25.215.182
-    port: 22222
-
-  - name: "🇩🇪 Германия 649ms"
-    type: socks5
-    server: 150.241.91.238
-    port: 7777
-
-  - name: "🇮🇹 Италия 653ms"
-    type: socks5
-    server: 212.77.75.25
-    port: 1088
-
-  - name: "🇫🇮 Финляндия 656ms"
-    type: socks5
-    server: 138.124.59.186
-    port: 1080
-
-  - name: "🇺🇸 США 660ms"
-    type: socks5
-    server: 72.195.34.58
-    port: 4145
-
-  - name: "🇪🇪 Эстония 666ms"
-    type: socks5
-    server: 5.45.118.209
-    port: 1080
-
-  - name: "🇳🇱 Нидерланды 674ms"
-    type: http
-    server: 145.220.226.80
-    port: 8080
-
-  - name: "🇩🇪 Германия 691ms"
-    type: socks5
-    server: 185.128.104.152
-    port: 8443
-
-  - name: "🇲🇽 Мексика 695ms"
-    type: http
-    server: 187.190.58.152
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 697ms"
-    type: http
-    server: 145.220.226.167
-    port: 8080
-
-  - name: "🇨🇭 Швейцария 701ms"
-    type: http
-    server: 185.191.239.248
-    port: 3128
-
-  - name: "🇯🇵 Япония 704ms"
-    type: socks5
-    server: 101.36.104.46
-    port: 10808
-
-  - name: "🇨🇳 Китай 704ms"
-    type: http
-    server: 36.147.78.166
-    port: 80
-
-  - name: "🇺🇸 США 722ms"
-    type: socks5
-    server: 72.223.188.92
-    port: 4145
-
-  - name: "🇩🇪 Германия 733ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1090
-
-  - name: "🇩🇪 Германия 733ms-2"
-    type: socks5
-    server: 144.76.159.120
-    port: 1100
-
-  - name: "🇯🇵 Япония 738ms"
-    type: socks5
-    server: 101.36.104.239
-    port: 10808
-
-  - name: "🇺🇸 США 738ms"
-    type: socks5
-    server: 184.178.172.5
-    port: 15303
-
-  - name: "🇰🇷 Южная Корея 739ms"
-    type: socks5
-    server: 43.164.136.189
-    port: 1080
-
-  - name: "🇺🇸 США 746ms"
-    type: socks5
-    server: 70.166.167.38
-    port: 57728
-
-  - name: "🇭🇰 Гонконг 747ms"
-    type: socks5
-    server: 43.161.253.113
-    port: 1080
-
-  - name: "🇭🇰 Гонконг 748ms"
-    type: socks5
-    server: 119.28.13.138
-    port: 1080
-
-  - name: "🇭🇰 Гонконг 749ms"
-    type: socks5
-    server: 124.156.185.140
-    port: 1080
-
-  - name: "🇭🇰 Гонконг 753ms"
-    type: socks5
-    server: 124.156.166.29
-    port: 1080
-
-  - name: "🇺🇸 США 754ms"
-    type: socks5
-    server: 208.102.51.6
-    port: 58208
-
-  - name: "🇰🇷 Южная Корея 755ms"
-    type: socks5
-    server: 121.169.46.116
-    port: 1090
-
-  - name: "🇭🇰 Гонконг 758ms"
-    type: socks5
-    server: 123.58.219.171
-    port: 10808
-
-  - name: "🇭🇰 Гонконг 772ms"
-    type: socks5
-    server: 16.162.27.125
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 800ms"
-    type: http
-    server: 113.192.1.170
-    port: 8181
-
-  - name: "🇩🇪 Германия 802ms"
-    type: socks5
-    server: 144.76.159.120
-    port: 1083
-
-  - name: "🇺🇸 США 809ms"
-    type: socks5
-    server: 152.53.209.196
-    port: 1080
-
-  - name: "🇲🇾 Малайзия 840ms"
-    type: http
-    server: 175.139.255.25
-    port: 8181
-
-  - name: "🇳🇱 Нидерланды 842ms"
-    type: http
-    server: 145.220.226.209
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 853ms"
-    type: http
-    server: 145.220.226.174
-    port: 8080
-
-  - name: "🇨🇳 Китай 864ms"
-    type: socks5
-    server: 120.220.197.196
-    port: 59999
-
-  - name: "🇷🇺 Россия 870ms"
-    type: http
-    server: 81.17.146.38
-    port: 8080
-
-  - name: "🇮🇳 Индия 897ms"
-    type: socks5
-    server: 144.24.111.128
-    port: 1088
-
-  - name: "🇸🇬 Сингапур 899ms"
-    type: socks5
-    server: 217.15.160.116
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 901ms"
-    type: http
-    server: 160.19.19.223
-    port: 8080
-
-  - name: "🇸🇪 Швеция 946ms"
-    type: socks5
-    server: 171.25.158.95
-    port: 1080
-
-  - name: "🇸🇬 Сингапур 954ms"
-    type: socks5
-    server: 43.160.250.124
-    port: 1080
-
-  - name: "🇫🇷 Франция 966ms"
-    type: http
-    server: 217.182.195.221
-    port: 30007
-
-  - name: "🇧🇩 Неизвестно 971ms"
-    type: http
-    server: 202.5.53.145
-    port: 9355
-
-  - name: "🇸🇬 Сингапур 971ms"
-    type: socks5
-    server: 45.43.63.37
-    port: 10808
-
-  - name: "🇹🇭 Таиланд 999ms"
-    type: socks5
-    server: 43.164.3.124
-    port: 1080
-
-  - name: "🇻🇳 Вьетнам 1051ms"
-    type: socks5
-    server: 160.22.17.4
-    port: 9988
-
-  - name: "🇷🇺 Россия 1083ms"
-    type: http
-    server: 147.45.60.241
-    port: 1081
-
-  - name: "🇩🇪 Германия 1089ms"
-    type: socks5
-    server: 159.195.61.240
-    port: 1080
-
-  - name: "🇫🇷 Франция 1094ms"
-    type: socks5
-    server: 213.199.47.140
-    port: 1080
-
-  - name: "🇺🇸 США 1135ms"
-    type: socks5
-    server: 212.58.132.5
-    port: 1080
-
-  - name: "🇨🇳 Китай 1156ms"
-    type: socks5
-    server: 43.143.108.2
-    port: 9701
-
-  - name: "🇫🇷 Франция 1175ms"
-    type: socks5
-    server: 109.199.105.194
-    port: 1080
-
-  - name: "🇺🇸 США 1193ms"
-    type: socks5
-    server: 45.61.129.165
-    port: 8443
-
-  - name: "🇳🇱 Нидерланды 1194ms"
-    type: http
-    server: 145.220.226.168
-    port: 8080
-
-  - name: "🇨🇳 Китай 1217ms"
-    type: socks5
-    server: 218.95.39.55
-    port: 59999
-
-  - name: "🇺🇸 США 1224ms"
-    type: socks5
-    server: 15.204.57.89
-    port: 1080
-
-  - name: "🇨🇳 Китай 1232ms"
-    type: socks5
-    server: 218.95.39.100
-    port: 59999
-
-  - name: "🇨🇳 Китай 1236ms"
-    type: socks5
-    server: 218.95.39.101
-    port: 59999
-
-  - name: "🇨🇳 Китай 1236ms-2"
-    type: socks5
-    server: 218.95.39.107
-    port: 59999
-
-  - name: "🇳🇱 Нидерланды 1254ms"
-    type: http
-    server: 145.220.226.65
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1255ms"
-    type: http
-    server: 145.220.226.235
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1255ms-2"
-    type: http
-    server: 145.220.226.242
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1255ms-3"
-    type: http
-    server: 145.220.226.92
-    port: 8080
-
-  - name: "🇺🇸 США 1275ms"
-    type: socks5
-    server: 178.130.47.43
-    port: 1081
-
-  - name: "🇳🇱 Нидерланды 1297ms"
-    type: http
-    server: 145.220.226.85
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1333ms"
-    type: http
-    server: 145.220.226.182
-    port: 8080
-
-  - name: "🇨🇳 Китай 1365ms"
-    type: socks5
-    server: 218.95.39.113
-    port: 59999
-
-  - name: "🇮🇷 Неизвестно 1367ms"
-    type: socks5
-    server: 206.123.156.215
-    port: 6896
-
-  - name: "🇳🇱 Нидерланды 1394ms"
-    type: http
-    server: 145.220.226.10
-    port: 8080
-
-  - name: "🇱🇻 Латвия 1437ms"
-    type: http
-    server: 185.113.139.149
-    port: 3128
-
-  - name: "🇺🇸 США 1448ms"
-    type: http
-    server: 23.228.86.236
-    port: 8081
-
-  - name: "🇳🇱 Нидерланды 1480ms"
-    type: socks5
-    server: 5.255.99.75
-    port: 1080
-
-  - name: "🇨🇳 Китай 1488ms"
-    type: socks5
-    server: 218.95.39.105
-    port: 59999
-
-  - name: "🇮🇳 Индия 1494ms"
-    type: socks5
-    server: 117.244.114.54
-    port: 1080
-
-  - name: "🇩🇪 Германия 1503ms"
-    type: socks5
-    server: 91.107.178.197
-    port: 1080
-
-  - name: "🇺🇸 США 1524ms"
-    type: socks5
-    server: 213.188.203.54
-    port: 1080
-
-  - name: "🇬🇧 Великобритания 1562ms"
-    type: http
-    server: 86.53.163.185
-    port: 10002
-
-  - name: "🇧🇪 Бельгия 1587ms"
-    type: http
-    server: 188.190.10.47
-    port: 1080
-
-  - name: "🇳🇱 Нидерланды 1603ms"
-    type: http
-    server: 145.220.226.210
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1603ms-2"
-    type: http
-    server: 145.220.226.45
-    port: 8080
-
-  - name: "🇺🇸 США 1623ms"
-    type: socks5
-    server: 184.185.2.12
-    port: 4145
-
-  - name: "🇹🇼 Тайвань 1640ms"
-    type: http
-    server: 164.52.11.194
-    port: 18080
-
-  - name: "🇨🇳 Китай 1679ms"
-    type: socks5
-    server: 218.95.39.126
-    port: 59999
-
-  - name: "🇳🇱 Нидерланды 1723ms"
-    type: http
-    server: 145.220.226.180
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1723ms-2"
-    type: http
-    server: 145.220.226.185
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1723ms-3"
-    type: http
-    server: 145.220.226.94
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 1724ms"
-    type: http
-    server: 145.220.226.200
-    port: 8080
-
-  - name: "🇭🇰 Гонконг 1726ms"
-    type: http
-    server: 103.167.61.162
-    port: 3128
-
-  - name: "🇨🇳 Китай 1727ms"
-    type: http
-    server: 61.158.175.38
-    port: 9002
-
-  - name: "🇳🇱 Нидерланды 1733ms"
-    type: http
-    server: 145.220.226.22
-    port: 8080
-
-  - name: "🇸🇾 Неизвестно 1797ms"
-    type: http
-    server: 185.235.16.12
-    port: 80
-
-  - name: "🇨🇳 Китай 1823ms"
-    type: http
-    server: 101.89.150.168
-    port: 3128
-
-  - name: "🇨🇳 Китай 1901ms"
-    type: socks5
-    server: 120.220.197.198
-    port: 59999
-
-  - name: "🇰🇿 Неизвестно 1901ms"
-    type: socks5
-    server: 213.148.11.81
-    port: 1080
-
-  - name: "🇳🇱 Нидерланды 1937ms"
-    type: http
-    server: 145.220.226.141
-    port: 8080
-
-  - name: "🇲🇾 Малайзия 1949ms"
-    type: http
-    server: 175.139.233.79
-    port: 80
-
-  - name: "🇮🇷 Неизвестно 1981ms"
-    type: socks5
-    server: 206.123.156.245
-    port: 8012
-
-  - name: "🇻🇳 Вьетнам 2003ms"
-    type: http
-    server: 103.82.20.76
-    port: 8080
-
-  - name: "🇨🇳 Китай 2003ms"
-    type: http
-    server: 120.92.212.16
-    port: 7890
-
-  - name: "🇳🇱 Нидерланды 2003ms"
-    type: http
-    server: 145.220.226.157
-    port: 8080
-
-  - name: "🇺🇿 Неизвестно 2003ms"
-    type: http
-    server: 195.158.8.123
-    port: 3128
-
-  - name: "🇨🇳 Китай 2003ms-2"
-    type: http
-    server: 218.78.128.193
-    port: 12366
-
-  - name: "🇨🇳 Китай 2004ms"
-    type: http
-    server: 114.94.148.37
-    port: 18080
-
-  - name: "🇨🇮 Неизвестно 2004ms"
-    type: http
-    server: 149.18.81.114
-    port: 7890
-
-  - name: "🇺🇸 США 2004ms"
-    type: http
-    server: 170.106.173.62
-    port: 8080
-
-  - name: "🇨🇳 Китай 2005ms"
-    type: http
-    server: 114.111.19.228
-    port: 3389
-
-  - name: "🇫🇮 Финляндия 2037ms"
-    type: socks5
-    server: 193.221.203.192
-    port: 1080
-
-  - name: "🇮🇷 Неизвестно 2040ms"
-    type: http
-    server: 46.209.30.11
-    port: 8080
-
-  - name: "🇩🇪 Германия 2070ms"
-    type: http
-    server: 80.74.54.148
-    port: 3128
-
-  - name: "🇳🇱 Нидерланды 2124ms"
-    type: socks5
-    server: 5.255.117.250
-    port: 1080
-
-  - name: "🇳🇱 Нидерланды 2206ms"
-    type: http
-    server: 145.220.226.255
-    port: 8080
-
-  - name: "🇰🇭 Неизвестно 2282ms"
-    type: socks5
-    server: 220.158.232.118
-    port: 1080
-
-  - name: "🇳🇱 Нидерланды 2312ms"
-    type: http
-    server: 145.220.226.32
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2313ms"
-    type: socks5
-    server: 5.255.103.55
-    port: 1080
-
-  - name: "🇳🇱 Нидерланды 2322ms"
-    type: http
-    server: 145.220.226.186
-    port: 8080
-
-  - name: "🇨🇳 Китай 2329ms"
-    type: http
-    server: 39.105.27.30
-    port: 3128
-
-  - name: "🇵🇱 Польша 2362ms"
-    type: http
-    server: 185.238.238.93
-    port: 58080
-
-  - name: "🇮🇩 Индонезия 2447ms"
-    type: http
-    server: 103.160.182.35
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2460ms"
-    type: http
-    server: 145.220.226.194
-    port: 8080
-
-  - name: "🇸🇬 Сингапур 2475ms"
-    type: http
-    server: 178.128.59.180
-    port: 18080
-
-  - name: "🇩🇪 Германия 2478ms"
-    type: socks5
-    server: 152.89.104.11
-    port: 1080
-
-  - name: "🇨🇳 Китай 2581ms"
-    type: socks5
-    server: 218.95.39.42
-    port: 59999
-
-  - name: "🇫🇷 Франция 2621ms"
-    type: http
-    server: 212.47.232.28
-    port: 80
-
-  - name: "🇰🇷 Южная Корея 2698ms"
-    type: http
-    server: 219.249.37.107
-    port: 8382
-
-  - name: "🇨🇳 Китай 2746ms"
-    type: socks5
-    server: 218.95.39.49
-    port: 59999
-
-  - name: "🇨🇳 Китай 2772ms"
-    type: http
-    server: 122.246.4.6
-    port: 17981
-
-  - name: "🇳🇱 Нидерланды 2806ms"
-    type: http
-    server: 145.220.226.205
-    port: 8080
-
-  - name: "🇯🇵 Япония 2834ms"
-    type: http
-    server: 43.130.231.201
-    port: 8080
-
-  - name: "🇨🇳 Китай 2837ms"
-    type: http
-    server: 119.188.131.55
-    port: 17981
-
-  - name: "🇳🇱 Нидерланды 2848ms"
-    type: http
-    server: 145.220.226.162
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2848ms-2"
-    type: http
-    server: 145.220.226.245
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2850ms"
-    type: http
-    server: 145.220.226.224
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2851ms"
-    type: http
-    server: 145.220.226.78
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2853ms"
-    type: http
-    server: 145.220.226.17
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2855ms"
-    type: http
-    server: 145.220.226.144
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 2855ms-2"
-    type: http
-    server: 145.220.226.20
-    port: 8080
-
-  - name: "🇮🇩 Индонезия 2943ms"
-    type: http
-    server: 103.177.8.119
-    port: 10103
-
-  - name: "🇮🇩 Индонезия 2978ms"
-    type: http
-    server: 103.39.51.130
-    port: 1080
-
-  - name: "🇨🇳 Китай 3019ms"
-    type: socks5
-    server: 218.95.39.104
-    port: 59999
-
-  - name: "🇻🇳 Вьетнам 3108ms"
-    type: http
-    server: 203.162.13.26
-    port: 6868
-
-  - name: "🇧🇩 Неизвестно 3225ms"
-    type: socks5
-    server: 182.163.96.66
-    port: 1080
-
-  - name: "🇮🇷 Неизвестно 3234ms"
-    type: http
-    server: 109.230.83.178
-    port: 5060
-
-  - name: "🇮🇩 Индонезия 3242ms"
-    type: http
-    server: 103.176.96.103
-    port: 8082
-
-  - name: "🇩🇪 Германия 3257ms"
-    type: http
-    server: 85.214.107.177
-    port: 80
-
-  - name: "🇵🇭 Филиппины 3296ms"
-    type: http
-    server: 210.5.93.253
-    port: 8080
-
-  - name: "🇹🇷 Турция 3341ms"
-    type: http
-    server: 139.28.241.247
-    port: 1082
-
-  - name: "🇭🇰 Гонконг 3347ms"
-    type: socks5
-    server: 45.125.32.64
-    port: 5555
-
-  - name: "🇫🇷 Франция 3375ms"
-    type: http
-    server: 173.212.246.157
-    port: 3128
-
-  - name: "🇳🇱 Нидерланды 3432ms"
-    type: http
-    server: 79.133.180.232
-    port: 10808
-
-  - name: "🇻🇳 Вьетнам 3441ms"
-    type: http
-    server: 27.72.98.89
-    port: 8443
-
-  - name: "🇺🇸 США 3607ms"
-    type: http
-    server: 108.170.12.11
-    port: 80
-
-  - name: "🇨🇳 Китай 3621ms"
-    type: socks5
-    server: 218.95.39.58
-    port: 59999
-
-  - name: "🇮🇩 Индонезия 3736ms"
-    type: http
-    server: 103.229.14.115
-    port: 8080
-
-  - name: "🇸🇾 Неизвестно 3805ms"
-    type: http
-    server: 131.222.210.185
-    port: 8080
-
-  - name: "🇯🇵 Япония 3832ms"
-    type: http
-    server: 45.43.60.220
-    port: 8080
-
-  - name: "🇨🇳 Китай 3929ms"
-    type: http
-    server: 113.204.79.230
-    port: 9091
-
-  - name: "🇳🇱 Нидерланды 3943ms"
-    type: http
-    server: 145.220.226.192
-    port: 8080
-
-  - name: "🇸🇬 Сингапур 3995ms"
-    type: http
-    server: 103.43.191.71
-    port: 8888
-
-  - name: "🇫🇷 Франция 3997ms"
-    type: http
-    server: 202.133.88.173
-    port: 80
-
-  - name: "🇮🇩 Индонезия 3999ms"
-    type: http
-    server: 103.65.237.92
-    port: 5678
-
-  - name: "🇳🇱 Нидерланды 3999ms"
-    type: http
-    server: 145.220.226.30
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 3999ms-2"
-    type: http
-    server: 145.220.226.43
-    port: 8080
-
-  - name: "🇭🇰 Гонконг 3999ms"
-    type: http
-    server: 193.239.86.180
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 4001ms"
-    type: http
-    server: 145.220.226.138
-    port: 8080
-
-  - name: "🇩🇪 Германия 4001ms"
-    type: http
-    server: 159.195.49.27
-    port: 8888
-
-  - name: "🇨🇳 Китай 4001ms"
-    type: http
-    server: 203.19.38.114
-    port: 1080
-
-  - name: "🇭🇰 Гонконг 4001ms"
-    type: http
-    server: 47.242.243.198
-    port: 2233
-
-  - name: "🇳🇱 Нидерланды 4002ms"
-    type: http
-    server: 145.220.226.183
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 4002ms-2"
-    type: http
-    server: 145.220.226.97
-    port: 8080
-
-  - name: "🇨🇳 Китай 4002ms"
-    type: http
-    server: 27.155.93.29
-    port: 1080
-
-  - name: "🇻🇪 Неизвестно 4078ms"
-    type: http
-    server: 190.142.231.46
-    port: 999
-
-  - name: "🇮🇳 Индия 4126ms"
-    type: socks5
-    server: 140.238.241.74
-    port: 1080
-
-  - name: "🇺🇸 США 4155ms"
-    type: http
-    server: 104.129.192.156
-    port: 10749
-
-  - name: "🇺🇸 США 4158ms"
-    type: http
-    server: 104.129.192.156
-    port: 12162
-
-  - name: "🇺🇸 США 4160ms"
-    type: http
-    server: 104.129.192.156
-    port: 12628
-
-  - name: "🇺🇸 США 4169ms"
-    type: http
-    server: 104.129.192.156
-    port: 12130
-
-  - name: "🇺🇸 США 4176ms"
-    type: http
-    server: 104.129.192.156
-    port: 12199
-
-  - name: "🇨🇳 Китай 4203ms"
-    type: socks5
-    server: 218.95.39.5
-    port: 59999
-
-  - name: "🇺🇸 США 4234ms"
-    type: http
-    server: 104.129.192.156
-    port: 11677
-
-  - name: "🇮🇩 Индонезия 4262ms"
-    type: http
-    server: 157.15.40.250
-    port: 7777
-
-  - name: "🇺🇸 США 4268ms"
-    type: socks5
-    server: 67.210.146.50
-    port: 11080
-
-  - name: "🇳🇱 Нидерланды 4286ms"
-    type: http
-    server: 145.220.226.107
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 4286ms-2"
-    type: http
-    server: 145.220.226.206
-    port: 8080
-
-  - name: "🇨🇴 Колумбия 4402ms"
-    type: http
-    server: 38.10.240.130
-    port: 3128
-
-  - name: "🇷🇺 Россия 4498ms"
-    type: http
-    server: 202.49.176.24
-    port: 2080
-
-  - name: "🇮🇩 Индонезия 4535ms"
-    type: http
-    server: 103.176.96.50
-    port: 8082
-
-  - name: "🇨🇾 Неизвестно 4547ms"
-    type: http
-    server: 92.118.234.124
-    port: 1080
-
-  - name: "🇨🇳 Китай 4595ms"
-    type: http
-    server: 62.234.206.73
-    port: 3128
-
-  - name: "🇨🇴 Колумбия 4653ms"
-    type: http
-    server: 186.96.111.214
-    port: 999
-
-  - name: "🇨🇳 Китай 4742ms"
-    type: http
-    server: 111.79.111.126
-    port: 3128
-
-  - name: "🇺🇸 США 4836ms"
-    type: socks5
-    server: 108.181.162.173
-    port: 10008
-
-  - name: "🇳🇱 Нидерланды 4853ms"
-    type: http
-    server: 145.220.226.70
-    port: 8080
-
-  - name: "🇮🇩 Индонезия 4855ms"
-    type: http
-    server: 103.193.145.231
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 4857ms"
-    type: http
-    server: 145.220.226.240
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 4861ms"
-    type: http
-    server: 145.220.226.2
-    port: 8080
-
-  - name: "🇳🇱 Нидерланды 4862ms"
-    type: http
-    server: 145.220.226.14
-    port: 8080
-
-  - name: "🇺🇸 США 4872ms"
-    type: http
-    server: 138.91.159.185
-    port: 80
-
-  - name: "🇳🇱 Нидерланды 4894ms"
-    type: http
-    server: 145.220.226.188
-    port: 8080
-
-  - name: "🇨🇳 Китай 4929ms"
-    type: socks5
-    server: 218.95.39.28
-    port: 59999
-
-  - name: "🇮🇩 Индонезия 4987ms"
-    type: http
-    server: 103.239.41.49
-    port: 8080
-
-  - name: "🇵🇭 Филиппины 5008ms"
-    type: http
-    server: 165.101.102.26
-    port: 8084
-
-  - name: "🇺🇸 США 5332ms"
-    type: socks5
-    server: 138.2.216.186
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 5381ms"
-    type: http
-    server: 103.176.97.204
-    port: 8082
-
-  - name: "🇭🇰 Гонконг 5500ms"
-    type: socks5
-    server: 47.238.210.231
-    port: 1011
-
-  - name: "🇨🇳 Китай 5611ms"
-    type: http
-    server: 123.57.0.163
-    port: 8888
-
-  - name: "🇮🇩 Индонезия 5963ms"
-    type: http
-    server: 103.172.121.28
-    port: 8080
-
-  - name: "🇮🇩 Индонезия 5974ms"
-    type: http
-    server: 103.249.19.50
-    port: 10001
-
-  - name: "🇻🇳 Вьетнам 6003ms"
-    type: http
-    server: 203.162.13.222
-    port: 6868
-
-  - name: "🇰🇭 Неизвестно 6073ms"
-    type: socks5
-    server: 220.158.233.26
-    port: 1080
-
-  - name: "🇸🇪 Швеция 6080ms"
-    type: socks5
-    server: 176.126.70.111
-    port: 16379
-
-  - name: "🇨🇴 Колумбия 6139ms"
-    type: http
-    server: 45.172.218.67
-    port: 3028
-
-  - name: "🇪🇸 Испания 6185ms"
-    type: http
-    server: 195.114.209.50
-    port: 80
-
-  - name: "🇦🇱 Неизвестно 6248ms"
-    type: http
-    server: 185.196.182.22
-    port: 8080
-
-  - name: "🇰🇭 Неизвестно 6306ms"
-    type: socks5
-    server: 220.158.234.84
-    port: 1080
-
-  - name: "🇮🇩 Индонезия 6492ms"
-    type: http
-    server: 103.162.63.166
-    port: 1111
-
-  - name: "🇩🇴 Неизвестно 6549ms"
+  - name: "🇩🇴 Неизвестно 147ms"
     type: http
     server: 38.188.247.12
     port: 999
 
-  - name: "🇨🇳 Китай 6633ms"
+  - name: "🇺🇸 США 149ms"
     type: http
-    server: 219.142.66.244
-    port: 9090
+    server: 165.138.86.202
+    port: 8080
 
-  - name: "🇺🇸 США 6876ms"
-    type: socks5
-    server: 47.251.127.154
+  - name: "🇨🇴 Колумбия 154ms"
+    type: http
+    server: 190.0.246.210
+    port: 4040
+
+  - name: "🇬🇧 Великобритания 164ms"
+    type: http
+    server: 104.194.148.188
+    port: 3128
+
+  - name: "🇺🇸 США 164ms"
+    type: http
+    server: 52.34.243.150
+    port: 8080
+
+  - name: "🇺🇸 США 171ms"
+    type: http
+    server: 103.11.76.74
+    port: 8081
+
+  - name: "🇺🇸 США 171ms-2"
+    type: http
+    server: 34.94.46.8
+    port: 80
+
+  - name: "🇫🇷 Франция 173ms"
+    type: http
+    server: 152.228.217.116
+    port: 80
+
+  - name: "🇫🇷 Франция 177ms"
+    type: http
+    server: 46.35.9.110
+    port: 80
+
+  - name: "🇫🇷 Франция 181ms"
+    type: http
+    server: 82.66.54.40
+    port: 80
+
+  - name: "🇩🇪 Германия 183ms"
+    type: http
+    server: 103.237.102.191
+    port: 11111
+
+  - name: "🇩🇪 Германия 184ms"
+    type: http
+    server: 164.92.200.113
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 185ms"
+    type: http
+    server: 95.211.174.135
+    port: 3128
+
+  - name: "🇳🇱 Нидерланды 188ms"
+    type: http
+    server: 193.23.194.116
+    port: 80
+
+  - name: "🇫🇷 Франция 191ms"
+    type: http
+    server: 212.47.232.28
+    port: 80
+
+  - name: "🇪🇨 Неизвестно 191ms"
+    type: http
+    server: 45.186.6.104
+    port: 3128
+
+  - name: "🇳🇱 Нидерланды 192ms"
+    type: http
+    server: 95.211.64.139
+    port: 8888
+
+  - name: "🇩🇪 Германия 195ms"
+    type: http
+    server: 168.119.153.216
+    port: 8888
+
+  - name: "🇩🇪 Германия 201ms"
+    type: http
+    server: 91.107.255.47
     port: 1080
 
-  - name: "🇺🇸 США 6966ms"
+  - name: "🇫🇷 Франция 203ms"
     type: http
-    server: 186.241.90.120
+    server: 206.245.131.160
+    port: 80
+
+  - name: "🇺🇸 США 203ms"
+    type: http
+    server: 52.33.78.11
+    port: 8080
+
+  - name: "🇩🇪 Германия 204ms"
+    type: http
+    server: 85.234.100.149
+    port: 8080
+
+  - name: "🇩🇪 Германия 205ms"
+    type: http
+    server: 95.140.154.156
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 209ms"
+    type: http
+    server: 145.220.226.35
+    port: 8080
+
+  - name: "🇬🇧 Великобритания 209ms"
+    type: http
+    server: 81.168.119.85
+    port: 443
+
+  - name: "🇫🇮 Финляндия 210ms"
+    type: http
+    server: 135.87.39.23
+    port: 9443
+
+  - name: "🇳🇱 Нидерланды 212ms"
+    type: http
+    server: 145.220.226.6
+    port: 8080
+
+  - name: "🇵🇱 Польша 212ms"
+    type: http
+    server: 212.127.95.235
+    port: 8081
+
+  - name: "🇳🇱 Нидерланды 213ms"
+    type: http
+    server: 77.238.239.122
+    port: 10808
+
+  - name: "🇫🇮 Финляндия 214ms"
+    type: http
+    server: 135.87.39.23
+    port: 443
+
+  - name: "🇵🇱 Польша 214ms"
+    type: http
+    server: 83.168.74.163
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 215ms"
+    type: http
+    server: 145.220.226.125
+    port: 8080
+
+  - name: "🇺🇸 США 216ms"
+    type: http
+    server: 103.11.76.74
+    port: 1081
+
+  - name: "🇫🇮 Финляндия 216ms"
+    type: http
+    server: 135.87.39.23
+    port: 80
+
+  - name: "🇵🇱 Польша 218ms"
+    type: http
+    server: 79.110.200.27
+    port: 8000
+
+  - name: "🇳🇱 Нидерланды 219ms"
+    type: http
+    server: 144.178.199.118
+    port: 8443
+
+  - name: "🇨🇭 Швейцария 219ms"
+    type: http
+    server: 185.191.239.248
+    port: 3128
+
+  - name: "🇺🇸 США 220ms"
+    type: http
+    server: 23.228.86.236
+    port: 8081
+
+  - name: "🇩🇪 Германия 223ms"
+    type: http
+    server: 159.195.49.27
+    port: 8888
+
+  - name: "🇳🇱 Нидерланды 226ms"
+    type: http
+    server: 145.220.226.191
+    port: 8080
+
+  - name: "🇪🇨 Неизвестно 226ms"
+    type: http
+    server: 181.39.25.196
+    port: 8118
+
+  - name: "🇺🇸 США 228ms"
+    type: socks5
+    server: 45.61.188.134
+    port: 44499
+
+  - name: "🇳🇱 Нидерланды 230ms"
+    type: http
+    server: 145.220.226.117
+    port: 8080
+
+  - name: "🇵🇱 Польша 230ms"
+    type: http
+    server: 79.110.202.131
+    port: 8081
+
+  - name: "🇺🇦 Украина 232ms"
+    type: http
+    server: 176.111.37.216
+    port: 39811
+
+  - name: "🇳🇱 Нидерланды 233ms"
+    type: http
+    server: 145.220.226.78
+    port: 8080
+
+  - name: "🇭🇰 Гонконг 233ms"
+    type: http
+    server: 45.155.226.177
+    port: 3128
+
+  - name: "🇳🇱 Нидерланды 234ms"
+    type: http
+    server: 145.220.226.169
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 236ms"
+    type: http
+    server: 145.220.226.183
+    port: 8080
+
+  - name: "🇷🇺 Россия 239ms"
+    type: http
+    server: 87.228.89.21
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 242ms"
+    type: http
+    server: 145.220.226.82
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 243ms"
+    type: http
+    server: 145.220.226.71
+    port: 8080
+
+  - name: "🇩🇪 Германия 243ms"
+    type: http
+    server: 91.98.86.26
+    port: 8888
+
+  - name: "🇺🇸 США 248ms"
+    type: http
+    server: 64.23.188.3
+    port: 3128
+
+  - name: "🇮🇱 Израиль 249ms"
+    type: http
+    server: 62.90.70.144
+    port: 7443
+
+  - name: "🇵🇱 Польша 252ms"
+    type: http
+    server: 178.212.144.7
+    port: 80
+
+  - name: "🇫🇷 Франция 259ms"
+    type: http
+    server: 37.59.125.131
+    port: 8888
+
+  - name: "🇺🇦 Украина 260ms"
+    type: http
+    server: 176.111.37.5
+    port: 39811
+
+  - name: "🇫🇷 Франция 262ms"
+    type: http
+    server: 202.133.88.173
+    port: 80
+
+  - name: "🇫🇮 Финляндия 263ms"
+    type: http
+    server: 46.62.189.77
+    port: 8888
+
+  - name: "🇨🇴 Колумбия 271ms"
+    type: socks5
+    server: 149.130.182.81
+    port: 1080
+
+  - name: "🇺🇸 США 289ms"
+    type: socks5
+    server: 144.24.47.42
+    port: 1080
+
+  - name: "🇺🇸 США 289ms-2"
+    type: socks5
+    server: 23.254.233.221
+    port: 666
+
+  - name: "🇨🇭 Швейцария 297ms"
+    type: http
+    server: 185.191.239.97
+    port: 1080
+
+  - name: "🇦🇷 Аргентина 302ms"
+    type: http
+    server: 168.194.34.196
+    port: 9001
+
+  - name: "🇺🇦 Украина 314ms"
+    type: http
+    server: 159.224.232.194
+    port: 8888
+
+  - name: "🇷🇺 Россия 316ms"
+    type: http
+    server: 37.110.147.13
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 324ms"
+    type: http
+    server: 145.220.226.180
+    port: 8080
+
+  - name: "🇯🇵 Япония 332ms"
+    type: http
+    server: 45.146.163.31
+    port: 80
+
+  - name: "🇺🇸 США 348ms"
+    type: socks5
+    server: 15.204.57.89
+    port: 1080
+
+  - name: "🇺🇸 США 352ms"
+    type: socks5
+    server: 152.53.209.196
+    port: 1080
+
+  - name: "🇺🇸 США 360ms"
+    type: socks5
+    server: 67.201.58.190
+    port: 4145
+
+  - name: "🇱🇹 Литва 361ms"
+    type: http
+    server: 45.153.4.154
+    port: 3128
+
+  - name: "🇺🇸 США 371ms"
+    type: socks5
+    server: 68.71.240.210
+    port: 4145
+
+  - name: "🇺🇸 США 371ms-2"
+    type: socks5
+    server: 68.71.251.134
+    port: 4145
+
+  - name: "🇺🇸 США 371ms-3"
+    type: socks5
+    server: 72.37.217.3
+    port: 4145
+
+  - name: "🇮🇶 Неизвестно 373ms"
+    type: socks5
+    server: 178.17.57.222
+    port: 1080
+
+  - name: "🇺🇸 США 373ms"
+    type: socks5
+    server: 199.187.210.54
+    port: 4145
+
+  - name: "🇳🇱 Нидерланды 374ms"
+    type: socks5
+    server: 5.255.123.162
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 377ms"
+    type: socks5
+    server: 144.124.232.204
+    port: 1080
+
+  - name: "🇹🇼 Тайвань 378ms"
+    type: http
+    server: 34.81.160.132
+    port: 80
+
+  - name: "🇺🇸 США 381ms"
+    type: http
+    server: 174.137.134.182
+    port: 2999
+
+  - name: "🇳🇱 Нидерланды 382ms"
+    type: http
+    server: 145.220.226.124
+    port: 8080
+
+  - name: "🇩🇪 Германия 383ms"
+    type: socks5
+    server: 159.69.47.155
+    port: 1080
+
+  - name: "🇰🇷 Южная Корея 389ms"
+    type: http
+    server: 43.203.195.46
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 394ms"
+    type: http
+    server: 145.220.226.209
+    port: 8080
+
+  - name: "🇹🇼 Тайвань 396ms"
+    type: http
+    server: 164.52.11.194
+    port: 18080
+
+  - name: "🇳🇱 Нидерланды 397ms"
+    type: http
+    server: 145.220.226.2
+    port: 8080
+
+  - name: "🇮🇷 Неизвестно 407ms"
+    type: socks5
+    server: 206.123.156.232
+    port: 7805
+
+  - name: "🇭🇰 Гонконг 408ms"
+    type: http
+    server: 193.239.86.180
+    port: 80
+
+  - name: "🇩🇪 Германия 409ms"
+    type: socks5
+    server: 159.195.49.27
+    port: 1080
+
+  - name: "🇮🇳 Индия 410ms"
+    type: http
+    server: 117.236.124.166
+    port: 3128
+
+  - name: "🇺🇸 США 417ms"
+    type: socks5
+    server: 107.151.148.153
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 417ms"
+    type: http
+    server: 145.220.226.145
+    port: 8080
+
+  - name: "🇮🇷 Неизвестно 417ms"
+    type: http
+    server: 188.121.121.191
+    port: 3128
+
+  - name: "🇬🇧 Великобритания 418ms"
+    type: http
+    server: 104.194.148.204
+    port: 80
+
+  - name: "🇰🇷 Южная Корея 421ms"
+    type: http
+    server: 1.231.81.166
+    port: 3128
+
+  - name: "🇺🇸 США 421ms"
+    type: socks5
+    server: 103.7.138.17
+    port: 1080
+
+  - name: "🇭🇰 Гонконг 428ms"
+    type: http
+    server: 101.36.109.77
+    port: 8118
+
+  - name: "🇳🇱 Нидерланды 435ms"
+    type: http
+    server: 145.220.226.61
+    port: 8080
+
+  - name: "🇰🇷 Южная Корея 435ms"
+    type: http
+    server: 183.110.216.128
+    port: 8091
+
+  - name: "🇫🇷 Франция 435ms"
+    type: socks5
+    server: 213.199.47.140
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 436ms"
+    type: http
+    server: 145.220.226.247
+    port: 8080
+
+  - name: "🇰🇷 Южная Корея 447ms"
+    type: http
+    server: 183.110.216.159
+    port: 8090
+
+  - name: "🇩🇪 Германия 450ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1084
+
+  - name: "🇩🇪 Германия 451ms"
+    type: socks5
+    server: 150.241.91.238
+    port: 7777
+
+  - name: "🇰🇷 Южная Корея 459ms"
+    type: http
+    server: 183.110.216.159
+    port: 8091
+
+  - name: "🇺🇸 США 467ms"
+    type: http
+    server: 170.106.173.62
+    port: 8080
+
+  - name: "🇰🇷 Южная Корея 469ms"
+    type: http
+    server: 183.110.216.128
+    port: 8090
+
+  - name: "🇸🇬 Сингапур 477ms"
+    type: http
+    server: 139.99.95.120
+    port: 8080
+
+  - name: "🇸🇬 Сингапур 480ms"
+    type: http
+    server: 103.164.55.81
+    port: 3128
+
+  - name: "🇩🇪 Германия 482ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1081
+
+  - name: "🇮🇩 Индонезия 483ms"
+    type: http
+    server: 103.176.96.228
+    port: 8082
+
+  - name: "🇺🇸 США 483ms"
+    type: socks5
+    server: 199.66.183.251
+    port: 4145
+
+  - name: "🇸🇬 Сингапур 484ms"
+    type: http
+    server: 143.42.66.91
+    port: 80
+
+  - name: "🇰🇷 Южная Корея 484ms"
+    type: http
+    server: 219.249.37.107
+    port: 8380
+
+  - name: "🇷🇺 Россия 485ms"
+    type: http
+    server: 46.47.197.210
+    port: 3128
+
+  - name: "🇳🇱 Нидерланды 486ms"
+    type: http
+    server: 145.220.226.177
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 487ms"
+    type: http
+    server: 145.220.226.189
+    port: 8080
+
+  - name: "🇧🇷 Бразилия 489ms"
+    type: socks5
+    server: 144.22.165.206
+    port: 1088
+
+  - name: "🇮🇳 Индия 489ms"
+    type: http
+    server: 27.34.242.98
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 489ms"
+    type: socks5
+    server: 5.255.103.55
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 490ms"
+    type: http
+    server: 145.220.226.47
+    port: 8080
+
+  - name: "🇨🇳 Китай 491ms"
+    type: http
+    server: 203.19.38.114
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 492ms"
+    type: http
+    server: 144.124.227.88
+    port: 3128
+
+  - name: "🇰🇷 Южная Корея 493ms"
+    type: http
+    server: 219.249.37.107
+    port: 8382
+
+  - name: "🇸🇾 Неизвестно 495ms"
+    type: http
+    server: 185.235.16.12
+    port: 80
+
+  - name: "🇭🇰 Гонконг 495ms"
+    type: http
+    server: 47.242.243.198
+    port: 2233
+
+  - name: "🇩🇪 Германия 495ms"
+    type: http
+    server: 89.167.124.218
+    port: 8888
+
+  - name: "🇩🇪 Германия 496ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1088
+
+  - name: "🇮🇶 Неизвестно 498ms"
+    type: http
+    server: 185.135.69.34
+    port: 80
+
+  - name: "🇸🇬 Сингапур 498ms"
+    type: http
+    server: 97.74.87.226
+    port: 80
+
+  - name: "🇸🇬 Сингапур 499ms"
+    type: http
+    server: 140.245.99.105
     port: 7890
 
-  - name: "🇳🇱 Нидерланды 7384ms"
+  - name: "🇲🇾 Малайзия 499ms"
+    type: http
+    server: 175.139.255.25
+    port: 8181
+
+  - name: "🇳🇱 Нидерланды 500ms"
+    type: http
+    server: 145.220.226.85
+    port: 8080
+
+  - name: "🇸🇬 Сингапур 501ms"
+    type: http
+    server: 47.236.86.147
+    port: 443
+
+  - name: "🇮🇩 Индонезия 502ms"
+    type: http
+    server: 103.18.79.197
+    port: 8085
+
+  - name: "🇨🇳 Китай 504ms"
+    type: http
+    server: 115.239.234.43
+    port: 7302
+
+  - name: "🇰🇷 Южная Корея 504ms"
+    type: http
+    server: 219.249.37.107
+    port: 8197
+
+  - name: "🇩🇪 Германия 505ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1080
+
+  - name: "🇺🇸 США 506ms"
+    type: socks5
+    server: 192.252.210.233
+    port: 4145
+
+  - name: "🇺🇸 США 509ms"
+    type: socks5
+    server: 192.111.139.163
+    port: 19404
+
+  - name: "🇮🇷 Неизвестно 510ms"
+    type: http
+    server: 185.105.184.45
+    port: 1110
+
+  - name: "🇭🇰 Гонконг 510ms"
+    type: http
+    server: 39.109.113.97
+    port: 4090
+
+  - name: "🇮🇩 Индонезия 511ms"
+    type: http
+    server: 160.22.24.74
+    port: 8082
+
+  - name: "🇮🇹 Италия 515ms"
+    type: socks5
+    server: 212.77.75.25
+    port: 1088
+
+  - name: "🇺🇸 США 516ms"
+    type: socks5
+    server: 192.252.215.2
+    port: 4145
+
+  - name: "🇮🇩 Индонезия 520ms"
+    type: http
+    server: 103.176.97.192
+    port: 8082
+
+  - name: "🇮🇩 Индонезия 521ms"
+    type: http
+    server: 149.129.240.132
+    port: 8888
+
+  - name: "🇺🇸 США 521ms"
+    type: socks5
+    server: 192.111.139.162
+    port: 4145
+
+  - name: "🇮🇩 Индонезия 522ms"
+    type: http
+    server: 103.175.238.206
+    port: 8082
+
+  - name: "🇦🇺 Австралия 523ms"
+    type: http
+    server: 139.99.237.62
+    port: 80
+
+  - name: "🇰🇿 Неизвестно 524ms"
+    type: http
+    server: 2.78.60.10
+    port: 3129
+
+  - name: "🇨🇳 Китай 525ms"
+    type: http
+    server: 111.230.27.213
+    port: 3128
+
+  - name: "🇳🇱 Нидерланды 529ms"
+    type: http
+    server: 145.220.226.232
+    port: 8080
+
+  - name: "🇺🇸 США 532ms"
+    type: http
+    server: 212.58.132.5
+    port: 8888
+
+  - name: "🇳🇱 Нидерланды 539ms"
+    type: http
+    server: 145.220.226.168
+    port: 8080
+
+  - name: "🇨🇳 Китай 540ms"
+    type: http
+    server: 114.94.148.37
+    port: 18080
+
+  - name: "🇳🇱 Нидерланды 540ms"
+    type: http
+    server: 145.220.226.224
+    port: 8080
+
+  - name: "🇨🇳 Китай 541ms"
+    type: http
+    server: 58.254.153.146
+    port: 17981
+
+  - name: "🇨🇳 Китай 544ms"
+    type: http
+    server: 183.248.129.5
+    port: 17981
+
+  - name: "🇨🇳 Китай 548ms"
+    type: http
+    server: 115.120.12.177
+    port: 8888
+
+  - name: "🇨🇳 Китай 549ms"
+    type: http
+    server: 123.60.155.1
+    port: 3128
+
+  - name: "🇻🇳 Вьетнам 550ms"
+    type: http
+    server: 137.59.47.73
+    port: 3128
+
+  - name: "🇺🇸 США 550ms"
+    type: socks5
+    server: 184.178.172.3
+    port: 4145
+
+  - name: "🇺🇸 США 551ms"
+    type: socks5
+    server: 184.178.172.26
+    port: 4145
+
+  - name: "🇺🇸 США 554ms"
+    type: socks5
+    server: 184.178.172.5
+    port: 15303
+
+  - name: "🇮🇩 Индонезия 555ms"
+    type: http
+    server: 103.147.134.33
+    port: 8082
+
+  - name: "🇺🇸 США 555ms"
+    type: socks5
+    server: 72.223.188.92
+    port: 4145
+
+  - name: "🇺🇸 США 556ms"
+    type: socks5
+    server: 174.77.111.198
+    port: 49547
+
+  - name: "🇲🇾 Малайзия 557ms"
+    type: http
+    server: 219.93.101.62
+    port: 80
+
+  - name: "🇲🇾 Малайзия 558ms"
+    type: http
+    server: 219.93.101.60
+    port: 80
+
+  - name: "🇺🇸 США 558ms"
+    type: socks5
+    server: 72.195.114.169
+    port: 4145
+
+  - name: "🇺🇸 США 559ms"
+    type: socks5
+    server: 184.178.172.28
+    port: 15294
+
+  - name: "🇨🇳 Китай 559ms"
+    type: http
+    server: 47.112.25.109
+    port: 7890
+
+  - name: "🇺🇸 США 560ms"
+    type: socks5
+    server: 72.205.0.93
+    port: 4145
+
+  - name: "🇺🇸 США 560ms-2"
+    type: socks5
+    server: 98.175.31.222
+    port: 4145
+
+  - name: "🇺🇸 США 560ms-3"
+    type: socks5
+    server: 98.178.72.30
+    port: 4145
+
+  - name: "🇺🇸 США 560ms-4"
+    type: socks5
+    server: 98.191.0.37
+    port: 4145
+
+  - name: "🇺🇸 США 561ms"
+    type: socks5
+    server: 184.178.172.13
+    port: 15311
+
+  - name: "🇺🇸 США 561ms-2"
+    type: socks5
+    server: 72.223.188.67
+    port: 4145
+
+  - name: "🇺🇸 США 562ms"
+    type: socks5
+    server: 184.178.172.23
+    port: 4145
+
+  - name: "🇺🇸 США 562ms-2"
+    type: socks5
+    server: 70.166.167.55
+    port: 57745
+
+  - name: "🇺🇸 США 563ms"
+    type: socks5
+    server: 174.75.211.222
+    port: 4145
+
+  - name: "🇲🇾 Малайзия 564ms"
+    type: http
+    server: 219.93.101.63
+    port: 80
+
+  - name: "🇺🇸 США 564ms"
+    type: socks5
+    server: 70.166.65.160
+    port: 4145
+
+  - name: "🇺🇸 США 565ms"
+    type: socks5
+    server: 184.178.172.11
+    port: 4145
+
+  - name: "🇺🇸 США 566ms"
+    type: socks5
+    server: 24.249.199.4
+    port: 4145
+
+  - name: "🇫🇮 Финляндия 567ms"
+    type: socks5
+    server: 138.124.59.186
+    port: 1080
+
+  - name: "🇺🇸 США 568ms"
+    type: socks5
+    server: 184.185.2.12
+    port: 4145
+
+  - name: "🇮🇳 Индия 571ms"
+    type: http
+    server: 219.65.73.81
+    port: 80
+
+  - name: "🇺🇸 США 574ms"
+    type: socks5
+    server: 141.148.158.143
+    port: 1080
+
+  - name: "🇨🇳 Китай 578ms"
+    type: http
+    server: 119.188.131.55
+    port: 17981
+
+  - name: "🇸🇪 Швеция 578ms"
+    type: socks5
+    server: 171.25.158.95
+    port: 1080
+
+  - name: "🇨🇳 Китай 581ms"
+    type: http
+    server: 39.105.27.30
+    port: 3128
+
+  - name: "🇨🇳 Китай 585ms"
+    type: http
+    server: 115.231.181.40
+    port: 8128
+
+  - name: "🇩🇪 Германия 587ms"
+    type: socks5
+    server: 91.107.138.5
+    port: 9058
+
+  - name: "🇨🇳 Китай 590ms"
+    type: http
+    server: 123.138.24.114
+    port: 8800
+
+  - name: "🇸🇨 Неизвестно 592ms"
+    type: socks5
+    server: 45.133.210.241
+    port: 1080
+
+  - name: "🇨🇳 Китай 595ms"
+    type: http
+    server: 101.71.143.237
+    port: 8092
+
+  - name: "🇩🇪 Германия 599ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1100
+
+  - name: "🇨🇳 Китай 602ms"
+    type: http
+    server: 61.158.175.38
+    port: 9002
+
+  - name: "🇨🇳 Китай 607ms"
+    type: http
+    server: 122.246.3.210
+    port: 17981
+
+  - name: "🇻🇳 Вьетнам 608ms"
+    type: http
+    server: 113.160.132.26
+    port: 8080
+
+  - name: "🇮🇳 Индия 626ms"
+    type: http
+    server: 219.65.73.80
+    port: 80
+
+  - name: "🇨🇳 Китай 638ms"
+    type: http
+    server: 123.57.0.163
+    port: 8888
+
+  - name: "🇨🇳 Китай 642ms"
+    type: http
+    server: 113.249.101.125
+    port: 18255
+
+  - name: "🇯🇵 Япония 669ms"
+    type: socks5
+    server: 152.32.203.130
+    port: 10808
+
+  - name: "🇨🇳 Китай 672ms"
+    type: http
+    server: 153.0.171.163
+    port: 8085
+
+  - name: "🇳🇱 Нидерланды 679ms"
+    type: http
+    server: 145.220.226.101
+    port: 8080
+
+  - name: "🇮🇷 Неизвестно 693ms"
+    type: http
+    server: 95.38.160.79
+    port: 10809
+
+  - name: "🇺🇸 США 718ms"
+    type: http
+    server: 138.197.68.35
+    port: 4857
+
+  - name: "🇺🇸 США 752ms"
+    type: socks5
+    server: 216.68.128.121
+    port: 4145
+
+  - name: "🇺🇸 США 753ms"
+    type: socks5
+    server: 208.102.51.6
+    port: 58208
+
+  - name: "🇩🇪 Германия 754ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1090
+
+  - name: "🇳🇱 Нидерланды 761ms"
+    type: http
+    server: 145.220.226.188
+    port: 8080
+
+  - name: "🇨🇳 Китай 761ms"
+    type: http
+    server: 36.147.78.166
+    port: 80
+
+  - name: "🇪🇪 Эстония 781ms"
+    type: socks5
+    server: 5.45.118.209
+    port: 1080
+
+  - name: "🇺🇸 США 785ms"
+    type: socks5
+    server: 193.25.215.182
+    port: 22222
+
+  - name: "🇩🇪 Германия 793ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1085
+
+  - name: "🇩🇪 Германия 794ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1082
+
+  - name: "🇷🇺 Россия 800ms"
+    type: socks5
+    server: 193.233.218.213
+    port: 1080
+
+  - name: "🇯🇵 Япония 813ms"
+    type: socks5
+    server: 101.36.104.46
+    port: 10808
+
+  - name: "🇭🇰 Гонконг 819ms"
+    type: socks5
+    server: 43.161.253.113
+    port: 1080
+
+  - name: "🇭🇰 Гонконг 825ms"
+    type: socks5
+    server: 124.156.185.140
+    port: 1080
+
+  - name: "🇭🇰 Гонконг 827ms"
+    type: socks5
+    server: 123.58.219.171
+    port: 10808
+
+  - name: "🇭🇰 Гонконг 836ms"
+    type: socks5
+    server: 119.28.13.138
+    port: 1080
+
+  - name: "🇭🇰 Гонконг 838ms"
+    type: socks5
+    server: 124.156.166.29
+    port: 1080
+
+  - name: "🇯🇵 Япония 848ms"
+    type: socks5
+    server: 101.36.104.239
+    port: 10808
+
+  - name: "🇰🇷 Южная Корея 852ms"
+    type: socks5
+    server: 8.213.149.224
+    port: 1080
+
+  - name: "🇰🇷 Южная Корея 854ms"
+    type: socks5
+    server: 43.164.136.189
+    port: 1080
+
+  - name: "🇮🇳 Индия 869ms"
+    type: socks5
+    server: 144.24.111.128
+    port: 1088
+
+  - name: "🇬🇭 Неизвестно 873ms"
+    type: http
+    server: 197.255.126.69
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 882ms"
+    type: http
+    server: 145.220.226.25
+    port: 8080
+
+  - name: "🇰🇷 Южная Корея 893ms"
+    type: socks5
+    server: 121.169.46.116
+    port: 1090
+
+  - name: "🇫🇷 Франция 934ms"
+    type: socks5
+    server: 185.185.80.58
+    port: 1088
+
+  - name: "🇺🇸 США 948ms"
+    type: socks5
+    server: 169.155.50.87
+    port: 1080
+
+  - name: "🇨🇳 Китай 960ms"
+    type: socks5
+    server: 120.220.197.197
+    port: 59999
+
+  - name: "🇰🇿 Неизвестно 963ms"
+    type: socks5
+    server: 213.148.11.81
+    port: 1080
+
+  - name: "🇸🇬 Сингапур 982ms"
+    type: socks5
+    server: 45.43.63.37
+    port: 10808
+
+  - name: "🇨🇳 Китай 984ms"
+    type: socks5
+    server: 120.220.197.196
+    port: 59999
+
+  - name: "🇨🇳 Китай 1006ms"
+    type: socks5
+    server: 120.220.197.198
+    port: 59999
+
+  - name: "🇨🇳 Китай 1022ms"
+    type: socks5
+    server: 112.28.149.156
+    port: 8443
+
+  - name: "🇹🇭 Таиланд 1061ms"
+    type: socks5
+    server: 43.164.3.124
+    port: 1080
+
+  - name: "🇨🇳 Китай 1074ms"
+    type: http
+    server: 218.78.128.193
+    port: 12366
+
+  - name: "🇫🇷 Франция 1083ms"
+    type: socks5
+    server: 109.123.251.109
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 1088ms"
+    type: http
+    server: 145.220.226.45
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1094ms"
+    type: http
+    server: 145.220.226.167
+    port: 8080
+
+  - name: "🇩🇪 Германия 1095ms"
+    type: socks5
+    server: 144.76.159.120
+    port: 1083
+
+  - name: "🇧🇩 Неизвестно 1106ms"
+    type: socks5
+    server: 182.163.96.66
+    port: 1080
+
+  - name: "🇻🇳 Вьетнам 1112ms"
+    type: socks5
+    server: 160.22.17.4
+    port: 9988
+
+  - name: "🇸🇬 Сингапур 1121ms"
+    type: socks5
+    server: 217.15.160.116
+    port: 1080
+
+  - name: "🇺🇸 США 1140ms"
+    type: socks5
+    server: 212.58.132.5
+    port: 1080
+
+  - name: "🇮🇳 Индия 1154ms"
+    type: socks5
+    server: 140.238.241.74
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 1158ms"
+    type: http
+    server: 145.220.226.234
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1211ms"
+    type: http
+    server: 145.220.226.91
+    port: 8080
+
+  - name: "🇻🇳 Вьетнам 1228ms"
+    type: http
+    server: 203.162.13.222
+    port: 6868
+
+  - name: "🇨🇳 Китай 1235ms"
+    type: socks5
+    server: 218.95.39.113
+    port: 59999
+
+  - name: "🇳🇱 Нидерланды 1238ms"
+    type: http
+    server: 145.220.226.249
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1266ms"
+    type: http
+    server: 145.220.226.161
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1267ms"
+    type: http
+    server: 145.220.226.187
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1270ms"
+    type: http
+    server: 145.220.226.182
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1292ms"
+    type: http
+    server: 145.220.226.248
+    port: 8080
+
+  - name: "🇫🇷 Франция 1294ms"
+    type: http
+    server: 217.182.195.221
+    port: 30007
+
+  - name: "🇺🇸 США 1298ms"
+    type: socks5
+    server: 138.2.216.186
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 1298ms"
+    type: http
+    server: 145.220.226.231
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 1303ms"
+    type: http
+    server: 145.220.226.68
+    port: 8080
+
+  - name: "🇵🇱 Польша 1326ms"
+    type: http
+    server: 185.238.238.37
+    port: 58080
+
+  - name: "🇿🇼 Неизвестно 1356ms"
+    type: http
+    server: 41.220.16.208
+    port: 80
+
+  - name: "🇨🇳 Китай 1388ms"
+    type: socks5
+    server: 218.95.39.100
+    port: 59999
+
+  - name: "🇳🇱 Нидерланды 1389ms"
+    type: http
+    server: 145.220.226.181
+    port: 8080
+
+  - name: "🇨🇳 Китай 1408ms"
+    type: http
+    server: 111.79.111.126
+    port: 3128
+
+  - name: "🇨🇳 Китай 1413ms"
+    type: socks5
+    server: 218.95.39.114
+    port: 59999
+
+  - name: "🇳🇱 Нидерланды 1437ms"
+    type: http
+    server: 145.220.226.74
+    port: 8080
+
+  - name: "🇸🇬 Сингапур 1458ms"
+    type: http
+    server: 43.160.255.142
+    port: 7890
+
+  - name: "🇳🇱 Нидерланды 1463ms"
+    type: http
+    server: 145.220.226.151
+    port: 8080
+
+  - name: "🇨🇳 Китай 1477ms"
+    type: socks5
+    server: 218.95.39.105
+    port: 59999
+
+  - name: "🇺🇸 США 1493ms"
+    type: http
+    server: 34.122.187.196
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 1522ms"
+    type: http
+    server: 145.220.226.88
+    port: 8080
+
+  - name: "🇨🇳 Китай 1530ms"
+    type: socks5
+    server: 218.95.39.55
+    port: 59999
+
+  - name: "🇳🇱 Нидерланды 1579ms"
+    type: http
+    server: 145.220.226.185
+    port: 8080
+
+  - name: "🇫🇮 Финляндия 1594ms"
+    type: socks5
+    server: 193.221.203.192
+    port: 1080
+
+  - name: "🇩🇪 Германия 1608ms"
+    type: socks5
+    server: 152.89.104.11
+    port: 1080
+
+  - name: "🇨🇳 Китай 1637ms"
+    type: socks5
+    server: 218.95.39.5
+    port: 59999
+
+  - name: "🇨🇳 Китай 1639ms"
+    type: socks5
+    server: 218.95.39.42
+    port: 59999
+
+  - name: "🇭🇰 Гонконг 1650ms"
+    type: http
+    server: 43.128.63.68
+    port: 7890
+
+  - name: "🇮🇷 Неизвестно 1679ms"
+    type: socks5
+    server: 206.123.156.215
+    port: 7818
+
+  - name: "🇮🇩 Индонезия 1700ms"
+    type: http
+    server: 49.156.22.42
+    port: 8082
+
+  - name: "🇲🇾 Малайзия 1716ms"
+    type: http
+    server: 175.139.233.79
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 1717ms"
+    type: http
+    server: 145.220.226.144
+    port: 8080
+
+  - name: "🇨🇳 Китай 1778ms"
+    type: socks5
+    server: 218.95.39.101
+    port: 59999
+
+  - name: "🇺🇸 США 1868ms"
+    type: http
+    server: 138.91.159.185
+    port: 80
+
+  - name: "🇸🇨 Неизвестно 2001ms"
+    type: socks5
+    server: 154.201.94.252
+    port: 5555
+
+  - name: "🇺🇸 США 2016ms"
+    type: http
+    server: 167.99.124.118
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 2025ms"
+    type: http
+    server: 145.220.226.186
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2080ms"
     type: socks5
     server: 5.255.117.127
     port: 1080
 
-  - name: "🇫🇮 Финляндия 7590ms"
+  - name: "🇺🇸 США 2138ms"
     type: http
-    server: 65.108.203.37
-    port: 18080
+    server: 47.251.87.74
+    port: 8060
 
-  - name: "🇮🇩 Индонезия 7611ms"
+  - name: "🇬🇧 Великобритания 2163ms"
     type: http
-    server: 163.227.146.38
+    server: 8.211.200.183
     port: 8080
 
-  - name: "🇻🇪 Неизвестно 7802ms"
+  - name: "🇨🇳 Китай 2175ms"
     type: http
-    server: 45.230.170.13
+    server: 101.89.150.168
+    port: 3128
+
+  - name: "🇩🇪 Германия 2179ms"
+    type: http
+    server: 8.209.96.245
+    port: 1234
+
+  - name: "🇬🇧 Великобритания 2185ms"
+    type: http
+    server: 8.211.194.78
+    port: 1080
+
+  - name: "🇩🇪 Германия 2193ms"
+    type: http
+    server: 47.91.89.3
+    port: 8443
+
+  - name: "🇮🇳 Индия 2200ms"
+    type: socks5
+    server: 117.244.114.54
+    port: 1080
+
+  - name: "🇮🇷 Неизвестно 2202ms"
+    type: socks5
+    server: 206.123.156.215
+    port: 7810
+
+  - name: "🇰🇭 Неизвестно 2222ms"
+    type: socks5
+    server: 220.158.234.84
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 2229ms"
+    type: http
+    server: 145.220.226.111
+    port: 8080
+
+  - name: "🇺🇸 США 2245ms"
+    type: socks5
+    server: 45.61.129.165
+    port: 8443
+
+  - name: "🇭🇰 Гонконг 2308ms"
+    type: socks5
+    server: 45.125.32.64
+    port: 5555
+
+  - name: "🇦🇫 Неизвестно 2317ms"
+    type: socks5
+    server: 103.96.233.10
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 2334ms"
+    type: http
+    server: 145.220.226.69
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2335ms"
+    type: http
+    server: 145.220.226.242
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2335ms-2"
+    type: http
+    server: 145.220.226.38
+    port: 8080
+
+  - name: "🇯🇵 Япония 2337ms"
+    type: http
+    server: 47.74.46.81
+    port: 8047
+
+  - name: "🇳🇱 Нидерланды 2339ms"
+    type: http
+    server: 145.220.226.240
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2340ms"
+    type: http
+    server: 145.220.226.157
+    port: 8080
+
+  - name: "🇯🇵 Япония 2341ms"
+    type: http
+    server: 47.91.29.151
+    port: 4002
+
+  - name: "🇳🇱 Нидерланды 2345ms"
+    type: http
+    server: 145.220.226.29
+    port: 8080
+
+  - name: "🇺🇸 США 2347ms"
+    type: http
+    server: 108.170.12.11
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 2351ms"
+    type: http
+    server: 145.220.226.79
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2358ms"
+    type: http
+    server: 145.220.226.22
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2362ms"
+    type: http
+    server: 145.220.226.49
+    port: 8080
+
+  - name: "🇨🇳 Китай 2364ms"
+    type: socks5
+    server: 112.28.149.152
+    port: 8443
+
+  - name: "🇰🇷 Южная Корея 2372ms"
+    type: http
+    server: 8.220.204.92
+    port: 1081
+
+  - name: "🇪🇬 Египет 2374ms"
+    type: http
+    server: 213.131.85.27
+    port: 1976
+
+  - name: "🇨🇳 Китай 2383ms"
+    type: http
+    server: 120.232.115.170
+    port: 17981
+
+  - name: "🇰🇭 Неизвестно 2388ms"
+    type: socks5
+    server: 220.158.233.26
+    port: 1080
+
+  - name: "🇭🇰 Гонконг 2412ms"
+    type: http
+    server: 47.238.130.212
+    port: 9050
+
+  - name: "🇭🇰 Гонконг 2413ms"
+    type: http
+    server: 47.76.144.139
+    port: 8081
+
+  - name: "🇭🇰 Гонконг 2415ms"
+    type: http
+    server: 47.76.144.139
+    port: 5060
+
+  - name: "🇧🇪 Бельгия 2465ms"
+    type: http
+    server: 34.140.137.151
+    port: 80
+
+  - name: "🇮🇩 Индонезия 2486ms"
+    type: http
+    server: 160.22.207.13
+    port: 8082
+
+  - name: "🇮🇩 Индонезия 2495ms"
+    type: http
+    server: 149.129.226.9
+    port: 8008
+
+  - name: "🇹🇭 Таиланд 2508ms"
+    type: http
+    server: 8.213.195.191
+    port: 90
+
+  - name: "🇨🇳 Китай 2549ms"
+    type: http
+    server: 114.215.127.92
+    port: 8008
+
+  - name: "🇳🇱 Нидерланды 2554ms"
+    type: http
+    server: 145.220.226.0
+    port: 8080
+
+  - name: "🇪🇸 Испания 2556ms"
+    type: http
+    server: 212.231.191.23
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 2562ms"
+    type: http
+    server: 145.220.226.43
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2572ms"
+    type: http
+    server: 145.220.226.176
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2572ms-2"
+    type: http
+    server: 145.220.226.236
+    port: 8080
+
+  - name: "🇷🇸 Неизвестно 2572ms"
+    type: http
+    server: 185.119.90.69
+    port: 8888
+
+  - name: "🇳🇱 Нидерланды 2573ms"
+    type: http
+    server: 145.220.226.164
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2573ms-2"
+    type: http
+    server: 145.220.226.205
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2573ms-3"
+    type: http
+    server: 145.220.226.24
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2573ms-4"
+    type: http
+    server: 145.220.226.48
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2573ms-5"
+    type: http
+    server: 145.220.226.65
+    port: 8080
+
+  - name: "🇧🇷 Бразилия 2614ms"
+    type: http
+    server: 131.255.227.104
+    port: 3128
+
+  - name: "🇮🇩 Индонезия 2630ms"
+    type: http
+    server: 103.125.18.74
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2726ms"
+    type: http
+    server: 145.220.226.235
+    port: 8080
+
+  - name: "🇻🇳 Вьетнам 2741ms"
+    type: http
+    server: 203.162.13.26
+    port: 6868
+
+  - name: "🇳🇱 Нидерланды 2822ms"
+    type: http
+    server: 145.220.226.92
+    port: 8080
+
+  - name: "🇿🇦 ЮАР 2895ms"
+    type: http
+    server: 154.117.154.194
+    port: 8080
+
+  - name: "🇻🇳 Вьетнам 2901ms"
+    type: http
+    server: 110.172.29.162
+    port: 443
+
+  - name: "🇨🇳 Китай 2901ms"
+    type: http
+    server: 183.201.114.49
+    port: 17981
+
+  - name: "🇺🇸 США 2912ms"
+    type: http
+    server: 104.129.192.156
+    port: 11131
+
+  - name: "🇺🇸 США 2945ms"
+    type: http
+    server: 104.129.192.156
+    port: 12162
+
+  - name: "🇺🇸 США 2946ms"
+    type: http
+    server: 104.129.192.156
+    port: 12486
+
+  - name: "🇺🇸 США 2951ms"
+    type: http
+    server: 104.129.192.156
+    port: 10749
+
+  - name: "🇱🇻 Латвия 2952ms"
+    type: http
+    server: 185.113.139.149
+    port: 3128
+
+  - name: "🇺🇸 США 2966ms"
+    type: http
+    server: 104.129.192.156
+    port: 12264
+
+  - name: "🇺🇸 США 2968ms"
+    type: http
+    server: 104.129.192.156
+    port: 3128
+
+  - name: "🇳🇱 Нидерланды 2970ms"
+    type: http
+    server: 145.220.226.253
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2977ms"
+    type: http
+    server: 145.220.226.222
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 2978ms"
+    type: http
+    server: 145.220.226.239
+    port: 8080
+
+  - name: "🇭🇰 Гонконг 3014ms"
+    type: socks5
+    server: 47.239.131.9
+    port: 1011
+
+  - name: "🇨🇳 Китай 3020ms"
+    type: socks5
+    server: 218.95.39.28
+    port: 59999
+
+  - name: "🇺🇸 США 3047ms"
+    type: socks5
+    server: 47.251.127.154
+    port: 1080
+
+  - name: "🇨🇴 Колумбия 3049ms"
+    type: http
+    server: 186.96.111.214
     port: 999
 
-  - name: "🇯🇵 Япония 7996ms"
+  - name: "🇺🇸 США 3095ms"
     type: http
-    server: 45.32.8.165
-    port: 6688
+    server: 104.129.192.156
+    port: 10033
 
-  - name: "🇮🇷 Неизвестно 8272ms"
+  - name: "🇳🇱 Нидерланды 3106ms"
+    type: http
+    server: 145.220.226.138
+    port: 8080
+
+  - name: "🇭🇰 Гонконг 3155ms"
+    type: socks5
+    server: 47.82.108.195
+    port: 1011
+
+  - name: "🇨🇴 Колумбия 3178ms"
+    type: http
+    server: 181.225.75.99
+    port: 4040
+
+  - name: "🇸🇬 Сингапур 3189ms"
+    type: http
+    server: 103.43.191.71
+    port: 8888
+
+  - name: "🇺🇸 США 3255ms"
+    type: http
+    server: 8.221.126.184
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 3260ms"
+    type: http
+    server: 145.220.226.9
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3262ms"
+    type: http
+    server: 145.220.226.192
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3275ms"
+    type: http
+    server: 145.220.226.10
+    port: 8080
+
+  - name: "🇧🇩 Неизвестно 3375ms"
+    type: http
+    server: 103.148.83.110
+    port: 8889
+
+  - name: "🇳🇱 Нидерланды 3400ms"
+    type: http
+    server: 145.220.226.109
+    port: 8080
+
+  - name: "🇺🇸 США 3420ms"
+    type: socks5
+    server: 144.24.15.246
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 3488ms"
+    type: http
+    server: 145.220.226.80
+    port: 8080
+
+  - name: "🇨🇳 Китай 3516ms"
+    type: http
+    server: 113.249.101.123
+    port: 18255
+
+  - name: "🇰🇷 Южная Корея 3562ms"
+    type: http
+    server: 8.220.205.172
+    port: 11443
+
+  - name: "🇮🇷 Неизвестно 3576ms"
+    type: socks5
+    server: 206.123.156.232
+    port: 4529
+
+  - name: "🇸🇬 Сингапур 3581ms"
+    type: http
+    server: 8.219.97.248
+    port: 80
+
+  - name: "🇪🇨 Неизвестно 3706ms"
+    type: http
+    server: 45.70.236.194
+    port: 999
+
+  - name: "🇮🇩 Индонезия 3795ms"
+    type: http
+    server: 103.176.96.103
+    port: 8082
+
+  - name: "🇨🇳 Китай 3797ms"
+    type: http
+    server: 27.185.218.213
+    port: 17981
+
+  - name: "🇮🇩 Индонезия 3814ms"
+    type: http
+    server: 157.15.116.26
+    port: 8082
+
+  - name: "🇳🇱 Нидерланды 3919ms"
+    type: http
+    server: 145.220.226.32
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3947ms"
+    type: http
+    server: 145.220.226.81
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3948ms"
+    type: http
+    server: 145.220.226.171
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3949ms"
+    type: http
+    server: 145.220.226.194
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3949ms-2"
+    type: http
+    server: 145.220.226.200
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 3949ms-3"
+    type: http
+    server: 145.220.226.30
+    port: 8080
+
+  - name: "🇯🇵 Япония 3949ms"
+    type: http
+    server: 43.133.13.187
+    port: 8889
+
+  - name: "🇳🇱 Нидерланды 3953ms"
+    type: http
+    server: 145.220.226.8
+    port: 8080
+
+  - name: "🇫🇷 Франция 3963ms"
+    type: http
+    server: 161.97.79.222
+    port: 8888
+
+  - name: "🇨🇳 Китай 4071ms"
+    type: socks5
+    server: 120.220.197.194
+    port: 59999
+
+  - name: "🇨🇳 Китай 4089ms"
+    type: socks5
+    server: 218.95.39.126
+    port: 59999
+
+  - name: "🇮🇩 Индонезия 4297ms"
+    type: http
+    server: 103.191.72.10
+    port: 8082
+
+  - name: "🇳🇱 Нидерланды 4314ms"
+    type: http
+    server: 145.220.226.14
+    port: 8080
+
+  - name: "🇨🇳 Китай 4346ms"
+    type: http
+    server: 114.111.19.228
+    port: 3389
+
+  - name: "🇮🇷 Неизвестно 4391ms"
+    type: socks5
+    server: 206.123.156.234
+    port: 9271
+
+  - name: "🇨🇳 Китай 4444ms"
+    type: http
+    server: 122.246.4.6
+    port: 17981
+
+  - name: "🇺🇿 Неизвестно 4444ms"
+    type: http
+    server: 195.158.8.123
+    port: 3128
+
+  - name: "🇨🇳 Китай 4445ms"
+    type: http
+    server: 113.204.79.230
+    port: 9091
+
+  - name: "🇹🇭 Таиланд 4445ms"
+    type: http
+    server: 202.28.194.139
+    port: 31280
+
+  - name: "🇹🇭 Таиланд 4445ms-2"
+    type: http
+    server: 47.81.56.193
+    port: 8888
+
+  - name: "🇨🇳 Китай 4445ms-2"
+    type: http
+    server: 58.254.153.147
+    port: 17981
+
+  - name: "🇨🇳 Китай 4446ms"
+    type: http
+    server: 111.74.1.65
+    port: 13382
+
+  - name: "🇨🇳 Китай 4446ms-2"
+    type: http
+    server: 120.92.212.16
+    port: 8890
+
+  - name: "🇸🇳 Неизвестно 4449ms"
+    type: http
+    server: 196.1.97.198
+    port: 80
+
+  - name: "🇻🇳 Вьетнам 4459ms"
+    type: http
+    server: 14.225.240.23
+    port: 8562
+
+  - name: "🇨🇳 Китай 4459ms"
+    type: http
+    server: 27.155.93.29
+    port: 1080
+
+  - name: "🇨🇳 Китай 4460ms"
+    type: http
+    server: 113.249.101.105
+    port: 18255
+
+  - name: "🇷🇺 Россия 4460ms"
+    type: http
+    server: 31.28.4.192
+    port: 80
+
+  - name: "🇺🇸 США 4466ms"
+    type: http
+    server: 159.65.245.255
+    port: 80
+
+  - name: "🇺🇸 США 4624ms"
+    type: http
+    server: 104.129.192.156
+    port: 11686
+
+  - name: "🇮🇩 Индонезия 4656ms"
+    type: http
+    server: 103.65.237.92
+    port: 5678
+
+  - name: "🇺🇸 США 4683ms"
+    type: http
+    server: 216.106.179.216
+    port: 49423
+
+  - name: "🇺🇸 США 4710ms"
+    type: http
+    server: 104.129.192.156
+    port: 10078
+
+  - name: "🇷🇺 Россия 4738ms"
+    type: http
+    server: 176.99.134.183
+    port: 8090
+
+  - name: "🇮🇩 Индонезия 4743ms"
+    type: http
+    server: 157.20.100.194
+    port: 8080
+
+  - name: "🇪🇨 Неизвестно 4751ms"
+    type: http
+    server: 45.239.48.99
+    port: 999
+
+  - name: "🇨🇳 Китай 4827ms"
+    type: socks5
+    server: 218.95.39.104
+    port: 59999
+
+  - name: "🇧🇪 Бельгия 5075ms"
+    type: http
+    server: 188.190.10.47
+    port: 1080
+
+  - name: "🇩🇪 Германия 5094ms"
+    type: http
+    server: 85.214.107.177
+    port: 80
+
+  - name: "🇷🇺 Россия 5118ms"
+    type: http
+    server: 202.49.176.24
+    port: 2080
+
+  - name: "🇧🇩 Неизвестно 5170ms"
+    type: socks5
+    server: 103.138.145.228
+    port: 1999
+
+  - name: "🇷🇺 Россия 5183ms"
+    type: http
+    server: 147.45.60.252
+    port: 1082
+
+  - name: "🇨🇳 Китай 5186ms"
+    type: socks5
+    server: 106.54.229.77
+    port: 1111
+
+  - name: "🇺🇸 США 5278ms"
+    type: http
+    server: 104.129.192.156
+    port: 11229
+
+  - name: "🇺🇸 США 5331ms"
+    type: http
+    server: 104.129.192.156
+    port: 10115
+
+  - name: "🇺🇸 США 5332ms"
+    type: http
+    server: 104.129.192.156
+    port: 12130
+
+  - name: "🇸🇨 Неизвестно 5365ms"
+    type: socks5
+    server: 156.225.20.83
+    port: 1080
+
+  - name: "🇺🇸 США 5371ms"
+    type: http
+    server: 149.28.87.103
+    port: 8888
+
+  - name: "🇰🇭 Неизвестно 5509ms"
+    type: socks5
+    server: 220.158.232.118
+    port: 1080
+
+  - name: "🇺🇸 США 5560ms"
+    type: http
+    server: 186.241.90.120
+    port: 7890
+
+  - name: "🇳🇱 Нидерланды 5735ms"
+    type: http
+    server: 145.220.226.208
+    port: 8080
+
+  - name: "🇨🇳 Китай 5740ms"
+    type: http
+    server: 175.6.75.144
+    port: 10064
+
+  - name: "🇺🇸 США 5945ms"
+    type: http
+    server: 104.129.192.156
+    port: 11677
+
+  - name: "🇺🇸 США 6062ms"
+    type: http
+    server: 108.170.12.12
+    port: 80
+
+  - name: "🇵🇱 Польша 6297ms"
+    type: http
+    server: 185.238.238.121
+    port: 58080
+
+  - name: "🇫🇮 Финляндия 6323ms"
+    type: http
+    server: 109.120.184.202
+    port: 1080
+
+  - name: "🇳🇱 Нидерланды 6323ms"
+    type: http
+    server: 145.220.226.72
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 6328ms"
+    type: http
+    server: 145.220.226.18
+    port: 8080
+
+  - name: "🇺🇸 США 6361ms"
+    type: http
+    server: 104.129.192.156
+    port: 12072
+
+  - name: "🇨🇳 Китай 6411ms"
+    type: socks5
+    server: 218.95.39.49
+    port: 59999
+
+  - name: "🇨🇳 Китай 6527ms"
+    type: http
+    server: 61.49.87.3
+    port: 80
+
+  - name: "🇨🇳 Китай 6529ms"
+    type: http
+    server: 125.122.35.253
+    port: 8086
+
+  - name: "🇨🇳 Китай 6531ms"
+    type: http
+    server: 122.246.3.12
+    port: 17981
+
+  - name: "🇨🇳 Китай 6584ms"
+    type: http
+    server: 219.142.66.244
+    port: 9090
+
+  - name: "🇮🇩 Индонезия 6691ms"
+    type: http
+    server: 103.193.145.231
+    port: 8080
+
+  - name: "🇺🇸 США 6723ms"
+    type: http
+    server: 150.136.163.51
+    port: 80
+
+  - name: "🇳🇱 Нидерланды 6761ms"
+    type: http
+    server: 145.220.226.17
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 6763ms"
+    type: http
+    server: 145.220.226.210
+    port: 8080
+
+  - name: "🇹🇷 Турция 6885ms"
+    type: http
+    server: 139.28.49.230
+    port: 8080
+
+  - name: "🇫🇷 Франция 6907ms"
+    type: http
+    server: 176.191.124.3
+    port: 80
+
+  - name: "🇮🇪 Ирландия 6920ms"
+    type: http
+    server: 185.138.114.111
+    port: 8080
+
+  - name: "🇯🇵 Япония 6996ms"
+    type: http
+    server: 45.43.60.220
+    port: 8080
+
+  - name: "🇮🇩 Индонезия 7000ms"
+    type: http
+    server: 103.220.23.57
+    port: 3128
+
+  - name: "🇮🇷 Неизвестно 7019ms"
     type: http
     server: 217.219.83.186
     port: 2222
 
-  - name: "🇸🇾 Неизвестно 8634ms"
+  - name: "🇳🇱 Нидерланды 7023ms"
     type: http
-    server: 131.222.210.40
+    server: 145.220.226.120
     port: 8080
 
-  - name: "🇨🇳 Китай 9497ms"
+  - name: "🇳🇱 Нидерланды 7023ms-2"
     type: http
-    server: 113.249.101.194
-    port: 18255
+    server: 145.220.226.160
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7023ms-3"
+    type: http
+    server: 145.220.226.237
+    port: 8080
+
+  - name: "🇨🇳 Китай 7024ms"
+    type: http
+    server: 120.92.212.16
+    port: 7890
+
+  - name: "🇳🇱 Нидерланды 7024ms"
+    type: http
+    server: 145.220.226.107
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7024ms-2"
+    type: http
+    server: 145.220.226.130
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7024ms-3"
+    type: http
+    server: 145.220.226.206
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7024ms-4"
+    type: http
+    server: 145.220.226.95
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7024ms-5"
+    type: http
+    server: 79.133.180.232
+    port: 10808
+
+  - name: "🇳🇱 Нидерланды 7025ms"
+    type: http
+    server: 145.220.226.12
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7025ms-2"
+    type: http
+    server: 145.220.226.179
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7025ms-3"
+    type: http
+    server: 145.220.226.4
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7025ms-4"
+    type: http
+    server: 145.220.226.87
+    port: 8080
+
+  - name: "🇳🇱 Нидерланды 7025ms-5"
+    type: http
+    server: 145.220.226.98
+    port: 8080
+
+  - name: "🇹🇷 Турция 7044ms"
+    type: http
+    server: 176.88.166.162
+    port: 8080
+
+  - name: "🇷🇺 Россия 7061ms"
+    type: http
+    server: 81.17.146.38
+    port: 8080
+
+  - name: "🇦🇱 Неизвестно 7110ms"
+    type: http
+    server: 185.196.182.22
+    port: 8080
 
 proxy-groups:
   - name: PROXY
     type: select
     proxies:
       - "Auto-Смена"
-      - "🇺🇸 США"
       - "🇳🇱 Нидерланды"
+      - "🇺🇸 США"
       - "🇨🇳 Китай"
       - "🇩🇪 Германия"
       - "🇮🇩 Индонезия"
-      - "🇫🇷 Франция"
       - "🇭🇰 Гонконг"
       - "🇰🇷 Южная Корея"
-      - "🇷🇺 Россия"
+      - "🇫🇷 Франция"
       - "🇸🇬 Сингапур"
-      - "🇫🇮 Финляндия"
+      - "🇷🇺 Россия"
       - "🇮🇷 Неизвестно"
-      - "🇵🇱 Польша"
       - "🇯🇵 Япония"
+      - "🇫🇮 Финляндия"
+      - "🇮🇳 Индия"
+      - "🇵🇱 Польша"
       - "🇻🇳 Вьетнам"
       - "🇨🇴 Колумбия"
-      - "🇮🇳 Индия"
-      - "🇨🇦 Канада"
-      - "🇲🇾 Малайзия"
-      - "🇸🇾 Неизвестно"
-      - "🇺🇦 Украина"
-      - "🇰🇭 Неизвестно"
-      - "🇰🇿 Неизвестно"
-      - "🇹🇭 Таиланд"
-      - "🇹🇼 Тайвань"
-      - "🇧🇩 Неизвестно"
-      - "🇧🇪 Бельгия"
-      - "🇪🇨 Неизвестно"
-      - "🇪🇸 Испания"
       - "🇬🇧 Великобритания"
-      - "🇬🇭 Неизвестно"
-      - "🇮🇶 Неизвестно"
-      - "🇮🇹 Италия"
-      - "🇲🇽 Мексика"
-      - "🇵🇭 Филиппины"
-      - "🇸🇪 Швеция"
-      - "🇹🇷 Турция"
-      - "🇻🇪 Неизвестно"
-      - "🇦🇱 Неизвестно"
-      - "🇦🇷 Аргентина"
-      - "🇦🇹 Австрия"
-      - "🇦🇺 Австралия"
+      - "🇲🇾 Малайзия"
+      - "🇪🇨 Неизвестно"
+      - "🇹🇭 Таиланд"
+      - "🇧🇩 Неизвестно"
+      - "🇰🇭 Неизвестно"
+      - "🇸🇨 Неизвестно"
+      - "🇺🇦 Украина"
+      - "🇧🇪 Бельгия"
       - "🇧🇷 Бразилия"
       - "🇨🇭 Швейцария"
-      - "🇨🇮 Неизвестно"
-      - "🇨🇾 Неизвестно"
+      - "🇮🇶 Неизвестно"
+      - "🇰🇿 Неизвестно"
+      - "🇹🇷 Турция"
+      - "🇹🇼 Тайвань"
+      - "🇦🇫 Неизвестно"
+      - "🇦🇱 Неизвестно"
+      - "🇦🇷 Аргентина"
+      - "🇦🇺 Австралия"
       - "🇩🇴 Неизвестно"
       - "🇪🇪 Эстония"
+      - "🇪🇬 Египет"
+      - "🇪🇸 Испания"
+      - "🇬🇭 Неизвестно"
+      - "🇮🇪 Ирландия"
       - "🇮🇱 Израиль"
-      - "🇰🇬 Неизвестно"
+      - "🇮🇹 Италия"
       - "🇱🇹 Литва"
       - "🇱🇻 Латвия"
-      - "🇲🇦 Неизвестно"
-      - "🇲🇲 Неизвестно"
-      - "🇸🇨 Неизвестно"
+      - "🇷🇸 Неизвестно"
+      - "🇸🇪 Швеция"
       - "🇸🇳 Неизвестно"
+      - "🇸🇾 Неизвестно"
       - "🇺🇿 Неизвестно"
+      - "🇿🇦 ЮАР"
+      - "🇿🇼 Неизвестно"
       - DIRECT
 
   - name: "Auto-Смена"
@@ -2581,1290 +2577,1270 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - "🇺🇸 США 25ms"
-      - "🇺🇸 США 36ms"
-      - "🇺🇸 США 40ms"
-      - "🇺🇸 США 46ms"
-      - "🇺🇸 США 48ms"
-      - "🇺🇸 США 50ms"
-      - "🇷🇺 Россия 51ms"
-      - "🇺🇸 США 57ms"
-      - "🇺🇸 США 61ms"
-      - "🇺🇸 США 70ms"
-      - "🇨🇦 Канада 72ms"
+      - "🇺🇸 США 20ms"
+      - "🇺🇸 США 26ms"
+      - "🇺🇸 США 27ms"
+      - "🇺🇸 США 27ms-2"
+      - "🇺🇸 США 35ms"
+      - "🇺🇸 США 55ms"
+      - "🇷🇺 Россия 58ms"
+      - "🇺🇸 США 71ms"
       - "🇺🇸 США 73ms"
-      - "🇨🇦 Канада 74ms"
       - "🇺🇸 США 74ms"
-      - "🇺🇸 США 75ms"
-      - "🇺🇸 США 76ms"
-      - "🇷🇺 Россия 76ms"
-      - "🇺🇸 США 76ms-2"
-      - "🇺🇸 США 76ms-3"
-      - "🇺🇸 США 76ms-4"
-      - "🇺🇸 США 76ms-5"
-      - "🇺🇸 США 77ms"
-      - "🇺🇸 США 77ms-2"
-      - "🇺🇸 США 78ms"
-      - "🇺🇸 США 78ms-2"
-      - "🇺🇸 США 95ms"
-      - "🇨🇦 Канада 96ms"
+      - "🇺🇸 США 83ms"
+      - "🇺🇸 США 84ms"
       - "🇺🇸 США 97ms"
+      - "🇺🇸 США 99ms"
       - "🇺🇸 США 100ms"
-      - "🇲🇽 Мексика 103ms"
-      - "🇺🇸 США 107ms"
-      - "🇺🇸 США 109ms"
-      - "🇺🇸 США 117ms"
-      - "🇨🇦 Канада 126ms"
-      - "🇺🇸 США 129ms"
-      - "🇺🇸 США 132ms"
-      - "🇺🇸 США 140ms"
-      - "🇨🇴 Колумбия 157ms"
+      - "🇺🇸 США 102ms"
+      - "🇺🇸 США 104ms"
+      - "🇺🇸 США 114ms"
+      - "🇺🇸 США 122ms"
+      - "🇨🇴 Колумбия 134ms"
+      - "🇺🇸 США 143ms"
+      - "🇩🇴 Неизвестно 147ms"
+      - "🇺🇸 США 149ms"
+      - "🇨🇴 Колумбия 154ms"
+      - "🇬🇧 Великобритания 164ms"
+      - "🇺🇸 США 164ms"
       - "🇺🇸 США 171ms"
-      - "🇨🇴 Колумбия 173ms"
-      - "🇺🇸 США 197ms"
-      - "🇫🇷 Франция 199ms"
-      - "🇳🇱 Нидерланды 205ms"
-      - "🇬🇧 Великобритания 207ms"
-      - "🇳🇱 Нидерланды 208ms"
-      - "🇫🇷 Франция 210ms"
-      - "🇺🇸 США 213ms"
+      - "🇺🇸 США 171ms-2"
+      - "🇫🇷 Франция 173ms"
+      - "🇫🇷 Франция 177ms"
+      - "🇫🇷 Франция 181ms"
+      - "🇩🇪 Германия 183ms"
+      - "🇩🇪 Германия 184ms"
+      - "🇳🇱 Нидерланды 185ms"
+      - "🇳🇱 Нидерланды 188ms"
+      - "🇫🇷 Франция 191ms"
+      - "🇪🇨 Неизвестно 191ms"
+      - "🇳🇱 Нидерланды 192ms"
+      - "🇩🇪 Германия 195ms"
+      - "🇩🇪 Германия 201ms"
+      - "🇫🇷 Франция 203ms"
+      - "🇺🇸 США 203ms"
+      - "🇩🇪 Германия 204ms"
+      - "🇩🇪 Германия 205ms"
+      - "🇳🇱 Нидерланды 209ms"
+      - "🇬🇧 Великобритания 209ms"
+      - "🇫🇮 Финляндия 210ms"
+      - "🇳🇱 Нидерланды 212ms"
+      - "🇵🇱 Польша 212ms"
       - "🇳🇱 Нидерланды 213ms"
-      - "🇫🇷 Франция 216ms"
-      - "🇩🇪 Германия 222ms"
-      - "🇩🇪 Германия 222ms-2"
-      - "🇧🇪 Бельгия 224ms"
+      - "🇫🇮 Финляндия 214ms"
+      - "🇵🇱 Польша 214ms"
+      - "🇳🇱 Нидерланды 215ms"
+      - "🇺🇸 США 216ms"
+      - "🇫🇮 Финляндия 216ms"
+      - "🇵🇱 Польша 218ms"
+      - "🇳🇱 Нидерланды 219ms"
+      - "🇨🇭 Швейцария 219ms"
+      - "🇺🇸 США 220ms"
+      - "🇩🇪 Германия 223ms"
+      - "🇳🇱 Нидерланды 226ms"
+      - "🇪🇨 Неизвестно 226ms"
+      - "🇺🇸 США 228ms"
       - "🇳🇱 Нидерланды 230ms"
-      - "🇩🇪 Германия 230ms"
-      - "🇪🇨 Неизвестно 233ms"
-      - "🇫🇷 Франция 233ms"
-      - "🇫🇷 Франция 236ms"
-      - "🇩🇪 Германия 236ms"
-      - "🇪🇨 Неизвестно 240ms"
-      - "🇳🇱 Нидерланды 244ms"
-      - "🇳🇱 Нидерланды 244ms-2"
-      - "🇳🇱 Нидерланды 245ms"
-      - "🇩🇪 Германия 246ms"
-      - "🇵🇱 Польша 248ms"
-      - "🇺🇸 США 249ms"
-      - "🇺🇸 США 250ms"
-      - "🇫🇷 Франция 250ms"
-      - "🇳🇱 Нидерланды 251ms"
-      - "🇳🇱 Нидерланды 252ms"
-      - "🇳🇱 Нидерланды 253ms"
-      - "🇵🇱 Польша 254ms"
-      - "🇺🇦 Украина 255ms"
-      - "🇵🇱 Польша 255ms"
-      - "🇮🇹 Италия 255ms"
-      - "🇺🇦 Украина 256ms"
-      - "🇫🇷 Франция 256ms"
-      - "🇵🇱 Польша 258ms"
-      - "🇭🇰 Гонконг 262ms"
-      - "🇷🇺 Россия 265ms"
-      - "🇺🇸 США 266ms"
-      - "🇵🇱 Польша 269ms"
-      - "🇵🇱 Польша 272ms"
-      - "🇳🇱 Нидерланды 278ms"
-      - "🇳🇱 Нидерланды 278ms-2"
-      - "🇳🇱 Нидерланды 279ms"
-      - "🇳🇱 Нидерланды 279ms-2"
-      - "🇳🇱 Нидерланды 279ms-3"
-      - "🇳🇱 Нидерланды 279ms-4"
-      - "🇳🇱 Нидерланды 279ms-5"
-      - "🇳🇱 Нидерланды 279ms-6"
-      - "🇳🇱 Нидерланды 280ms"
-      - "🇷🇺 Россия 281ms"
-      - "🇮🇱 Израиль 281ms"
-      - "🇩🇪 Германия 282ms"
-      - "🇱🇹 Литва 283ms"
-      - "🇫🇮 Финляндия 298ms"
-      - "🇺🇸 США 300ms"
-      - "🇺🇸 США 307ms"
-      - "🇺🇸 США 310ms"
-      - "🇺🇸 США 316ms"
-      - "🇺🇸 США 316ms-2"
-      - "🇦🇹 Австрия 317ms"
-      - "🇺🇸 США 321ms"
-      - "🇯🇵 Япония 323ms"
-      - "🇺🇦 Украина 334ms"
-      - "🇰🇷 Южная Корея 337ms"
-      - "🇺🇸 США 339ms"
-      - "🇷🇺 Россия 341ms"
-      - "🇲🇦 Неизвестно 342ms"
-      - "🇺🇸 США 347ms"
-      - "🇰🇷 Южная Корея 348ms"
-      - "🇦🇷 Аргентина 351ms"
-      - "🇺🇦 Украина 357ms"
-      - "🇳🇱 Нидерланды 361ms"
-      - "🇳🇱 Нидерланды 362ms"
-      - "🇳🇱 Нидерланды 363ms"
-      - "🇳🇱 Нидерланды 365ms"
-      - "🇳🇱 Нидерланды 365ms-2"
-      - "🇹🇼 Тайвань 365ms"
-      - "🇳🇱 Нидерланды 367ms"
-      - "🇦🇺 Австралия 369ms"
-      - "🇰🇷 Южная Корея 373ms"
-      - "🇨🇴 Колумбия 377ms"
-      - "🇭🇰 Гонконг 379ms"
-      - "🇭🇰 Гонконг 387ms"
-      - "🇺🇸 США 396ms"
-      - "🇰🇷 Южная Корея 397ms"
-      - "🇰🇷 Южная Корея 403ms"
-      - "🇸🇬 Сингапур 406ms"
-      - "🇰🇷 Южная Корея 407ms"
-      - "🇰🇷 Южная Корея 408ms"
-      - "🇰🇷 Южная Корея 411ms"
-      - "🇷🇺 Россия 420ms"
-      - "🇩🇪 Германия 421ms"
-      - "🇸🇬 Сингапур 421ms"
-      - "🇮🇳 Индия 428ms"
-      - "🇮🇶 Неизвестно 430ms"
-      - "🇮🇩 Индонезия 439ms"
-      - "🇰🇷 Южная Корея 443ms"
-      - "🇷🇺 Россия 444ms"
-      - "🇨🇳 Китай 448ms"
-      - "🇭🇰 Гонконг 450ms"
-      - "🇮🇩 Индонезия 451ms"
-      - "🇮🇳 Индия 451ms"
-      - "🇸🇬 Сингапур 452ms"
-      - "🇬🇭 Неизвестно 455ms"
-      - "🇸🇬 Сингапур 456ms"
-      - "🇺🇸 США 456ms"
-      - "🇮🇩 Индонезия 457ms"
-      - "🇸🇳 Неизвестно 460ms"
-      - "🇮🇩 Индонезия 462ms"
-      - "🇮🇷 Неизвестно 467ms"
-      - "🇮🇩 Индонезия 470ms"
-      - "🇫🇮 Финляндия 473ms"
-      - "🇮🇩 Индонезия 473ms"
-      - "🇮🇩 Индонезия 478ms"
-      - "🇸🇨 Неизвестно 480ms"
-      - "🇮🇩 Индонезия 485ms"
-      - "🇻🇳 Вьетнам 487ms"
+      - "🇵🇱 Польша 230ms"
+      - "🇺🇦 Украина 232ms"
+      - "🇳🇱 Нидерланды 233ms"
+      - "🇭🇰 Гонконг 233ms"
+      - "🇳🇱 Нидерланды 234ms"
+      - "🇳🇱 Нидерланды 236ms"
+      - "🇷🇺 Россия 239ms"
+      - "🇳🇱 Нидерланды 242ms"
+      - "🇳🇱 Нидерланды 243ms"
+      - "🇩🇪 Германия 243ms"
+      - "🇺🇸 США 248ms"
+      - "🇮🇱 Израиль 249ms"
+      - "🇵🇱 Польша 252ms"
+      - "🇫🇷 Франция 259ms"
+      - "🇺🇦 Украина 260ms"
+      - "🇫🇷 Франция 262ms"
+      - "🇫🇮 Финляндия 263ms"
+      - "🇨🇴 Колумбия 271ms"
+      - "🇺🇸 США 289ms"
+      - "🇺🇸 США 289ms-2"
+      - "🇨🇭 Швейцария 297ms"
+      - "🇦🇷 Аргентина 302ms"
+      - "🇺🇦 Украина 314ms"
+      - "🇷🇺 Россия 316ms"
+      - "🇳🇱 Нидерланды 324ms"
+      - "🇯🇵 Япония 332ms"
+      - "🇺🇸 США 348ms"
+      - "🇺🇸 США 352ms"
+      - "🇺🇸 США 360ms"
+      - "🇱🇹 Литва 361ms"
+      - "🇺🇸 США 371ms"
+      - "🇺🇸 США 371ms-2"
+      - "🇺🇸 США 371ms-3"
+      - "🇮🇶 Неизвестно 373ms"
+      - "🇺🇸 США 373ms"
+      - "🇳🇱 Нидерланды 374ms"
+      - "🇳🇱 Нидерланды 377ms"
+      - "🇹🇼 Тайвань 378ms"
+      - "🇺🇸 США 381ms"
+      - "🇳🇱 Нидерланды 382ms"
+      - "🇩🇪 Германия 383ms"
+      - "🇰🇷 Южная Корея 389ms"
+      - "🇳🇱 Нидерланды 394ms"
+      - "🇹🇼 Тайвань 396ms"
+      - "🇳🇱 Нидерланды 397ms"
+      - "🇮🇷 Неизвестно 407ms"
+      - "🇭🇰 Гонконг 408ms"
+      - "🇩🇪 Германия 409ms"
+      - "🇮🇳 Индия 410ms"
+      - "🇺🇸 США 417ms"
+      - "🇳🇱 Нидерланды 417ms"
+      - "🇮🇷 Неизвестно 417ms"
+      - "🇬🇧 Великобритания 418ms"
+      - "🇰🇷 Южная Корея 421ms"
+      - "🇺🇸 США 421ms"
+      - "🇭🇰 Гонконг 428ms"
+      - "🇳🇱 Нидерланды 435ms"
+      - "🇰🇷 Южная Корея 435ms"
+      - "🇫🇷 Франция 435ms"
+      - "🇳🇱 Нидерланды 436ms"
+      - "🇰🇷 Южная Корея 447ms"
+      - "🇩🇪 Германия 450ms"
+      - "🇩🇪 Германия 451ms"
+      - "🇰🇷 Южная Корея 459ms"
+      - "🇺🇸 США 467ms"
+      - "🇰🇷 Южная Корея 469ms"
+      - "🇸🇬 Сингапур 477ms"
+      - "🇸🇬 Сингапур 480ms"
+      - "🇩🇪 Германия 482ms"
+      - "🇮🇩 Индонезия 483ms"
+      - "🇺🇸 США 483ms"
+      - "🇸🇬 Сингапур 484ms"
+      - "🇰🇷 Южная Корея 484ms"
+      - "🇷🇺 Россия 485ms"
+      - "🇳🇱 Нидерланды 486ms"
+      - "🇳🇱 Нидерланды 487ms"
+      - "🇧🇷 Бразилия 489ms"
+      - "🇮🇳 Индия 489ms"
+      - "🇳🇱 Нидерланды 489ms"
+      - "🇳🇱 Нидерланды 490ms"
+      - "🇨🇳 Китай 491ms"
+      - "🇳🇱 Нидерланды 492ms"
+      - "🇰🇷 Южная Корея 493ms"
+      - "🇸🇾 Неизвестно 495ms"
+      - "🇭🇰 Гонконг 495ms"
       - "🇩🇪 Германия 495ms"
-      - "🇭🇰 Гонконг 504ms"
-      - "🇲🇾 Малайзия 509ms"
-      - "🇲🇾 Малайзия 510ms"
-      - "🇫🇷 Франция 512ms"
-      - "🇩🇪 Германия 512ms"
-      - "🇺🇸 США 512ms"
-      - "🇺🇸 США 513ms"
-      - "🇨🇳 Китай 514ms"
-      - "🇺🇸 США 515ms"
-      - "🇨🇳 Китай 517ms"
-      - "🇹🇷 Турция 519ms"
-      - "🇳🇱 Нидерланды 519ms"
-      - "🇸🇬 Сингапур 520ms"
-      - "🇩🇪 Германия 520ms"
-      - "🇨🇳 Китай 522ms"
-      - "🇨🇳 Китай 522ms-2"
-      - "🇩🇪 Германия 524ms"
-      - "🇬🇭 Неизвестно 530ms"
-      - "🇺🇸 США 531ms"
-      - "🇺🇸 США 531ms-2"
+      - "🇩🇪 Германия 496ms"
+      - "🇮🇶 Неизвестно 498ms"
+      - "🇸🇬 Сингапур 498ms"
+      - "🇸🇬 Сингапур 499ms"
+      - "🇲🇾 Малайзия 499ms"
+      - "🇳🇱 Нидерланды 500ms"
+      - "🇸🇬 Сингапур 501ms"
+      - "🇮🇩 Индонезия 502ms"
+      - "🇨🇳 Китай 504ms"
+      - "🇰🇷 Южная Корея 504ms"
+      - "🇩🇪 Германия 505ms"
+      - "🇺🇸 США 506ms"
+      - "🇺🇸 США 509ms"
+      - "🇮🇷 Неизвестно 510ms"
+      - "🇭🇰 Гонконг 510ms"
+      - "🇮🇩 Индонезия 511ms"
+      - "🇮🇹 Италия 515ms"
+      - "🇺🇸 США 516ms"
+      - "🇮🇩 Индонезия 520ms"
+      - "🇮🇩 Индонезия 521ms"
+      - "🇺🇸 США 521ms"
+      - "🇮🇩 Индонезия 522ms"
+      - "🇦🇺 Австралия 523ms"
+      - "🇰🇿 Неизвестно 524ms"
+      - "🇨🇳 Китай 525ms"
+      - "🇳🇱 Нидерланды 529ms"
       - "🇺🇸 США 532ms"
-      - "🇧🇷 Бразилия 534ms"
-      - "🇺🇸 США 537ms"
-      - "🇫🇮 Финляндия 540ms"
-      - "🇺🇸 США 540ms"
-      - "🇪🇸 Испания 540ms"
-      - "🇮🇳 Индия 540ms"
-      - "🇫🇮 Финляндия 541ms"
-      - "🇳🇱 Нидерланды 541ms"
-      - "🇳🇱 Нидерланды 541ms-2"
-      - "🇳🇱 Нидерланды 541ms-3"
-      - "🇳🇱 Нидерланды 541ms-4"
+      - "🇳🇱 Нидерланды 539ms"
+      - "🇨🇳 Китай 540ms"
+      - "🇳🇱 Нидерланды 540ms"
       - "🇨🇳 Китай 541ms"
-      - "🇫🇮 Финляндия 542ms"
-      - "🇳🇱 Нидерланды 542ms"
-      - "🇫🇮 Финляндия 542ms-2"
-      - "🇳🇱 Нидерланды 544ms"
-      - "🇳🇱 Нидерланды 544ms-2"
-      - "🇺🇸 США 544ms"
-      - "🇷🇺 Россия 544ms"
-      - "🇹🇼 Тайвань 544ms"
-      - "🇳🇱 Нидерланды 545ms"
-      - "🇳🇱 Нидерланды 545ms-2"
-      - "🇳🇱 Нидерланды 545ms-3"
-      - "🇳🇱 Нидерланды 545ms-4"
-      - "🇳🇱 Нидерланды 545ms-5"
-      - "🇳🇱 Нидерланды 545ms-6"
-      - "🇳🇱 Нидерланды 545ms-7"
-      - "🇵🇱 Польша 545ms"
-      - "🇩🇪 Германия 545ms"
-      - "🇲🇲 Неизвестно 547ms"
-      - "🇩🇪 Германия 547ms"
-      - "🇮🇩 Индонезия 548ms"
+      - "🇨🇳 Китай 544ms"
       - "🇨🇳 Китай 548ms"
-      - "🇫🇷 Франция 548ms"
-      - "🇨🇳 Китай 550ms"
-      - "🇨🇳 Китай 550ms-2"
-      - "🇨🇦 Канада 551ms"
-      - "🇸🇾 Неизвестно 551ms"
-      - "🇮🇶 Неизвестно 552ms"
-      - "🇺🇸 США 552ms"
-      - "🇨🇳 Китай 553ms"
-      - "🇮🇷 Неизвестно 553ms"
-      - "🇨🇳 Китай 554ms"
-      - "🇨🇳 Китай 555ms"
-      - "🇫🇷 Франция 559ms"
+      - "🇨🇳 Китай 549ms"
+      - "🇻🇳 Вьетнам 550ms"
+      - "🇺🇸 США 550ms"
+      - "🇺🇸 США 551ms"
+      - "🇺🇸 США 554ms"
+      - "🇮🇩 Индонезия 555ms"
+      - "🇺🇸 США 555ms"
+      - "🇺🇸 США 556ms"
+      - "🇲🇾 Малайзия 557ms"
+      - "🇲🇾 Малайзия 558ms"
+      - "🇺🇸 США 558ms"
+      - "🇺🇸 США 559ms"
+      - "🇨🇳 Китай 559ms"
       - "🇺🇸 США 560ms"
-      - "🇰🇿 Неизвестно 563ms"
-      - "🇳🇱 Нидерланды 569ms"
-      - "🇺🇸 США 570ms"
-      - "🇨🇳 Китай 573ms"
-      - "🇺🇸 США 575ms"
-      - "🇳🇱 Нидерланды 578ms"
-      - "🇺🇸 США 578ms"
-      - "🇺🇸 США 578ms-2"
-      - "🇨🇳 Китай 579ms"
-      - "🇨🇳 Китай 579ms-2"
-      - "🇺🇸 США 579ms"
-      - "🇩🇪 Германия 581ms"
-      - "🇺🇸 США 581ms"
-      - "🇺🇸 США 581ms-2"
-      - "🇺🇸 США 581ms-3"
-      - "🇯🇵 Япония 582ms"
-      - "🇺🇸 США 582ms"
-      - "🇺🇸 США 582ms-2"
-      - "🇹🇭 Таиланд 582ms"
-      - "🇺🇸 США 582ms-3"
-      - "🇺🇸 США 582ms-4"
-      - "🇺🇸 США 583ms"
-      - "🇺🇸 США 587ms"
-      - "🇻🇳 Вьетнам 588ms"
-      - "🇺🇸 США 588ms"
-      - "🇺🇸 США 589ms"
-      - "🇺🇸 США 590ms"
-      - "🇺🇸 США 590ms-2"
-      - "🇨🇳 Китай 592ms"
-      - "🇺🇸 США 593ms"
-      - "🇺🇸 США 594ms"
-      - "🇮🇷 Неизвестно 595ms"
+      - "🇺🇸 США 560ms-2"
+      - "🇺🇸 США 560ms-3"
+      - "🇺🇸 США 560ms-4"
+      - "🇺🇸 США 561ms"
+      - "🇺🇸 США 561ms-2"
+      - "🇺🇸 США 562ms"
+      - "🇺🇸 США 562ms-2"
+      - "🇺🇸 США 563ms"
+      - "🇲🇾 Малайзия 564ms"
+      - "🇺🇸 США 564ms"
+      - "🇺🇸 США 565ms"
+      - "🇺🇸 США 566ms"
+      - "🇫🇮 Финляндия 567ms"
+      - "🇺🇸 США 568ms"
+      - "🇮🇳 Индия 571ms"
+      - "🇺🇸 США 574ms"
+      - "🇨🇳 Китай 578ms"
+      - "🇸🇪 Швеция 578ms"
+      - "🇨🇳 Китай 581ms"
+      - "🇨🇳 Китай 585ms"
+      - "🇩🇪 Германия 587ms"
+      - "🇨🇳 Китай 590ms"
+      - "🇸🇨 Неизвестно 592ms"
       - "🇨🇳 Китай 595ms"
-      - "🇨🇳 Китай 596ms"
-      - "🇹🇭 Таиланд 597ms"
-      - "🇺🇸 США 598ms"
-      - "🇳🇱 Нидерланды 603ms"
-      - "🇺🇸 США 610ms"
-      - "🇮🇷 Неизвестно 611ms"
-      - "🇺🇸 США 611ms"
-      - "🇺🇸 США 622ms"
-      - "🇺🇸 США 625ms"
-      - "🇰🇿 Неизвестно 625ms"
-      - "🇩🇪 Германия 630ms"
-      - "🇰🇬 Неизвестно 632ms"
-      - "🇺🇸 США 635ms"
-      - "🇺🇸 США 642ms"
-      - "🇩🇪 Германия 649ms"
-      - "🇮🇹 Италия 653ms"
-      - "🇫🇮 Финляндия 656ms"
-      - "🇺🇸 США 660ms"
-      - "🇪🇪 Эстония 666ms"
-      - "🇳🇱 Нидерланды 674ms"
-      - "🇩🇪 Германия 691ms"
-      - "🇲🇽 Мексика 695ms"
-      - "🇳🇱 Нидерланды 697ms"
-      - "🇨🇭 Швейцария 701ms"
-      - "🇯🇵 Япония 704ms"
-      - "🇨🇳 Китай 704ms"
-      - "🇺🇸 США 722ms"
-      - "🇩🇪 Германия 733ms"
-      - "🇩🇪 Германия 733ms-2"
-      - "🇯🇵 Япония 738ms"
-      - "🇺🇸 США 738ms"
-      - "🇰🇷 Южная Корея 739ms"
-      - "🇺🇸 США 746ms"
-      - "🇭🇰 Гонконг 747ms"
-      - "🇭🇰 Гонконг 748ms"
-      - "🇭🇰 Гонконг 749ms"
-      - "🇭🇰 Гонконг 753ms"
-      - "🇺🇸 США 754ms"
-      - "🇰🇷 Южная Корея 755ms"
-      - "🇭🇰 Гонконг 758ms"
-      - "🇭🇰 Гонконг 772ms"
-      - "🇮🇩 Индонезия 800ms"
-      - "🇩🇪 Германия 802ms"
-      - "🇺🇸 США 809ms"
-      - "🇲🇾 Малайзия 840ms"
-      - "🇳🇱 Нидерланды 842ms"
-      - "🇳🇱 Нидерланды 853ms"
-      - "🇨🇳 Китай 864ms"
-      - "🇷🇺 Россия 870ms"
-      - "🇮🇳 Индия 897ms"
-      - "🇸🇬 Сингапур 899ms"
-      - "🇮🇩 Индонезия 901ms"
-      - "🇸🇪 Швеция 946ms"
-      - "🇸🇬 Сингапур 954ms"
-      - "🇫🇷 Франция 966ms"
-      - "🇧🇩 Неизвестно 971ms"
-      - "🇸🇬 Сингапур 971ms"
-      - "🇹🇭 Таиланд 999ms"
-      - "🇻🇳 Вьетнам 1051ms"
-      - "🇷🇺 Россия 1083ms"
-      - "🇩🇪 Германия 1089ms"
-      - "🇫🇷 Франция 1094ms"
-      - "🇺🇸 США 1135ms"
-      - "🇨🇳 Китай 1156ms"
-      - "🇫🇷 Франция 1175ms"
-      - "🇺🇸 США 1193ms"
-      - "🇳🇱 Нидерланды 1194ms"
-      - "🇨🇳 Китай 1217ms"
-      - "🇺🇸 США 1224ms"
-      - "🇨🇳 Китай 1232ms"
-      - "🇨🇳 Китай 1236ms"
-      - "🇨🇳 Китай 1236ms-2"
-      - "🇳🇱 Нидерланды 1254ms"
-      - "🇳🇱 Нидерланды 1255ms"
-      - "🇳🇱 Нидерланды 1255ms-2"
-      - "🇳🇱 Нидерланды 1255ms-3"
-      - "🇺🇸 США 1275ms"
-      - "🇳🇱 Нидерланды 1297ms"
-      - "🇳🇱 Нидерланды 1333ms"
-      - "🇨🇳 Китай 1365ms"
-      - "🇮🇷 Неизвестно 1367ms"
-      - "🇳🇱 Нидерланды 1394ms"
-      - "🇱🇻 Латвия 1437ms"
-      - "🇺🇸 США 1448ms"
-      - "🇳🇱 Нидерланды 1480ms"
-      - "🇨🇳 Китай 1488ms"
-      - "🇮🇳 Индия 1494ms"
-      - "🇩🇪 Германия 1503ms"
-      - "🇺🇸 США 1524ms"
-      - "🇬🇧 Великобритания 1562ms"
-      - "🇧🇪 Бельгия 1587ms"
-      - "🇳🇱 Нидерланды 1603ms"
-      - "🇳🇱 Нидерланды 1603ms-2"
-      - "🇺🇸 США 1623ms"
-      - "🇹🇼 Тайвань 1640ms"
-      - "🇨🇳 Китай 1679ms"
-      - "🇳🇱 Нидерланды 1723ms"
-      - "🇳🇱 Нидерланды 1723ms-2"
-      - "🇳🇱 Нидерланды 1723ms-3"
-      - "🇳🇱 Нидерланды 1724ms"
-      - "🇭🇰 Гонконг 1726ms"
-      - "🇨🇳 Китай 1727ms"
-      - "🇳🇱 Нидерланды 1733ms"
-      - "🇸🇾 Неизвестно 1797ms"
-      - "🇨🇳 Китай 1823ms"
-      - "🇨🇳 Китай 1901ms"
-      - "🇰🇿 Неизвестно 1901ms"
-      - "🇳🇱 Нидерланды 1937ms"
-      - "🇲🇾 Малайзия 1949ms"
-      - "🇮🇷 Неизвестно 1981ms"
-      - "🇻🇳 Вьетнам 2003ms"
-      - "🇨🇳 Китай 2003ms"
-      - "🇳🇱 Нидерланды 2003ms"
-      - "🇺🇿 Неизвестно 2003ms"
-      - "🇨🇳 Китай 2003ms-2"
-      - "🇨🇳 Китай 2004ms"
-      - "🇨🇮 Неизвестно 2004ms"
-      - "🇺🇸 США 2004ms"
-      - "🇨🇳 Китай 2005ms"
-      - "🇫🇮 Финляндия 2037ms"
-      - "🇮🇷 Неизвестно 2040ms"
-      - "🇩🇪 Германия 2070ms"
-      - "🇳🇱 Нидерланды 2124ms"
-      - "🇳🇱 Нидерланды 2206ms"
-      - "🇰🇭 Неизвестно 2282ms"
-      - "🇳🇱 Нидерланды 2312ms"
-      - "🇳🇱 Нидерланды 2313ms"
-      - "🇳🇱 Нидерланды 2322ms"
-      - "🇨🇳 Китай 2329ms"
-      - "🇵🇱 Польша 2362ms"
-      - "🇮🇩 Индонезия 2447ms"
-      - "🇳🇱 Нидерланды 2460ms"
-      - "🇸🇬 Сингапур 2475ms"
-      - "🇩🇪 Германия 2478ms"
-      - "🇨🇳 Китай 2581ms"
-      - "🇫🇷 Франция 2621ms"
-      - "🇰🇷 Южная Корея 2698ms"
-      - "🇨🇳 Китай 2746ms"
-      - "🇨🇳 Китай 2772ms"
-      - "🇳🇱 Нидерланды 2806ms"
-      - "🇯🇵 Япония 2834ms"
-      - "🇨🇳 Китай 2837ms"
-      - "🇳🇱 Нидерланды 2848ms"
-      - "🇳🇱 Нидерланды 2848ms-2"
-      - "🇳🇱 Нидерланды 2850ms"
-      - "🇳🇱 Нидерланды 2851ms"
-      - "🇳🇱 Нидерланды 2853ms"
-      - "🇳🇱 Нидерланды 2855ms"
-      - "🇳🇱 Нидерланды 2855ms-2"
-      - "🇮🇩 Индонезия 2943ms"
-      - "🇮🇩 Индонезия 2978ms"
-      - "🇨🇳 Китай 3019ms"
-      - "🇻🇳 Вьетнам 3108ms"
-      - "🇧🇩 Неизвестно 3225ms"
-      - "🇮🇷 Неизвестно 3234ms"
-      - "🇮🇩 Индонезия 3242ms"
-      - "🇩🇪 Германия 3257ms"
-      - "🇵🇭 Филиппины 3296ms"
-      - "🇹🇷 Турция 3341ms"
-      - "🇭🇰 Гонконг 3347ms"
-      - "🇫🇷 Франция 3375ms"
-      - "🇳🇱 Нидерланды 3432ms"
-      - "🇻🇳 Вьетнам 3441ms"
-      - "🇺🇸 США 3607ms"
-      - "🇨🇳 Китай 3621ms"
-      - "🇮🇩 Индонезия 3736ms"
-      - "🇸🇾 Неизвестно 3805ms"
-      - "🇯🇵 Япония 3832ms"
-      - "🇨🇳 Китай 3929ms"
-      - "🇳🇱 Нидерланды 3943ms"
-      - "🇸🇬 Сингапур 3995ms"
-      - "🇫🇷 Франция 3997ms"
-      - "🇮🇩 Индонезия 3999ms"
-      - "🇳🇱 Нидерланды 3999ms"
-      - "🇳🇱 Нидерланды 3999ms-2"
-      - "🇭🇰 Гонконг 3999ms"
-      - "🇳🇱 Нидерланды 4001ms"
-      - "🇩🇪 Германия 4001ms"
-      - "🇨🇳 Китай 4001ms"
-      - "🇭🇰 Гонконг 4001ms"
-      - "🇳🇱 Нидерланды 4002ms"
-      - "🇳🇱 Нидерланды 4002ms-2"
-      - "🇨🇳 Китай 4002ms"
-      - "🇻🇪 Неизвестно 4078ms"
-      - "🇮🇳 Индия 4126ms"
-      - "🇺🇸 США 4155ms"
-      - "🇺🇸 США 4158ms"
-      - "🇺🇸 США 4160ms"
-      - "🇺🇸 США 4169ms"
-      - "🇺🇸 США 4176ms"
-      - "🇨🇳 Китай 4203ms"
-      - "🇺🇸 США 4234ms"
-      - "🇮🇩 Индонезия 4262ms"
-      - "🇺🇸 США 4268ms"
-      - "🇳🇱 Нидерланды 4286ms"
-      - "🇳🇱 Нидерланды 4286ms-2"
-      - "🇨🇴 Колумбия 4402ms"
-      - "🇷🇺 Россия 4498ms"
-      - "🇮🇩 Индонезия 4535ms"
-      - "🇨🇾 Неизвестно 4547ms"
-      - "🇨🇳 Китай 4595ms"
-      - "🇨🇴 Колумбия 4653ms"
-      - "🇨🇳 Китай 4742ms"
-      - "🇺🇸 США 4836ms"
-      - "🇳🇱 Нидерланды 4853ms"
-      - "🇮🇩 Индонезия 4855ms"
-      - "🇳🇱 Нидерланды 4857ms"
-      - "🇳🇱 Нидерланды 4861ms"
-      - "🇳🇱 Нидерланды 4862ms"
-      - "🇺🇸 США 4872ms"
-      - "🇳🇱 Нидерланды 4894ms"
-      - "🇨🇳 Китай 4929ms"
-      - "🇮🇩 Индонезия 4987ms"
-      - "🇵🇭 Филиппины 5008ms"
+      - "🇩🇪 Германия 599ms"
+      - "🇨🇳 Китай 602ms"
+      - "🇨🇳 Китай 607ms"
+      - "🇻🇳 Вьетнам 608ms"
+      - "🇮🇳 Индия 626ms"
+      - "🇨🇳 Китай 638ms"
+      - "🇨🇳 Китай 642ms"
+      - "🇯🇵 Япония 669ms"
+      - "🇨🇳 Китай 672ms"
+      - "🇳🇱 Нидерланды 679ms"
+      - "🇮🇷 Неизвестно 693ms"
+      - "🇺🇸 США 718ms"
+      - "🇺🇸 США 752ms"
+      - "🇺🇸 США 753ms"
+      - "🇩🇪 Германия 754ms"
+      - "🇳🇱 Нидерланды 761ms"
+      - "🇨🇳 Китай 761ms"
+      - "🇪🇪 Эстония 781ms"
+      - "🇺🇸 США 785ms"
+      - "🇩🇪 Германия 793ms"
+      - "🇩🇪 Германия 794ms"
+      - "🇷🇺 Россия 800ms"
+      - "🇯🇵 Япония 813ms"
+      - "🇭🇰 Гонконг 819ms"
+      - "🇭🇰 Гонконг 825ms"
+      - "🇭🇰 Гонконг 827ms"
+      - "🇭🇰 Гонконг 836ms"
+      - "🇭🇰 Гонконг 838ms"
+      - "🇯🇵 Япония 848ms"
+      - "🇰🇷 Южная Корея 852ms"
+      - "🇰🇷 Южная Корея 854ms"
+      - "🇮🇳 Индия 869ms"
+      - "🇬🇭 Неизвестно 873ms"
+      - "🇳🇱 Нидерланды 882ms"
+      - "🇰🇷 Южная Корея 893ms"
+      - "🇫🇷 Франция 934ms"
+      - "🇺🇸 США 948ms"
+      - "🇨🇳 Китай 960ms"
+      - "🇰🇿 Неизвестно 963ms"
+      - "🇸🇬 Сингапур 982ms"
+      - "🇨🇳 Китай 984ms"
+      - "🇨🇳 Китай 1006ms"
+      - "🇨🇳 Китай 1022ms"
+      - "🇹🇭 Таиланд 1061ms"
+      - "🇨🇳 Китай 1074ms"
+      - "🇫🇷 Франция 1083ms"
+      - "🇳🇱 Нидерланды 1088ms"
+      - "🇳🇱 Нидерланды 1094ms"
+      - "🇩🇪 Германия 1095ms"
+      - "🇧🇩 Неизвестно 1106ms"
+      - "🇻🇳 Вьетнам 1112ms"
+      - "🇸🇬 Сингапур 1121ms"
+      - "🇺🇸 США 1140ms"
+      - "🇮🇳 Индия 1154ms"
+      - "🇳🇱 Нидерланды 1158ms"
+      - "🇳🇱 Нидерланды 1211ms"
+      - "🇻🇳 Вьетнам 1228ms"
+      - "🇨🇳 Китай 1235ms"
+      - "🇳🇱 Нидерланды 1238ms"
+      - "🇳🇱 Нидерланды 1266ms"
+      - "🇳🇱 Нидерланды 1267ms"
+      - "🇳🇱 Нидерланды 1270ms"
+      - "🇳🇱 Нидерланды 1292ms"
+      - "🇫🇷 Франция 1294ms"
+      - "🇺🇸 США 1298ms"
+      - "🇳🇱 Нидерланды 1298ms"
+      - "🇳🇱 Нидерланды 1303ms"
+      - "🇵🇱 Польша 1326ms"
+      - "🇿🇼 Неизвестно 1356ms"
+      - "🇨🇳 Китай 1388ms"
+      - "🇳🇱 Нидерланды 1389ms"
+      - "🇨🇳 Китай 1408ms"
+      - "🇨🇳 Китай 1413ms"
+      - "🇳🇱 Нидерланды 1437ms"
+      - "🇸🇬 Сингапур 1458ms"
+      - "🇳🇱 Нидерланды 1463ms"
+      - "🇨🇳 Китай 1477ms"
+      - "🇺🇸 США 1493ms"
+      - "🇳🇱 Нидерланды 1522ms"
+      - "🇨🇳 Китай 1530ms"
+      - "🇳🇱 Нидерланды 1579ms"
+      - "🇫🇮 Финляндия 1594ms"
+      - "🇩🇪 Германия 1608ms"
+      - "🇨🇳 Китай 1637ms"
+      - "🇨🇳 Китай 1639ms"
+      - "🇭🇰 Гонконг 1650ms"
+      - "🇮🇷 Неизвестно 1679ms"
+      - "🇮🇩 Индонезия 1700ms"
+      - "🇲🇾 Малайзия 1716ms"
+      - "🇳🇱 Нидерланды 1717ms"
+      - "🇨🇳 Китай 1778ms"
+      - "🇺🇸 США 1868ms"
+      - "🇸🇨 Неизвестно 2001ms"
+      - "🇺🇸 США 2016ms"
+      - "🇳🇱 Нидерланды 2025ms"
+      - "🇳🇱 Нидерланды 2080ms"
+      - "🇺🇸 США 2138ms"
+      - "🇬🇧 Великобритания 2163ms"
+      - "🇨🇳 Китай 2175ms"
+      - "🇩🇪 Германия 2179ms"
+      - "🇬🇧 Великобритания 2185ms"
+      - "🇩🇪 Германия 2193ms"
+      - "🇮🇳 Индия 2200ms"
+      - "🇮🇷 Неизвестно 2202ms"
+      - "🇰🇭 Неизвестно 2222ms"
+      - "🇳🇱 Нидерланды 2229ms"
+      - "🇺🇸 США 2245ms"
+      - "🇭🇰 Гонконг 2308ms"
+      - "🇦🇫 Неизвестно 2317ms"
+      - "🇳🇱 Нидерланды 2334ms"
+      - "🇳🇱 Нидерланды 2335ms"
+      - "🇳🇱 Нидерланды 2335ms-2"
+      - "🇯🇵 Япония 2337ms"
+      - "🇳🇱 Нидерланды 2339ms"
+      - "🇳🇱 Нидерланды 2340ms"
+      - "🇯🇵 Япония 2341ms"
+      - "🇳🇱 Нидерланды 2345ms"
+      - "🇺🇸 США 2347ms"
+      - "🇳🇱 Нидерланды 2351ms"
+      - "🇳🇱 Нидерланды 2358ms"
+      - "🇳🇱 Нидерланды 2362ms"
+      - "🇨🇳 Китай 2364ms"
+      - "🇰🇷 Южная Корея 2372ms"
+      - "🇪🇬 Египет 2374ms"
+      - "🇨🇳 Китай 2383ms"
+      - "🇰🇭 Неизвестно 2388ms"
+      - "🇭🇰 Гонконг 2412ms"
+      - "🇭🇰 Гонконг 2413ms"
+      - "🇭🇰 Гонконг 2415ms"
+      - "🇧🇪 Бельгия 2465ms"
+      - "🇮🇩 Индонезия 2486ms"
+      - "🇮🇩 Индонезия 2495ms"
+      - "🇹🇭 Таиланд 2508ms"
+      - "🇨🇳 Китай 2549ms"
+      - "🇳🇱 Нидерланды 2554ms"
+      - "🇪🇸 Испания 2556ms"
+      - "🇳🇱 Нидерланды 2562ms"
+      - "🇳🇱 Нидерланды 2572ms"
+      - "🇳🇱 Нидерланды 2572ms-2"
+      - "🇷🇸 Неизвестно 2572ms"
+      - "🇳🇱 Нидерланды 2573ms"
+      - "🇳🇱 Нидерланды 2573ms-2"
+      - "🇳🇱 Нидерланды 2573ms-3"
+      - "🇳🇱 Нидерланды 2573ms-4"
+      - "🇳🇱 Нидерланды 2573ms-5"
+      - "🇧🇷 Бразилия 2614ms"
+      - "🇮🇩 Индонезия 2630ms"
+      - "🇳🇱 Нидерланды 2726ms"
+      - "🇻🇳 Вьетнам 2741ms"
+      - "🇳🇱 Нидерланды 2822ms"
+      - "🇿🇦 ЮАР 2895ms"
+      - "🇻🇳 Вьетнам 2901ms"
+      - "🇨🇳 Китай 2901ms"
+      - "🇺🇸 США 2912ms"
+      - "🇺🇸 США 2945ms"
+      - "🇺🇸 США 2946ms"
+      - "🇺🇸 США 2951ms"
+      - "🇱🇻 Латвия 2952ms"
+      - "🇺🇸 США 2966ms"
+      - "🇺🇸 США 2968ms"
+      - "🇳🇱 Нидерланды 2970ms"
+      - "🇳🇱 Нидерланды 2977ms"
+      - "🇳🇱 Нидерланды 2978ms"
+      - "🇭🇰 Гонконг 3014ms"
+      - "🇨🇳 Китай 3020ms"
+      - "🇺🇸 США 3047ms"
+      - "🇨🇴 Колумбия 3049ms"
+      - "🇺🇸 США 3095ms"
+      - "🇳🇱 Нидерланды 3106ms"
+      - "🇭🇰 Гонконг 3155ms"
+      - "🇨🇴 Колумбия 3178ms"
+      - "🇸🇬 Сингапур 3189ms"
+      - "🇺🇸 США 3255ms"
+      - "🇳🇱 Нидерланды 3260ms"
+      - "🇳🇱 Нидерланды 3262ms"
+      - "🇳🇱 Нидерланды 3275ms"
+      - "🇧🇩 Неизвестно 3375ms"
+      - "🇳🇱 Нидерланды 3400ms"
+      - "🇺🇸 США 3420ms"
+      - "🇳🇱 Нидерланды 3488ms"
+      - "🇨🇳 Китай 3516ms"
+      - "🇰🇷 Южная Корея 3562ms"
+      - "🇮🇷 Неизвестно 3576ms"
+      - "🇸🇬 Сингапур 3581ms"
+      - "🇪🇨 Неизвестно 3706ms"
+      - "🇮🇩 Индонезия 3795ms"
+      - "🇨🇳 Китай 3797ms"
+      - "🇮🇩 Индонезия 3814ms"
+      - "🇳🇱 Нидерланды 3919ms"
+      - "🇳🇱 Нидерланды 3947ms"
+      - "🇳🇱 Нидерланды 3948ms"
+      - "🇳🇱 Нидерланды 3949ms"
+      - "🇳🇱 Нидерланды 3949ms-2"
+      - "🇳🇱 Нидерланды 3949ms-3"
+      - "🇯🇵 Япония 3949ms"
+      - "🇳🇱 Нидерланды 3953ms"
+      - "🇫🇷 Франция 3963ms"
+      - "🇨🇳 Китай 4071ms"
+      - "🇨🇳 Китай 4089ms"
+      - "🇮🇩 Индонезия 4297ms"
+      - "🇳🇱 Нидерланды 4314ms"
+      - "🇨🇳 Китай 4346ms"
+      - "🇮🇷 Неизвестно 4391ms"
+      - "🇨🇳 Китай 4444ms"
+      - "🇺🇿 Неизвестно 4444ms"
+      - "🇨🇳 Китай 4445ms"
+      - "🇹🇭 Таиланд 4445ms"
+      - "🇹🇭 Таиланд 4445ms-2"
+      - "🇨🇳 Китай 4445ms-2"
+      - "🇨🇳 Китай 4446ms"
+      - "🇨🇳 Китай 4446ms-2"
+      - "🇸🇳 Неизвестно 4449ms"
+      - "🇻🇳 Вьетнам 4459ms"
+      - "🇨🇳 Китай 4459ms"
+      - "🇨🇳 Китай 4460ms"
+      - "🇷🇺 Россия 4460ms"
+      - "🇺🇸 США 4466ms"
+      - "🇺🇸 США 4624ms"
+      - "🇮🇩 Индонезия 4656ms"
+      - "🇺🇸 США 4683ms"
+      - "🇺🇸 США 4710ms"
+      - "🇷🇺 Россия 4738ms"
+      - "🇮🇩 Индонезия 4743ms"
+      - "🇪🇨 Неизвестно 4751ms"
+      - "🇨🇳 Китай 4827ms"
+      - "🇧🇪 Бельгия 5075ms"
+      - "🇩🇪 Германия 5094ms"
+      - "🇷🇺 Россия 5118ms"
+      - "🇧🇩 Неизвестно 5170ms"
+      - "🇷🇺 Россия 5183ms"
+      - "🇨🇳 Китай 5186ms"
+      - "🇺🇸 США 5278ms"
+      - "🇺🇸 США 5331ms"
       - "🇺🇸 США 5332ms"
-      - "🇮🇩 Индонезия 5381ms"
-      - "🇭🇰 Гонконг 5500ms"
-      - "🇨🇳 Китай 5611ms"
-      - "🇮🇩 Индонезия 5963ms"
-      - "🇮🇩 Индонезия 5974ms"
-      - "🇻🇳 Вьетнам 6003ms"
-      - "🇰🇭 Неизвестно 6073ms"
-      - "🇸🇪 Швеция 6080ms"
-      - "🇨🇴 Колумбия 6139ms"
-      - "🇪🇸 Испания 6185ms"
-      - "🇦🇱 Неизвестно 6248ms"
-      - "🇰🇭 Неизвестно 6306ms"
-      - "🇮🇩 Индонезия 6492ms"
-      - "🇩🇴 Неизвестно 6549ms"
-      - "🇨🇳 Китай 6633ms"
-      - "🇺🇸 США 6876ms"
-      - "🇺🇸 США 6966ms"
-      - "🇳🇱 Нидерланды 7384ms"
-      - "🇫🇮 Финляндия 7590ms"
-      - "🇮🇩 Индонезия 7611ms"
-      - "🇻🇪 Неизвестно 7802ms"
-      - "🇯🇵 Япония 7996ms"
-      - "🇮🇷 Неизвестно 8272ms"
-      - "🇸🇾 Неизвестно 8634ms"
-      - "🇨🇳 Китай 9497ms"
-
-  - name: "🇺🇸 США"
-    type: select
-    proxies:
-      - "🇺🇸 США 25ms"
-      - "🇺🇸 США 36ms"
-      - "🇺🇸 США 40ms"
-      - "🇺🇸 США 46ms"
-      - "🇺🇸 США 48ms"
-      - "🇺🇸 США 50ms"
-      - "🇺🇸 США 57ms"
-      - "🇺🇸 США 61ms"
-      - "🇺🇸 США 70ms"
-      - "🇺🇸 США 73ms"
-      - "🇺🇸 США 74ms"
-      - "🇺🇸 США 75ms"
-      - "🇺🇸 США 76ms"
-      - "🇺🇸 США 76ms-2"
-      - "🇺🇸 США 76ms-3"
-      - "🇺🇸 США 76ms-4"
-      - "🇺🇸 США 76ms-5"
-      - "🇺🇸 США 77ms"
-      - "🇺🇸 США 77ms-2"
-      - "🇺🇸 США 78ms"
-      - "🇺🇸 США 78ms-2"
-      - "🇺🇸 США 95ms"
-      - "🇺🇸 США 97ms"
-      - "🇺🇸 США 100ms"
-      - "🇺🇸 США 107ms"
-      - "🇺🇸 США 109ms"
-      - "🇺🇸 США 117ms"
-      - "🇺🇸 США 129ms"
-      - "🇺🇸 США 132ms"
-      - "🇺🇸 США 140ms"
-      - "🇺🇸 США 171ms"
-      - "🇺🇸 США 197ms"
-      - "🇺🇸 США 213ms"
-      - "🇺🇸 США 249ms"
-      - "🇺🇸 США 250ms"
-      - "🇺🇸 США 266ms"
-      - "🇺🇸 США 300ms"
-      - "🇺🇸 США 307ms"
-      - "🇺🇸 США 310ms"
-      - "🇺🇸 США 316ms"
-      - "🇺🇸 США 316ms-2"
-      - "🇺🇸 США 321ms"
-      - "🇺🇸 США 339ms"
-      - "🇺🇸 США 347ms"
-      - "🇺🇸 США 396ms"
-      - "🇺🇸 США 456ms"
-      - "🇺🇸 США 512ms"
-      - "🇺🇸 США 513ms"
-      - "🇺🇸 США 515ms"
-      - "🇺🇸 США 531ms"
-      - "🇺🇸 США 531ms-2"
-      - "🇺🇸 США 532ms"
-      - "🇺🇸 США 537ms"
-      - "🇺🇸 США 540ms"
-      - "🇺🇸 США 544ms"
-      - "🇺🇸 США 552ms"
-      - "🇺🇸 США 560ms"
-      - "🇺🇸 США 570ms"
-      - "🇺🇸 США 575ms"
-      - "🇺🇸 США 578ms"
-      - "🇺🇸 США 578ms-2"
-      - "🇺🇸 США 579ms"
-      - "🇺🇸 США 581ms"
-      - "🇺🇸 США 581ms-2"
-      - "🇺🇸 США 581ms-3"
-      - "🇺🇸 США 582ms"
-      - "🇺🇸 США 582ms-2"
-      - "🇺🇸 США 582ms-3"
-      - "🇺🇸 США 582ms-4"
-      - "🇺🇸 США 583ms"
-      - "🇺🇸 США 587ms"
-      - "🇺🇸 США 588ms"
-      - "🇺🇸 США 589ms"
-      - "🇺🇸 США 590ms"
-      - "🇺🇸 США 590ms-2"
-      - "🇺🇸 США 593ms"
-      - "🇺🇸 США 594ms"
-      - "🇺🇸 США 598ms"
-      - "🇺🇸 США 610ms"
-      - "🇺🇸 США 611ms"
-      - "🇺🇸 США 622ms"
-      - "🇺🇸 США 625ms"
-      - "🇺🇸 США 635ms"
-      - "🇺🇸 США 642ms"
-      - "🇺🇸 США 660ms"
-      - "🇺🇸 США 722ms"
-      - "🇺🇸 США 738ms"
-      - "🇺🇸 США 746ms"
-      - "🇺🇸 США 754ms"
-      - "🇺🇸 США 809ms"
-      - "🇺🇸 США 1135ms"
-      - "🇺🇸 США 1193ms"
-      - "🇺🇸 США 1224ms"
-      - "🇺🇸 США 1275ms"
-      - "🇺🇸 США 1448ms"
-      - "🇺🇸 США 1524ms"
-      - "🇺🇸 США 1623ms"
-      - "🇺🇸 США 2004ms"
-      - "🇺🇸 США 3607ms"
-      - "🇺🇸 США 4155ms"
-      - "🇺🇸 США 4158ms"
-      - "🇺🇸 США 4160ms"
-      - "🇺🇸 США 4169ms"
-      - "🇺🇸 США 4176ms"
-      - "🇺🇸 США 4234ms"
-      - "🇺🇸 США 4268ms"
-      - "🇺🇸 США 4836ms"
-      - "🇺🇸 США 4872ms"
-      - "🇺🇸 США 5332ms"
-      - "🇺🇸 США 6876ms"
-      - "🇺🇸 США 6966ms"
-      - DIRECT
+      - "🇸🇨 Неизвестно 5365ms"
+      - "🇺🇸 США 5371ms"
+      - "🇰🇭 Неизвестно 5509ms"
+      - "🇺🇸 США 5560ms"
+      - "🇳🇱 Нидерланды 5735ms"
+      - "🇨🇳 Китай 5740ms"
+      - "🇺🇸 США 5945ms"
+      - "🇺🇸 США 6062ms"
+      - "🇵🇱 Польша 6297ms"
+      - "🇫🇮 Финляндия 6323ms"
+      - "🇳🇱 Нидерланды 6323ms"
+      - "🇳🇱 Нидерланды 6328ms"
+      - "🇺🇸 США 6361ms"
+      - "🇨🇳 Китай 6411ms"
+      - "🇨🇳 Китай 6527ms"
+      - "🇨🇳 Китай 6529ms"
+      - "🇨🇳 Китай 6531ms"
+      - "🇨🇳 Китай 6584ms"
+      - "🇮🇩 Индонезия 6691ms"
+      - "🇺🇸 США 6723ms"
+      - "🇳🇱 Нидерланды 6761ms"
+      - "🇳🇱 Нидерланды 6763ms"
+      - "🇹🇷 Турция 6885ms"
+      - "🇫🇷 Франция 6907ms"
+      - "🇮🇪 Ирландия 6920ms"
+      - "🇯🇵 Япония 6996ms"
+      - "🇮🇩 Индонезия 7000ms"
+      - "🇮🇷 Неизвестно 7019ms"
+      - "🇳🇱 Нидерланды 7023ms"
+      - "🇳🇱 Нидерланды 7023ms-2"
+      - "🇳🇱 Нидерланды 7023ms-3"
+      - "🇨🇳 Китай 7024ms"
+      - "🇳🇱 Нидерланды 7024ms"
+      - "🇳🇱 Нидерланды 7024ms-2"
+      - "🇳🇱 Нидерланды 7024ms-3"
+      - "🇳🇱 Нидерланды 7024ms-4"
+      - "🇳🇱 Нидерланды 7024ms-5"
+      - "🇳🇱 Нидерланды 7025ms"
+      - "🇳🇱 Нидерланды 7025ms-2"
+      - "🇳🇱 Нидерланды 7025ms-3"
+      - "🇳🇱 Нидерланды 7025ms-4"
+      - "🇳🇱 Нидерланды 7025ms-5"
+      - "🇹🇷 Турция 7044ms"
+      - "🇷🇺 Россия 7061ms"
+      - "🇦🇱 Неизвестно 7110ms"
 
   - name: "🇳🇱 Нидерланды"
     type: select
     proxies:
-      - "🇳🇱 Нидерланды 205ms"
-      - "🇳🇱 Нидерланды 208ms"
+      - "🇳🇱 Нидерланды 185ms"
+      - "🇳🇱 Нидерланды 188ms"
+      - "🇳🇱 Нидерланды 192ms"
+      - "🇳🇱 Нидерланды 209ms"
+      - "🇳🇱 Нидерланды 212ms"
       - "🇳🇱 Нидерланды 213ms"
+      - "🇳🇱 Нидерланды 215ms"
+      - "🇳🇱 Нидерланды 219ms"
+      - "🇳🇱 Нидерланды 226ms"
       - "🇳🇱 Нидерланды 230ms"
-      - "🇳🇱 Нидерланды 244ms"
-      - "🇳🇱 Нидерланды 244ms-2"
-      - "🇳🇱 Нидерланды 245ms"
-      - "🇳🇱 Нидерланды 251ms"
-      - "🇳🇱 Нидерланды 252ms"
-      - "🇳🇱 Нидерланды 253ms"
-      - "🇳🇱 Нидерланды 278ms"
-      - "🇳🇱 Нидерланды 278ms-2"
-      - "🇳🇱 Нидерланды 279ms"
-      - "🇳🇱 Нидерланды 279ms-2"
-      - "🇳🇱 Нидерланды 279ms-3"
-      - "🇳🇱 Нидерланды 279ms-4"
-      - "🇳🇱 Нидерланды 279ms-5"
-      - "🇳🇱 Нидерланды 279ms-6"
-      - "🇳🇱 Нидерланды 280ms"
-      - "🇳🇱 Нидерланды 361ms"
-      - "🇳🇱 Нидерланды 362ms"
-      - "🇳🇱 Нидерланды 363ms"
-      - "🇳🇱 Нидерланды 365ms"
-      - "🇳🇱 Нидерланды 365ms-2"
-      - "🇳🇱 Нидерланды 367ms"
-      - "🇳🇱 Нидерланды 519ms"
-      - "🇳🇱 Нидерланды 541ms"
-      - "🇳🇱 Нидерланды 541ms-2"
-      - "🇳🇱 Нидерланды 541ms-3"
-      - "🇳🇱 Нидерланды 541ms-4"
-      - "🇳🇱 Нидерланды 542ms"
-      - "🇳🇱 Нидерланды 544ms"
-      - "🇳🇱 Нидерланды 544ms-2"
-      - "🇳🇱 Нидерланды 545ms"
-      - "🇳🇱 Нидерланды 545ms-2"
-      - "🇳🇱 Нидерланды 545ms-3"
-      - "🇳🇱 Нидерланды 545ms-4"
-      - "🇳🇱 Нидерланды 545ms-5"
-      - "🇳🇱 Нидерланды 545ms-6"
-      - "🇳🇱 Нидерланды 545ms-7"
-      - "🇳🇱 Нидерланды 569ms"
-      - "🇳🇱 Нидерланды 578ms"
-      - "🇳🇱 Нидерланды 603ms"
-      - "🇳🇱 Нидерланды 674ms"
-      - "🇳🇱 Нидерланды 697ms"
-      - "🇳🇱 Нидерланды 842ms"
-      - "🇳🇱 Нидерланды 853ms"
-      - "🇳🇱 Нидерланды 1194ms"
-      - "🇳🇱 Нидерланды 1254ms"
-      - "🇳🇱 Нидерланды 1255ms"
-      - "🇳🇱 Нидерланды 1255ms-2"
-      - "🇳🇱 Нидерланды 1255ms-3"
-      - "🇳🇱 Нидерланды 1297ms"
-      - "🇳🇱 Нидерланды 1333ms"
-      - "🇳🇱 Нидерланды 1394ms"
-      - "🇳🇱 Нидерланды 1480ms"
-      - "🇳🇱 Нидерланды 1603ms"
-      - "🇳🇱 Нидерланды 1603ms-2"
-      - "🇳🇱 Нидерланды 1723ms"
-      - "🇳🇱 Нидерланды 1723ms-2"
-      - "🇳🇱 Нидерланды 1723ms-3"
-      - "🇳🇱 Нидерланды 1724ms"
-      - "🇳🇱 Нидерланды 1733ms"
-      - "🇳🇱 Нидерланды 1937ms"
-      - "🇳🇱 Нидерланды 2003ms"
-      - "🇳🇱 Нидерланды 2124ms"
-      - "🇳🇱 Нидерланды 2206ms"
-      - "🇳🇱 Нидерланды 2312ms"
-      - "🇳🇱 Нидерланды 2313ms"
-      - "🇳🇱 Нидерланды 2322ms"
-      - "🇳🇱 Нидерланды 2460ms"
-      - "🇳🇱 Нидерланды 2806ms"
-      - "🇳🇱 Нидерланды 2848ms"
-      - "🇳🇱 Нидерланды 2848ms-2"
-      - "🇳🇱 Нидерланды 2850ms"
-      - "🇳🇱 Нидерланды 2851ms"
-      - "🇳🇱 Нидерланды 2853ms"
-      - "🇳🇱 Нидерланды 2855ms"
-      - "🇳🇱 Нидерланды 2855ms-2"
-      - "🇳🇱 Нидерланды 3432ms"
-      - "🇳🇱 Нидерланды 3943ms"
-      - "🇳🇱 Нидерланды 3999ms"
-      - "🇳🇱 Нидерланды 3999ms-2"
-      - "🇳🇱 Нидерланды 4001ms"
-      - "🇳🇱 Нидерланды 4002ms"
-      - "🇳🇱 Нидерланды 4002ms-2"
-      - "🇳🇱 Нидерланды 4286ms"
-      - "🇳🇱 Нидерланды 4286ms-2"
-      - "🇳🇱 Нидерланды 4853ms"
-      - "🇳🇱 Нидерланды 4857ms"
-      - "🇳🇱 Нидерланды 4861ms"
-      - "🇳🇱 Нидерланды 4862ms"
-      - "🇳🇱 Нидерланды 4894ms"
-      - "🇳🇱 Нидерланды 7384ms"
+      - "🇳🇱 Нидерланды 233ms"
+      - "🇳🇱 Нидерланды 234ms"
+      - "🇳🇱 Нидерланды 236ms"
+      - "🇳🇱 Нидерланды 242ms"
+      - "🇳🇱 Нидерланды 243ms"
+      - "🇳🇱 Нидерланды 324ms"
+      - "🇳🇱 Нидерланды 374ms"
+      - "🇳🇱 Нидерланды 377ms"
+      - "🇳🇱 Нидерланды 382ms"
+      - "🇳🇱 Нидерланды 394ms"
+      - "🇳🇱 Нидерланды 397ms"
+      - "🇳🇱 Нидерланды 417ms"
+      - "🇳🇱 Нидерланды 435ms"
+      - "🇳🇱 Нидерланды 436ms"
+      - "🇳🇱 Нидерланды 486ms"
+      - "🇳🇱 Нидерланды 487ms"
+      - "🇳🇱 Нидерланды 489ms"
+      - "🇳🇱 Нидерланды 490ms"
+      - "🇳🇱 Нидерланды 492ms"
+      - "🇳🇱 Нидерланды 500ms"
+      - "🇳🇱 Нидерланды 529ms"
+      - "🇳🇱 Нидерланды 539ms"
+      - "🇳🇱 Нидерланды 540ms"
+      - "🇳🇱 Нидерланды 679ms"
+      - "🇳🇱 Нидерланды 761ms"
+      - "🇳🇱 Нидерланды 882ms"
+      - "🇳🇱 Нидерланды 1088ms"
+      - "🇳🇱 Нидерланды 1094ms"
+      - "🇳🇱 Нидерланды 1158ms"
+      - "🇳🇱 Нидерланды 1211ms"
+      - "🇳🇱 Нидерланды 1238ms"
+      - "🇳🇱 Нидерланды 1266ms"
+      - "🇳🇱 Нидерланды 1267ms"
+      - "🇳🇱 Нидерланды 1270ms"
+      - "🇳🇱 Нидерланды 1292ms"
+      - "🇳🇱 Нидерланды 1298ms"
+      - "🇳🇱 Нидерланды 1303ms"
+      - "🇳🇱 Нидерланды 1389ms"
+      - "🇳🇱 Нидерланды 1437ms"
+      - "🇳🇱 Нидерланды 1463ms"
+      - "🇳🇱 Нидерланды 1522ms"
+      - "🇳🇱 Нидерланды 1579ms"
+      - "🇳🇱 Нидерланды 1717ms"
+      - "🇳🇱 Нидерланды 2025ms"
+      - "🇳🇱 Нидерланды 2080ms"
+      - "🇳🇱 Нидерланды 2229ms"
+      - "🇳🇱 Нидерланды 2334ms"
+      - "🇳🇱 Нидерланды 2335ms"
+      - "🇳🇱 Нидерланды 2335ms-2"
+      - "🇳🇱 Нидерланды 2339ms"
+      - "🇳🇱 Нидерланды 2340ms"
+      - "🇳🇱 Нидерланды 2345ms"
+      - "🇳🇱 Нидерланды 2351ms"
+      - "🇳🇱 Нидерланды 2358ms"
+      - "🇳🇱 Нидерланды 2362ms"
+      - "🇳🇱 Нидерланды 2554ms"
+      - "🇳🇱 Нидерланды 2562ms"
+      - "🇳🇱 Нидерланды 2572ms"
+      - "🇳🇱 Нидерланды 2572ms-2"
+      - "🇳🇱 Нидерланды 2573ms"
+      - "🇳🇱 Нидерланды 2573ms-2"
+      - "🇳🇱 Нидерланды 2573ms-3"
+      - "🇳🇱 Нидерланды 2573ms-4"
+      - "🇳🇱 Нидерланды 2573ms-5"
+      - "🇳🇱 Нидерланды 2726ms"
+      - "🇳🇱 Нидерланды 2822ms"
+      - "🇳🇱 Нидерланды 2970ms"
+      - "🇳🇱 Нидерланды 2977ms"
+      - "🇳🇱 Нидерланды 2978ms"
+      - "🇳🇱 Нидерланды 3106ms"
+      - "🇳🇱 Нидерланды 3260ms"
+      - "🇳🇱 Нидерланды 3262ms"
+      - "🇳🇱 Нидерланды 3275ms"
+      - "🇳🇱 Нидерланды 3400ms"
+      - "🇳🇱 Нидерланды 3488ms"
+      - "🇳🇱 Нидерланды 3919ms"
+      - "🇳🇱 Нидерланды 3947ms"
+      - "🇳🇱 Нидерланды 3948ms"
+      - "🇳🇱 Нидерланды 3949ms"
+      - "🇳🇱 Нидерланды 3949ms-2"
+      - "🇳🇱 Нидерланды 3949ms-3"
+      - "🇳🇱 Нидерланды 3953ms"
+      - "🇳🇱 Нидерланды 4314ms"
+      - "🇳🇱 Нидерланды 5735ms"
+      - "🇳🇱 Нидерланды 6323ms"
+      - "🇳🇱 Нидерланды 6328ms"
+      - "🇳🇱 Нидерланды 6761ms"
+      - "🇳🇱 Нидерланды 6763ms"
+      - "🇳🇱 Нидерланды 7023ms"
+      - "🇳🇱 Нидерланды 7023ms-2"
+      - "🇳🇱 Нидерланды 7023ms-3"
+      - "🇳🇱 Нидерланды 7024ms"
+      - "🇳🇱 Нидерланды 7024ms-2"
+      - "🇳🇱 Нидерланды 7024ms-3"
+      - "🇳🇱 Нидерланды 7024ms-4"
+      - "🇳🇱 Нидерланды 7024ms-5"
+      - "🇳🇱 Нидерланды 7025ms"
+      - "🇳🇱 Нидерланды 7025ms-2"
+      - "🇳🇱 Нидерланды 7025ms-3"
+      - "🇳🇱 Нидерланды 7025ms-4"
+      - "🇳🇱 Нидерланды 7025ms-5"
+      - DIRECT
+
+  - name: "🇺🇸 США"
+    type: select
+    proxies:
+      - "🇺🇸 США 20ms"
+      - "🇺🇸 США 26ms"
+      - "🇺🇸 США 27ms"
+      - "🇺🇸 США 27ms-2"
+      - "🇺🇸 США 35ms"
+      - "🇺🇸 США 55ms"
+      - "🇺🇸 США 71ms"
+      - "🇺🇸 США 73ms"
+      - "🇺🇸 США 74ms"
+      - "🇺🇸 США 83ms"
+      - "🇺🇸 США 84ms"
+      - "🇺🇸 США 97ms"
+      - "🇺🇸 США 99ms"
+      - "🇺🇸 США 100ms"
+      - "🇺🇸 США 102ms"
+      - "🇺🇸 США 104ms"
+      - "🇺🇸 США 114ms"
+      - "🇺🇸 США 122ms"
+      - "🇺🇸 США 143ms"
+      - "🇺🇸 США 149ms"
+      - "🇺🇸 США 164ms"
+      - "🇺🇸 США 171ms"
+      - "🇺🇸 США 171ms-2"
+      - "🇺🇸 США 203ms"
+      - "🇺🇸 США 216ms"
+      - "🇺🇸 США 220ms"
+      - "🇺🇸 США 228ms"
+      - "🇺🇸 США 248ms"
+      - "🇺🇸 США 289ms"
+      - "🇺🇸 США 289ms-2"
+      - "🇺🇸 США 348ms"
+      - "🇺🇸 США 352ms"
+      - "🇺🇸 США 360ms"
+      - "🇺🇸 США 371ms"
+      - "🇺🇸 США 371ms-2"
+      - "🇺🇸 США 371ms-3"
+      - "🇺🇸 США 373ms"
+      - "🇺🇸 США 381ms"
+      - "🇺🇸 США 417ms"
+      - "🇺🇸 США 421ms"
+      - "🇺🇸 США 467ms"
+      - "🇺🇸 США 483ms"
+      - "🇺🇸 США 506ms"
+      - "🇺🇸 США 509ms"
+      - "🇺🇸 США 516ms"
+      - "🇺🇸 США 521ms"
+      - "🇺🇸 США 532ms"
+      - "🇺🇸 США 550ms"
+      - "🇺🇸 США 551ms"
+      - "🇺🇸 США 554ms"
+      - "🇺🇸 США 555ms"
+      - "🇺🇸 США 556ms"
+      - "🇺🇸 США 558ms"
+      - "🇺🇸 США 559ms"
+      - "🇺🇸 США 560ms"
+      - "🇺🇸 США 560ms-2"
+      - "🇺🇸 США 560ms-3"
+      - "🇺🇸 США 560ms-4"
+      - "🇺🇸 США 561ms"
+      - "🇺🇸 США 561ms-2"
+      - "🇺🇸 США 562ms"
+      - "🇺🇸 США 562ms-2"
+      - "🇺🇸 США 563ms"
+      - "🇺🇸 США 564ms"
+      - "🇺🇸 США 565ms"
+      - "🇺🇸 США 566ms"
+      - "🇺🇸 США 568ms"
+      - "🇺🇸 США 574ms"
+      - "🇺🇸 США 718ms"
+      - "🇺🇸 США 752ms"
+      - "🇺🇸 США 753ms"
+      - "🇺🇸 США 785ms"
+      - "🇺🇸 США 948ms"
+      - "🇺🇸 США 1140ms"
+      - "🇺🇸 США 1298ms"
+      - "🇺🇸 США 1493ms"
+      - "🇺🇸 США 1868ms"
+      - "🇺🇸 США 2016ms"
+      - "🇺🇸 США 2138ms"
+      - "🇺🇸 США 2245ms"
+      - "🇺🇸 США 2347ms"
+      - "🇺🇸 США 2912ms"
+      - "🇺🇸 США 2945ms"
+      - "🇺🇸 США 2946ms"
+      - "🇺🇸 США 2951ms"
+      - "🇺🇸 США 2966ms"
+      - "🇺🇸 США 2968ms"
+      - "🇺🇸 США 3047ms"
+      - "🇺🇸 США 3095ms"
+      - "🇺🇸 США 3255ms"
+      - "🇺🇸 США 3420ms"
+      - "🇺🇸 США 4466ms"
+      - "🇺🇸 США 4624ms"
+      - "🇺🇸 США 4683ms"
+      - "🇺🇸 США 4710ms"
+      - "🇺🇸 США 5278ms"
+      - "🇺🇸 США 5331ms"
+      - "🇺🇸 США 5332ms"
+      - "🇺🇸 США 5371ms"
+      - "🇺🇸 США 5560ms"
+      - "🇺🇸 США 5945ms"
+      - "🇺🇸 США 6062ms"
+      - "🇺🇸 США 6361ms"
+      - "🇺🇸 США 6723ms"
       - DIRECT
 
   - name: "🇨🇳 Китай"
     type: select
     proxies:
-      - "🇨🇳 Китай 448ms"
-      - "🇨🇳 Китай 514ms"
-      - "🇨🇳 Китай 517ms"
-      - "🇨🇳 Китай 522ms"
-      - "🇨🇳 Китай 522ms-2"
+      - "🇨🇳 Китай 491ms"
+      - "🇨🇳 Китай 504ms"
+      - "🇨🇳 Китай 525ms"
+      - "🇨🇳 Китай 540ms"
       - "🇨🇳 Китай 541ms"
+      - "🇨🇳 Китай 544ms"
       - "🇨🇳 Китай 548ms"
-      - "🇨🇳 Китай 550ms"
-      - "🇨🇳 Китай 550ms-2"
-      - "🇨🇳 Китай 553ms"
-      - "🇨🇳 Китай 554ms"
-      - "🇨🇳 Китай 555ms"
-      - "🇨🇳 Китай 573ms"
-      - "🇨🇳 Китай 579ms"
-      - "🇨🇳 Китай 579ms-2"
-      - "🇨🇳 Китай 592ms"
+      - "🇨🇳 Китай 549ms"
+      - "🇨🇳 Китай 559ms"
+      - "🇨🇳 Китай 578ms"
+      - "🇨🇳 Китай 581ms"
+      - "🇨🇳 Китай 585ms"
+      - "🇨🇳 Китай 590ms"
       - "🇨🇳 Китай 595ms"
-      - "🇨🇳 Китай 596ms"
-      - "🇨🇳 Китай 704ms"
-      - "🇨🇳 Китай 864ms"
-      - "🇨🇳 Китай 1156ms"
-      - "🇨🇳 Китай 1217ms"
-      - "🇨🇳 Китай 1232ms"
-      - "🇨🇳 Китай 1236ms"
-      - "🇨🇳 Китай 1236ms-2"
-      - "🇨🇳 Китай 1365ms"
-      - "🇨🇳 Китай 1488ms"
-      - "🇨🇳 Китай 1679ms"
-      - "🇨🇳 Китай 1727ms"
-      - "🇨🇳 Китай 1823ms"
-      - "🇨🇳 Китай 1901ms"
-      - "🇨🇳 Китай 2003ms"
-      - "🇨🇳 Китай 2003ms-2"
-      - "🇨🇳 Китай 2004ms"
-      - "🇨🇳 Китай 2005ms"
-      - "🇨🇳 Китай 2329ms"
-      - "🇨🇳 Китай 2581ms"
-      - "🇨🇳 Китай 2746ms"
-      - "🇨🇳 Китай 2772ms"
-      - "🇨🇳 Китай 2837ms"
-      - "🇨🇳 Китай 3019ms"
-      - "🇨🇳 Китай 3621ms"
-      - "🇨🇳 Китай 3929ms"
-      - "🇨🇳 Китай 4001ms"
-      - "🇨🇳 Китай 4002ms"
-      - "🇨🇳 Китай 4203ms"
-      - "🇨🇳 Китай 4595ms"
-      - "🇨🇳 Китай 4742ms"
-      - "🇨🇳 Китай 4929ms"
-      - "🇨🇳 Китай 5611ms"
-      - "🇨🇳 Китай 6633ms"
-      - "🇨🇳 Китай 9497ms"
+      - "🇨🇳 Китай 602ms"
+      - "🇨🇳 Китай 607ms"
+      - "🇨🇳 Китай 638ms"
+      - "🇨🇳 Китай 642ms"
+      - "🇨🇳 Китай 672ms"
+      - "🇨🇳 Китай 761ms"
+      - "🇨🇳 Китай 960ms"
+      - "🇨🇳 Китай 984ms"
+      - "🇨🇳 Китай 1006ms"
+      - "🇨🇳 Китай 1022ms"
+      - "🇨🇳 Китай 1074ms"
+      - "🇨🇳 Китай 1235ms"
+      - "🇨🇳 Китай 1388ms"
+      - "🇨🇳 Китай 1408ms"
+      - "🇨🇳 Китай 1413ms"
+      - "🇨🇳 Китай 1477ms"
+      - "🇨🇳 Китай 1530ms"
+      - "🇨🇳 Китай 1637ms"
+      - "🇨🇳 Китай 1639ms"
+      - "🇨🇳 Китай 1778ms"
+      - "🇨🇳 Китай 2175ms"
+      - "🇨🇳 Китай 2364ms"
+      - "🇨🇳 Китай 2383ms"
+      - "🇨🇳 Китай 2549ms"
+      - "🇨🇳 Китай 2901ms"
+      - "🇨🇳 Китай 3020ms"
+      - "🇨🇳 Китай 3516ms"
+      - "🇨🇳 Китай 3797ms"
+      - "🇨🇳 Китай 4071ms"
+      - "🇨🇳 Китай 4089ms"
+      - "🇨🇳 Китай 4346ms"
+      - "🇨🇳 Китай 4444ms"
+      - "🇨🇳 Китай 4445ms"
+      - "🇨🇳 Китай 4445ms-2"
+      - "🇨🇳 Китай 4446ms"
+      - "🇨🇳 Китай 4446ms-2"
+      - "🇨🇳 Китай 4459ms"
+      - "🇨🇳 Китай 4460ms"
+      - "🇨🇳 Китай 4827ms"
+      - "🇨🇳 Китай 5186ms"
+      - "🇨🇳 Китай 5740ms"
+      - "🇨🇳 Китай 6411ms"
+      - "🇨🇳 Китай 6527ms"
+      - "🇨🇳 Китай 6529ms"
+      - "🇨🇳 Китай 6531ms"
+      - "🇨🇳 Китай 6584ms"
+      - "🇨🇳 Китай 7024ms"
       - DIRECT
 
   - name: "🇩🇪 Германия"
     type: select
     proxies:
-      - "🇩🇪 Германия 222ms"
-      - "🇩🇪 Германия 222ms-2"
-      - "🇩🇪 Германия 230ms"
-      - "🇩🇪 Германия 236ms"
-      - "🇩🇪 Германия 246ms"
-      - "🇩🇪 Германия 282ms"
-      - "🇩🇪 Германия 421ms"
+      - "🇩🇪 Германия 183ms"
+      - "🇩🇪 Германия 184ms"
+      - "🇩🇪 Германия 195ms"
+      - "🇩🇪 Германия 201ms"
+      - "🇩🇪 Германия 204ms"
+      - "🇩🇪 Германия 205ms"
+      - "🇩🇪 Германия 223ms"
+      - "🇩🇪 Германия 243ms"
+      - "🇩🇪 Германия 383ms"
+      - "🇩🇪 Германия 409ms"
+      - "🇩🇪 Германия 450ms"
+      - "🇩🇪 Германия 451ms"
+      - "🇩🇪 Германия 482ms"
       - "🇩🇪 Германия 495ms"
-      - "🇩🇪 Германия 512ms"
-      - "🇩🇪 Германия 520ms"
-      - "🇩🇪 Германия 524ms"
-      - "🇩🇪 Германия 545ms"
-      - "🇩🇪 Германия 547ms"
-      - "🇩🇪 Германия 581ms"
-      - "🇩🇪 Германия 630ms"
-      - "🇩🇪 Германия 649ms"
-      - "🇩🇪 Германия 691ms"
-      - "🇩🇪 Германия 733ms"
-      - "🇩🇪 Германия 733ms-2"
-      - "🇩🇪 Германия 802ms"
-      - "🇩🇪 Германия 1089ms"
-      - "🇩🇪 Германия 1503ms"
-      - "🇩🇪 Германия 2070ms"
-      - "🇩🇪 Германия 2478ms"
-      - "🇩🇪 Германия 3257ms"
-      - "🇩🇪 Германия 4001ms"
+      - "🇩🇪 Германия 496ms"
+      - "🇩🇪 Германия 505ms"
+      - "🇩🇪 Германия 587ms"
+      - "🇩🇪 Германия 599ms"
+      - "🇩🇪 Германия 754ms"
+      - "🇩🇪 Германия 793ms"
+      - "🇩🇪 Германия 794ms"
+      - "🇩🇪 Германия 1095ms"
+      - "🇩🇪 Германия 1608ms"
+      - "🇩🇪 Германия 2179ms"
+      - "🇩🇪 Германия 2193ms"
+      - "🇩🇪 Германия 5094ms"
       - DIRECT
 
   - name: "🇮🇩 Индонезия"
     type: select
     proxies:
-      - "🇮🇩 Индонезия 439ms"
-      - "🇮🇩 Индонезия 451ms"
-      - "🇮🇩 Индонезия 457ms"
-      - "🇮🇩 Индонезия 462ms"
-      - "🇮🇩 Индонезия 470ms"
-      - "🇮🇩 Индонезия 473ms"
-      - "🇮🇩 Индонезия 478ms"
-      - "🇮🇩 Индонезия 485ms"
-      - "🇮🇩 Индонезия 548ms"
-      - "🇮🇩 Индонезия 800ms"
-      - "🇮🇩 Индонезия 901ms"
-      - "🇮🇩 Индонезия 2447ms"
-      - "🇮🇩 Индонезия 2943ms"
-      - "🇮🇩 Индонезия 2978ms"
-      - "🇮🇩 Индонезия 3242ms"
-      - "🇮🇩 Индонезия 3736ms"
-      - "🇮🇩 Индонезия 3999ms"
-      - "🇮🇩 Индонезия 4262ms"
-      - "🇮🇩 Индонезия 4535ms"
-      - "🇮🇩 Индонезия 4855ms"
-      - "🇮🇩 Индонезия 4987ms"
-      - "🇮🇩 Индонезия 5381ms"
-      - "🇮🇩 Индонезия 5963ms"
-      - "🇮🇩 Индонезия 5974ms"
-      - "🇮🇩 Индонезия 6492ms"
-      - "🇮🇩 Индонезия 7611ms"
-      - DIRECT
-
-  - name: "🇫🇷 Франция"
-    type: select
-    proxies:
-      - "🇫🇷 Франция 199ms"
-      - "🇫🇷 Франция 210ms"
-      - "🇫🇷 Франция 216ms"
-      - "🇫🇷 Франция 233ms"
-      - "🇫🇷 Франция 236ms"
-      - "🇫🇷 Франция 250ms"
-      - "🇫🇷 Франция 256ms"
-      - "🇫🇷 Франция 512ms"
-      - "🇫🇷 Франция 548ms"
-      - "🇫🇷 Франция 559ms"
-      - "🇫🇷 Франция 966ms"
-      - "🇫🇷 Франция 1094ms"
-      - "🇫🇷 Франция 1175ms"
-      - "🇫🇷 Франция 2621ms"
-      - "🇫🇷 Франция 3375ms"
-      - "🇫🇷 Франция 3997ms"
+      - "🇮🇩 Индонезия 483ms"
+      - "🇮🇩 Индонезия 502ms"
+      - "🇮🇩 Индонезия 511ms"
+      - "🇮🇩 Индонезия 520ms"
+      - "🇮🇩 Индонезия 521ms"
+      - "🇮🇩 Индонезия 522ms"
+      - "🇮🇩 Индонезия 555ms"
+      - "🇮🇩 Индонезия 1700ms"
+      - "🇮🇩 Индонезия 2486ms"
+      - "🇮🇩 Индонезия 2495ms"
+      - "🇮🇩 Индонезия 2630ms"
+      - "🇮🇩 Индонезия 3795ms"
+      - "🇮🇩 Индонезия 3814ms"
+      - "🇮🇩 Индонезия 4297ms"
+      - "🇮🇩 Индонезия 4656ms"
+      - "🇮🇩 Индонезия 4743ms"
+      - "🇮🇩 Индонезия 6691ms"
+      - "🇮🇩 Индонезия 7000ms"
       - DIRECT
 
   - name: "🇭🇰 Гонконг"
     type: select
     proxies:
-      - "🇭🇰 Гонконг 262ms"
-      - "🇭🇰 Гонконг 379ms"
-      - "🇭🇰 Гонконг 387ms"
-      - "🇭🇰 Гонконг 450ms"
-      - "🇭🇰 Гонконг 504ms"
-      - "🇭🇰 Гонконг 747ms"
-      - "🇭🇰 Гонконг 748ms"
-      - "🇭🇰 Гонконг 749ms"
-      - "🇭🇰 Гонконг 753ms"
-      - "🇭🇰 Гонконг 758ms"
-      - "🇭🇰 Гонконг 772ms"
-      - "🇭🇰 Гонконг 1726ms"
-      - "🇭🇰 Гонконг 3347ms"
-      - "🇭🇰 Гонконг 3999ms"
-      - "🇭🇰 Гонконг 4001ms"
-      - "🇭🇰 Гонконг 5500ms"
+      - "🇭🇰 Гонконг 233ms"
+      - "🇭🇰 Гонконг 408ms"
+      - "🇭🇰 Гонконг 428ms"
+      - "🇭🇰 Гонконг 495ms"
+      - "🇭🇰 Гонконг 510ms"
+      - "🇭🇰 Гонконг 819ms"
+      - "🇭🇰 Гонконг 825ms"
+      - "🇭🇰 Гонконг 827ms"
+      - "🇭🇰 Гонконг 836ms"
+      - "🇭🇰 Гонконг 838ms"
+      - "🇭🇰 Гонконг 1650ms"
+      - "🇭🇰 Гонконг 2308ms"
+      - "🇭🇰 Гонконг 2412ms"
+      - "🇭🇰 Гонконг 2413ms"
+      - "🇭🇰 Гонконг 2415ms"
+      - "🇭🇰 Гонконг 3014ms"
+      - "🇭🇰 Гонконг 3155ms"
       - DIRECT
 
   - name: "🇰🇷 Южная Корея"
     type: select
     proxies:
-      - "🇰🇷 Южная Корея 337ms"
-      - "🇰🇷 Южная Корея 348ms"
-      - "🇰🇷 Южная Корея 373ms"
-      - "🇰🇷 Южная Корея 397ms"
-      - "🇰🇷 Южная Корея 403ms"
-      - "🇰🇷 Южная Корея 407ms"
-      - "🇰🇷 Южная Корея 408ms"
-      - "🇰🇷 Южная Корея 411ms"
-      - "🇰🇷 Южная Корея 443ms"
-      - "🇰🇷 Южная Корея 739ms"
-      - "🇰🇷 Южная Корея 755ms"
-      - "🇰🇷 Южная Корея 2698ms"
+      - "🇰🇷 Южная Корея 389ms"
+      - "🇰🇷 Южная Корея 421ms"
+      - "🇰🇷 Южная Корея 435ms"
+      - "🇰🇷 Южная Корея 447ms"
+      - "🇰🇷 Южная Корея 459ms"
+      - "🇰🇷 Южная Корея 469ms"
+      - "🇰🇷 Южная Корея 484ms"
+      - "🇰🇷 Южная Корея 493ms"
+      - "🇰🇷 Южная Корея 504ms"
+      - "🇰🇷 Южная Корея 852ms"
+      - "🇰🇷 Южная Корея 854ms"
+      - "🇰🇷 Южная Корея 893ms"
+      - "🇰🇷 Южная Корея 2372ms"
+      - "🇰🇷 Южная Корея 3562ms"
       - DIRECT
 
-  - name: "🇷🇺 Россия"
+  - name: "🇫🇷 Франция"
     type: select
     proxies:
-      - "🇷🇺 Россия 51ms"
-      - "🇷🇺 Россия 76ms"
-      - "🇷🇺 Россия 265ms"
-      - "🇷🇺 Россия 281ms"
-      - "🇷🇺 Россия 341ms"
-      - "🇷🇺 Россия 420ms"
-      - "🇷🇺 Россия 444ms"
-      - "🇷🇺 Россия 544ms"
-      - "🇷🇺 Россия 870ms"
-      - "🇷🇺 Россия 1083ms"
-      - "🇷🇺 Россия 4498ms"
+      - "🇫🇷 Франция 173ms"
+      - "🇫🇷 Франция 177ms"
+      - "🇫🇷 Франция 181ms"
+      - "🇫🇷 Франция 191ms"
+      - "🇫🇷 Франция 203ms"
+      - "🇫🇷 Франция 259ms"
+      - "🇫🇷 Франция 262ms"
+      - "🇫🇷 Франция 435ms"
+      - "🇫🇷 Франция 934ms"
+      - "🇫🇷 Франция 1083ms"
+      - "🇫🇷 Франция 1294ms"
+      - "🇫🇷 Франция 3963ms"
+      - "🇫🇷 Франция 6907ms"
       - DIRECT
 
   - name: "🇸🇬 Сингапур"
     type: select
     proxies:
-      - "🇸🇬 Сингапур 406ms"
-      - "🇸🇬 Сингапур 421ms"
-      - "🇸🇬 Сингапур 452ms"
-      - "🇸🇬 Сингапур 456ms"
-      - "🇸🇬 Сингапур 520ms"
-      - "🇸🇬 Сингапур 899ms"
-      - "🇸🇬 Сингапур 954ms"
-      - "🇸🇬 Сингапур 971ms"
-      - "🇸🇬 Сингапур 2475ms"
-      - "🇸🇬 Сингапур 3995ms"
+      - "🇸🇬 Сингапур 477ms"
+      - "🇸🇬 Сингапур 480ms"
+      - "🇸🇬 Сингапур 484ms"
+      - "🇸🇬 Сингапур 498ms"
+      - "🇸🇬 Сингапур 499ms"
+      - "🇸🇬 Сингапур 501ms"
+      - "🇸🇬 Сингапур 982ms"
+      - "🇸🇬 Сингапур 1121ms"
+      - "🇸🇬 Сингапур 1458ms"
+      - "🇸🇬 Сингапур 3189ms"
+      - "🇸🇬 Сингапур 3581ms"
       - DIRECT
 
-  - name: "🇫🇮 Финляндия"
+  - name: "🇷🇺 Россия"
     type: select
     proxies:
-      - "🇫🇮 Финляндия 298ms"
-      - "🇫🇮 Финляндия 473ms"
-      - "🇫🇮 Финляндия 540ms"
-      - "🇫🇮 Финляндия 541ms"
-      - "🇫🇮 Финляндия 542ms"
-      - "🇫🇮 Финляндия 542ms-2"
-      - "🇫🇮 Финляндия 656ms"
-      - "🇫🇮 Финляндия 2037ms"
-      - "🇫🇮 Финляндия 7590ms"
+      - "🇷🇺 Россия 58ms"
+      - "🇷🇺 Россия 239ms"
+      - "🇷🇺 Россия 316ms"
+      - "🇷🇺 Россия 485ms"
+      - "🇷🇺 Россия 800ms"
+      - "🇷🇺 Россия 4460ms"
+      - "🇷🇺 Россия 4738ms"
+      - "🇷🇺 Россия 5118ms"
+      - "🇷🇺 Россия 5183ms"
+      - "🇷🇺 Россия 7061ms"
       - DIRECT
 
   - name: "🇮🇷 Неизвестно"
     type: select
     proxies:
-      - "🇮🇷 Неизвестно 467ms"
-      - "🇮🇷 Неизвестно 553ms"
-      - "🇮🇷 Неизвестно 595ms"
-      - "🇮🇷 Неизвестно 611ms"
-      - "🇮🇷 Неизвестно 1367ms"
-      - "🇮🇷 Неизвестно 1981ms"
-      - "🇮🇷 Неизвестно 2040ms"
-      - "🇮🇷 Неизвестно 3234ms"
-      - "🇮🇷 Неизвестно 8272ms"
-      - DIRECT
-
-  - name: "🇵🇱 Польша"
-    type: select
-    proxies:
-      - "🇵🇱 Польша 248ms"
-      - "🇵🇱 Польша 254ms"
-      - "🇵🇱 Польша 255ms"
-      - "🇵🇱 Польша 258ms"
-      - "🇵🇱 Польша 269ms"
-      - "🇵🇱 Польша 272ms"
-      - "🇵🇱 Польша 545ms"
-      - "🇵🇱 Польша 2362ms"
+      - "🇮🇷 Неизвестно 407ms"
+      - "🇮🇷 Неизвестно 417ms"
+      - "🇮🇷 Неизвестно 510ms"
+      - "🇮🇷 Неизвестно 693ms"
+      - "🇮🇷 Неизвестно 1679ms"
+      - "🇮🇷 Неизвестно 2202ms"
+      - "🇮🇷 Неизвестно 3576ms"
+      - "🇮🇷 Неизвестно 4391ms"
+      - "🇮🇷 Неизвестно 7019ms"
       - DIRECT
 
   - name: "🇯🇵 Япония"
     type: select
     proxies:
-      - "🇯🇵 Япония 323ms"
-      - "🇯🇵 Япония 582ms"
-      - "🇯🇵 Япония 704ms"
-      - "🇯🇵 Япония 738ms"
-      - "🇯🇵 Япония 2834ms"
-      - "🇯🇵 Япония 3832ms"
-      - "🇯🇵 Япония 7996ms"
+      - "🇯🇵 Япония 332ms"
+      - "🇯🇵 Япония 669ms"
+      - "🇯🇵 Япония 813ms"
+      - "🇯🇵 Япония 848ms"
+      - "🇯🇵 Япония 2337ms"
+      - "🇯🇵 Япония 2341ms"
+      - "🇯🇵 Япония 3949ms"
+      - "🇯🇵 Япония 6996ms"
       - DIRECT
 
-  - name: "🇻🇳 Вьетнам"
+  - name: "🇫🇮 Финляндия"
     type: select
     proxies:
-      - "🇻🇳 Вьетнам 487ms"
-      - "🇻🇳 Вьетнам 588ms"
-      - "🇻🇳 Вьетнам 1051ms"
-      - "🇻🇳 Вьетнам 2003ms"
-      - "🇻🇳 Вьетнам 3108ms"
-      - "🇻🇳 Вьетнам 3441ms"
-      - "🇻🇳 Вьетнам 6003ms"
-      - DIRECT
-
-  - name: "🇨🇴 Колумбия"
-    type: select
-    proxies:
-      - "🇨🇴 Колумбия 157ms"
-      - "🇨🇴 Колумбия 173ms"
-      - "🇨🇴 Колумбия 377ms"
-      - "🇨🇴 Колумбия 4402ms"
-      - "🇨🇴 Колумбия 4653ms"
-      - "🇨🇴 Колумбия 6139ms"
+      - "🇫🇮 Финляндия 210ms"
+      - "🇫🇮 Финляндия 214ms"
+      - "🇫🇮 Финляндия 216ms"
+      - "🇫🇮 Финляндия 263ms"
+      - "🇫🇮 Финляндия 567ms"
+      - "🇫🇮 Финляндия 1594ms"
+      - "🇫🇮 Финляндия 6323ms"
       - DIRECT
 
   - name: "🇮🇳 Индия"
     type: select
     proxies:
-      - "🇮🇳 Индия 428ms"
-      - "🇮🇳 Индия 451ms"
-      - "🇮🇳 Индия 540ms"
-      - "🇮🇳 Индия 897ms"
-      - "🇮🇳 Индия 1494ms"
-      - "🇮🇳 Индия 4126ms"
+      - "🇮🇳 Индия 410ms"
+      - "🇮🇳 Индия 489ms"
+      - "🇮🇳 Индия 571ms"
+      - "🇮🇳 Индия 626ms"
+      - "🇮🇳 Индия 869ms"
+      - "🇮🇳 Индия 1154ms"
+      - "🇮🇳 Индия 2200ms"
       - DIRECT
 
-  - name: "🇨🇦 Канада"
+  - name: "🇵🇱 Польша"
     type: select
     proxies:
-      - "🇨🇦 Канада 72ms"
-      - "🇨🇦 Канада 74ms"
-      - "🇨🇦 Канада 96ms"
-      - "🇨🇦 Канада 126ms"
-      - "🇨🇦 Канада 551ms"
+      - "🇵🇱 Польша 212ms"
+      - "🇵🇱 Польша 214ms"
+      - "🇵🇱 Польша 218ms"
+      - "🇵🇱 Польша 230ms"
+      - "🇵🇱 Польша 252ms"
+      - "🇵🇱 Польша 1326ms"
+      - "🇵🇱 Польша 6297ms"
       - DIRECT
 
-  - name: "🇲🇾 Малайзия"
+  - name: "🇻🇳 Вьетнам"
     type: select
     proxies:
-      - "🇲🇾 Малайзия 509ms"
-      - "🇲🇾 Малайзия 510ms"
-      - "🇲🇾 Малайзия 840ms"
-      - "🇲🇾 Малайзия 1949ms"
+      - "🇻🇳 Вьетнам 550ms"
+      - "🇻🇳 Вьетнам 608ms"
+      - "🇻🇳 Вьетнам 1112ms"
+      - "🇻🇳 Вьетнам 1228ms"
+      - "🇻🇳 Вьетнам 2741ms"
+      - "🇻🇳 Вьетнам 2901ms"
+      - "🇻🇳 Вьетнам 4459ms"
       - DIRECT
 
-  - name: "🇸🇾 Неизвестно"
+  - name: "🇨🇴 Колумбия"
     type: select
     proxies:
-      - "🇸🇾 Неизвестно 551ms"
-      - "🇸🇾 Неизвестно 1797ms"
-      - "🇸🇾 Неизвестно 3805ms"
-      - "🇸🇾 Неизвестно 8634ms"
-      - DIRECT
-
-  - name: "🇺🇦 Украина"
-    type: select
-    proxies:
-      - "🇺🇦 Украина 255ms"
-      - "🇺🇦 Украина 256ms"
-      - "🇺🇦 Украина 334ms"
-      - "🇺🇦 Украина 357ms"
-      - DIRECT
-
-  - name: "🇰🇭 Неизвестно"
-    type: select
-    proxies:
-      - "🇰🇭 Неизвестно 2282ms"
-      - "🇰🇭 Неизвестно 6073ms"
-      - "🇰🇭 Неизвестно 6306ms"
-      - DIRECT
-
-  - name: "🇰🇿 Неизвестно"
-    type: select
-    proxies:
-      - "🇰🇿 Неизвестно 563ms"
-      - "🇰🇿 Неизвестно 625ms"
-      - "🇰🇿 Неизвестно 1901ms"
-      - DIRECT
-
-  - name: "🇹🇭 Таиланд"
-    type: select
-    proxies:
-      - "🇹🇭 Таиланд 582ms"
-      - "🇹🇭 Таиланд 597ms"
-      - "🇹🇭 Таиланд 999ms"
-      - DIRECT
-
-  - name: "🇹🇼 Тайвань"
-    type: select
-    proxies:
-      - "🇹🇼 Тайвань 365ms"
-      - "🇹🇼 Тайвань 544ms"
-      - "🇹🇼 Тайвань 1640ms"
-      - DIRECT
-
-  - name: "🇧🇩 Неизвестно"
-    type: select
-    proxies:
-      - "🇧🇩 Неизвестно 971ms"
-      - "🇧🇩 Неизвестно 3225ms"
-      - DIRECT
-
-  - name: "🇧🇪 Бельгия"
-    type: select
-    proxies:
-      - "🇧🇪 Бельгия 224ms"
-      - "🇧🇪 Бельгия 1587ms"
-      - DIRECT
-
-  - name: "🇪🇨 Неизвестно"
-    type: select
-    proxies:
-      - "🇪🇨 Неизвестно 233ms"
-      - "🇪🇨 Неизвестно 240ms"
-      - DIRECT
-
-  - name: "🇪🇸 Испания"
-    type: select
-    proxies:
-      - "🇪🇸 Испания 540ms"
-      - "🇪🇸 Испания 6185ms"
+      - "🇨🇴 Колумбия 134ms"
+      - "🇨🇴 Колумбия 154ms"
+      - "🇨🇴 Колумбия 271ms"
+      - "🇨🇴 Колумбия 3049ms"
+      - "🇨🇴 Колумбия 3178ms"
       - DIRECT
 
   - name: "🇬🇧 Великобритания"
     type: select
     proxies:
-      - "🇬🇧 Великобритания 207ms"
-      - "🇬🇧 Великобритания 1562ms"
+      - "🇬🇧 Великобритания 164ms"
+      - "🇬🇧 Великобритания 209ms"
+      - "🇬🇧 Великобритания 418ms"
+      - "🇬🇧 Великобритания 2163ms"
+      - "🇬🇧 Великобритания 2185ms"
       - DIRECT
 
-  - name: "🇬🇭 Неизвестно"
+  - name: "🇲🇾 Малайзия"
     type: select
     proxies:
-      - "🇬🇭 Неизвестно 455ms"
-      - "🇬🇭 Неизвестно 530ms"
+      - "🇲🇾 Малайзия 499ms"
+      - "🇲🇾 Малайзия 557ms"
+      - "🇲🇾 Малайзия 558ms"
+      - "🇲🇾 Малайзия 564ms"
+      - "🇲🇾 Малайзия 1716ms"
       - DIRECT
 
-  - name: "🇮🇶 Неизвестно"
+  - name: "🇪🇨 Неизвестно"
     type: select
     proxies:
-      - "🇮🇶 Неизвестно 430ms"
-      - "🇮🇶 Неизвестно 552ms"
+      - "🇪🇨 Неизвестно 191ms"
+      - "🇪🇨 Неизвестно 226ms"
+      - "🇪🇨 Неизвестно 3706ms"
+      - "🇪🇨 Неизвестно 4751ms"
       - DIRECT
 
-  - name: "🇮🇹 Италия"
+  - name: "🇹🇭 Таиланд"
     type: select
     proxies:
-      - "🇮🇹 Италия 255ms"
-      - "🇮🇹 Италия 653ms"
+      - "🇹🇭 Таиланд 1061ms"
+      - "🇹🇭 Таиланд 2508ms"
+      - "🇹🇭 Таиланд 4445ms"
+      - "🇹🇭 Таиланд 4445ms-2"
       - DIRECT
 
-  - name: "🇲🇽 Мексика"
+  - name: "🇧🇩 Неизвестно"
     type: select
     proxies:
-      - "🇲🇽 Мексика 103ms"
-      - "🇲🇽 Мексика 695ms"
+      - "🇧🇩 Неизвестно 1106ms"
+      - "🇧🇩 Неизвестно 3375ms"
+      - "🇧🇩 Неизвестно 5170ms"
       - DIRECT
 
-  - name: "🇵🇭 Филиппины"
+  - name: "🇰🇭 Неизвестно"
     type: select
     proxies:
-      - "🇵🇭 Филиппины 3296ms"
-      - "🇵🇭 Филиппины 5008ms"
-      - DIRECT
-
-  - name: "🇸🇪 Швеция"
-    type: select
-    proxies:
-      - "🇸🇪 Швеция 946ms"
-      - "🇸🇪 Швеция 6080ms"
-      - DIRECT
-
-  - name: "🇹🇷 Турция"
-    type: select
-    proxies:
-      - "🇹🇷 Турция 519ms"
-      - "🇹🇷 Турция 3341ms"
-      - DIRECT
-
-  - name: "🇻🇪 Неизвестно"
-    type: select
-    proxies:
-      - "🇻🇪 Неизвестно 4078ms"
-      - "🇻🇪 Неизвестно 7802ms"
-      - DIRECT
-
-  - name: "🇦🇱 Неизвестно"
-    type: select
-    proxies:
-      - "🇦🇱 Неизвестно 6248ms"
-      - DIRECT
-
-  - name: "🇦🇷 Аргентина"
-    type: select
-    proxies:
-      - "🇦🇷 Аргентина 351ms"
-      - DIRECT
-
-  - name: "🇦🇹 Австрия"
-    type: select
-    proxies:
-      - "🇦🇹 Австрия 317ms"
-      - DIRECT
-
-  - name: "🇦🇺 Австралия"
-    type: select
-    proxies:
-      - "🇦🇺 Австралия 369ms"
-      - DIRECT
-
-  - name: "🇧🇷 Бразилия"
-    type: select
-    proxies:
-      - "🇧🇷 Бразилия 534ms"
-      - DIRECT
-
-  - name: "🇨🇭 Швейцария"
-    type: select
-    proxies:
-      - "🇨🇭 Швейцария 701ms"
-      - DIRECT
-
-  - name: "🇨🇮 Неизвестно"
-    type: select
-    proxies:
-      - "🇨🇮 Неизвестно 2004ms"
-      - DIRECT
-
-  - name: "🇨🇾 Неизвестно"
-    type: select
-    proxies:
-      - "🇨🇾 Неизвестно 4547ms"
-      - DIRECT
-
-  - name: "🇩🇴 Неизвестно"
-    type: select
-    proxies:
-      - "🇩🇴 Неизвестно 6549ms"
-      - DIRECT
-
-  - name: "🇪🇪 Эстония"
-    type: select
-    proxies:
-      - "🇪🇪 Эстония 666ms"
-      - DIRECT
-
-  - name: "🇮🇱 Израиль"
-    type: select
-    proxies:
-      - "🇮🇱 Израиль 281ms"
-      - DIRECT
-
-  - name: "🇰🇬 Неизвестно"
-    type: select
-    proxies:
-      - "🇰🇬 Неизвестно 632ms"
-      - DIRECT
-
-  - name: "🇱🇹 Литва"
-    type: select
-    proxies:
-      - "🇱🇹 Литва 283ms"
-      - DIRECT
-
-  - name: "🇱🇻 Латвия"
-    type: select
-    proxies:
-      - "🇱🇻 Латвия 1437ms"
-      - DIRECT
-
-  - name: "🇲🇦 Неизвестно"
-    type: select
-    proxies:
-      - "🇲🇦 Неизвестно 342ms"
-      - DIRECT
-
-  - name: "🇲🇲 Неизвестно"
-    type: select
-    proxies:
-      - "🇲🇲 Неизвестно 547ms"
+      - "🇰🇭 Неизвестно 2222ms"
+      - "🇰🇭 Неизвестно 2388ms"
+      - "🇰🇭 Неизвестно 5509ms"
       - DIRECT
 
   - name: "🇸🇨 Неизвестно"
     type: select
     proxies:
-      - "🇸🇨 Неизвестно 480ms"
+      - "🇸🇨 Неизвестно 592ms"
+      - "🇸🇨 Неизвестно 2001ms"
+      - "🇸🇨 Неизвестно 5365ms"
+      - DIRECT
+
+  - name: "🇺🇦 Украина"
+    type: select
+    proxies:
+      - "🇺🇦 Украина 232ms"
+      - "🇺🇦 Украина 260ms"
+      - "🇺🇦 Украина 314ms"
+      - DIRECT
+
+  - name: "🇧🇪 Бельгия"
+    type: select
+    proxies:
+      - "🇧🇪 Бельгия 2465ms"
+      - "🇧🇪 Бельгия 5075ms"
+      - DIRECT
+
+  - name: "🇧🇷 Бразилия"
+    type: select
+    proxies:
+      - "🇧🇷 Бразилия 489ms"
+      - "🇧🇷 Бразилия 2614ms"
+      - DIRECT
+
+  - name: "🇨🇭 Швейцария"
+    type: select
+    proxies:
+      - "🇨🇭 Швейцария 219ms"
+      - "🇨🇭 Швейцария 297ms"
+      - DIRECT
+
+  - name: "🇮🇶 Неизвестно"
+    type: select
+    proxies:
+      - "🇮🇶 Неизвестно 373ms"
+      - "🇮🇶 Неизвестно 498ms"
+      - DIRECT
+
+  - name: "🇰🇿 Неизвестно"
+    type: select
+    proxies:
+      - "🇰🇿 Неизвестно 524ms"
+      - "🇰🇿 Неизвестно 963ms"
+      - DIRECT
+
+  - name: "🇹🇷 Турция"
+    type: select
+    proxies:
+      - "🇹🇷 Турция 6885ms"
+      - "🇹🇷 Турция 7044ms"
+      - DIRECT
+
+  - name: "🇹🇼 Тайвань"
+    type: select
+    proxies:
+      - "🇹🇼 Тайвань 378ms"
+      - "🇹🇼 Тайвань 396ms"
+      - DIRECT
+
+  - name: "🇦🇫 Неизвестно"
+    type: select
+    proxies:
+      - "🇦🇫 Неизвестно 2317ms"
+      - DIRECT
+
+  - name: "🇦🇱 Неизвестно"
+    type: select
+    proxies:
+      - "🇦🇱 Неизвестно 7110ms"
+      - DIRECT
+
+  - name: "🇦🇷 Аргентина"
+    type: select
+    proxies:
+      - "🇦🇷 Аргентина 302ms"
+      - DIRECT
+
+  - name: "🇦🇺 Австралия"
+    type: select
+    proxies:
+      - "🇦🇺 Австралия 523ms"
+      - DIRECT
+
+  - name: "🇩🇴 Неизвестно"
+    type: select
+    proxies:
+      - "🇩🇴 Неизвестно 147ms"
+      - DIRECT
+
+  - name: "🇪🇪 Эстония"
+    type: select
+    proxies:
+      - "🇪🇪 Эстония 781ms"
+      - DIRECT
+
+  - name: "🇪🇬 Египет"
+    type: select
+    proxies:
+      - "🇪🇬 Египет 2374ms"
+      - DIRECT
+
+  - name: "🇪🇸 Испания"
+    type: select
+    proxies:
+      - "🇪🇸 Испания 2556ms"
+      - DIRECT
+
+  - name: "🇬🇭 Неизвестно"
+    type: select
+    proxies:
+      - "🇬🇭 Неизвестно 873ms"
+      - DIRECT
+
+  - name: "🇮🇪 Ирландия"
+    type: select
+    proxies:
+      - "🇮🇪 Ирландия 6920ms"
+      - DIRECT
+
+  - name: "🇮🇱 Израиль"
+    type: select
+    proxies:
+      - "🇮🇱 Израиль 249ms"
+      - DIRECT
+
+  - name: "🇮🇹 Италия"
+    type: select
+    proxies:
+      - "🇮🇹 Италия 515ms"
+      - DIRECT
+
+  - name: "🇱🇹 Литва"
+    type: select
+    proxies:
+      - "🇱🇹 Литва 361ms"
+      - DIRECT
+
+  - name: "🇱🇻 Латвия"
+    type: select
+    proxies:
+      - "🇱🇻 Латвия 2952ms"
+      - DIRECT
+
+  - name: "🇷🇸 Неизвестно"
+    type: select
+    proxies:
+      - "🇷🇸 Неизвестно 2572ms"
+      - DIRECT
+
+  - name: "🇸🇪 Швеция"
+    type: select
+    proxies:
+      - "🇸🇪 Швеция 578ms"
       - DIRECT
 
   - name: "🇸🇳 Неизвестно"
     type: select
     proxies:
-      - "🇸🇳 Неизвестно 460ms"
+      - "🇸🇳 Неизвестно 4449ms"
+      - DIRECT
+
+  - name: "🇸🇾 Неизвестно"
+    type: select
+    proxies:
+      - "🇸🇾 Неизвестно 495ms"
       - DIRECT
 
   - name: "🇺🇿 Неизвестно"
     type: select
     proxies:
-      - "🇺🇿 Неизвестно 2003ms"
+      - "🇺🇿 Неизвестно 4444ms"
+      - DIRECT
+
+  - name: "🇿🇦 ЮАР"
+    type: select
+    proxies:
+      - "🇿🇦 ЮАР 2895ms"
+      - DIRECT
+
+  - name: "🇿🇼 Неизвестно"
+    type: select
+    proxies:
+      - "🇿🇼 Неизвестно 1356ms"
       - DIRECT
 
 rules:
