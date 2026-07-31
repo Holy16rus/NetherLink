@@ -1,367 +1,502 @@
 {
-  "🇺🇸 США 395ms": {
-    "type": "socks",
-    "server": "184.170.245.148",
-    "server_port": 4145
+  "🇿🇿 Неизвестно 19ms": {
+    "type": "http",
+    "server": "192.73.244.36",
+    "server_port": 80
   },
-  "🇺🇸 США 398ms": {
-    "type": "socks",
-    "server": "192.252.216.86",
-    "server_port": 4145
-  },
-  "🇺🇸 США 399ms": {
-    "type": "socks",
-    "server": "184.170.251.30",
-    "server_port": 11288
-  },
-  "🇺🇸 США 400ms": {
-    "type": "socks",
-    "server": "199.58.184.97",
-    "server_port": 4145
-  },
-  "🇺🇸 США 456ms": {
-    "type": "socks",
-    "server": "192.252.208.70",
-    "server_port": 14282
-  },
-  "🇺🇸 США 456ms-2": {
-    "type": "socks",
-    "server": "192.111.139.162",
-    "server_port": 4145
-  },
-  "🇺🇸 США 460ms": {
-    "type": "socks",
-    "server": "192.111.135.18",
-    "server_port": 18301
-  },
-  "🇺🇸 США 461ms": {
-    "type": "socks",
-    "server": "192.111.139.163",
-    "server_port": 19404
-  },
-  "🇺🇸 США 380ms": {
-    "type": "socks",
-    "server": "67.201.35.145",
-    "server_port": 4145
-  },
-  "🇺🇸 США 383ms": {
-    "type": "socks",
-    "server": "192.111.134.10",
-    "server_port": 4145
-  },
-  "🇺🇸 США 387ms": {
-    "type": "socks",
-    "server": "68.71.247.130",
-    "server_port": 4145
-  },
-  "🇨🇦 Канада 373ms": {
-    "type": "socks",
-    "server": "198.8.84.3",
-    "server_port": 4145
-  },
-  "🇺🇸 США 400ms-2": {
-    "type": "socks",
-    "server": "142.54.237.38",
-    "server_port": 4145
-  },
-  "🇺🇸 США 422ms": {
-    "type": "socks",
-    "server": "142.54.226.214",
-    "server_port": 4145
-  },
-  "🇺🇸 США 479ms": {
-    "type": "socks",
-    "server": "192.252.220.92",
-    "server_port": 17328
-  },
-  "🇺🇸 США 10ms": {
+  "🇿🇿 Неизвестно 20ms": {
     "type": "http",
     "server": "213.188.208.179",
     "server_port": 80
   },
-  "🇺🇸 США 9ms": {
-    "type": "http",
-    "server": "150.136.163.51",
-    "server_port": 80
-  },
-  "🇺🇸 США 7ms": {
-    "type": "http",
-    "server": "64.112.184.210",
-    "server_port": 3128
-  },
-  "🇺🇸 США 57ms": {
-    "type": "http",
-    "server": "34.44.49.215",
-    "server_port": 80
-  },
-  "🇺🇸 США 64ms": {
-    "type": "http",
-    "server": "34.69.61.247",
-    "server_port": 80
-  },
-  "🇨🇴 Колумбия 146ms": {
-    "type": "http",
-    "server": "190.0.246.210",
-    "server_port": 4040
-  },
-  "🇺🇸 США 155ms": {
-    "type": "http",
-    "server": "52.34.243.150",
-    "server_port": 8080
-  },
-  "🇨🇴 Колумбия 147ms": {
-    "type": "http",
-    "server": "190.0.246.213",
-    "server_port": 4040
-  },
-  "🇩🇪 Германия 180ms": {
-    "type": "http",
-    "server": "164.92.200.113",
-    "server_port": 80
-  },
-  "🇩🇪 Германия 182ms": {
-    "type": "http",
-    "server": "161.35.223.141",
-    "server_port": 80
-  },
-  "🇵🇱 Польша 220ms": {
-    "type": "http",
-    "server": "212.127.95.235",
-    "server_port": 8081
-  },
-  "🇫🇷 Франция 453ms": {
-    "type": "socks",
-    "server": "213.199.47.140",
-    "server_port": 1080
-  },
-  "🇫🇷 Франция 184ms": {
-    "type": "http",
-    "server": "37.187.74.125",
-    "server_port": 80
-  },
-  "🇫🇷 Франция 184ms-2": {
-    "type": "http",
-    "server": "82.66.54.40",
-    "server_port": 80
-  },
-  "🇳🇱 Нидерланды 1202ms": {
-    "type": "http",
-    "server": "195.26.224.135",
-    "server_port": 80
-  },
-  "🇳🇱 Нидерланды 178ms": {
-    "type": "http",
-    "server": "193.23.194.116",
-    "server_port": 80
-  },
-  "🇺🇸 США 19ms": {
-    "type": "http",
-    "server": "142.93.202.130",
-    "server_port": 3128
-  },
-  "🇫🇷 Франция 170ms": {
-    "type": "http",
-    "server": "152.228.217.116",
-    "server_port": 80
-  },
-  "🇳🇱 Нидерланды 169ms": {
-    "type": "http",
-    "server": "95.211.64.139",
-    "server_port": 8888
-  },
-  "🇺🇸 США 718ms": {
-    "type": "http",
-    "server": "174.137.134.182",
-    "server_port": 2999
-  },
-  "🇳🇱 Нидерланды 178ms-2": {
-    "type": "http",
-    "server": "95.211.64.139",
-    "server_port": 8889
-  },
-  "🇫🇷 Франция 180ms": {
-    "type": "http",
-    "server": "212.47.232.28",
-    "server_port": 80
-  },
-  "🇺🇸 США 92ms": {
-    "type": "socks",
-    "server": "69.55.49.177",
-    "server_port": 38182
-  },
-  "🇨🇭 Швейцария 225ms": {
-    "type": "http",
-    "server": "185.191.239.248",
-    "server_port": 3128
-  },
-  "🇺🇸 США 260ms": {
-    "type": "http",
-    "server": "203.161.52.193",
-    "server_port": 80
-  },
-  "🇳🇱 Нидерланды 195ms": {
-    "type": "http",
-    "server": "144.178.199.118",
-    "server_port": 8443
-  },
-  "🇺🇸 США 295ms": {
-    "type": "http",
-    "server": "153.72.68.0",
-    "server_port": 8080
-  },
-  "🇺🇦 Украина 237ms": {
-    "type": "http",
-    "server": "176.111.37.5",
-    "server_port": 39811
-  },
-  "🇭🇰 Гонконг 267ms": {
-    "type": "http",
-    "server": "45.155.226.177",
-    "server_port": 3128
-  },
-  "🇻🇪 Неизвестно 190ms": {
-    "type": "http",
-    "server": "38.76.9.0",
-    "server_port": 999
-  },
-  "🇫🇷 Франция 236ms": {
-    "type": "http",
-    "server": "51.75.206.209",
-    "server_port": 80
-  },
-  "🇨🇱 Чили 240ms": {
-    "type": "http",
-    "server": "152.230.215.123",
-    "server_port": 80
-  },
-  "🇷🇺 Россия 324ms": {
-    "type": "http",
-    "server": "87.236.23.201",
-    "server_port": 3128
-  },
-  "🇺🇸 США 24ms": {
-    "type": "http",
-    "server": "174.138.119.88",
-    "server_port": 80
-  },
-  "🇪🇨 Неизвестно 219ms": {
-    "type": "http",
-    "server": "45.186.6.104",
-    "server_port": 3128
-  },
-  "🇰🇷 Южная Корея 379ms": {
-    "type": "http",
-    "server": "43.203.195.46",
-    "server_port": 80
-  },
-  "🇹🇼 Тайвань 404ms": {
-    "type": "http",
-    "server": "164.52.11.194",
-    "server_port": 18080
-  },
-  "🇰🇷 Южная Корея 402ms": {
-    "type": "http",
-    "server": "1.231.81.166",
-    "server_port": 3128
-  },
-  "🇸🇳 Неизвестно 431ms": {
-    "type": "http",
-    "server": "196.1.93.16",
-    "server_port": 80
-  },
-  "🇮🇳 Индия 488ms": {
-    "type": "http",
-    "server": "117.236.124.166",
-    "server_port": 3128
-  },
-  "🇭🇰 Гонконг 413ms": {
-    "type": "http",
-    "server": "16.163.88.228",
-    "server_port": 80
-  },
-  "🇮🇱 Израиль 992ms": {
-    "type": "http",
-    "server": "62.90.70.144",
-    "server_port": 7443
-  },
-  "🇺🇸 США 397ms": {
-    "type": "socks",
-    "server": "199.66.182.243",
-    "server_port": 4145
-  },
-  "🇺🇸 США 394ms": {
-    "type": "socks",
-    "server": "184.170.249.65",
-    "server_port": 4145
-  },
-  "🇺🇸 США 392ms": {
-    "type": "socks",
-    "server": "74.119.147.209",
-    "server_port": 4145
-  },
-  "🇺🇸 США 391ms": {
-    "type": "socks",
-    "server": "199.229.254.129",
-    "server_port": 4145
-  },
-  "🇺🇸 США 393ms": {
-    "type": "socks",
-    "server": "74.119.144.60",
-    "server_port": 4145
-  },
-  "🇺🇸 США 391ms-2": {
-    "type": "socks",
-    "server": "184.170.248.5",
-    "server_port": 4145
-  },
-  "🇺🇸 США 392ms-2": {
-    "type": "socks",
-    "server": "192.252.216.81",
-    "server_port": 4145
-  },
-  "🇷🇺 Россия 243ms": {
-    "type": "http",
-    "server": "87.228.89.21",
-    "server_port": 80
-  },
-  "🇷🇸 Неизвестно 259ms": {
-    "type": "http",
-    "server": "147.91.22.150",
-    "server_port": 80
-  },
-  "🇺🇸 США 5577ms": {
+  "🇿🇿 Неизвестно 26ms": {
     "type": "http",
     "server": "23.228.86.236",
     "server_port": 8081
   },
-  "🇺🇸 США 436ms": {
-    "type": "socks",
-    "server": "104.37.135.145",
-    "server_port": 4145
+  "🇿🇿 Неизвестно 41ms": {
+    "type": "http",
+    "server": "54.215.41.74",
+    "server_port": 13644
   },
-  "🇯🇵 Япония 341ms": {
+  "🇿🇿 Неизвестно 41ms-2": {
+    "type": "http",
+    "server": "54.215.41.74",
+    "server_port": 10875
+  },
+  "🇿🇿 Неизвестно 44ms": {
+    "type": "http",
+    "server": "52.34.243.150",
+    "server_port": 8080
+  },
+  "🇿🇿 Неизвестно 97ms": {
+    "type": "http",
+    "server": "34.44.49.215",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 130ms": {
+    "type": "http",
+    "server": "64.112.184.210",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 130ms-2": {
+    "type": "http",
+    "server": "200.110.106.72",
+    "server_port": 999
+  },
+  "🇿🇿 Неизвестно 134ms": {
+    "type": "http",
+    "server": "150.136.163.51",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 149ms": {
+    "type": "http",
+    "server": "142.93.202.130",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 153ms": {
+    "type": "http",
+    "server": "18.190.253.157",
+    "server_port": 45166
+  },
+  "🇿🇿 Неизвестно 204ms": {
+    "type": "http",
+    "server": "23.190.168.41",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 212ms": {
+    "type": "http",
+    "server": "190.0.246.210",
+    "server_port": 4040
+  },
+  "🇿🇿 Неизвестно 213ms": {
+    "type": "http",
+    "server": "190.0.246.213",
+    "server_port": 4040
+  },
+  "🇿🇿 Неизвестно 188ms": {
+    "type": "http",
+    "server": "203.161.52.193",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 284ms": {
+    "type": "http",
+    "server": "95.211.64.139",
+    "server_port": 8889
+  },
+  "🇿🇿 Неизвестно 284ms-2": {
+    "type": "http",
+    "server": "95.211.64.139",
+    "server_port": 8888
+  },
+  "🇿🇿 Неизвестно 285ms": {
+    "type": "http",
+    "server": "152.228.217.116",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 291ms": {
+    "type": "http",
+    "server": "38.76.9.0",
+    "server_port": 999
+  },
+  "🇿🇿 Неизвестно 296ms": {
+    "type": "http",
+    "server": "193.23.194.116",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 296ms-2": {
+    "type": "http",
+    "server": "161.35.223.141",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 13ms": {
+    "type": "socks",
+    "server": "54.193.63.238",
+    "server_port": 9080
+  },
+  "🇿🇿 Неизвестно 299ms": {
+    "type": "http",
+    "server": "37.187.74.125",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 300ms": {
+    "type": "http",
+    "server": "82.66.54.40",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 301ms": {
+    "type": "socks",
+    "server": "23.175.248.21",
+    "server_port": 1080
+  },
+  "🇿🇿 Неизвестно 301ms-2": {
+    "type": "http",
+    "server": "164.92.200.113",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 305ms": {
+    "type": "http",
+    "server": "108.181.123.113",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 309ms": {
+    "type": "http",
+    "server": "195.26.224.135",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 318ms": {
+    "type": "http",
+    "server": "212.47.232.28",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 319ms": {
+    "type": "http",
+    "server": "78.17.60.92",
+    "server_port": 8080
+  },
+  "🇿🇿 Неизвестно 25ms": {
+    "type": "socks",
+    "server": "43.173.124.23",
+    "server_port": 8081
+  },
+  "🇿🇿 Неизвестно 284ms-3": {
+    "type": "http",
+    "server": "45.186.6.104",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 334ms": {
+    "type": "http",
+    "server": "212.127.95.235",
+    "server_port": 8081
+  },
+  "🇿🇿 Неизвестно 340ms": {
+    "type": "http",
+    "server": "176.111.37.216",
+    "server_port": 39811
+  },
+  "🇿🇿 Неизвестно 341ms": {
+    "type": "http",
+    "server": "185.191.239.248",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 337ms": {
+    "type": "http",
+    "server": "45.155.226.177",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 391ms": {
+    "type": "socks",
+    "server": "69.55.49.177",
+    "server_port": 38182
+  },
+  "🇿🇿 Неизвестно 459ms": {
+    "type": "http",
+    "server": "144.178.199.118",
+    "server_port": 8443
+  },
+  "🇿🇿 Неизвестно 342ms": {
+    "type": "http",
+    "server": "176.111.37.5",
+    "server_port": 39811
+  },
+  "🇿🇿 Неизвестно 346ms": {
+    "type": "http",
+    "server": "87.228.89.21",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 351ms": {
+    "type": "http",
+    "server": "45.153.4.154",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 360ms": {
+    "type": "http",
+    "server": "62.90.70.144",
+    "server_port": 7443
+  },
+  "🇿🇿 Неизвестно 228ms": {
     "type": "http",
     "server": "45.146.163.31",
     "server_port": 80
   },
-  "🇺🇸 США 432ms": {
-    "type": "socks",
-    "server": "67.201.33.10",
-    "server_port": 25283
+  "🇿🇿 Неизвестно 375ms": {
+    "type": "http",
+    "server": "147.91.22.150",
+    "server_port": 80
   },
-  "🇺🇸 США 436ms-2": {
+  "🇿🇿 Неизвестно 259ms": {
+    "type": "http",
+    "server": "153.72.68.0",
+    "server_port": 8080
+  },
+  "🇿🇿 Неизвестно 266ms": {
     "type": "socks",
-    "server": "107.181.161.81",
+    "server": "162.253.68.97",
     "server_port": 4145
   },
-  "🇺🇸 США 441ms": {
+  "🇿🇿 Неизвестно 260ms": {
+    "type": "socks",
+    "server": "199.102.105.242",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 260ms-2": {
+    "type": "socks",
+    "server": "198.8.84.3",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 262ms": {
     "type": "socks",
     "server": "199.102.104.70",
     "server_port": 4145
   },
-  "🇺🇸 США 296ms": {
+  "🇿🇿 Неизвестно 261ms": {
     "type": "socks",
-    "server": "43.173.124.23",
-    "server_port": 8081
+    "server": "206.220.175.2",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 260ms-3": {
+    "type": "socks",
+    "server": "192.252.220.92",
+    "server_port": 17328
+  },
+  "🇿🇿 Неизвестно 255ms": {
+    "type": "socks",
+    "server": "107.181.161.81",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 255ms-2": {
+    "type": "socks",
+    "server": "67.201.35.145",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 250ms": {
+    "type": "socks",
+    "server": "104.200.152.30",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 249ms": {
+    "type": "socks",
+    "server": "104.37.135.145",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 234ms": {
+    "type": "socks",
+    "server": "142.54.236.97",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 231ms": {
+    "type": "socks",
+    "server": "199.102.107.145",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 705ms": {
+    "type": "http",
+    "server": "141.147.9.254",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 238ms": {
+    "type": "socks",
+    "server": "142.54.231.38",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 234ms-2": {
+    "type": "socks",
+    "server": "192.111.134.10",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 235ms": {
+    "type": "socks",
+    "server": "142.54.229.249",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 430ms": {
+    "type": "http",
+    "server": "87.236.23.201",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 243ms": {
+    "type": "socks",
+    "server": "68.71.249.153",
+    "server_port": 48606
+  },
+  "🇿🇿 Неизвестно 231ms-2": {
+    "type": "socks",
+    "server": "67.201.59.70",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 238ms-2": {
+    "type": "socks",
+    "server": "104.200.135.46",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 231ms-3": {
+    "type": "socks",
+    "server": "142.54.239.1",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 300ms-2": {
+    "type": "http",
+    "server": "152.230.215.123",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 231ms-4": {
+    "type": "socks",
+    "server": "142.54.228.193",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 231ms-5": {
+    "type": "socks",
+    "server": "199.116.114.11",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 239ms": {
+    "type": "socks",
+    "server": "199.102.106.94",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 234ms-3": {
+    "type": "socks",
+    "server": "142.54.237.38",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 237ms": {
+    "type": "socks",
+    "server": "72.37.217.3",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 247ms": {
+    "type": "socks",
+    "server": "142.54.237.34",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 248ms": {
+    "type": "socks",
+    "server": "67.201.39.14",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 251ms": {
+    "type": "socks",
+    "server": "67.201.33.10",
+    "server_port": 25283
+  },
+  "🇿🇿 Неизвестно 281ms": {
+    "type": "socks",
+    "server": "68.71.254.6",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 277ms": {
+    "type": "socks",
+    "server": "72.37.216.68",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 281ms-2": {
+    "type": "socks",
+    "server": "107.181.168.145",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 391ms-2": {
+    "type": "http",
+    "server": "51.75.206.209",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 555ms": {
+    "type": "socks",
+    "server": "139.28.240.201",
+    "server_port": 1082
+  },
+  "🇿🇿 Неизвестно 269ms": {
+    "type": "http",
+    "server": "43.203.195.46",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 514ms": {
+    "type": "socks",
+    "server": "74.119.144.60",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 508ms": {
+    "type": "socks",
+    "server": "184.170.251.30",
+    "server_port": 11288
+  },
+  "🇿🇿 Неизвестно 549ms": {
+    "type": "socks",
+    "server": "184.170.249.65",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 508ms-2": {
+    "type": "socks",
+    "server": "184.170.248.5",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 515ms": {
+    "type": "socks",
+    "server": "192.252.216.81",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 345ms": {
+    "type": "http",
+    "server": "1.231.81.166",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 510ms": {
+    "type": "socks",
+    "server": "74.119.147.209",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 502ms": {
+    "type": "socks",
+    "server": "199.229.254.129",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 467ms": {
+    "type": "http",
+    "server": "117.236.124.166",
+    "server_port": 3128
+  },
+  "🇿🇿 Неизвестно 489ms": {
+    "type": "http",
+    "server": "185.200.188.234",
+    "server_port": 10001
+  },
+  "🇿🇿 Неизвестно 479ms": {
+    "type": "http",
+    "server": "164.52.11.194",
+    "server_port": 18080
+  },
+  "🇿🇿 Неизвестно 305ms-2": {
+    "type": "http",
+    "server": "16.163.88.228",
+    "server_port": 80
+  },
+  "🇿🇿 Неизвестно 509ms": {
+    "type": "socks",
+    "server": "184.170.245.148",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 604ms": {
+    "type": "socks",
+    "server": "147.45.221.112",
+    "server_port": 1082
+  },
+  "🇿🇿 Неизвестно 541ms": {
+    "type": "socks",
+    "server": "199.66.182.243",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 680ms": {
+    "type": "socks",
+    "server": "213.199.47.140",
+    "server_port": 1080
+  },
+  "🇿🇿 Неизвестно 506ms": {
+    "type": "socks",
+    "server": "192.252.216.86",
+    "server_port": 4145
+  },
+  "🇿🇿 Неизвестно 530ms": {
+    "type": "http",
+    "server": "196.1.93.16",
+    "server_port": 80
   }
 }
