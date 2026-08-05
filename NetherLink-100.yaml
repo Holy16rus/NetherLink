@@ -11,512 +11,960 @@ log-level: info
 external-controller: 127.0.0.1:9090
 
 proxies:
-  - name: "🇿🇿 Неизвестно 64ms"
-    type: http
-    server: 35.182.12.78
-    port: 7963
+  - name: "🇸🇬 Сингапур 6ms"
+    type: vless
+    server: 104.17.112.113
+    port: 443
+    uuid: "4d10c997-4781-4cd9-82c3-15453523e12c"
+    network: "ws"
+    tls: true
+    servername: "support.zoom.us.yxls.eu.cc"
+    ws-opts:
+      path: "/sg-melbi"
+      headers:
+        Host: "support.zoom.us.yxls.eu.cc"
 
-  - name: "🇿🇿 Неизвестно 78ms"
-    type: http
-    server: 174.138.119.88
-    port: 80
+  - name: "🇺🇸 США 7ms"
+    type: vless
+    server: 8.47.69.0
+    port: 2095
+    uuid: "86c50e3a-5b87-49dd-bd20-03c7f2735e40"
+    network: "ws"
+    tls: false
+    servername: "fuckingfangbinxing.pusytroller.cf"
+    ws-opts:
+      path: "/"
+      headers:
+        Host: "fuckingfangbinxing.pusytroller.cf"
 
-  - name: "🇿🇿 Неизвестно 92ms"
-    type: http
-    server: 15.235.21.254
+  - name: "🇺🇸 США 13ms"
+    type: vless
+    server: 169.40.42.184
+    port: 443
+    uuid: "d65cc14c-f53f-4fe2-b262-97856601319c"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "yahoo.com"
+
+  - name: "🇺🇸 США 15ms"
+    type: vless
+    server: 88.218.44.4
+    port: 993
+    uuid: "7c74b0e4-f132-5583-4692-622a7d6b71a4"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "swcdn.apple.com"
+
+  - name: "🇺🇸 США 60ms"
+    type: vless
+    server: 70.39.178.231
+    port: 46197
+    uuid: "5aab0d40-c509-4560-b048-ade921fdfb6a"
+    network: "tcp"
+    tls: true
+    servername: "updates.cdn-apple.com"
+
+  - name: "🇺🇸 США 61ms"
+    type: vless
+    server: 38.246.226.240
+    port: 57878
+    uuid: "535f0e03-24d4-4268-ac40-5af829e8e59b"
+    network: "ws"
+    tls: false
+    ws-opts:
+      path: "/535f0e03"
+
+  - name: "🇺🇸 США 61ms-2"
+    type: vless
+    server: 70.39.198.93
+    port: 46197
+    uuid: "5aab0d40-c509-4560-b048-ade921fdfb6a"
+    network: "tcp"
+    tls: true
+    servername: "updates.cdn-apple.com"
+
+  - name: "🇺🇸 США 64ms"
+    type: ss
+    server: 70.39.198.35
+    port: 54166
+    cipher: "chacha20-ietf-poly1305"
+    password: "EvLfWGe0AKvK"
+
+  - name: "🇨🇴 Колумбия 73ms"
+    type: vless
+    server: 149.130.166.237
+    port: 62145
+    uuid: "8fb65472-5957-4f64-ba2d-b5812b2f155a"
+    network: "tcp"
+    tls: false
+
+  - name: "🇨🇴 Колумбия 74ms"
+    type: vless
+    server: 149.130.186.27
+    port: 62145
+    uuid: "8fb65472-5957-4f64-ba2d-b5812b2f155a"
+    network: "tcp"
+    tls: false
+
+  - name: "🇨🇴 Колумбия 76ms"
+    type: vless
+    server: 149.130.184.51
+    port: 62145
+    uuid: "8fb65472-5957-4f64-ba2d-b5812b2f155a"
+    network: "tcp"
+    tls: false
+
+  - name: "🇨🇴 Колумбия 86ms"
+    type: vless
+    server: 149.130.185.31
+    port: 62145
+    uuid: "8fb65472-5957-4f64-ba2d-b5812b2f155a"
+    network: "tcp"
+    tls: false
+
+  - name: "🇮🇪 Ирландия 89ms"
+    type: trojan
+    server: skilled-lioness.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "skilled-lioness.rooster465.autos"
+
+  - name: "🇩🇪 Германия 95ms"
+    type: vless
+    server: 5.75.201.77
+    port: 51822
+    uuid: "200e4181-caf2-4261-bd98-b1fd9ad1fce1"
+    network: "tcp"
+    tls: false
+
+  - name: "🇫🇷 Франция 96ms"
+    type: vless
+    server: 89.208.113.16
+    port: 443
+    uuid: "adce7c2a-3191-49ae-b61c-9b8258ea1b0e"
+    network: "tcp"
+    tls: false
+
+  - name: "🇺🇸 США 100ms"
+    type: vless
+    server: 70.39.198.183
+    port: 46197
+    uuid: "5aab0d40-c509-4560-b048-ade921fdfb6a"
+    network: "tcp"
+    tls: true
+    servername: "updates.cdn-apple.com"
+
+  - name: "🇳🇱 Нидерланды 89ms"
+    type: vless
+    server: 89.105.197.203
+    port: 443
+    uuid: "631ee34f-4faf-4ad7-b49d-e6f50403cf0e"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "anyfile2file.com"
+
+  - name: "🇳🇱 Нидерланды 105ms"
+    type: ss
+    server: 82.38.31.42
     port: 8080
+    cipher: "chacha20-ietf-poly1305"
+    password: "oZIoA69Q8yhcQV8ka3Pa3A"
 
-  - name: "🇿🇿 Неизвестно 109ms"
+  - name: "🇫🇷 Франция 109ms"
+    type: trojan
+    server: classic-gator.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "classic-gator.rooster465.autos"
+
+  - name: "🇫🇷 Франция 110ms"
+    type: trojan
+    server: careful-tadpole.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+
+  - name: "🇩🇪 Германия 104ms"
+    type: trojan
+    server: gentle-raptor.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "gentle-raptor.rooster465.autos"
+
+  - name: "🇩🇪 Германия 113ms"
+    type: trojan
+    server: next-turkey.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "next-turkey.rooster465.autos"
+
+  - name: "🇳🇱 Нидерланды 117ms"
+    type: vmess
+    server: 159.223.13.109
+    port: 1234
+    uuid: "5c040f1d-45db-43bd-8d46-e4950e433735"
+    alterId: 0
+    cipher: "aes-128-gcm"
+    network: "tcp"
+    tls: true
+    servername: "supervpn.super.com"
+
+  - name: "🇵🇹 Португалия 125ms"
+    type: vless
+    server: 93.119.168.26
+    port: 63443
+    uuid: "555a098f-06db-427c-a535-4ba284046dbf"
+    network: "tcp"
+    tls: false
+
+  - name: "🇺🇸 США 65ms"
     type: http
-    server: 192.220.34.124
+    server: 34.69.61.247
     port: 80
 
-  - name: "🇿🇿 Неизвестно 110ms"
-    type: http
-    server: 67.203.23.79
-    port: 8081
+  - name: "🇮🇹 Италия 138ms"
+    type: vless
+    server: sca20.exodnsdir.xyz
+    port: 8880
+    uuid: "8dc7722c-2767-4eea-a28b-2f8daacc07e3"
+    network: "grpc"
+    tls: false
 
-  - name: "🇿🇿 Неизвестно 199ms"
+  - name: "🇳🇱 Нидерланды 21ms"
+    type: vless
+    server: www.visa.com.hk
+    port: 443
+    uuid: "98ca432c-4dd0-452e-a49c-552620e14358"
+    network: "ws"
+    tls: true
+    servername: "nl-ams.862400.xyz"
+    ws-opts:
+      path: "/announcement"
+      headers:
+        Host: "nl-ams.862400.xyz"
+
+  - name: "🇩🇪 Германия 89ms"
+    type: vless
+    server: 88.216.220.87
+    port: 443
+    uuid: "a8e3155b-ceb1-4fcb-bc0c-2e77ec005401"
+    network: "grpc"
+    tls: true
+    servername: "api.noneok.com"
+    grpc-opts:
+      grpc-service-name: "api.v1.StreamService"
+
+  - name: "🇨🇭 Швейцария 98ms"
+    type: trojan
+    server: 86.106.84.195
+    port: 53261
+    password: "y3b03zx3tznhyo538p4c"
+    skip-cert-verify: true
+    sni: "speedtest.tinkoff.ru"
+
+  - name: "🇩🇪 Германия 100ms"
+    type: trojan
+    server: rapid-firefly.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "rapid-firefly.rooster465.autos"
+
+  - name: "🇺🇸 США 162ms"
+    type: trojan
+    server: devoted-tapir.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "devoted-tapir.rooster465.autos"
+
+  - name: "🇸🇨 Неизвестно 112ms"
+    type: vless
+    server: 45.195.111.15
+    port: 443
+    uuid: "45459159-1536-4e98-95b3-aa1dbbfb4172"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇦🇹 Австрия 102ms"
+    type: vless
+    server: 152.53.114.186
+    port: 443
+    uuid: "ab7d5ea9-6eca-47c3-b14b-67378fc2d7c2"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "as.tunnelx.space"
+
+  - name: "🇳🇱 Нидерланды 107ms"
+    type: trojan
+    server: eager-louse.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "eager-louse.rooster465.autos"
+
+  - name: "🇩🇪 Германия 5ms"
+    type: vless
+    server: 172.64.34.119
+    port: 443
+    uuid: "49e76398-5127-4005-90cb-c2a971f745f1"
+    network: "ws"
+    tls: true
+    servername: "uhnjk.greenlionport-fla.sbs"
+    ws-opts:
+      path: "/carbon"
+      headers:
+        Host: "uhnjk.greenlionport-fla.sbs"
+
+  - name: "🇩🇪 Германия 6ms"
+    type: vless
+    server: love.ns.cloudflare.com
+    port: 443
+    uuid: "49e76398-5127-4005-90cb-c2a971f745f1"
+    network: "ws"
+    tls: true
+    servername: "uhnjk.greenlionport-fla.sbs"
+    ws-opts:
+      path: "/carbon"
+      headers:
+        Host: "uhnjk.greenlionport-fla.sbs"
+
+  - name: "🇳🇱 Нидерланды 92ms"
+    type: vless
+    server: 64.188.62.138
+    port: 40443
+    uuid: "9150748b-fa2b-4ef1-a7f1-7c4a76e2dc0b"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "deepl.com"
+
+  - name: "🇺🇸 США 61ms-3"
+    type: vless
+    server: 70.39.197.13
+    port: 46197
+    uuid: "5aab0d40-c509-4560-b048-ade921fdfb6a"
+    network: "tcp"
+    tls: true
+    servername: "updates.cdn-apple.com"
+
+  - name: "🇱🇹 Литва 122ms"
+    type: vless
+    server: 93.115.25.139
+    port: 443
+    uuid: "5c192fd7-ef98-4112-a20c-129108fcd7e9"
+    network: "tcp"
+    tls: true
+    servername: "ddc-chr2.astralweb.tech"
+
+  - name: "🇵🇱 Польша 120ms"
+    type: trojan
+    server: discrete-basilisk.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "discrete-basilisk.rooster465.autos"
+
+  - name: "🇪🇪 Эстония 113ms"
+    type: vless
+    server: 95.85.224.51
+    port: 443
+    uuid: "342ab7e4-5a89-0001-8809-304120d4aa83"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "max.ru"
+
+  - name: "🇱🇻 Латвия 119ms"
+    type: vless
+    server: 188.92.78.80
+    port: 443
+    uuid: "631ee34f-4faf-4ad7-b49d-e6f50403cf0e"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "anyfile2file.com"
+
+  - name: "🇵🇱 Польша 111ms"
+    type: vless
+    server: 155.212.243.123
+    port: 443
+    uuid: "5cd8fc43-878f-11f1-8c93-54db13ea7d40"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "www.wp.pl"
+
+  - name: "🇷🇺 Россия 122ms"
+    type: vless
+    server: 185.247.16.3
+    port: 2200
+    uuid: "155e8dd4-a559-407a-9ea8-13a5e829f066"
+    network: "ws"
+    tls: false
+    servername: "rzd.ru"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
+
+  - name: "🇷🇺 Россия 131ms"
+    type: vless
+    server: 31.177.82.106
+    port: 4100
+    uuid: "5d0fbb28-3be3-4044-bc5b-e4b7ca1916c7"
+    network: "ws"
+    tls: false
+    servername: "live.ok.ru"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "live.ok.ru"
+
+  - name: "🇷🇺 Россия 123ms"
+    type: vless
+    server: 89.127.217.127
+    port: 2200
+    uuid: "9501f3d6-483f-45c1-ab2c-33266520cd5c"
+    network: "ws"
+    tls: false
+    servername: "rzd.ru"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
+
+  - name: "🇺🇸 США 96ms"
+    type: vless
+    server: d.mygoldiran.com
+    port: 443
+    uuid: "eaa3cc1a-c3cd-48d6-b4d2-f3b84c05bd4a"
+    network: "ws"
+    tls: true
+    servername: "usa_multi.mygoldiran.com"
+    ws-opts:
+      path: "/idea"
+      headers:
+        Host: "usa_multi.mygoldiran.com"
+
+  - name: "🇫🇮 Финляндия 124ms"
+    type: vless
+    server: 91.103.140.243
+    port: 443
+    uuid: "c8dcbe44-5714-4f99-8d7a-aadebea34abf"
+    network: "tcp"
+    tls: true
+    servername: "www.amd.com"
+
+  - name: "🇨🇦 Канада 6ms"
+    type: vless
+    server: 104.17.108.69
+    port: 443
+    uuid: "3a17b816-a8ae-415d-a592-29345d7a7591"
+    network: "ws"
+    tls: true
+    servername: "89drg3d.zenvorix.ir"
+    ws-opts:
+      path: "/nova-geo-psiphon-ca"
+      headers:
+        Host: "89drg3d.zenvorix.ir"
+
+  - name: "🇷🇺 Россия 129ms"
+    type: vless
+    server: 79.174.78.25
+    port: 9443
+    uuid: "bdba330b-dfc6-0023-93e4-b10f906bf4fb"
+    network: "tcp"
+    tls: true
+    servername: "api-maps.yandex.ru"
+
+  - name: "🇵🇱 Польша 200ms"
+    type: trojan
+    server: relaxed-gull.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "relaxed-gull.rooster465.autos"
+
+  - name: "🇷🇺 Россия 141ms"
+    type: vless
+    server: 194.87.161.60
+    port: 4100
+    uuid: "9b44bfb4-9d28-4870-9fc3-5154d6d462ff"
+    network: "ws"
+    tls: false
+    servername: "live.ok.ru"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "live.ok.ru"
+
+  - name: "🇬🇧 Великобритания 64ms"
+    type: trojan
+    server: 157.254.38.210
+    port: 20041
+    password: "ba07a8af-5544-48ac-ab62-3b6c00a44fa6"
+    skip-cert-verify: true
+    sni: "de.catxstar.com"
+
+  - name: "🇳🇱 Нидерланды 125ms"
+    type: vless
+    server: 94.139.251.189
+    port: 443
+    uuid: "35699c54-9188-4f43-972e-e8e42dbb104e"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "apple.com"
+
+  - name: "🇭🇰 Гонконг 210ms"
+    type: ss
+    server: 212.192.15.33
+    port: 10910
+    cipher: "aes-256-gcm"
+    password: "72553320ae6bcc8f"
+
+  - name: "🇺🇸 США 330ms"
+    type: trojan
+    server: fleet-bonefish.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "fleet-bonefish.rooster465.autos"
+
+  - name: "🇬🇧 Великобритания 256ms"
+    type: vless
+    server: gr005.bamajobin.ir
+    port: 2053
+    uuid: "d9aa9ea3-9388-483f-a58d-a754f33ec505"
+    network: "grpc"
+    tls: true
+    servername: "play.google.com"
+    grpc-opts:
+      grpc-service-name: "api.v1.data"
+
+  - name: "🇭🇰 Гонконг 218ms"
+    type: ss
+    server: 212.192.15.13
+    port: 8388
+    cipher: "aes-256-gcm"
+    password: "WWMo8FMXNGLs"
+
+  - name: "🇯🇵 Япония 173ms"
+    type: trojan
+    server: definite-sturgeon.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "definite-sturgeon.rooster465.autos"
+
+  - name: "🇷🇺 Россия 135ms"
+    type: vless
+    server: 212.233.93.223
+    port: 443
+    uuid: "bdba330b-dfc6-001f-93e4-b10f906bf4fb"
+    network: "tcp"
+    tls: true
+    servername: "eh.vk.com"
+
+  - name: "🇳🇱 Нидерланды 188ms"
     type: http
     server: 95.211.64.139
     port: 8889
 
-  - name: "🇿🇿 Неизвестно 203ms"
-    type: http
-    server: 144.178.199.118
-    port: 8443
+  - name: "🇬🇧 Великобритания 98ms"
+    type: vless
+    server: 144.31.213.225
+    port: 443
+    uuid: "9e3de7f7-a595-4117-b1b6-dc41eb870ab1"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "www.cloudflare.com"
 
-  - name: "🇿🇿 Неизвестно 206ms"
-    type: http
-    server: 152.228.217.116
-    port: 80
+  - name: "🇵🇰 Неизвестно 78ms"
+    type: vless
+    server: 64.49.38.6
+    port: 993
+    uuid: "e6d41d6f-d58a-7650-bba4-d7f0dde3ba4d"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "download.nvidia.com"
 
-  - name: "🇿🇿 Неизвестно 209ms"
+  - name: "🇳🇱 Нидерланды 187ms"
     type: http
     server: 95.211.64.139
     port: 8888
 
-  - name: "🇿🇿 Неизвестно 215ms"
-    type: http
-    server: 164.92.200.113
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 217ms"
-    type: http
-    server: 46.35.9.110
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 219ms"
-    type: http
-    server: 82.66.54.40
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 229ms"
-    type: http
-    server: 109.199.119.160
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 231ms"
-    type: http
-    server: 51.49.153.183
-    port: 15004
-
-  - name: "🇿🇿 Неизвестно 233ms"
+  - name: "🇩🇪 Германия 202ms"
     type: http
     server: 152.53.20.190
     port: 20000
 
-  - name: "🇿🇿 Неизвестно 237ms"
-    type: http
-    server: 91.98.109.147
-    port: 2222
+  - name: "🇷🇺 Россия 133ms"
+    type: vless
+    server: 31.177.82.106
+    port: 2200
+    uuid: "5d0fbb28-3be3-4044-bc5b-e4b7ca1916c7"
+    network: "ws"
+    tls: false
+    servername: "rzd.ru"
+    ws-opts:
+      path: "/v1"
+      headers:
+        Host: "rzd.ru"
 
-  - name: "🇿🇿 Неизвестно 239ms"
-    type: http
-    server: 206.245.131.160
-    port: 80
+  - name: "🇳🇱 Нидерланды 95ms"
+    type: vless
+    server: 50.7.41.142
+    port: 443
+    uuid: "b8794f67-80d9-4124-8fc5-2d2ce5516573"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "deepl.com"
 
-  - name: "🇿🇿 Неизвестно 240ms"
-    type: http
-    server: 51.49.153.183
-    port: 5243
+  - name: "🇯🇵 Япония 288ms"
+    type: trojan
+    server: becoming-hare.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "becoming-hare.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 241ms"
-    type: http
-    server: 50.114.58.9
-    port: 1050
+  - name: "🇸🇨 Неизвестно 122ms"
+    type: vless
+    server: 45.196.201.155
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 241ms-2"
-    type: http
-    server: 116.202.5.157
-    port: 2222
+  - name: "🇮🇹 Италия 261ms"
+    type: vless
+    server: freev2.cloudflare.182682.xyz
+    port: 443
+    uuid: "98ca432c-4dd0-452e-a49c-552620e14358"
+    network: "ws"
+    tls: true
+    servername: "it-mil.862400.xyz"
+    ws-opts:
+      path: "/announcement"
+      headers:
+        Host: "it-mil.862400.xyz"
 
-  - name: "🇿🇿 Неизвестно 243ms"
-    type: http
-    server: 212.127.95.235
-    port: 8081
+  - name: "🇰🇷 Южная Корея 240ms"
+    type: trojan
+    server: definite-malamute.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "definite-malamute.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 247ms"
-    type: http
-    server: 193.124.91.150
-    port: 1024
+  - name: "🇰🇷 Южная Корея 244ms"
+    type: trojan
+    server: saving-octopus.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "saving-octopus.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 252ms"
-    type: http
-    server: 37.59.125.131
-    port: 8888
+  - name: "🇮🇩 Индонезия 122ms"
+    type: vless
+    server: 45.196.201.234
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 254ms"
-    type: http
-    server: 116.202.108.111
-    port: 3128
+  - name: "🇮🇩 Индонезия 124ms"
+    type: vless
+    server: 45.196.201.76
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 264ms"
-    type: http
-    server: 5.101.118.69
-    port: 10123
+  - name: "🇸🇨 Неизвестно 126ms"
+    type: vless
+    server: 45.196.201.13
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 237ms-2"
-    type: http
-    server: 79.110.200.27
-    port: 8000
+  - name: "🇵🇭 Филиппины 121ms"
+    type: vless
+    server: 45.196.201.41
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 253ms"
-    type: http
-    server: 79.110.202.131
-    port: 8081
+  - name: "🇮🇩 Индонезия 127ms"
+    type: vless
+    server: 45.196.201.7
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 275ms"
-    type: http
-    server: 91.98.86.26
-    port: 8888
+  - name: "🇮🇩 Индонезия 127ms-2"
+    type: vless
+    server: 45.196.201.84
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
 
-  - name: "🇿🇿 Неизвестно 273ms"
-    type: http
-    server: 178.212.144.7
-    port: 80
+  - name: "🇬🇧 Великобритания 344ms"
+    type: vless
+    server: meshbuzz.bond
+    port: 443
+    uuid: "8a6729c4-81d4-4b05-8747-3fffc17b6a64"
+    network: "ws"
+    tls: true
+    servername: "OhPwIlJo8.RoBoRoCkS.Ir"
+    ws-opts:
+      path: "/mashdi"
+      headers:
+        Host: "OhPwIlJo8.RoBoRoCkS.Ir"
 
-  - name: "🇿🇿 Неизвестно 456ms"
+  - name: "🇮🇳 Индия 234ms"
+    type: vless
+    server: 5.253.42.164
+    port: 40443
+    uuid: "e99ba96d-dec8-42eb-be53-19e71eef7cab"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "deepl.com"
+
+  - name: "🇵🇭 Филиппины 125ms"
+    type: vless
+    server: 45.196.201.63
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇯🇵 Япония 324ms"
+    type: trojan
+    server: upright-impala.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "upright-impala.rooster465.autos"
+
+  - name: "🇯🇵 Япония 331ms"
+    type: trojan
+    server: relaxing-bluebird.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "relaxing-bluebird.rooster465.autos"
+
+  - name: "🇷🇺 Россия 314ms"
+    type: vless
+    server: api.kinomir.fun
+    port: 40443
+    uuid: "598b823c-d3fc-4013-aae5-837f10080f7a"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "deepl.com"
+
+  - name: "🇰🇷 Южная Корея 281ms"
+    type: trojan
+    server: moved-meerkat.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "moved-meerkat.rooster465.autos"
+
+  - name: "🇮🇩 Индонезия 127ms-3"
+    type: vless
+    server: 45.196.201.37
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇸🇨 Неизвестно 125ms"
+    type: vless
+    server: 45.196.201.231
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇸🇨 Неизвестно 134ms"
+    type: vless
+    server: 45.196.201.161
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇫🇮 Финляндия 335ms"
+    type: vless
+    server: fl11.skorostnet.space
+    port: 443
+    uuid: "06d44c57-8e1a-41f4-b9c4-65d35869e078"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "fl11.skorostnet.space"
+
+  - name: "🇺🇸 США 122ms"
+    type: vless
+    server: 45.196.201.163
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇸🇨 Неизвестно 127ms"
+    type: vless
+    server: 45.196.201.38
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇬🇧 Великобритания 255ms"
+    type: trojan
+    server: hkdcrtc-e.catcat321.com
+    port: 20041
+    password: "ba07a8af-5544-48ac-ab62-3b6c00a44fa6"
+    skip-cert-verify: true
+
+  - name: "🇸🇨 Неизвестно 132ms"
+    type: vless
+    server: 45.196.201.195
+    port: 443
+    uuid: "f75814f6-8f81-4847-b792-168c41f2dc85"
+    flow: "xtls-rprx-vision"
+    network: "tcp"
+    tls: true
+    servername: "storage.yandex.net"
+
+  - name: "🇷🇺 Россия 268ms"
+    type: trojan
+    server: hkdcrtc-e.catcat321.com
+    port: 20066
+    password: "41c406e2-12b5-41f2-a329-d0621052d675"
+    skip-cert-verify: true
+    sni: "hk.catxstar.com"
+
+  - name: "🇭🇰 Гонконг 292ms"
+    type: trojan
+    server: upright-hamster.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "upright-hamster.rooster465.autos"
+
+  - name: "🇭🇰 Гонконг 292ms-2"
+    type: trojan
+    server: ace-starling.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "ace-starling.rooster465.autos"
+
+  - name: "🇳🇱 Нидерланды 436ms"
     type: http
     server: 95.211.174.135
     port: 3128
 
-  - name: "🇿🇿 Неизвестно 460ms"
-    type: http
-    server: 137.66.1.45
-    port: 80
+  - name: "🇰🇷 Южная Корея 498ms"
+    type: trojan
+    server: uncommon-feline.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "uncommon-feline.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 312ms"
+  - name: "🇳🇱 Нидерланды 187ms-2"
     type: http
-    server: 31.10.83.158
-    port: 8080
+    server: 144.178.199.118
+    port: 8443
 
-  - name: "🇿🇿 Неизвестно 299ms"
-    type: http
-    server: 43.207.141.180
-    port: 41850
-
-  - name: "🇿🇿 Неизвестно 325ms"
-    type: http
-    server: 91.202.185.69
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 363ms"
-    type: http
-    server: 65.109.65.238
-    port: 28080
-
-  - name: "🇿🇿 Неизвестно 376ms"
-    type: http
-    server: 195.26.230.202
-    port: 8080
-
-  - name: "🇿🇿 Неизвестно 357ms"
-    type: http
-    server: 88.225.216.242
-    port: 3310
-
-  - name: "🇿🇿 Неизвестно 369ms"
-    type: http
-    server: 89.167.124.218
-    port: 8888
-
-  - name: "🇿🇿 Неизвестно 609ms"
-    type: http
-    server: 67.203.23.88
-    port: 8081
-
-  - name: "🇿🇿 Неизвестно 352ms"
-    type: http
-    server: 43.203.195.46
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 383ms"
-    type: http
-    server: 147.78.0.81
-    port: 9443
-
-  - name: "🇿🇿 Неизвестно 365ms"
-    type: http
-    server: 70.39.205.56
-    port: 5556
-
-  - name: "🇿🇿 Неизвестно 674ms"
+  - name: "🇺🇸 США 543ms"
     type: http
     server: 162.214.159.94
     port: 3128
-
-  - name: "🇿🇿 Неизвестно 393ms"
-    type: http
-    server: 54.46.6.234
-    port: 3129
-
-  - name: "🇿🇿 Неизвестно 386ms"
-    type: http
-    server: 112.118.187.149
-    port: 8080
-
-  - name: "🇿🇿 Неизвестно 867ms"
-    type: http
-    server: 212.231.191.23
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 895ms"
-    type: http
-    server: 153.51.241.50
-    port: 999
-
-  - name: "🇿🇿 Неизвестно 443ms"
-    type: http
-    server: 152.42.167.241
-    port: 3128
-
-  - name: "🇿🇿 Неизвестно 423ms"
-    type: http
-    server: 18.138.102.128
-    port: 3128
-
-  - name: "🇿🇿 Неизвестно 428ms"
-    type: http
-    server: 104.64.214.122
-    port: 2345
-
-  - name: "🇿🇿 Неизвестно 409ms"
-    type: http
-    server: 88.247.49.47
-    port: 19053
-
-  - name: "🇿🇿 Неизвестно 423ms-2"
-    type: http
-    server: 97.74.87.226
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 792ms"
-    type: http
-    server: 217.182.195.221
-    port: 30008
-
-  - name: "🇿🇿 Неизвестно 430ms"
-    type: http
-    server: 143.42.66.91
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 443ms-2"
-    type: http
-    server: 203.19.38.114
-    port: 1080
-
-  - name: "🇿🇿 Неизвестно 510ms"
-    type: socks5
-    server: 144.91.111.48
-    port: 1088
-
-  - name: "🇿🇿 Неизвестно 554ms"
-    type: http
-    server: 27.34.242.98
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 480ms"
-    type: http
-    server: 58.254.153.146
-    port: 17981
-
-  - name: "🇿🇿 Неизвестно 513ms"
-    type: http
-    server: 94.182.177.92
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 472ms"
-    type: http
-    server: 111.230.80.172
-    port: 7080
-
-  - name: "🇿🇿 Неизвестно 471ms"
-    type: http
-    server: 58.254.153.147
-    port: 17981
-
-  - name: "🇿🇿 Неизвестно 507ms"
-    type: http
-    server: 85.99.248.64
-    port: 1453
-
-  - name: "🇿🇿 Неизвестно 447ms"
-    type: http
-    server: 34.101.184.164
-    port: 3128
-
-  - name: "🇿🇿 Неизвестно 544ms"
-    type: socks5
-    server: 212.77.75.25
-    port: 1088
-
-  - name: "🇿🇿 Неизвестно 1423ms"
-    type: http
-    server: 93.123.16.38
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 1423ms-2"
-    type: http
-    server: 78.186.41.62
-    port: 1455
-
-  - name: "🇿🇿 Неизвестно 579ms"
-    type: http
-    server: 212.80.19.203
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 578ms"
-    type: http
-    server: 219.65.73.81
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 417ms"
-    type: http
-    server: 88.247.23.135
-    port: 3310
-
-  - name: "🇿🇿 Неизвестно 535ms"
-    type: http
-    server: 14.238.8.63
-    port: 9090
-
-  - name: "🇿🇿 Неизвестно 1423ms-3"
-    type: http
-    server: 183.110.216.159
-    port: 8091
-
-  - name: "🇿🇿 Неизвестно 1218ms"
-    type: http
-    server: 85.104.3.232
-    port: 3310
-
-  - name: "🇿🇿 Неизвестно 1262ms"
-    type: http
-    server: 176.99.134.183
-    port: 8090
-
-  - name: "🇿🇿 Неизвестно 611ms"
-    type: http
-    server: 113.204.79.230
-    port: 9091
-
-  - name: "🇿🇿 Неизвестно 587ms"
-    type: socks5
-    server: 74.119.144.60
-    port: 4145
-
-  - name: "🇿🇿 Неизвестно 612ms"
-    type: http
-    server: 101.251.204.174
-    port: 8080
-
-  - name: "🇿🇿 Неизвестно 625ms"
-    type: http
-    server: 219.65.73.80
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 2283ms"
-    type: http
-    server: 91.98.97.79
-    port: 2222
-
-  - name: "🇿🇿 Неизвестно 672ms"
-    type: http
-    server: 153.0.171.163
-    port: 8085
-
-  - name: "🇿🇿 Неизвестно 2145ms"
-    type: http
-    server: 65.109.65.238
-    port: 18080
-
-  - name: "🇿🇿 Неизвестно 924ms"
-    type: http
-    server: 183.110.216.159
-    port: 8090
-
-  - name: "🇿🇿 Неизвестно 565ms"
-    type: http
-    server: 78.186.42.241
-    port: 1453
-
-  - name: "🇿🇿 Неизвестно 1192ms"
-    type: http
-    server: 217.182.195.221
-    port: 30007
-
-  - name: "🇿🇿 Неизвестно 936ms"
-    type: http
-    server: 34.134.231.117
-    port: 3129
-
-  - name: "🇿🇿 Неизвестно 1241ms"
-    type: http
-    server: 195.19.217.200
-    port: 3128
-
-  - name: "🇿🇿 Неизвестно 1280ms"
-    type: http
-    server: 175.136.239.173
-    port: 8181
-
-  - name: "🇿🇿 Неизвестно 3311ms"
-    type: http
-    server: 91.98.97.61
-    port: 2222
-
-  - name: "🇿🇿 Неизвестно 3314ms"
-    type: http
-    server: 91.98.105.243
-    port: 2222
-
-  - name: "🇿🇿 Неизвестно 3314ms-2"
-    type: http
-    server: 91.98.104.216
-    port: 2222
-
-  - name: "🇿🇿 Неизвестно 1244ms"
-    type: socks5
-    server: 147.139.201.108
-    port: 1080
-
-  - name: "🇿🇿 Неизвестно 1098ms"
-    type: http
-    server: 210.12.28.122
-    port: 8124
-
-  - name: "🇿🇿 Неизвестно 1295ms"
-    type: http
-    server: 175.139.255.25
-    port: 8181
-
-  - name: "🇿🇿 Неизвестно 4502ms"
-    type: http
-    server: 80.55.169.2
-    port: 8080
-
-  - name: "🇿🇿 Неизвестно 1979ms"
-    type: http
-    server: 175.143.76.177
-    port: 8181
-
-  - name: "🇿🇿 Неизвестно 3718ms"
-    type: http
-    server: 66.163.119.55
-    port: 10006
-
-  - name: "🇿🇿 Неизвестно 1663ms"
-    type: socks5
-    server: 45.61.129.165
-    port: 9050
-
-  - name: "🇿🇿 Неизвестно 1736ms"
-    type: socks5
-    server: 158.220.101.43
-    port: 1080
-
-  - name: "🇿🇿 Неизвестно 255ms"
-    type: http
-    server: 195.26.224.135
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 7540ms"
-    type: http
-    server: 108.161.135.118
-    port: 80
-
-  - name: "🇿🇿 Неизвестно 564ms"
-    type: http
-    server: 61.158.175.38
-    port: 9002
 
 proxy-groups:
   - name: PROXY
     type: select
     proxies:
       - "Auto-Смена"
-      - "🇿🇿 Неизвестно"
+      - "🇺🇸 США"
+      - "🇳🇱 Нидерланды"
+      - "🇷🇺 Россия"
+      - "🇩🇪 Германия"
+      - "🇸🇨 Неизвестно"
+      - "🇬🇧 Великобритания"
+      - "🇮🇩 Индонезия"
+      - "🇨🇴 Колумбия"
+      - "🇭🇰 Гонконг"
+      - "🇯🇵 Япония"
+      - "🇰🇷 Южная Корея"
+      - "🇫🇷 Франция"
+      - "🇵🇱 Польша"
+      - "🇫🇮 Финляндия"
+      - "🇮🇹 Италия"
+      - "🇵🇭 Филиппины"
+      - "🇦🇹 Австрия"
+      - "🇨🇦 Канада"
+      - "🇨🇭 Швейцария"
+      - "🇪🇪 Эстония"
+      - "🇮🇪 Ирландия"
+      - "🇮🇳 Индия"
+      - "🇱🇹 Литва"
+      - "🇱🇻 Латвия"
+      - "🇵🇰 Неизвестно"
+      - "🇵🇹 Португалия"
+      - "🇸🇬 Сингапур"
       - DIRECT
 
   - name: "Auto-Смена"
@@ -525,210 +973,340 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - "🇿🇿 Неизвестно 64ms"
-      - "🇿🇿 Неизвестно 78ms"
-      - "🇿🇿 Неизвестно 92ms"
-      - "🇿🇿 Неизвестно 109ms"
-      - "🇿🇿 Неизвестно 110ms"
-      - "🇿🇿 Неизвестно 199ms"
-      - "🇿🇿 Неизвестно 203ms"
-      - "🇿🇿 Неизвестно 206ms"
-      - "🇿🇿 Неизвестно 209ms"
-      - "🇿🇿 Неизвестно 215ms"
-      - "🇿🇿 Неизвестно 217ms"
-      - "🇿🇿 Неизвестно 219ms"
-      - "🇿🇿 Неизвестно 229ms"
-      - "🇿🇿 Неизвестно 231ms"
-      - "🇿🇿 Неизвестно 233ms"
-      - "🇿🇿 Неизвестно 237ms"
-      - "🇿🇿 Неизвестно 239ms"
-      - "🇿🇿 Неизвестно 240ms"
-      - "🇿🇿 Неизвестно 241ms"
-      - "🇿🇿 Неизвестно 241ms-2"
-      - "🇿🇿 Неизвестно 243ms"
-      - "🇿🇿 Неизвестно 247ms"
-      - "🇿🇿 Неизвестно 252ms"
-      - "🇿🇿 Неизвестно 254ms"
-      - "🇿🇿 Неизвестно 264ms"
-      - "🇿🇿 Неизвестно 237ms-2"
-      - "🇿🇿 Неизвестно 253ms"
-      - "🇿🇿 Неизвестно 275ms"
-      - "🇿🇿 Неизвестно 273ms"
-      - "🇿🇿 Неизвестно 456ms"
-      - "🇿🇿 Неизвестно 460ms"
-      - "🇿🇿 Неизвестно 312ms"
-      - "🇿🇿 Неизвестно 299ms"
-      - "🇿🇿 Неизвестно 325ms"
-      - "🇿🇿 Неизвестно 363ms"
-      - "🇿🇿 Неизвестно 376ms"
-      - "🇿🇿 Неизвестно 357ms"
-      - "🇿🇿 Неизвестно 369ms"
-      - "🇿🇿 Неизвестно 609ms"
-      - "🇿🇿 Неизвестно 352ms"
-      - "🇿🇿 Неизвестно 383ms"
-      - "🇿🇿 Неизвестно 365ms"
-      - "🇿🇿 Неизвестно 674ms"
-      - "🇿🇿 Неизвестно 393ms"
-      - "🇿🇿 Неизвестно 386ms"
-      - "🇿🇿 Неизвестно 867ms"
-      - "🇿🇿 Неизвестно 895ms"
-      - "🇿🇿 Неизвестно 443ms"
-      - "🇿🇿 Неизвестно 423ms"
-      - "🇿🇿 Неизвестно 428ms"
-      - "🇿🇿 Неизвестно 409ms"
-      - "🇿🇿 Неизвестно 423ms-2"
-      - "🇿🇿 Неизвестно 792ms"
-      - "🇿🇿 Неизвестно 430ms"
-      - "🇿🇿 Неизвестно 443ms-2"
-      - "🇿🇿 Неизвестно 510ms"
-      - "🇿🇿 Неизвестно 554ms"
-      - "🇿🇿 Неизвестно 480ms"
-      - "🇿🇿 Неизвестно 513ms"
-      - "🇿🇿 Неизвестно 472ms"
-      - "🇿🇿 Неизвестно 471ms"
-      - "🇿🇿 Неизвестно 507ms"
-      - "🇿🇿 Неизвестно 447ms"
-      - "🇿🇿 Неизвестно 544ms"
-      - "🇿🇿 Неизвестно 1423ms"
-      - "🇿🇿 Неизвестно 1423ms-2"
-      - "🇿🇿 Неизвестно 579ms"
-      - "🇿🇿 Неизвестно 578ms"
-      - "🇿🇿 Неизвестно 417ms"
-      - "🇿🇿 Неизвестно 535ms"
-      - "🇿🇿 Неизвестно 1423ms-3"
-      - "🇿🇿 Неизвестно 1218ms"
-      - "🇿🇿 Неизвестно 1262ms"
-      - "🇿🇿 Неизвестно 611ms"
-      - "🇿🇿 Неизвестно 587ms"
-      - "🇿🇿 Неизвестно 612ms"
-      - "🇿🇿 Неизвестно 625ms"
-      - "🇿🇿 Неизвестно 2283ms"
-      - "🇿🇿 Неизвестно 672ms"
-      - "🇿🇿 Неизвестно 2145ms"
-      - "🇿🇿 Неизвестно 924ms"
-      - "🇿🇿 Неизвестно 565ms"
-      - "🇿🇿 Неизвестно 1192ms"
-      - "🇿🇿 Неизвестно 936ms"
-      - "🇿🇿 Неизвестно 1241ms"
-      - "🇿🇿 Неизвестно 1280ms"
-      - "🇿🇿 Неизвестно 3311ms"
-      - "🇿🇿 Неизвестно 3314ms"
-      - "🇿🇿 Неизвестно 3314ms-2"
-      - "🇿🇿 Неизвестно 1244ms"
-      - "🇿🇿 Неизвестно 1098ms"
-      - "🇿🇿 Неизвестно 1295ms"
-      - "🇿🇿 Неизвестно 4502ms"
-      - "🇿🇿 Неизвестно 1979ms"
-      - "🇿🇿 Неизвестно 3718ms"
-      - "🇿🇿 Неизвестно 1663ms"
-      - "🇿🇿 Неизвестно 1736ms"
-      - "🇿🇿 Неизвестно 255ms"
-      - "🇿🇿 Неизвестно 7540ms"
-      - "🇿🇿 Неизвестно 564ms"
+      - "🇸🇬 Сингапур 6ms"
+      - "🇺🇸 США 7ms"
+      - "🇺🇸 США 13ms"
+      - "🇺🇸 США 15ms"
+      - "🇺🇸 США 60ms"
+      - "🇺🇸 США 61ms"
+      - "🇺🇸 США 61ms-2"
+      - "🇺🇸 США 64ms"
+      - "🇨🇴 Колумбия 73ms"
+      - "🇨🇴 Колумбия 74ms"
+      - "🇨🇴 Колумбия 76ms"
+      - "🇨🇴 Колумбия 86ms"
+      - "🇮🇪 Ирландия 89ms"
+      - "🇩🇪 Германия 95ms"
+      - "🇫🇷 Франция 96ms"
+      - "🇺🇸 США 100ms"
+      - "🇳🇱 Нидерланды 89ms"
+      - "🇳🇱 Нидерланды 105ms"
+      - "🇫🇷 Франция 109ms"
+      - "🇫🇷 Франция 110ms"
+      - "🇩🇪 Германия 104ms"
+      - "🇩🇪 Германия 113ms"
+      - "🇳🇱 Нидерланды 117ms"
+      - "🇵🇹 Португалия 125ms"
+      - "🇺🇸 США 65ms"
+      - "🇮🇹 Италия 138ms"
+      - "🇳🇱 Нидерланды 21ms"
+      - "🇩🇪 Германия 89ms"
+      - "🇨🇭 Швейцария 98ms"
+      - "🇩🇪 Германия 100ms"
+      - "🇺🇸 США 162ms"
+      - "🇸🇨 Неизвестно 112ms"
+      - "🇦🇹 Австрия 102ms"
+      - "🇳🇱 Нидерланды 107ms"
+      - "🇩🇪 Германия 5ms"
+      - "🇩🇪 Германия 6ms"
+      - "🇳🇱 Нидерланды 92ms"
+      - "🇺🇸 США 61ms-3"
+      - "🇱🇹 Литва 122ms"
+      - "🇵🇱 Польша 120ms"
+      - "🇪🇪 Эстония 113ms"
+      - "🇱🇻 Латвия 119ms"
+      - "🇵🇱 Польша 111ms"
+      - "🇷🇺 Россия 122ms"
+      - "🇷🇺 Россия 131ms"
+      - "🇷🇺 Россия 123ms"
+      - "🇺🇸 США 96ms"
+      - "🇫🇮 Финляндия 124ms"
+      - "🇨🇦 Канада 6ms"
+      - "🇷🇺 Россия 129ms"
+      - "🇵🇱 Польша 200ms"
+      - "🇷🇺 Россия 141ms"
+      - "🇬🇧 Великобритания 64ms"
+      - "🇳🇱 Нидерланды 125ms"
+      - "🇭🇰 Гонконг 210ms"
+      - "🇺🇸 США 330ms"
+      - "🇬🇧 Великобритания 256ms"
+      - "🇭🇰 Гонконг 218ms"
+      - "🇯🇵 Япония 173ms"
+      - "🇷🇺 Россия 135ms"
+      - "🇳🇱 Нидерланды 188ms"
+      - "🇬🇧 Великобритания 98ms"
+      - "🇵🇰 Неизвестно 78ms"
+      - "🇳🇱 Нидерланды 187ms"
+      - "🇩🇪 Германия 202ms"
+      - "🇷🇺 Россия 133ms"
+      - "🇳🇱 Нидерланды 95ms"
+      - "🇯🇵 Япония 288ms"
+      - "🇸🇨 Неизвестно 122ms"
+      - "🇮🇹 Италия 261ms"
+      - "🇰🇷 Южная Корея 240ms"
+      - "🇰🇷 Южная Корея 244ms"
+      - "🇮🇩 Индонезия 122ms"
+      - "🇮🇩 Индонезия 124ms"
+      - "🇸🇨 Неизвестно 126ms"
+      - "🇵🇭 Филиппины 121ms"
+      - "🇮🇩 Индонезия 127ms"
+      - "🇮🇩 Индонезия 127ms-2"
+      - "🇬🇧 Великобритания 344ms"
+      - "🇮🇳 Индия 234ms"
+      - "🇵🇭 Филиппины 125ms"
+      - "🇯🇵 Япония 324ms"
+      - "🇯🇵 Япония 331ms"
+      - "🇷🇺 Россия 314ms"
+      - "🇰🇷 Южная Корея 281ms"
+      - "🇮🇩 Индонезия 127ms-3"
+      - "🇸🇨 Неизвестно 125ms"
+      - "🇸🇨 Неизвестно 134ms"
+      - "🇫🇮 Финляндия 335ms"
+      - "🇺🇸 США 122ms"
+      - "🇸🇨 Неизвестно 127ms"
+      - "🇬🇧 Великобритания 255ms"
+      - "🇸🇨 Неизвестно 132ms"
+      - "🇷🇺 Россия 268ms"
+      - "🇭🇰 Гонконг 292ms"
+      - "🇭🇰 Гонконг 292ms-2"
+      - "🇳🇱 Нидерланды 436ms"
+      - "🇰🇷 Южная Корея 498ms"
+      - "🇳🇱 Нидерланды 187ms-2"
+      - "🇺🇸 США 543ms"
 
-  - name: "🇿🇿 Неизвестно"
+  - name: "🇺🇸 США"
     type: select
     proxies:
-      - "🇿🇿 Неизвестно 64ms"
-      - "🇿🇿 Неизвестно 78ms"
-      - "🇿🇿 Неизвестно 92ms"
-      - "🇿🇿 Неизвестно 109ms"
-      - "🇿🇿 Неизвестно 110ms"
-      - "🇿🇿 Неизвестно 199ms"
-      - "🇿🇿 Неизвестно 203ms"
-      - "🇿🇿 Неизвестно 206ms"
-      - "🇿🇿 Неизвестно 209ms"
-      - "🇿🇿 Неизвестно 215ms"
-      - "🇿🇿 Неизвестно 217ms"
-      - "🇿🇿 Неизвестно 219ms"
-      - "🇿🇿 Неизвестно 229ms"
-      - "🇿🇿 Неизвестно 231ms"
-      - "🇿🇿 Неизвестно 233ms"
-      - "🇿🇿 Неизвестно 237ms"
-      - "🇿🇿 Неизвестно 239ms"
-      - "🇿🇿 Неизвестно 240ms"
-      - "🇿🇿 Неизвестно 241ms"
-      - "🇿🇿 Неизвестно 241ms-2"
-      - "🇿🇿 Неизвестно 243ms"
-      - "🇿🇿 Неизвестно 247ms"
-      - "🇿🇿 Неизвестно 252ms"
-      - "🇿🇿 Неизвестно 254ms"
-      - "🇿🇿 Неизвестно 264ms"
-      - "🇿🇿 Неизвестно 237ms-2"
-      - "🇿🇿 Неизвестно 253ms"
-      - "🇿🇿 Неизвестно 275ms"
-      - "🇿🇿 Неизвестно 273ms"
-      - "🇿🇿 Неизвестно 456ms"
-      - "🇿🇿 Неизвестно 460ms"
-      - "🇿🇿 Неизвестно 312ms"
-      - "🇿🇿 Неизвестно 299ms"
-      - "🇿🇿 Неизвестно 325ms"
-      - "🇿🇿 Неизвестно 363ms"
-      - "🇿🇿 Неизвестно 376ms"
-      - "🇿🇿 Неизвестно 357ms"
-      - "🇿🇿 Неизвестно 369ms"
-      - "🇿🇿 Неизвестно 609ms"
-      - "🇿🇿 Неизвестно 352ms"
-      - "🇿🇿 Неизвестно 383ms"
-      - "🇿🇿 Неизвестно 365ms"
-      - "🇿🇿 Неизвестно 674ms"
-      - "🇿🇿 Неизвестно 393ms"
-      - "🇿🇿 Неизвестно 386ms"
-      - "🇿🇿 Неизвестно 867ms"
-      - "🇿🇿 Неизвестно 895ms"
-      - "🇿🇿 Неизвестно 443ms"
-      - "🇿🇿 Неизвестно 423ms"
-      - "🇿🇿 Неизвестно 428ms"
-      - "🇿🇿 Неизвестно 409ms"
-      - "🇿🇿 Неизвестно 423ms-2"
-      - "🇿🇿 Неизвестно 792ms"
-      - "🇿🇿 Неизвестно 430ms"
-      - "🇿🇿 Неизвестно 443ms-2"
-      - "🇿🇿 Неизвестно 510ms"
-      - "🇿🇿 Неизвестно 554ms"
-      - "🇿🇿 Неизвестно 480ms"
-      - "🇿🇿 Неизвестно 513ms"
-      - "🇿🇿 Неизвестно 472ms"
-      - "🇿🇿 Неизвестно 471ms"
-      - "🇿🇿 Неизвестно 507ms"
-      - "🇿🇿 Неизвестно 447ms"
-      - "🇿🇿 Неизвестно 544ms"
-      - "🇿🇿 Неизвестно 1423ms"
-      - "🇿🇿 Неизвестно 1423ms-2"
-      - "🇿🇿 Неизвестно 579ms"
-      - "🇿🇿 Неизвестно 578ms"
-      - "🇿🇿 Неизвестно 417ms"
-      - "🇿🇿 Неизвестно 535ms"
-      - "🇿🇿 Неизвестно 1423ms-3"
-      - "🇿🇿 Неизвестно 1218ms"
-      - "🇿🇿 Неизвестно 1262ms"
-      - "🇿🇿 Неизвестно 611ms"
-      - "🇿🇿 Неизвестно 587ms"
-      - "🇿🇿 Неизвестно 612ms"
-      - "🇿🇿 Неизвестно 625ms"
-      - "🇿🇿 Неизвестно 2283ms"
-      - "🇿🇿 Неизвестно 672ms"
-      - "🇿🇿 Неизвестно 2145ms"
-      - "🇿🇿 Неизвестно 924ms"
-      - "🇿🇿 Неизвестно 565ms"
-      - "🇿🇿 Неизвестно 1192ms"
-      - "🇿🇿 Неизвестно 936ms"
-      - "🇿🇿 Неизвестно 1241ms"
-      - "🇿🇿 Неизвестно 1280ms"
-      - "🇿🇿 Неизвестно 3311ms"
-      - "🇿🇿 Неизвестно 3314ms"
-      - "🇿🇿 Неизвестно 3314ms-2"
-      - "🇿🇿 Неизвестно 1244ms"
-      - "🇿🇿 Неизвестно 1098ms"
-      - "🇿🇿 Неизвестно 1295ms"
-      - "🇿🇿 Неизвестно 4502ms"
-      - "🇿🇿 Неизвестно 1979ms"
-      - "🇿🇿 Неизвестно 3718ms"
-      - "🇿🇿 Неизвестно 1663ms"
-      - "🇿🇿 Неизвестно 1736ms"
-      - "🇿🇿 Неизвестно 255ms"
-      - "🇿🇿 Неизвестно 7540ms"
-      - "🇿🇿 Неизвестно 564ms"
+      - "🇺🇸 США 7ms"
+      - "🇺🇸 США 13ms"
+      - "🇺🇸 США 15ms"
+      - "🇺🇸 США 60ms"
+      - "🇺🇸 США 61ms"
+      - "🇺🇸 США 61ms-2"
+      - "🇺🇸 США 64ms"
+      - "🇺🇸 США 100ms"
+      - "🇺🇸 США 65ms"
+      - "🇺🇸 США 162ms"
+      - "🇺🇸 США 61ms-3"
+      - "🇺🇸 США 96ms"
+      - "🇺🇸 США 330ms"
+      - "🇺🇸 США 122ms"
+      - "🇺🇸 США 543ms"
+      - DIRECT
+
+  - name: "🇳🇱 Нидерланды"
+    type: select
+    proxies:
+      - "🇳🇱 Нидерланды 89ms"
+      - "🇳🇱 Нидерланды 105ms"
+      - "🇳🇱 Нидерланды 117ms"
+      - "🇳🇱 Нидерланды 21ms"
+      - "🇳🇱 Нидерланды 107ms"
+      - "🇳🇱 Нидерланды 92ms"
+      - "🇳🇱 Нидерланды 125ms"
+      - "🇳🇱 Нидерланды 188ms"
+      - "🇳🇱 Нидерланды 187ms"
+      - "🇳🇱 Нидерланды 95ms"
+      - "🇳🇱 Нидерланды 436ms"
+      - "🇳🇱 Нидерланды 187ms-2"
+      - DIRECT
+
+  - name: "🇷🇺 Россия"
+    type: select
+    proxies:
+      - "🇷🇺 Россия 122ms"
+      - "🇷🇺 Россия 131ms"
+      - "🇷🇺 Россия 123ms"
+      - "🇷🇺 Россия 129ms"
+      - "🇷🇺 Россия 141ms"
+      - "🇷🇺 Россия 135ms"
+      - "🇷🇺 Россия 133ms"
+      - "🇷🇺 Россия 314ms"
+      - "🇷🇺 Россия 268ms"
+      - DIRECT
+
+  - name: "🇩🇪 Германия"
+    type: select
+    proxies:
+      - "🇩🇪 Германия 95ms"
+      - "🇩🇪 Германия 104ms"
+      - "🇩🇪 Германия 113ms"
+      - "🇩🇪 Германия 89ms"
+      - "🇩🇪 Германия 100ms"
+      - "🇩🇪 Германия 5ms"
+      - "🇩🇪 Германия 6ms"
+      - "🇩🇪 Германия 202ms"
+      - DIRECT
+
+  - name: "🇸🇨 Неизвестно"
+    type: select
+    proxies:
+      - "🇸🇨 Неизвестно 112ms"
+      - "🇸🇨 Неизвестно 122ms"
+      - "🇸🇨 Неизвестно 126ms"
+      - "🇸🇨 Неизвестно 125ms"
+      - "🇸🇨 Неизвестно 134ms"
+      - "🇸🇨 Неизвестно 127ms"
+      - "🇸🇨 Неизвестно 132ms"
+      - DIRECT
+
+  - name: "🇬🇧 Великобритания"
+    type: select
+    proxies:
+      - "🇬🇧 Великобритания 64ms"
+      - "🇬🇧 Великобритания 256ms"
+      - "🇬🇧 Великобритания 98ms"
+      - "🇬🇧 Великобритания 344ms"
+      - "🇬🇧 Великобритания 255ms"
+      - DIRECT
+
+  - name: "🇮🇩 Индонезия"
+    type: select
+    proxies:
+      - "🇮🇩 Индонезия 122ms"
+      - "🇮🇩 Индонезия 124ms"
+      - "🇮🇩 Индонезия 127ms"
+      - "🇮🇩 Индонезия 127ms-2"
+      - "🇮🇩 Индонезия 127ms-3"
+      - DIRECT
+
+  - name: "🇨🇴 Колумбия"
+    type: select
+    proxies:
+      - "🇨🇴 Колумбия 73ms"
+      - "🇨🇴 Колумбия 74ms"
+      - "🇨🇴 Колумбия 76ms"
+      - "🇨🇴 Колумбия 86ms"
+      - DIRECT
+
+  - name: "🇭🇰 Гонконг"
+    type: select
+    proxies:
+      - "🇭🇰 Гонконг 210ms"
+      - "🇭🇰 Гонконг 218ms"
+      - "🇭🇰 Гонконг 292ms"
+      - "🇭🇰 Гонконг 292ms-2"
+      - DIRECT
+
+  - name: "🇯🇵 Япония"
+    type: select
+    proxies:
+      - "🇯🇵 Япония 173ms"
+      - "🇯🇵 Япония 288ms"
+      - "🇯🇵 Япония 324ms"
+      - "🇯🇵 Япония 331ms"
+      - DIRECT
+
+  - name: "🇰🇷 Южная Корея"
+    type: select
+    proxies:
+      - "🇰🇷 Южная Корея 240ms"
+      - "🇰🇷 Южная Корея 244ms"
+      - "🇰🇷 Южная Корея 281ms"
+      - "🇰🇷 Южная Корея 498ms"
+      - DIRECT
+
+  - name: "🇫🇷 Франция"
+    type: select
+    proxies:
+      - "🇫🇷 Франция 96ms"
+      - "🇫🇷 Франция 109ms"
+      - "🇫🇷 Франция 110ms"
+      - DIRECT
+
+  - name: "🇵🇱 Польша"
+    type: select
+    proxies:
+      - "🇵🇱 Польша 120ms"
+      - "🇵🇱 Польша 111ms"
+      - "🇵🇱 Польша 200ms"
+      - DIRECT
+
+  - name: "🇫🇮 Финляндия"
+    type: select
+    proxies:
+      - "🇫🇮 Финляндия 124ms"
+      - "🇫🇮 Финляндия 335ms"
+      - DIRECT
+
+  - name: "🇮🇹 Италия"
+    type: select
+    proxies:
+      - "🇮🇹 Италия 138ms"
+      - "🇮🇹 Италия 261ms"
+      - DIRECT
+
+  - name: "🇵🇭 Филиппины"
+    type: select
+    proxies:
+      - "🇵🇭 Филиппины 121ms"
+      - "🇵🇭 Филиппины 125ms"
+      - DIRECT
+
+  - name: "🇦🇹 Австрия"
+    type: select
+    proxies:
+      - "🇦🇹 Австрия 102ms"
+      - DIRECT
+
+  - name: "🇨🇦 Канада"
+    type: select
+    proxies:
+      - "🇨🇦 Канада 6ms"
+      - DIRECT
+
+  - name: "🇨🇭 Швейцария"
+    type: select
+    proxies:
+      - "🇨🇭 Швейцария 98ms"
+      - DIRECT
+
+  - name: "🇪🇪 Эстония"
+    type: select
+    proxies:
+      - "🇪🇪 Эстония 113ms"
+      - DIRECT
+
+  - name: "🇮🇪 Ирландия"
+    type: select
+    proxies:
+      - "🇮🇪 Ирландия 89ms"
+      - DIRECT
+
+  - name: "🇮🇳 Индия"
+    type: select
+    proxies:
+      - "🇮🇳 Индия 234ms"
+      - DIRECT
+
+  - name: "🇱🇹 Литва"
+    type: select
+    proxies:
+      - "🇱🇹 Литва 122ms"
+      - DIRECT
+
+  - name: "🇱🇻 Латвия"
+    type: select
+    proxies:
+      - "🇱🇻 Латвия 119ms"
+      - DIRECT
+
+  - name: "🇵🇰 Неизвестно"
+    type: select
+    proxies:
+      - "🇵🇰 Неизвестно 78ms"
+      - DIRECT
+
+  - name: "🇵🇹 Португалия"
+    type: select
+    proxies:
+      - "🇵🇹 Португалия 125ms"
+      - DIRECT
+
+  - name: "🇸🇬 Сингапур"
+    type: select
+    proxies:
+      - "🇸🇬 Сингапур 6ms"
       - DIRECT
 
 rules:
