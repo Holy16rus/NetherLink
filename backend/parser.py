@@ -114,6 +114,10 @@ def parse_vless_uri(uri, country, source):
             "tls": params.get("security", [""])[0] in {"tls", "reality"},
             "servername": params.get("sni", params.get("host", [""]))[0],
             "ws_path": params.get("path", [""])[0], "ws_host": params.get("host", [""])[0],
+            "flow": params.get("flow", [""])[0],
+            "pbk": params.get("pbk", [""])[0], "sid": params.get("sid", [""])[0],
+            "fp": params.get("fp", [""])[0],
+            "grpc_service_name": params.get("serviceName", params.get("service_name", [""]))[0],
             "country": country, "source": source, "raw": uri}
 
 

@@ -296,13 +296,31 @@ async def speed_test_node(node, timeout, cancel_event):
 
 
 SING_BOX_BINARY = "/usr/local/bin/sing-box"
+# apt-get install sing-box ставит бинарник в /usr/bin, а не /usr/local/bin.
+# Ищем оба пути (и через PATH), иначе все туннельные прокси молча
+# отбрасываются с 0/137 — проверка даже не стартует.
+def _find_sing_box() -> str | None:
+    import shutil
+    candidates = [
+        os.environ.get("SING_BOX_BINARY", ""),
+        "/usr/local/bin/sing-box",
+        "/usr/bin/sing-box",
+        shutil.which("sing-box") or "",
+    ]
+    for path in candidates:
+        if path and os.path.exists(path):
+            return path
+    return None
 
 
 def _build_singbox_config(node: dict, socks_port: int) -> dict:
     """Строит минимальный sing-box конфиг с одним outbound на проверяемый прокси."""
     proto = node.get("protocol", "").lower()
     tag = f"test-{proto}"
-    outbound = {"type": proto, "tag": tag, "server": node["server"], "server_port": int(node["port"])}
+    # sing-box называет shadowsocks типом "shadowsocks", а не "ss".
+    # URI-схема ss:// → node["protocol"]=="ss" → здесь конвертируем.
+    singbox_type = "shadowsocks" if proto == "ss" else proto
+    outbound = {"type": singbox_type, "tag": tag, "server": node["server"], "server_port": int(node["port"])}
 
     if proto == "vmess":
         outbound["uuid"] = node.get("uuid", "")
@@ -323,8 +341,16 @@ def _build_singbox_config(node: dict, socks_port: int) -> dict:
         if flow:
             outbound["flow"] = flow
         network = node.get("network", "tcp")
-        if network != "tcp":
+        if network == "grpc":
+            outbound["transport"] = {"type": "grpc"}
+            if node.get("grpc_service_name"):
+                outbound["transport"]["service_name"] = node["grpc_service_name"]
+        elif network != "tcp":
             outbound["transport"] = {"type": network}
+            if node.get("ws_path"):
+                outbound["transport"]["path"] = node["ws_path"]
+            if node.get("ws_host"):
+                outbound["transport"]["headers"] = {"Host": node["ws_host"]}
         tls_fields = {}
         if node.get("tls"):
             tls_fields["enabled"] = True
@@ -334,6 +360,8 @@ def _build_singbox_config(node: dict, socks_port: int) -> dict:
             tls_fields["enabled"] = True
             tls_fields["reality"] = {"enabled": True, "public_key": node["pbk"], "short_id": node.get("sid", "")}
             tls_fields["server_name"] = node.get("servername", node.get("sni", node["server"]))
+            # sing-box reality требует uTLS — без него FATAL: "uTLS is required by reality client"
+            tls_fields["utls"] = {"enabled": True, "fingerprint": node.get("fp") or "chrome"}
         if tls_fields:
             outbound["tls"] = tls_fields
 
@@ -366,7 +394,8 @@ async def protocol_check(node, timeout, cancel_event):
         return None
     if cancel_event.is_set():
         return None
-    if not os.path.exists(SING_BOX_BINARY):
+    sing_box_bin = _find_sing_box()
+    if not sing_box_bin:
         return None
 
     socks_port = 0
@@ -391,7 +420,7 @@ async def protocol_check(node, timeout, cancel_event):
             Path(tmp_path).write_text(json.dumps(config, ensure_ascii=False), "utf-8")
 
             process = await asyncio.create_subprocess_exec(
-                SING_BOX_BINARY, "run", "-c", tmp_path,
+                sing_box_bin, "run", "-c", tmp_path,
                 stdout=asyncio.subprocess.DEVNULL,
                 stderr=asyncio.subprocess.DEVNULL,
             )

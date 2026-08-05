@@ -28,7 +28,9 @@ jobs:
         uses: actions/cache@v4
         id: singbox-cache
         with:
-          path: /usr/local/bin/sing-box
+          # apt-get install sing-box кладёт бинарник в /usr/bin, а не /usr/local/bin.
+          # Путь кеша должен совпадать с реальным расположением, иначе кеш никогда не хитится.
+          path: /usr/bin/sing-box
           key: sing-box-${{ runner.os }}-1.11.5
           restore-keys: sing-box-${{ runner.os }}-
 

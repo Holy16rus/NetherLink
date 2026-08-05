@@ -268,6 +268,35 @@ def generate_config_v2ray(nodes):
             if node.get("servername"):
                 v["streamSettings"] = {"security": "tls", "tlsSettings": {"serverName": node["servername"], "allowInsecure": True}}
             out[node.get("name", f"{node['server']}:{node['port']}")] = v
+        elif proto == "vless":
+            v = {"protocol": "vless", "settings": {"vnext": [{"address": node["server"], "port": int(node["port"]), "users": [{"id": node.get("uuid", ""), "encryption": "none", "flow": node.get("flow", "")}]}]}}
+            network = node.get("network", "tcp")
+            if network != "tcp":
+                v["streamSettings"] = {"network": network}
+                if network == "grpc" and node.get("grpc_service_name"):
+                    v["streamSettings"]["grpcSettings"] = {"serviceName": node["grpc_service_name"]}
+                if network == "ws":
+                    v["streamSettings"]["wsSettings"] = {}
+                    if node.get("ws_path"):
+                        v["streamSettings"]["wsSettings"]["path"] = node["ws_path"]
+                    if node.get("ws_host"):
+                        v["streamSettings"]["wsSettings"]["headers"] = {"Host": node["ws_host"]}
+            if node.get("tls"):
+                v["streamSettings"] = v.get("streamSettings", {})
+                v["streamSettings"]["security"] = "reality" if node.get("pbk") else "tls"
+                tls_settings = {"serverName": node.get("servername", node["server"]), "allowInsecure": True}
+                if node.get("pbk"):
+                    tls_settings["realitySettings"] = {"publicKey": node["pbk"], "shortId": node.get("sid", ""), "fingerprint": node.get("fp") or "chrome"}
+                v["streamSettings"]["tlsSettings"] = tls_settings
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
+        elif proto == "ss":
+            v = {"protocol": "shadowsocks", "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "method": node.get("cipher", "aes-256-gcm"), "password": node.get("password", "")}]}}
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
+        elif proto in ("hysteria2", "hy2"):
+            v = {"protocol": "hysteria2", "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "password": node.get("password", "")}]}}
+            if node.get("servername"):
+                v["settings"]["servers"][0]["tls"] = {"sni": node["servername"], "insecure": True}
+            out[node.get("name", f"{node['server']}:{node['port']}")] = v
     return json.dumps(out, ensure_ascii=False, indent=2)
 
 
@@ -295,6 +324,40 @@ def generate_config_singbox(nodes):
             out_obfs[tag] = v
         elif proto == "trojan":
             v = {"type": "trojan", "server": node["server"], "server_port": int(node["port"]), "password": node.get("password", ""), "tls": {"enabled": True, "server_name": node.get("servername", node["server"]), "insecure": True}}
+            out_obfs[tag] = v
+        elif proto == "vless":
+            v = {"type": "vless", "server": node["server"], "server_port": int(node["port"]), "uuid": node.get("uuid", "")}
+            if node.get("flow"):
+                v["flow"] = node["flow"]
+            network = node.get("network", "tcp")
+            if network == "grpc":
+                v["transport"] = {"type": "grpc"}
+                if node.get("grpc_service_name"):
+                    v["transport"]["service_name"] = node["grpc_service_name"]
+            elif network != "tcp":
+                v["transport"] = {"type": network}
+                if node.get("ws_path"):
+                    v["transport"]["path"] = node["ws_path"]
+                if node.get("ws_host"):
+                    v["transport"]["headers"] = {"Host": node["ws_host"]}
+            tls_fields = {}
+            if node.get("tls"):
+                tls_fields["enabled"] = True
+                tls_fields["server_name"] = node.get("servername", node["server"])
+                tls_fields["insecure"] = True
+            if node.get("pbk"):
+                tls_fields["enabled"] = True
+                tls_fields["reality"] = {"enabled": True, "public_key": node["pbk"], "short_id": node.get("sid", "")}
+                tls_fields["server_name"] = node.get("servername", node.get("sni", node["server"]))
+                tls_fields["utls"] = {"enabled": True, "fingerprint": node.get("fp") or "chrome"}
+            if tls_fields:
+                v["tls"] = tls_fields
+            out_obfs[tag] = v
+        elif proto == "ss":
+            v = {"type": "shadowsocks", "server": node["server"], "server_port": int(node["port"]), "method": node.get("cipher", "aes-256-gcm"), "password": node.get("password", "")}
+            out_obfs[tag] = v
+        elif proto in ("hysteria2", "hy2"):
+            v = {"type": "hysteria2", "server": node["server"], "server_port": int(node["port"]), "password": node.get("password", ""), "tls": {"enabled": True, "server_name": node.get("servername", node["server"]), "insecure": True}}
             out_obfs[tag] = v
     return json.dumps(out_obfs, ensure_ascii=False, indent=2)
 
