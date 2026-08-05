@@ -2,6 +2,8 @@
 HTTP/HTTPS proxy collection from public JSON APIs.
 """
 import asyncio
+from datetime import date, timedelta
+
 import httpx
 
 
@@ -17,6 +19,32 @@ WEB_SOURCES = [
     # lumiproxy.com — JSON API
     "https://api.lumiproxy.com/web_v1/free-proxy/list?page_size=2000&page=1&language=en-us",
 ]
+
+# checker.net — архив свежих проверенных прокси по датам.
+# JSON: {"data": {"date": "2026-08-05", "proxyList": ["host:port", ...]}}
+CHECKER_NET_BASE = "https://checker.net/v1/landing/archive"
+
+
+def _checker_net_dates() -> list[str]:
+    """Сегодня и вчера (UTC). Если сегодняшнего архива ещё нет — возьмём вчерашний."""
+    today = date.today()
+    return [today.isoformat(), (today - timedelta(days=1)).isoformat()]
+
+
+async def _fetch_checker_net(client: httpx.AsyncClient) -> dict | None:
+    """Качает свежайший доступный архив checker.net (сегодня → вчера)."""
+    for day in _checker_net_dates():
+        try:
+            resp = await client.get(f"{CHECKER_NET_BASE}/{day}", timeout=15)
+            if resp.status_code != 200:
+                continue
+            data = resp.json()
+            proxy_list = data.get("data", {}).get("proxyList", [])
+            if proxy_list:
+                return {"date": day, "proxyList": proxy_list}
+        except Exception:
+            continue
+    return None
 
 
 async def _fetch_json(client: httpx.AsyncClient, url: str) -> dict | None:
@@ -36,9 +64,35 @@ async def fetch_web_proxies(cancel_event: asyncio.Event | None = None) -> list[d
     limits = httpx.Limits(max_connections=10, max_keepalive_connections=5)
     async with httpx.AsyncClient(timeout=15, limits=limits) as client:
         tasks = [_fetch_json(client, url) for url in WEB_SOURCES]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        # checker.net — отдельно: свой парсер и авто-дата
+        checker_task = _fetch_checker_net(client)
+        all_tasks = tasks + [checker_task]
+        results = await asyncio.gather(*all_tasks, return_exceptions=True)
 
-        for i, result in enumerate(results):
+        # checker.net — последний индекс
+        checker_idx = len(WEB_SOURCES)
+        checker_result = results[checker_idx]
+        if checker_result and not isinstance(checker_result, Exception):
+            try:
+                before = len(nodes)
+                for item in checker_result.get("proxyList", []):
+                    host, _, port = str(item).partition(":")
+                    if not host or not port:
+                        continue
+                    try:
+                        port = int(port)
+                    except ValueError:
+                        continue
+                    key = ("http", host, port, "")
+                    if key[1] and key not in seen:
+                        seen.add(key)
+                        nodes.append({"protocol": "http", "server": host, "port": port})
+                if len(nodes) > before:
+                    print(f"  [checker.net] {checker_result.get('date')}: +{len(nodes) - before} прокси")
+            except Exception:
+                pass
+
+        for i, result in enumerate(results[:len(WEB_SOURCES)]):
             if cancel_event and cancel_event.is_set():
                 break
             if result is None or isinstance(result, Exception):

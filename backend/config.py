@@ -55,16 +55,16 @@ def load_sources():
                 return json.loads(example.read_text("utf-8"))
             except Exception:
                 pass
-        return {"sources": [], "local_files": ["proxy.txt"]}
+        return {"sources": [], "local_files": []}
     try:
         data = json.loads(SOURCES_FILE.read_text("utf-8"))
         if isinstance(data, dict):
             return data
         if isinstance(data, list):
-            return {"sources": data, "local_files": ["proxy.txt"]}
+            return {"sources": data, "local_files": []}
     except Exception:
         pass
-    return {"sources": [], "local_files": ["proxy.txt"]}
+    return {"sources": [], "local_files": []}
 
 
 def save_sources(data):
