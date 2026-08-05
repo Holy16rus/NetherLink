@@ -250,8 +250,10 @@ async def proxycheck_risk(ips, cancel_event):
 # Проверяет IP через публичные DNSBL-листы (SpamCop, Spamhaus ZEN, SORBS).
 # Если IP есть в листе — он замечен в спаме/абузе, такой прокси не нужен.
 # Всё бесплатно: обычные DNS-запросы, никаких ключей.
+# Только SpamCop из коробки — самый точный. Spamhaus и SORBS
+# слишком агрессивны (убирают датацентры/хостинг, где хостятся прокси).
 DNSBL_LIST = "bl.spamcop.net"
-DNSBL_EXTRA = ["zen.spamhaus.org", "dnsbl.sorbs.net"]
+DNSBL_EXTRA: list[str] = []  # отключены: zen.spamhaus.org, dnsbl.sorbs.net
 
 
 def _dnsbl_query(ip: str, dnsbl: str) -> bool:

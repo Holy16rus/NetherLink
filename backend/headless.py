@@ -40,10 +40,10 @@ async def run():
 
     opts = {
         "limit": 500,
-        "max_checks": 20000,
+        "max_checks": 35000,
         "timeout": 8,
         "selection": "fastest",
-        "producer_timeout": 180,
+        "producer_timeout": 240,
     }
 
     cancel = asyncio.Event()
