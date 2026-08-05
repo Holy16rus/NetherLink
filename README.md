@@ -19,20 +19,20 @@ https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink.yaml
 
 ### 100 прокси (авто-определение клиента)
 ```
-https://your-server/sub/100
+https://holy16rus.github.io/NetherLink/sub/100/
 ```
 Клиент определяется автоматически по User-Agent:
 - **FLClash / Clash Meta** → YAML
 - **V2rayTun / V2RayNG** → JSON
 - **HiddifyApp / Sing-box** → JSON
 
-Принудительный формат: `/sub/100?format=clash|v2ray|singbox`
+Принудительный формат: `https://holy16rus.github.io/NetherLink/sub/100/?format=clash|v2ray|singbox`
 
 ### 50 прокси (авто-определение клиента)
 ```
-https://your-server/sub/50
+https://holy16rus.github.io/NetherLink/sub/50/
 ```
-Аналогично `/sub/100`, но только лучшие из лучших — с перепроверкой и замером скорости.
+Аналогично `/sub/100/`, но только лучшие из лучших — с перепроверкой и замером скорости.
 
 ### Прямые ссылки на raw (gh-pages)
 

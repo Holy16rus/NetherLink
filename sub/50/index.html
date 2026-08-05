@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NetherLink Subscription</title>
+<script>
+(function(){
+  var ua = navigator.userAgent.toLowerCase();
+  var base = 'https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink';
+  var q = location.search; // ?format=clash|v2ray|singbox
+  var fmt = (q.match(/format=(\w+)/) || [])[1];
+  var url;
+  if (fmt === 'v2ray') {
+    url = base + '-50-v2ray.json';
+  } else if (fmt === 'singbox') {
+    url = base + '-50-singbox.json';
+  } else if (fmt === 'clash') {
+    url = base + '-50.yaml';
+  } else {
+    // Auto-detect by User-Agent
+    if (/v2ray|v2rayng|v2raytun/i.test(ua)) {
+      url = base + '-50-v2ray.json';
+    } else if (/hiddify|singbox|sing-box/i.test(ua)) {
+      url = base + '-50-singbox.json';
+    } else {
+      url = base + '-50.yaml'; // Clash by default
+    }
+  }
+  window.location.replace(url);
+})();
+</script>
+</head>
+<body>
+<a id="link" href="#">NetherLink /sub/50</a>
+<script>document.getElementById('link').href=window.location.href;</script>
+<p>Redirecting to proxy subscription...</p>
+</body>
+</html>
