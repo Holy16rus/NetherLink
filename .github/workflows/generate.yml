@@ -66,20 +66,22 @@ jobs:
           git config user.name "NetherLink Bot"
           git config user.email "bot@netherlink.local"
 
+          # Сохраняем сгенерированные файлы ДО переключения ветки
+          mkdir -p /tmp/nl-deploy
+          cp -f NetherLink*.yaml NetherLink*.json live.txt proxy-history.json /tmp/nl-deploy/ 2>/dev/null || true
+
           # ── gh-pages: только конфиги, без мусора ──
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          # Удаляем только старые конфиги и live.txt, НЕ трогаем репу (.git)
           rm -f NetherLink*.yaml NetherLink*.json live.txt proxy-history.json liveproxy.txt
           rm -rf backend GeoIP Proxy-Data sub 2>/dev/null || true
-          # Копируем свежие конфиги из корня репы
-          cp -f NetherLink*.yaml NetherLink*.json live.txt . 2>/dev/null || true
+          cp -f /tmp/nl-deploy/NetherLink*.yaml /tmp/nl-deploy/NetherLink*.json /tmp/nl-deploy/live.txt . 2>/dev/null || true
           git add -A
           git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin gh-pages
 
           # ── state: персистентная история проверок ──
           git checkout --orphan state-new
-          cp -f proxy-history.json . 2>/dev/null || true
-          git add proxy-history.json
+          cp -f /tmp/nl-deploy/proxy-history.json . 2>/dev/null || true
+          git add proxy-history.json 2>/dev/null || true
           git commit --allow-empty -m "Proxy history $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin state-new:state

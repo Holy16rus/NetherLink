@@ -61,18 +61,22 @@ jobs:
           git config user.name "NetherLink Recheck Bot"
           git config user.email "bot@netherlink.local"
 
+          # Сохраняем ДО переключения ветки
+          mkdir -p /tmp/nl-recheck
+          cp -f NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt proxy-history.json /tmp/nl-recheck/ 2>/dev/null || true
+
           # ── gh-pages: обновляем топ-50/топ-100, без мусора ──
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
           for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt; do
-            [ -f "$f" ] && cp -f "$f" . 2>/dev/null
+            [ -f "/tmp/nl-recheck/$f" ] && cp -f "/tmp/nl-recheck/$f" . 2>/dev/null
           done
           git add -A
-          git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
           git push --force origin gh-pages
 
           # ── state: история проверок ──
           git checkout --orphan state-new
-          cp -f proxy-history.json . 2>/dev/null || true
-          git add proxy-history.json
+          cp -f /tmp/nl-recheck/proxy-history.json . 2>/dev/null || true
+          git add proxy-history.json 2>/dev/null || true
           git commit --allow-empty -m "Proxy history $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin state-new:state
