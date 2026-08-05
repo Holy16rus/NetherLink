@@ -17,22 +17,23 @@ https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink.yaml
 ```
 > `/sub/500` — для Clash-совместимых клиентов. Другие клиенты не тянут столько прокси.
 
-### 100 прокси (авто-определение клиента)
+### 100 прокси (выберите формат под свой клиент)
 ```
-https://holy16rus.github.io/NetherLink/sub/100/
+FLClash / Clash Meta:  https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-100.yaml
+V2rayTun / V2RayNG:    https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-100-v2ray.json
+HiddifyApp / Sing-box: https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-100-singbox.json
 ```
-Клиент определяется автоматически по User-Agent:
-- **FLClash / Clash Meta** → YAML
-- **V2rayTun / V2RayNG** → JSON
-- **HiddifyApp / Sing-box** → JSON
+> Авто-определение по User-Agent (`/sub/100`) работает только при **локальном запуске** сервера
+> (`python start.py`) — GitHub Pages отдаёт статику и не умеет читать заголовки запроса.
+> Поэтому для gh-pages нужно вручную выбрать ссылку под свой клиент.
 
-Принудительный формат: `https://holy16rus.github.io/NetherLink/sub/100/?format=clash|v2ray|singbox`
-
-### 50 прокси (авто-определение клиента)
+### 50 прокси (топ, с перепроверкой)
 ```
-https://holy16rus.github.io/NetherLink/sub/50/
+FLClash / Clash Meta:  https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-50.yaml
+V2rayTun / V2RayNG:    https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-50-v2ray.json
+HiddifyApp / Sing-box: https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-50-singbox.json
 ```
-Аналогично `/sub/100/`, но только лучшие из лучших — с перепроверкой и замером скорости.
+Аналогично топ-100, но только лучшие из лучших — с перепроверкой и замером скорости.
 
 ### Прямые ссылки на raw (gh-pages)
 

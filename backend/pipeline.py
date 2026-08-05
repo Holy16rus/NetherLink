@@ -113,6 +113,13 @@ async def _consume(
     limit = opts.get("limit", 100)
     early_stop = limit * 3 if limit > 0 else 0
 
+    # Туннельные протоколы имеют приоритет: когда бюджет max_checks
+    # исчерпан, http/socks5 обрезаются, а vmess/vless/trojan/ss/hy2
+    # проходят ВСЕГДА (в счёт общего бюджета). Так жирные http-источники
+    # не вытесняют туннельные из проверки.
+    TUNNEL_PROTOCOLS = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
+    tunnel_checked = 0  # для лога
+
     seen_keys: set = set()
     live_nodes: list[dict] = []
     all_checked: list[dict] = []
@@ -121,17 +128,29 @@ async def _consume(
     pending_nodes: list[dict] = []
 
     async def flush_pending():
-        nonlocal pending_nodes
+        nonlocal pending_nodes, tunnel_checked
         if not pending_nodes or cancel_event.is_set():
             pending_nodes = []
             return
         batch = pending_nodes
         pending_nodes = []
+
+        # Приоритет туннельных: при исчерпании бюджета обрезаем
+        # только http/socks5, туннельные проходят всегда.
         remaining = max_checks - metrics["checking_total"] if max_checks > 0 else None
-        if remaining is not None and len(batch) > remaining:
-            batch = batch[:remaining]
+        if remaining is not None and remaining <= 0:
+            # Бюджет исчерпан — проверяем только туннельные (если есть).
+            batch = [n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS]
+        elif remaining is not None and len(batch) > remaining:
+            # Часть бюджета осталась — сначала туннельные, потом http/socks.
+            tunnel_part = [n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS]
+            other_part = [n for n in batch if n.get("protocol", "").lower() not in TUNNEL_PROTOCOLS]
+            other_part = other_part[:max(0, remaining - len(tunnel_part))]
+            batch = tunnel_part + other_part
+
         if not batch:
             return
+        tunnel_checked += len([n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS])
         metrics["checking_total"] += len(batch)
 
         async def check_one(node):
@@ -169,7 +188,7 @@ async def _consume(
                 await flush_pending()
             if max_checks > 0 and metrics["checking_total"] >= max_checks:
                 await flush_pending()
-                await emit("log", {"level": "info", "text": f"Достигнут max_checks={max_checks}, проверено {metrics['checking_total']}"})
+                await emit("log", {"level": "info", "text": f"Достигнут max_checks={max_checks}, проверено {metrics['checking_total']} (туннельных: {tunnel_checked})"})
                 break
             continue
 
@@ -352,20 +371,41 @@ async def run_pipeline(
 
     queue: asyncio.Queue = asyncio.Queue(maxsize=50)
 
-    if opts.get("use_web_sources", True):
+    # Сортируем источники: туннельные протоколы (v2ray/vless/trojan/hysteria/ss)
+    # идут первыми в очередь. Иначе жирные http-источники (checker.net,
+    # proxyscrape и т.п.) съедают весь max_checks-бюджет ещё до того, как
+    # producer доберётся до туннельных — и protocol_check получает пустоту.
+    def _is_tunnel_source(url: str) -> bool:
+        u = url.lower()
+        return any(k in u for k in ("v2ray", "vless", "vmess", "trojan", "hysteria", "hy2", "vpn-config", "clashx"))
+
+    sources = sorted(sources, key=lambda s: 0 if _is_tunnel_source(s) else 1)
+
+    producer_task = asyncio.create_task(
+        _produce(sources, local_files, queue, cancel_event, metrics, emit)
+    )
+
+    async def _feed_web_sources():
+        if not opts.get("use_web_sources", True):
+            return
         await emit("status", {"status": "running", "message": "Сбор прокси с web-источников..."})
         try:
             web_nodes = await fetch_web_proxies(cancel_event)
             if web_nodes:
                 metrics["candidates"] += len(web_nodes)
-                await queue.put(web_nodes)
+                # Кладём небольшими чанками, а НЕ одним огромным батчем.
+                # Один batch из 3000+ http-нод займёт весь ранний max_checks
+                # раньше, чем producer успеет докинуть туннельные источники.
+                # Запускается КОНКУРЕНТНО с _produce (см. ниже) — не блокирует
+                # старт сбора туннельных источников.
+                CHUNK = 150
+                for i in range(0, len(web_nodes), CHUNK):
+                    await queue.put(web_nodes[i:i + CHUNK])
                 await emit("log", {"level": "info", "text": f"Web-источники: +{len(web_nodes)} прокси"})
         except Exception as e:
             await emit("log", {"level": "warn", "text": f"Web-источники ошибка: {e}"})
 
-    producer_task = asyncio.create_task(
-        _produce(sources, local_files, queue, cancel_event, metrics, emit)
-    )
+    web_task = asyncio.create_task(_feed_web_sources())
 
     producer_time_budget = opts.get("producer_timeout", 180)
     producer_limited = asyncio.ensure_future(
@@ -389,6 +429,12 @@ async def run_pipeline(
                 await producer_limited
             except (asyncio.CancelledError, asyncio.TimeoutError, Exception):
                 pass
+        if not web_task.done():
+            web_task.cancel()
+        try:
+            await web_task
+        except (asyncio.CancelledError, Exception):
+            pass
         if not was_cancelled:
             cancel_event.clear()
 

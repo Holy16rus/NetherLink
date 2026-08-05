@@ -68,8 +68,6 @@ jobs:
             [ -f "$f" ] && cp "$f" "/tmp/deploy/$f"
           done
           [ -f proxy-history.json ] && cp proxy-history.json /tmp/deploy/proxy-history.json
-          # sub/ — статические HTML с авто-определением клиента
-          cp -r sub /tmp/deploy/sub 2>/dev/null || true
           git config user.name "NetherLink Bot"
           git config user.email "bot@netherlink.local"
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
