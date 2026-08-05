@@ -42,9 +42,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Restore state from gh-pages
+      - name: Restore state from state branch
         run: |
-          curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/proxy-history.json" -o proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          git fetch origin state 2>/dev/null && git show state:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
 
       - name: Download current configs from gh-pages
         run: |
@@ -55,20 +55,24 @@ jobs:
       - name: Run recheck
         run: python -m backend.recheck_headless
 
-      - name: Deploy rechecked configs to gh-pages
+      - name: Deploy rechecked configs to gh-pages (clean)
         if: success()
         run: |
-          mkdir -p /tmp/recheck-deploy
-          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt; do
-            [ -f "$f" ] && cp "$f" "/tmp/recheck-deploy/$f"
-          done
-          [ -f proxy-history.json ] && cp proxy-history.json /tmp/recheck-deploy/proxy-history.json
           git config user.name "NetherLink Recheck Bot"
           git config user.email "bot@netherlink.local"
+
+          # ── gh-pages: обновляем топ-50/топ-100, без мусора ──
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt proxy-history.json; do
-            [ -f "/tmp/recheck-deploy/$f" ] && cp "/tmp/recheck-deploy/$f" .
+          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt; do
+            [ -f "$f" ] && cp -f "$f" . 2>/dev/null
           done
           git add -A
           git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
           git push --force origin gh-pages
+
+          # ── state: история проверок ──
+          git checkout --orphan state-new
+          cp -f proxy-history.json . 2>/dev/null || true
+          git add proxy-history.json
+          git commit --allow-empty -m "Proxy history $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push --force origin state-new:state

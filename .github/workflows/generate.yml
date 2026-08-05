@@ -54,27 +54,32 @@ jobs:
         run: python -m backend.download_geoip
         continue-on-error: true
 
-      - name: Restore proxy history from gh-pages
+      - name: Restore proxy history from state branch
         run: |
-          curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/proxy-history.json" -o proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          git fetch origin state 2>/dev/null && git show state:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
 
       - name: Run proxy generator
         run: python -m backend.headless
 
-      - name: Deploy all configs to gh-pages branch
+      - name: Deploy configs to gh-pages (clean)
         run: |
-          mkdir -p /tmp/deploy
-          for f in NetherLink*.yaml NetherLink*.json live.txt; do
-            [ -f "$f" ] && cp "$f" "/tmp/deploy/$f"
-          done
-          [ -f proxy-history.json ] && cp proxy-history.json /tmp/deploy/proxy-history.json
           git config user.name "NetherLink Bot"
           git config user.email "bot@netherlink.local"
+
+          # ── gh-pages: только конфиги, без мусора ──
           git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf . 2>/dev/null || true
-          if ls /tmp/deploy/* 1>/dev/null 2>&1; then
-            cp /tmp/deploy/* .
-          fi
+          # Удаляем только старые конфиги и live.txt, НЕ трогаем репу (.git)
+          rm -f NetherLink*.yaml NetherLink*.json live.txt proxy-history.json liveproxy.txt
+          rm -rf backend GeoIP Proxy-Data sub 2>/dev/null || true
+          # Копируем свежие конфиги из корня репы
+          cp -f NetherLink*.yaml NetherLink*.json live.txt . 2>/dev/null || true
           git add -A
           git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin gh-pages
+
+          # ── state: персистентная история проверок ──
+          git checkout --orphan state-new
+          cp -f proxy-history.json . 2>/dev/null || true
+          git add proxy-history.json
+          git commit --allow-empty -m "Proxy history $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push --force origin state-new:state
