@@ -434,6 +434,36 @@ async def protocol_check(node, timeout, cancel_event):
                         asyncio.open_connection("127.0.0.1", socks_port),
                         timeout=1.0,
                     )
+                    # SOCKS5 handshake: sing-box слушает SOCKS-протокол, а не
+                    # сырой HTTP. Без handshake он видит мусор ("invalid argument")
+                    # и закрывает соединение → protocol check всегда None.
+                    writer.write(b"\x05\x01\x00")
+                    await writer.drain()
+                    handshake = await asyncio.wait_for(reader.readexactly(2), timeout=3.0)
+                    if handshake != b"\x05\x00":
+                        writer.close()
+                        await writer.wait_closed()
+                        break
+                    # SOCKS5 CONNECT www.gstatic.com:80
+                    target = b"www.gstatic.com"
+                    writer.write(b"\x05\x01\x00\x03" + bytes([len(target)]) + target + (80).to_bytes(2, "big"))
+                    await writer.drain()
+                    connect_resp = await asyncio.wait_for(reader.readexactly(4), timeout=3.0)
+                    if connect_resp[0] != 5 or connect_resp[1] != 0:
+                        writer.close()
+                        await writer.wait_closed()
+                        break
+                    # дочитать остаток ответа CONNECT (addr + port)
+                    addr_type = connect_resp[3]
+                    if addr_type == 1:
+                        await asyncio.wait_for(reader.readexactly(4), timeout=3.0)
+                    elif addr_type == 3:
+                        addr_len = await asyncio.wait_for(reader.readexactly(1), timeout=3.0)
+                        await asyncio.wait_for(reader.readexactly(addr_len[0]), timeout=3.0)
+                    elif addr_type == 4:
+                        await asyncio.wait_for(reader.readexactly(16), timeout=3.0)
+                    await asyncio.wait_for(reader.readexactly(2), timeout=3.0)
+
                     request = (
                         "GET /generate_204 HTTP/1.1\r\n"
                         "Host: www.gstatic.com\r\n"

@@ -156,6 +156,122 @@ def test_checker():
         sp = await speed_test_node({"server": "1.1.1.1", "port": 80, "protocol": "http"}, timeout, cancel)
         test("speed_test on non-proxy → None", sp, None)
 
+        # ── protocol_check: SOCKS5 handshake через sing-box (регрессия) ──
+        # Баг: protocol_check слал HTTP прямо в SOCKS-порт без рукопожатия,
+        # sing-box отвечал "invalid argument" и все туннельные прокси
+        # отбрасывались (0/137). Проверяем, что sing-box реально находит
+        # путь к бинарнику и что конфиг проходит sing-box check.
+        from backend.checker import _find_sing_box, _build_singbox_config
+        import subprocess
+
+        sing_bin = _find_sing_box()
+        test("sing-box найден (путь корректный)", sing_bin is not None, True)
+
+        if sing_bin:
+            # конфиг для vless-reality и ss — раньше падали на check
+            nodes_tunnel = [
+                {"protocol": "vless", "server": "1.2.3.4", "port": 443, "uuid": "aaaa-bbbb",
+                 "network": "tcp", "tls": True, "pbk": "ECxm-BdHYhxYK9MtN33NkkrFSdFZXp-OB-yhN8AleRY", "sid": "a62d513cd709744a",
+                 "servername": "ex.com"},
+                {"protocol": "ss", "server": "1.2.3.4", "port": 8388,
+                 "cipher": "aes-256-gcm", "password": "pass"},
+            ]
+            all_ok = True
+            for i, n in enumerate(nodes_tunnel):
+                cfg = _build_singbox_config(n, 34000 + i)
+                with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as tf:
+                    json.dump(cfg, tf)
+                    cfg_path = tf.name
+                try:
+                    r = subprocess.run(
+                        [sing_bin, "check", "-c", cfg_path],
+                        capture_output=True, text=True, timeout=10,
+                    )
+                    if r.returncode != 0:
+                        all_ok = False
+                        print(f"      ✗ sing-box check fail для {n['protocol']}: {r.stderr.strip()[:100]}")
+                finally:
+                    Path(cfg_path).unlink(missing_ok=True)
+            test("sing-box check: vless-reality + ss конфиги валидны", all_ok, True)
+
+        # Интеграционный тест SOCKS5 handshake: поднимаем sing-box с локальным
+        # HTTP-таргетом, шлём настоящий SOCKS5 handshake + CONNECT + HTTP GET.
+        # Без handshake sing-box отвечает "invalid argument" — регрессия.
+        if sing_bin:
+            import socket as sock_lib
+            import subprocess as sp
+            import threading
+
+            # локальный HTTP-сервер-эхо (отвечает 204 на любой GET)
+            http_srv = sock_lib.socket(sock_lib.AF_INET, sock_lib.SOCK_STREAM)
+            http_srv.setsockopt(sock_lib.SOL_SOCKET, sock_lib.SO_REUSEADDR, 1)
+            http_srv.bind(("127.0.0.1", 0))
+            http_srv.listen(1)
+            http_port = http_srv.getsockname()[1]
+
+            def http_worker():
+                try:
+                    conn, _ = http_srv.accept()
+                    conn.recv(1024)
+                    conn.sendall(b"HTTP/1.1 204 No Content\r\nContent-Length: 0\r\n\r\n")
+                    conn.close()
+                except Exception:
+                    pass
+
+            threading.Thread(target=http_worker, daemon=True).start()
+
+            socks_port = 0
+            s = sock_lib.socket(sock_lib.AF_INET, sock_lib.SOCK_STREAM)
+            s.bind(("127.0.0.1", 0))
+            socks_port = s.getsockname()[1]
+            s.close()
+
+            # sing-box конфиг: inbound socks + outbound direct → HTTP-сервер
+            sb_cfg = {
+                "log": {"level": "error"},
+                "inbounds": [{"type": "socks", "listen": "127.0.0.1", "listen_port": socks_port, "tag": "in"}],
+                "outbounds": [{"type": "direct", "tag": "direct"}],
+                "route": {"rules": [{"inbound": "in", "outbound": "direct"}]},
+            }
+            with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as tf:
+                json.dump(sb_cfg, tf)
+                sb_path = tf.name
+
+            proc = sp.Popen([sing_bin, "run", "-c", sb_path],
+                            stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+            try:
+                time.sleep(1.5)
+                handshake_ok = False
+                try:
+                    c = sock_lib.create_connection(("127.0.0.1", socks_port), timeout=3)
+                    c.settimeout(3)
+                    c.sendall(b"\x05\x01\x00")
+                    resp = c.recv(2)
+                    if resp == b"\x05\x00":
+                        # CONNECT на локальный HTTP-сервер
+                        c.sendall(b"\x05\x01\x00\x01" + sock_lib.inet_aton("127.0.0.1") + (http_port).to_bytes(2, "big"))
+                        r4 = c.recv(4)
+                        if len(r4) >= 2 and r4[0] == 5 and r4[1] == 0:
+                            # дочитать addr+port ответа
+                            if r4[3] == 1:
+                                c.recv(4)
+                            c.recv(2)
+                            c.sendall(b"GET /generate_204 HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n")
+                            data = c.recv(512)
+                            handshake_ok = b"HTTP/1.1 204" in data
+                    c.close()
+                except Exception as e:
+                    print(f"      ✗ handshake интеграционный: {e}")
+                test("SOCKS5 handshake через sing-box работает (204)", handshake_ok, True)
+            finally:
+                proc.terminate()
+                try:
+                    proc.wait(timeout=3)
+                except Exception:
+                    proc.kill()
+                http_srv.close()
+                Path(sb_path).unlink(missing_ok=True)
+
     asyncio.run(run())
 
 
