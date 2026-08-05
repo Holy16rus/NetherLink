@@ -40,7 +40,7 @@ async def run():
 
     opts = {
         "limit": 500,
-        "max_checks": 35000,
+        "max_checks": 50000,
         "timeout": 8,
         "selection": "fastest",
         "producer_timeout": 240,

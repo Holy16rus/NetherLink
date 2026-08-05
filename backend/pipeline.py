@@ -588,9 +588,14 @@ async def run_pipeline(
     limit = opts.get("limit", 100)
     strategy = opts.get("selection", "fastest")
 
-    selected = select_nodes(stable_nodes, limit, strategy)
-    if len(selected) < limit:
+    # Для 500-прокси подписки (NetherLink.yaml) берём ВСЕ живые по скорости,
+    # а не только стабильные. Стабильный фильтр — для топ-100 и топ-50.
+    if limit >= 500:
         selected = select_nodes(live_nodes, limit, strategy)
+    else:
+        selected = select_nodes(stable_nodes, limit, strategy)
+        if len(selected) < limit:
+            selected = select_nodes(live_nodes, limit, strategy)
 
     countries = {n.get("country", "ZZ") for n in selected}
     metrics["selected"] = len(selected)
