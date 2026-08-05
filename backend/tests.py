@@ -143,7 +143,7 @@ def test_checker():
         test("TCP check dead IP → None", lat2, None)
 
         lat_h = await http_check({"server": "github.com", "port": 443, "protocol": "https"}, timeout)
-        test("HTTPS check github.com:443 (reachable)", lat_h is not None, True)
+        test("https-проверка честная: github.com:443 не прокси → None", lat_h, None)
 
         node = {"server": "1.1.1.1", "port": 80, "protocol": "http"}
         result = await check_node(node, timeout, cancel)
@@ -275,6 +275,19 @@ def test_checker():
     asyncio.run(run())
 
 
+# ── services.py: DNSBL фильтр ───────────────────────────────────
+
+def test_dnsbl():
+    print("\n── services.py: DNSBL ──")
+    from backend.services import _dnsbl_query, _is_public_ip
+
+    test("наш прокси (135.87.39.23) в спам-базе", _dnsbl_query("135.87.39.23", "bl.spamcop.net"), True)
+    test("8.8.8.8 (Google) чистый", _dnsbl_query("8.8.8.8", "bl.spamcop.net"), False)
+    test("is_public_ip 8.8.8.8", _is_public_ip("8.8.8.8"), True)
+    test("is_public_ip 10.0.0.1 (private)", _is_public_ip("10.0.0.1"), False)
+    test("is_public_ip localhost", _is_public_ip("127.0.0.1"), False)
+
+
 # ── parser.py ───────────────────────────────────────────────────
 
 def test_parser():
@@ -347,6 +360,7 @@ if __name__ == "__main__":
     test_state()
     test_generator()
     test_parser()
+    test_dnsbl()
 
     print("\n── checker.py (network required) ──")
     try:

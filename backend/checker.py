@@ -39,33 +39,84 @@ async def http_check(node, timeout):
     is_https = node.get("protocol", "").lower() == "https"
     try:
         if is_https:
-            ctx = ssl._create_unverified_context()
+            # https-прокси = CONNECT-туннель: TCP → CONNECT → TLS → GET.
+            # Прямой TLS к порту прокси — ошибка: прокси ждёт CONNECT.
             reader, writer = await asyncio.wait_for(
-                asyncio.open_connection(node["server"], int(node["port"]), ssl=ctx),
+                asyncio.open_connection(node["server"], int(node["port"])),
                 timeout=timeout,
             )
+            target = HTTP_TEST_HOST.encode()
+            writer.write(b"CONNECT " + target + b":443 HTTP/1.1\r\nHost: " + target + b":443\r\n\r\n")
+            await writer.drain()
+            resp = await asyncio.wait_for(reader.read(512), timeout=timeout)
+            if b" 200 " not in resp.split(b"\r\n")[0]:
+                writer.close()
+                await writer.wait_closed()
+                return None
+            # TLS поверх установленного CONNECT-туннеля
+            ctx = ssl._create_unverified_context()
+            raw_sock = writer.transport.get_extra_info("socket")
+            try:
+                tls_reader, tls_writer = await asyncio.wait_for(
+                    asyncio.open_connection(
+                        node["server"], int(node["port"]), ssl=ctx, sock=raw_sock,
+                    ),
+                    timeout=timeout,
+                )
+            except Exception:
+                # CONNECT-туннель не принял TLS — это не https-прокси
+                writer.close()
+                await writer.wait_closed()
+                return None
+            # шлём GET /generate_204 через TLS-туннель
+            req = (
+                f"GET /generate_204 HTTP/1.1\r\n"
+                f"Host: {HTTP_TEST_HOST}\r\n"
+                "User-Agent: NetherLink/2.0\r\n"
+                "Connection: close\r\n\r\n"
+            ).encode("ascii")
+            tls_writer.write(req)
+            await tls_writer.drain()
+            data = await asyncio.wait_for(tls_reader.read(512), timeout=timeout)
+            tls_writer.close()
+            await tls_writer.wait_closed()
+            if b"HTTP/" not in data[:16]:
+                return None
+            status_line = data.split(b"\r\n")[0]
+            parts = status_line.split()
+            if len(parts) < 2:
+                return None
+            status = int(parts[1])
+            if status < 200 or status >= 400:
+                return None
+            return int((time.perf_counter() - started) * 1000)
         else:
             reader, writer = await asyncio.wait_for(
                 asyncio.open_connection(node["server"], int(node["port"])),
                 timeout=timeout,
             )
-        writer.write(HTTP_TEST_REQUEST)
-        await writer.drain()
-        data = await asyncio.wait_for(reader.read(512), timeout=timeout)
-        writer.close()
-        await writer.wait_closed()
-        if b"HTTP/" not in data[:16]:
-            return None
-        status_line = data.split(b"\r\n")[0]
-        parts = status_line.split()
-        if len(parts) < 2:
-            return None
-        status = int(parts[1])
-        if status == 407:
-            return None
-        if status < 200 or status >= 400:
-            return None
-        return int((time.perf_counter() - started) * 1000)
+            writer.write(HTTP_TEST_REQUEST)
+            await writer.drain()
+            data = await asyncio.wait_for(reader.read(512), timeout=timeout)
+            writer.close()
+            await writer.wait_closed()
+            if b"HTTP/" not in data[:16]:
+                return None
+            status_line = data.split(b"\r\n")[0]
+            parts = status_line.split()
+            if len(parts) < 2:
+                return None
+            status = int(parts[1])
+            if status == 407:
+                return None
+            if status < 200 or status >= 400:
+                return None
+            # Строгая проверка: ждём именно 204 от gstatic (или 2xx/3xx
+            # с телом от gstatic). Любой другой 200 — это веб-сервер,
+            # не прокси (reject-страница, капча, реклама).
+            if status == 200 and b"gstatic" not in data[:512] and b"generate_204" not in data[:512]:
+                return None
+            return int((time.perf_counter() - started) * 1000)
     except Exception:
         return None
 

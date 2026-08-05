@@ -245,3 +245,56 @@ async def proxycheck_risk(ips, cancel_event):
             continue
     return result_map
 
+
+# ── Бесплатный DNSBL-фильтр спам-баз (без ключей и аккаунтов) ──────
+# Проверяет IP через публичные DNSBL-листы (SpamCop, Spamhaus ZEN, SORBS).
+# Если IP есть в листе — он замечен в спаме/абузе, такой прокси не нужен.
+# Всё бесплатно: обычные DNS-запросы, никаких ключей.
+DNSBL_LIST = "bl.spamcop.net"
+DNSBL_EXTRA = ["zen.spamhaus.org", "dnsbl.sorbs.net"]
+
+
+def _dnsbl_query(ip: str, dnsbl: str) -> bool:
+    """True если IP числится в DNSBL. Синхронный, для потока."""
+    import socket as _sock
+    try:
+        rev = ".".join(reversed(ip.split(".")))
+        _sock.getaddrinfo(f"{rev}.{dnsbl}", None)
+        return True  # резолвится → в базе
+    except _sock.gaierror:
+        return False  # NXDOMAIN → чисто
+    except Exception:
+        return False  # сеть недоступна → не отсекаем
+
+
+async def dnsbl_check_batch(host_ips: dict[str, str], cancel_event) -> dict[str, bool]:
+    """Проверяет host → IP через DNSBL. Возвращает {host: in_spam_base}.
+
+    host_ips: маппинг host → IP (домены уже срезолвлены).
+    Недоступный DNSBL не отсекает прокси (консервативно: пропускаем).
+    """
+    import asyncio as _aio
+
+    if not host_ips:
+        return {}
+
+    results: dict[str, bool] = {}
+    sem = _aio.Semaphore(40)
+
+    async def check_host(host: str, ip: str):
+        if cancel_event.is_set() or not _is_public_ip(ip):
+            results[host] = False
+            return
+        async with sem:
+            # основной лист + запасные; в любом = спам
+            listed = await _aio.to_thread(_dnsbl_query, ip, DNSBL_LIST)
+            if not listed:
+                for extra in DNSBL_EXTRA:
+                    if await _aio.to_thread(_dnsbl_query, ip, extra):
+                        listed = True
+                        break
+        results[host] = listed
+
+    await asyncio.gather(*(check_host(h, ip) for h, ip in host_ips.items()))
+    return results
+

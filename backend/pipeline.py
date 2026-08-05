@@ -19,7 +19,7 @@ from typing import Callable, Awaitable
 from backend.config import OUTPUT_FILE, CHECK_CONCURRENCY, ROOT
 from backend.scraper import collect_local_files, discover_repo_files, fetch_and_parse
 from backend.checker import check_node, speed_test_node, protocol_check
-from backend.services import geoip_batch
+from backend.services import geoip_batch, dnsbl_check_batch
 from backend.generator import select_nodes, generate_configs
 from backend.web_sources import fetch_web_proxies
 from backend.state import record_check_results, filter_stable, save_history
@@ -502,6 +502,28 @@ async def run_pipeline(
 
     known = sum(1 for n in live_nodes if n.get("country") != "ZZ")
     await emit("log", {"level": "info", "text": f"GeoIP: {known}/{len(live_nodes)} определено"})
+
+    # ── DNSBL-фильтр спам-баз (бесплатно, без ключей) ────────────────
+    # Отсекаем прокси, замеченные в спаме/абузе (SpamCop/Spamhaus/SORBS).
+    # host → IP берём из geo_data (там уже есть резолв доменов).
+    spam_hosts = {}
+    for node in live_nodes:
+        host = node.get("server", "")
+        if not host:
+            continue
+        ip = geo_data.get(host, {}).get("ip") or host
+        if ip:
+            spam_hosts[host] = ip
+    if spam_hosts:
+        spam_map = await dnsbl_check_batch(spam_hosts, cancel_event)
+        spam_count = sum(1 for h, bad in spam_map.items() if bad)
+        if spam_count:
+            clean_nodes = [n for n in live_nodes if not spam_map.get(n.get("server", ""), False)]
+            await emit("log", {"level": "info",
+                               "text": f"DNSBL: {spam_count} прокси в спам-базах отсечено ({len(live_nodes)} → {len(clean_nodes)})"})
+            live_nodes = clean_nodes
+        else:
+            await emit("log", {"level": "info", "text": "DNSBL: все прокси чистые (0 в спам-базах)"})
 
     geo_points = [
         {"lat": n["lat"], "lon": n["lon"], "country": n.get("country", "ZZ"), "latency_ms": n.get("latency_ms")}
