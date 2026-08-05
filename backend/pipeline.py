@@ -111,7 +111,7 @@ async def _consume(
     timeout = opts.get("timeout", 10)
     max_checks = opts.get("max_checks", 0)
     limit = opts.get("limit", 100)
-    early_stop = limit * 3 if limit > 0 else 0
+    early_stop = limit * 6 if limit > 0 else 0  # 6x — для 500 прокси это 3000 живых
 
     # Туннельные протоколы имеют приоритет: когда бюджет max_checks
     # исчерпан, http/socks5 обрезаются, а vmess/vless/trojan/ss/hy2
