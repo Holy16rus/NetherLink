@@ -11,32 +11,22 @@ log-level: info
 external-controller: 127.0.0.1:9090
 
 proxies:
-  - name: "🇿🇿 Неизвестно 95ms"
+  - name: "🇿🇿 Неизвестно 31ms"
     type: http
     server: 34.44.49.215
     port: 80
 
-  - name: "🇿🇿 Неизвестно 136ms"
-    type: http
-    server: 100.28.75.142
-    port: 3128
-
-  - name: "🇿🇿 Неизвестно 144ms"
+  - name: "🇿🇿 Неизвестно 36ms"
     type: http
     server: 64.112.184.210
     port: 3128
 
-  - name: "🇿🇿 Неизвестно 125ms"
-    type: vmess
-    server: 165.140.216.142
-    port: 443
-    uuid: "b65a2d69-5634-42a2-e4be-54e8a6176900"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-    tls: false
+  - name: "🇿🇿 Неизвестно 3801ms"
+    type: http
+    server: 100.28.75.142
+    port: 3128
 
-  - name: "🇿🇿 Неизвестно 141ms"
+  - name: "🇿🇿 Неизвестно 164ms"
     type: vless
     server: lucky-sunset-d12e.201-98c.workers.dev
     port: 8880
@@ -44,7 +34,7 @@ proxies:
     network: "ws"
     tls: false
 
-  - name: "🇿🇿 Неизвестно 140ms"
+  - name: "🇿🇿 Неизвестно 167ms"
     type: vless
     server: small-tree-9ec0.84-971.workers.dev
     port: 8880
@@ -52,67 +42,29 @@ proxies:
     network: "ws"
     tls: false
 
-  - name: "🇿🇿 Неизвестно 286ms"
-    type: vmess
-    server: 23.162.200.198
-    port: 18000
-    uuid: "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe"
-    alterId: 0
-    cipher: "auto"
-    network: "tcp"
-    tls: false
+  - name: "🇿🇿 Неизвестно 318ms"
+    type: ss
+    server: 70.39.198.35
+    port: 54166
+    cipher: "chacha20-ietf-poly1305"
+    password: "EvLfWGe0AKvK"
 
-  - name: "🇿🇿 Неизвестно 425ms"
-    type: vless
-    server: fuckfangbinxing.pusytroller.gq
-    port: 2095
-    uuid: "86c50e3a-5b87-49dd-bd20-03c7f2735e40"
-    network: "ws"
-    tls: false
-    servername: "fuckfangbinxing.pusytroller.gq"
-
-  - name: "🇿🇿 Неизвестно 192ms"
-    type: trojan
-    server: fleet-bonefish.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "fleet-bonefish.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 435ms"
-    type: vless
-    server: nmslfangbinxing.pusytroller.gq
-    port: 2095
-    uuid: "86c50e3a-5b87-49dd-bd20-03c7f2735e40"
-    network: "ws"
-    tls: false
-    servername: "nmslfangbinxing.pusytroller.gq"
-
-  - name: "🇿🇿 Неизвестно 191ms"
-    type: trojan
-    server: devoted-tapir.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "devoted-tapir.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 128ms"
-    type: vless
-    server: josni.hoyes.cloudns.ch
-    port: 2053
-    uuid: "83afd88f-200f-4d89-bfc7-66eff160c1d8"
-    network: "ws"
-    tls: true
-    servername: "josni.hoyes.cloudns.ch"
-
-  - name: "🇿🇿 Неизвестно 409ms"
+  - name: "🇿🇿 Неизвестно 328ms"
     type: ss
     server: 82.38.31.42
     port: 8080
     cipher: "chacha20-ietf-poly1305"
     password: "oZIoA69Q8yhcQV8ka3Pa3A"
 
-  - name: "🇿🇿 Неизвестно 530ms"
+  - name: "🇿🇿 Неизвестно 387ms"
+    type: vless
+    server: 93.119.168.215
+    port: 60771
+    uuid: "060a5db6-7ff9-4a64-87c1-8a27be4f11ab"
+    network: "tcp"
+    tls: false
+
+  - name: "🇿🇿 Неизвестно 409ms"
     type: vmess
     server: 159.223.13.109
     port: 1234
@@ -123,52 +75,23 @@ proxies:
     tls: true
     servername: "supervpn.super.com"
 
-  - name: "🇿🇿 Неизвестно 452ms"
+  - name: "🇿🇿 Неизвестно 318ms-2"
     type: vless
-    server: 93.119.168.215
-    port: 60771
-    uuid: "060a5db6-7ff9-4a64-87c1-8a27be4f11ab"
-    network: "tcp"
+    server: nmslfangbinxing.pusytroller.gq
+    port: 2095
+    uuid: "86c50e3a-5b87-49dd-bd20-03c7f2735e40"
+    network: "ws"
     tls: false
+    servername: "nmslfangbinxing.pusytroller.gq"
 
-  - name: "🇿🇿 Неизвестно 449ms"
-    type: ss
-    server: 144.22.183.254
-    port: 59319
-    cipher: "chacha20-ietf-poly1305"
-    password: "YjliYmFlNzVmMmE4ZmJkYjAxNzQ2NWUyNzZlNjhkZGU="
-
-  - name: "🇿🇿 Неизвестно 496ms"
-    type: trojan
-    server: skilled-lioness.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "skilled-lioness.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 534ms"
-    type: trojan
-    server: classic-gator.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "classic-gator.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 447ms"
+  - name: "🇿🇿 Неизвестно 320ms"
     type: ss
     server: 185.226.172.8
     port: 8008
     cipher: "aes-256-gcm"
     password: "XKFKl2rULjIp74"
 
-  - name: "🇿🇿 Неизвестно 550ms"
-    type: trojan
-    server: careful-tadpole.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-
-  - name: "🇿🇿 Неизвестно 567ms"
+  - name: "🇿🇿 Неизвестно 444ms"
     type: trojan
     server: 86.106.84.195
     port: 53261
@@ -176,15 +99,71 @@ proxies:
     skip-cert-verify: true
     sni: "speedtest.tinkoff.ru"
 
-  - name: "🇿🇿 Неизвестно 565ms"
+  - name: "🇿🇿 Неизвестно 154ms"
+    type: vless
+    server: josni.hoyes.cloudns.ch
+    port: 2053
+    uuid: "83afd88f-200f-4d89-bfc7-66eff160c1d8"
+    network: "ws"
+    tls: true
+    servername: "josni.hoyes.cloudns.ch"
+
+  - name: "🇿🇿 Неизвестно 319ms"
     type: trojan
-    server: rapid-firefly.rooster465.autos
+    server: fleet-bonefish.rooster465.autos
     port: 443
     password: "ND91608427"
     skip-cert-verify: true
-    sni: "rapid-firefly.rooster465.autos"
+    sni: "fleet-bonefish.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 654ms"
+  - name: "🇿🇿 Неизвестно 400ms"
+    type: trojan
+    server: skilled-lioness.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "skilled-lioness.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 319ms-2"
+    type: trojan
+    server: devoted-tapir.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "devoted-tapir.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 441ms"
+    type: trojan
+    server: classic-gator.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "classic-gator.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 1006ms"
+    type: ss
+    server: 213.202.208.199
+    port: 7001
+    cipher: "aes-256-gcm"
+    password: "RexnBgU7EV5ADxG"
+
+  - name: "🇿🇿 Неизвестно 425ms"
+    type: trojan
+    server: careful-tadpole.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+
+  - name: "🇿🇿 Неизвестно 349ms"
+    type: vless
+    server: fuckfangbinxing.pusytroller.gq
+    port: 2095
+    uuid: "86c50e3a-5b87-49dd-bd20-03c7f2735e40"
+    network: "ws"
+    tls: false
+    servername: "fuckfangbinxing.pusytroller.gq"
+
+  - name: "🇿🇿 Неизвестно 436ms"
     type: trojan
     server: next-turkey.rooster465.autos
     port: 443
@@ -192,7 +171,15 @@ proxies:
     skip-cert-verify: true
     sni: "next-turkey.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 567ms-2"
+  - name: "🇿🇿 Неизвестно 442ms"
+    type: trojan
+    server: rapid-firefly.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "rapid-firefly.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 432ms"
     type: trojan
     server: gentle-raptor.rooster465.autos
     port: 443
@@ -200,7 +187,7 @@ proxies:
     skip-cert-verify: true
     sni: "gentle-raptor.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 1076ms"
+  - name: "🇿🇿 Неизвестно 752ms"
     type: trojan
     server: eager-louse.rooster465.autos
     port: 443
@@ -208,21 +195,7 @@ proxies:
     skip-cert-verify: true
     sni: "eager-louse.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 1210ms"
-    type: ss
-    server: 213.202.208.199
-    port: 7001
-    cipher: "aes-256-gcm"
-    password: "RexnBgU7EV5ADxG"
-
-  - name: "🇿🇿 Неизвестно 396ms"
-    type: ss
-    server: r3mrcg001286ek2.cybervena.com
-    port: 50099
-    cipher: "chacha20-ietf-poly1305"
-    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
-
-  - name: "🇿🇿 Неизвестно 646ms"
+  - name: "🇿🇿 Неизвестно 559ms"
     type: trojan
     server: discrete-basilisk.rooster465.autos
     port: 443
@@ -230,7 +203,7 @@ proxies:
     skip-cert-verify: true
     sni: "discrete-basilisk.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 646ms-2"
+  - name: "🇿🇿 Неизвестно 566ms"
     type: trojan
     server: relaxed-gull.rooster465.autos
     port: 443
@@ -238,7 +211,41 @@ proxies:
     skip-cert-verify: true
     sni: "relaxed-gull.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 431ms"
+  - name: "🇿🇿 Неизвестно 5203ms"
+    type: vmess
+    server: 23.162.200.198
+    port: 18000
+    uuid: "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    tls: false
+
+  - name: "🇿🇿 Неизвестно 562ms"
+    type: ss
+    server: r3mrcg00129437x.cybervena.com
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+
+  - name: "🇿🇿 Неизвестно 556ms"
+    type: ss
+    server: r3mrcg001286ek2.cybervena.com
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+
+  - name: "🇿🇿 Неизвестно 6544ms"
+    type: vmess
+    server: 165.140.216.142
+    port: 443
+    uuid: "b65a2d69-5634-42a2-e4be-54e8a6176900"
+    alterId: 0
+    cipher: "auto"
+    network: "tcp"
+    tls: false
+
+  - name: "🇿🇿 Неизвестно 567ms"
     type: trojan
     server: relaxing-bluebird.rooster465.autos
     port: 443
@@ -246,7 +253,7 @@ proxies:
     skip-cert-verify: true
     sni: "relaxing-bluebird.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 435ms-2"
+  - name: "🇿🇿 Неизвестно 552ms"
     type: trojan
     server: upright-impala.rooster465.autos
     port: 443
@@ -254,54 +261,7 @@ proxies:
     skip-cert-verify: true
     sni: "upright-impala.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 429ms"
-    type: trojan
-    server: definite-sturgeon.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "definite-sturgeon.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 435ms-3"
-    type: trojan
-    server: becoming-hare.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "becoming-hare.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 5522ms"
-    type: vless
-    server: 89.208.113.16
-    port: 443
-    uuid: "adce7c2a-3191-49ae-b61c-9b8258ea1b0e"
-    network: "tcp"
-    tls: false
-
-  - name: "🇿🇿 Неизвестно 450ms"
-    type: ss
-    server: r3mrcg001287h3p.cybervena.com
-    port: 50099
-    cipher: "chacha20-ietf-poly1305"
-    password: "b1ae0fce-9340-4f2e-882d-fdb2218e2e2b"
-
-  - name: "🇿🇿 Неизвестно 562ms"
-    type: trojan
-    server: moved-meerkat.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "moved-meerkat.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 549ms"
-    type: trojan
-    server: saving-octopus.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "saving-octopus.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 248ms"
+  - name: "🇿🇿 Неизвестно 145ms"
     type: vmess
     server: 134.195.196.211
     port: 18000
@@ -312,7 +272,31 @@ proxies:
     tls: false
     servername: "@proxyvpn11"
 
-  - name: "🇿🇿 Неизвестно 563ms"
+  - name: "🇿🇿 Неизвестно 555ms"
+    type: trojan
+    server: definite-sturgeon.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "definite-sturgeon.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 553ms"
+    type: trojan
+    server: becoming-hare.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "becoming-hare.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 657ms"
+    type: trojan
+    server: moved-meerkat.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "moved-meerkat.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 669ms"
     type: trojan
     server: definite-malamute.rooster465.autos
     port: 443
@@ -320,7 +304,22 @@ proxies:
     skip-cert-verify: true
     sni: "definite-malamute.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 555ms"
+  - name: "🇿🇿 Неизвестно 690ms"
+    type: trojan
+    server: saving-octopus.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "saving-octopus.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 573ms"
+    type: ss
+    server: r3mrcg001287h3p.cybervena.com
+    port: 50099
+    cipher: "chacha20-ietf-poly1305"
+    password: "b1ae0fce-9340-4f2e-882d-fdb2218e2e2b"
+
+  - name: "🇿🇿 Неизвестно 673ms"
     type: trojan
     server: uncommon-feline.rooster465.autos
     port: 443
@@ -328,30 +327,22 @@ proxies:
     skip-cert-verify: true
     sni: "uncommon-feline.rooster465.autos"
 
-  - name: "🇿🇿 Неизвестно 713ms"
+  - name: "🇿🇿 Неизвестно 456ms"
+    type: hysteria2
+    server: 91.196.32.163
+    port: 443
+    password: "mkL3AfdSZIpTWRB9TcWPn9vywPGN89MRHg3ToRDj"
+    skip-cert-verify: true
+    sni: "germany3.h2corp.local"
+
+  - name: "🇿🇿 Неизвестно 802ms"
     type: trojan
     server: 154.90.62.70
     port: 56127
     password: "p5jTPcffLgi4gaNOJd2KUTb9YEPBBD5B"
     skip-cert-verify: true
 
-  - name: "🇿🇿 Неизвестно 639ms"
-    type: trojan
-    server: ace-starling.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "ace-starling.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 645ms"
-    type: trojan
-    server: upright-hamster.rooster465.autos
-    port: 443
-    password: "ND91608427"
-    skip-cert-verify: true
-    sni: "upright-hamster.rooster465.autos"
-
-  - name: "🇿🇿 Неизвестно 1178ms"
+  - name: "🇿🇿 Неизвестно 2266ms"
     type: vless
     server: music1000.melobitmusic1.ir
     port: 2053
@@ -360,15 +351,15 @@ proxies:
     tls: true
     servername: "music1000.melobitmusic1.ir"
 
-  - name: "🇿🇿 Неизвестно 968ms"
+  - name: "🇿🇿 Неизвестно 2427ms"
     type: hysteria2
-    server: 91.196.32.163
+    server: de-two.quiet-rogue.site
     port: 443
-    password: "mkL3AfdSZIpTWRB9TcWPn9vywPGN89MRHg3ToRDj"
+    password: "71cada65-d23e-418c-88e4-a06188d14689"
     skip-cert-verify: true
-    sni: "germany3.h2corp.local"
+    sni: "de-two.quiet-rogue.site"
 
-  - name: "🇿🇿 Неизвестно 691ms"
+  - name: "🇿🇿 Неизвестно 860ms"
     type: trojan
     server: hkdcrtc-e.catcat321.com
     port: 20066
@@ -376,32 +367,41 @@ proxies:
     skip-cert-verify: true
     sni: "hk.catxstar.com"
 
-  - name: "🇿🇿 Неизвестно 1072ms"
+  - name: "🇿🇿 Неизвестно 1206ms"
     type: hysteria2
     server: it-one.quiet-rogue.site
     port: 443
     password: "71cada65-d23e-418c-88e4-a06188d14689"
     skip-cert-verify: true
 
-  - name: "🇿🇿 Неизвестно 930ms"
+  - name: "🇿🇿 Неизвестно 913ms"
     type: trojan
-    server: oplosgru-c.catcat321.com
-    port: 20034
+    server: 157.254.38.210
+    port: 20129
     password: "41c406e2-12b5-41f2-a329-d0621052d675"
     skip-cert-verify: true
     sni: "hk.catxstar.com"
 
-  - name: "🇿🇿 Неизвестно 1114ms"
-    type: ss
-    server: 212.192.15.33
-    port: 10910
-    cipher: "aes-256-gcm"
-    password: "72553320ae6bcc8f"
-
-  - name: "🇿🇿 Неизвестно 5618ms"
+  - name: "🇿🇿 Неизвестно 868ms"
     type: trojan
-    server: 157.254.38.210
-    port: 20129
+    server: upright-hamster.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "upright-hamster.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 851ms"
+    type: trojan
+    server: ace-starling.rooster465.autos
+    port: 443
+    password: "ND91608427"
+    skip-cert-verify: true
+    sni: "ace-starling.rooster465.autos"
+
+  - name: "🇿🇿 Неизвестно 1020ms"
+    type: trojan
+    server: oplosgru-c.catcat321.com
+    port: 20034
     password: "41c406e2-12b5-41f2-a329-d0621052d675"
     skip-cert-verify: true
     sni: "hk.catxstar.com"
@@ -420,110 +420,110 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - "🇿🇿 Неизвестно 95ms"
-      - "🇿🇿 Неизвестно 136ms"
-      - "🇿🇿 Неизвестно 144ms"
-      - "🇿🇿 Неизвестно 125ms"
-      - "🇿🇿 Неизвестно 141ms"
-      - "🇿🇿 Неизвестно 140ms"
-      - "🇿🇿 Неизвестно 286ms"
-      - "🇿🇿 Неизвестно 425ms"
-      - "🇿🇿 Неизвестно 192ms"
-      - "🇿🇿 Неизвестно 435ms"
-      - "🇿🇿 Неизвестно 191ms"
-      - "🇿🇿 Неизвестно 128ms"
+      - "🇿🇿 Неизвестно 31ms"
+      - "🇿🇿 Неизвестно 36ms"
+      - "🇿🇿 Неизвестно 3801ms"
+      - "🇿🇿 Неизвестно 164ms"
+      - "🇿🇿 Неизвестно 167ms"
+      - "🇿🇿 Неизвестно 318ms"
+      - "🇿🇿 Неизвестно 328ms"
+      - "🇿🇿 Неизвестно 387ms"
       - "🇿🇿 Неизвестно 409ms"
-      - "🇿🇿 Неизвестно 530ms"
-      - "🇿🇿 Неизвестно 452ms"
-      - "🇿🇿 Неизвестно 449ms"
-      - "🇿🇿 Неизвестно 496ms"
-      - "🇿🇿 Неизвестно 534ms"
-      - "🇿🇿 Неизвестно 447ms"
-      - "🇿🇿 Неизвестно 550ms"
-      - "🇿🇿 Неизвестно 567ms"
-      - "🇿🇿 Неизвестно 565ms"
-      - "🇿🇿 Неизвестно 654ms"
-      - "🇿🇿 Неизвестно 567ms-2"
-      - "🇿🇿 Неизвестно 1076ms"
-      - "🇿🇿 Неизвестно 1210ms"
-      - "🇿🇿 Неизвестно 396ms"
-      - "🇿🇿 Неизвестно 646ms"
-      - "🇿🇿 Неизвестно 646ms-2"
-      - "🇿🇿 Неизвестно 431ms"
-      - "🇿🇿 Неизвестно 435ms-2"
-      - "🇿🇿 Неизвестно 429ms"
-      - "🇿🇿 Неизвестно 435ms-3"
-      - "🇿🇿 Неизвестно 5522ms"
-      - "🇿🇿 Неизвестно 450ms"
+      - "🇿🇿 Неизвестно 318ms-2"
+      - "🇿🇿 Неизвестно 320ms"
+      - "🇿🇿 Неизвестно 444ms"
+      - "🇿🇿 Неизвестно 154ms"
+      - "🇿🇿 Неизвестно 319ms"
+      - "🇿🇿 Неизвестно 400ms"
+      - "🇿🇿 Неизвестно 319ms-2"
+      - "🇿🇿 Неизвестно 441ms"
+      - "🇿🇿 Неизвестно 1006ms"
+      - "🇿🇿 Неизвестно 425ms"
+      - "🇿🇿 Неизвестно 349ms"
+      - "🇿🇿 Неизвестно 436ms"
+      - "🇿🇿 Неизвестно 442ms"
+      - "🇿🇿 Неизвестно 432ms"
+      - "🇿🇿 Неизвестно 752ms"
+      - "🇿🇿 Неизвестно 559ms"
+      - "🇿🇿 Неизвестно 566ms"
+      - "🇿🇿 Неизвестно 5203ms"
       - "🇿🇿 Неизвестно 562ms"
-      - "🇿🇿 Неизвестно 549ms"
-      - "🇿🇿 Неизвестно 248ms"
-      - "🇿🇿 Неизвестно 563ms"
+      - "🇿🇿 Неизвестно 556ms"
+      - "🇿🇿 Неизвестно 6544ms"
+      - "🇿🇿 Неизвестно 567ms"
+      - "🇿🇿 Неизвестно 552ms"
+      - "🇿🇿 Неизвестно 145ms"
       - "🇿🇿 Неизвестно 555ms"
-      - "🇿🇿 Неизвестно 713ms"
-      - "🇿🇿 Неизвестно 639ms"
-      - "🇿🇿 Неизвестно 645ms"
-      - "🇿🇿 Неизвестно 1178ms"
-      - "🇿🇿 Неизвестно 968ms"
-      - "🇿🇿 Неизвестно 691ms"
-      - "🇿🇿 Неизвестно 1072ms"
-      - "🇿🇿 Неизвестно 930ms"
-      - "🇿🇿 Неизвестно 1114ms"
-      - "🇿🇿 Неизвестно 5618ms"
+      - "🇿🇿 Неизвестно 553ms"
+      - "🇿🇿 Неизвестно 657ms"
+      - "🇿🇿 Неизвестно 669ms"
+      - "🇿🇿 Неизвестно 690ms"
+      - "🇿🇿 Неизвестно 573ms"
+      - "🇿🇿 Неизвестно 673ms"
+      - "🇿🇿 Неизвестно 456ms"
+      - "🇿🇿 Неизвестно 802ms"
+      - "🇿🇿 Неизвестно 2266ms"
+      - "🇿🇿 Неизвестно 2427ms"
+      - "🇿🇿 Неизвестно 860ms"
+      - "🇿🇿 Неизвестно 1206ms"
+      - "🇿🇿 Неизвестно 913ms"
+      - "🇿🇿 Неизвестно 868ms"
+      - "🇿🇿 Неизвестно 851ms"
+      - "🇿🇿 Неизвестно 1020ms"
 
   - name: "🇿🇿 Неизвестно"
     type: select
     proxies:
-      - "🇿🇿 Неизвестно 95ms"
-      - "🇿🇿 Неизвестно 136ms"
-      - "🇿🇿 Неизвестно 144ms"
-      - "🇿🇿 Неизвестно 125ms"
-      - "🇿🇿 Неизвестно 141ms"
-      - "🇿🇿 Неизвестно 140ms"
-      - "🇿🇿 Неизвестно 286ms"
-      - "🇿🇿 Неизвестно 425ms"
-      - "🇿🇿 Неизвестно 192ms"
-      - "🇿🇿 Неизвестно 435ms"
-      - "🇿🇿 Неизвестно 191ms"
-      - "🇿🇿 Неизвестно 128ms"
+      - "🇿🇿 Неизвестно 31ms"
+      - "🇿🇿 Неизвестно 36ms"
+      - "🇿🇿 Неизвестно 3801ms"
+      - "🇿🇿 Неизвестно 164ms"
+      - "🇿🇿 Неизвестно 167ms"
+      - "🇿🇿 Неизвестно 318ms"
+      - "🇿🇿 Неизвестно 328ms"
+      - "🇿🇿 Неизвестно 387ms"
       - "🇿🇿 Неизвестно 409ms"
-      - "🇿🇿 Неизвестно 530ms"
-      - "🇿🇿 Неизвестно 452ms"
-      - "🇿🇿 Неизвестно 449ms"
-      - "🇿🇿 Неизвестно 496ms"
-      - "🇿🇿 Неизвестно 534ms"
-      - "🇿🇿 Неизвестно 447ms"
-      - "🇿🇿 Неизвестно 550ms"
-      - "🇿🇿 Неизвестно 567ms"
-      - "🇿🇿 Неизвестно 565ms"
-      - "🇿🇿 Неизвестно 654ms"
-      - "🇿🇿 Неизвестно 567ms-2"
-      - "🇿🇿 Неизвестно 1076ms"
-      - "🇿🇿 Неизвестно 1210ms"
-      - "🇿🇿 Неизвестно 396ms"
-      - "🇿🇿 Неизвестно 646ms"
-      - "🇿🇿 Неизвестно 646ms-2"
-      - "🇿🇿 Неизвестно 431ms"
-      - "🇿🇿 Неизвестно 435ms-2"
-      - "🇿🇿 Неизвестно 429ms"
-      - "🇿🇿 Неизвестно 435ms-3"
-      - "🇿🇿 Неизвестно 5522ms"
-      - "🇿🇿 Неизвестно 450ms"
+      - "🇿🇿 Неизвестно 318ms-2"
+      - "🇿🇿 Неизвестно 320ms"
+      - "🇿🇿 Неизвестно 444ms"
+      - "🇿🇿 Неизвестно 154ms"
+      - "🇿🇿 Неизвестно 319ms"
+      - "🇿🇿 Неизвестно 400ms"
+      - "🇿🇿 Неизвестно 319ms-2"
+      - "🇿🇿 Неизвестно 441ms"
+      - "🇿🇿 Неизвестно 1006ms"
+      - "🇿🇿 Неизвестно 425ms"
+      - "🇿🇿 Неизвестно 349ms"
+      - "🇿🇿 Неизвестно 436ms"
+      - "🇿🇿 Неизвестно 442ms"
+      - "🇿🇿 Неизвестно 432ms"
+      - "🇿🇿 Неизвестно 752ms"
+      - "🇿🇿 Неизвестно 559ms"
+      - "🇿🇿 Неизвестно 566ms"
+      - "🇿🇿 Неизвестно 5203ms"
       - "🇿🇿 Неизвестно 562ms"
-      - "🇿🇿 Неизвестно 549ms"
-      - "🇿🇿 Неизвестно 248ms"
-      - "🇿🇿 Неизвестно 563ms"
+      - "🇿🇿 Неизвестно 556ms"
+      - "🇿🇿 Неизвестно 6544ms"
+      - "🇿🇿 Неизвестно 567ms"
+      - "🇿🇿 Неизвестно 552ms"
+      - "🇿🇿 Неизвестно 145ms"
       - "🇿🇿 Неизвестно 555ms"
-      - "🇿🇿 Неизвестно 713ms"
-      - "🇿🇿 Неизвестно 639ms"
-      - "🇿🇿 Неизвестно 645ms"
-      - "🇿🇿 Неизвестно 1178ms"
-      - "🇿🇿 Неизвестно 968ms"
-      - "🇿🇿 Неизвестно 691ms"
-      - "🇿🇿 Неизвестно 1072ms"
-      - "🇿🇿 Неизвестно 930ms"
-      - "🇿🇿 Неизвестно 1114ms"
-      - "🇿🇿 Неизвестно 5618ms"
+      - "🇿🇿 Неизвестно 553ms"
+      - "🇿🇿 Неизвестно 657ms"
+      - "🇿🇿 Неизвестно 669ms"
+      - "🇿🇿 Неизвестно 690ms"
+      - "🇿🇿 Неизвестно 573ms"
+      - "🇿🇿 Неизвестно 673ms"
+      - "🇿🇿 Неизвестно 456ms"
+      - "🇿🇿 Неизвестно 802ms"
+      - "🇿🇿 Неизвестно 2266ms"
+      - "🇿🇿 Неизвестно 2427ms"
+      - "🇿🇿 Неизвестно 860ms"
+      - "🇿🇿 Неизвестно 1206ms"
+      - "🇿🇿 Неизвестно 913ms"
+      - "🇿🇿 Неизвестно 868ms"
+      - "🇿🇿 Неизвестно 851ms"
+      - "🇿🇿 Неизвестно 1020ms"
       - DIRECT
 
 rules:
