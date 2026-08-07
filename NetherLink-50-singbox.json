@@ -1,30 +1,20 @@
 {
-  "🇿🇿 Неизвестно 31ms": {
-    "type": "http",
-    "server": "34.44.49.215",
-    "server_port": 80
-  },
-  "🇿🇿 Неизвестно 38ms": {
+  "🇿🇿 Неизвестно 20ms": {
     "type": "http",
     "server": "64.112.184.210",
     "server_port": 3128
   },
-  "🇿🇿 Неизвестно 46ms": {
+  "🇿🇿 Неизвестно 56ms": {
     "type": "http",
-    "server": "100.28.75.142",
-    "server_port": 3128
+    "server": "34.44.49.215",
+    "server_port": 80
   },
-  "🇿🇿 Неизвестно 52ms": {
+  "🇿🇿 Неизвестно 59ms": {
     "type": "http",
-    "server": "35.183.127.162",
-    "server_port": 41400
+    "server": "104.154.186.48",
+    "server_port": 80
   },
-  "🇿🇿 Неизвестно 53ms": {
-    "type": "http",
-    "server": "35.183.127.162",
-    "server_port": 8703
-  },
-  "🇿🇿 Неизвестно 163ms": {
+  "🇿🇿 Неизвестно 146ms": {
     "type": "vless",
     "server": "lucky-sunset-d12e.201-98c.workers.dev",
     "server_port": 8880,
@@ -33,7 +23,7 @@
       "type": "ws"
     }
   },
-  "🇿🇿 Неизвестно 167ms": {
+  "🇿🇿 Неизвестно 143ms": {
     "type": "vless",
     "server": "small-tree-9ec0.84-971.workers.dev",
     "server_port": 8880,
@@ -42,7 +32,7 @@
       "type": "ws"
     }
   },
-  "🇿🇿 Неизвестно 194ms": {
+  "🇿🇿 Неизвестно 206ms": {
     "type": "vmess",
     "server": "23.162.200.198",
     "server_port": 18000,
@@ -50,14 +40,7 @@
     "alter_id": 0,
     "security": "auto"
   },
-  "🇿🇿 Неизвестно 255ms": {
-    "type": "shadowsocks",
-    "server": "70.39.198.35",
-    "server_port": 54166,
-    "method": "chacha20-ietf-poly1305",
-    "password": "EvLfWGe0AKvK"
-  },
-  "🇿🇿 Неизвестно 224ms": {
+  "🇿🇿 Неизвестно 257ms": {
     "type": "vmess",
     "server": "165.140.216.142",
     "server_port": 443,
@@ -65,14 +48,21 @@
     "alter_id": 0,
     "security": "auto"
   },
-  "🇿🇿 Неизвестно 324ms": {
+  "🇿🇿 Неизвестно 325ms": {
+    "type": "shadowsocks",
+    "server": "70.39.198.35",
+    "server_port": 54166,
+    "method": "chacha20-ietf-poly1305",
+    "password": "EvLfWGe0AKvK"
+  },
+  "🇿🇿 Неизвестно 302ms": {
     "type": "shadowsocks",
     "server": "82.38.31.42",
     "server_port": 8080,
     "method": "chacha20-ietf-poly1305",
     "password": "oZIoA69Q8yhcQV8ka3Pa3A"
   },
-  "🇿🇿 Неизвестно 412ms": {
+  "🇿🇿 Неизвестно 359ms": {
     "type": "vmess",
     "server": "159.223.13.109",
     "server_port": 1234,
@@ -85,66 +75,27 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 355ms": {
+  "🇿🇿 Неизвестно 331ms": {
     "type": "vless",
     "server": "89.208.113.16",
     "server_port": 443,
     "uuid": "adce7c2a-3191-49ae-b61c-9b8258ea1b0e"
   },
-  "🇿🇿 Неизвестно 359ms": {
+  "🇿🇿 Неизвестно 336ms": {
     "type": "vless",
     "server": "93.119.168.215",
     "server_port": 60771,
     "uuid": "060a5db6-7ff9-4a64-87c1-8a27be4f11ab"
   },
-  "🇿🇿 Неизвестно 407ms": {
-    "type": "vless",
-    "server": "fuckfangbinxing.pusytroller.gq",
-    "server_port": 2095,
-    "uuid": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
-    "transport": {
-      "type": "ws"
-    }
+  "🇿🇿 Неизвестно 367ms": {
+    "type": "vmess",
+    "server": "5.188.190.252",
+    "server_port": 22324,
+    "uuid": "04621bae-ab36-11ec-b909-0242ac120002",
+    "alter_id": 0,
+    "security": "auto"
   },
-  "🇿🇿 Неизвестно 489ms": {
-    "type": "shadowsocks",
-    "server": "213.202.208.199",
-    "server_port": 7001,
-    "method": "aes-256-gcm",
-    "password": "RexnBgU7EV5ADxG"
-  },
-  "🇿🇿 Неизвестно 450ms": {
-    "type": "trojan",
-    "server": "86.106.84.195",
-    "server_port": 53261,
-    "password": "y3b03zx3tznhyo538p4c",
-    "tls": {
-      "enabled": true,
-      "server_name": "speedtest.tinkoff.ru",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 376ms": {
-    "type": "trojan",
-    "server": "skilled-lioness.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "skilled-lioness.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 397ms": {
-    "type": "vless",
-    "server": "nmslfangbinxing.pusytroller.gq",
-    "server_port": 2095,
-    "uuid": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
-    "transport": {
-      "type": "ws"
-    }
-  },
-  "🇿🇿 Неизвестно 180ms": {
+  "🇿🇿 Неизвестно 139ms": {
     "type": "vless",
     "server": "josni.hoyes.cloudns.ch",
     "server_port": 2053,
@@ -158,18 +109,36 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 337ms": {
+  "🇿🇿 Неизвестно 291ms": {
+    "type": "shadowsocks",
+    "server": "213.202.208.199",
+    "server_port": 7001,
+    "method": "aes-256-gcm",
+    "password": "RexnBgU7EV5ADxG"
+  },
+  "🇿🇿 Неизвестно 403ms": {
     "type": "trojan",
-    "server": "fleet-bonefish.rooster465.autos",
+    "server": "86.106.84.195",
+    "server_port": 53261,
+    "password": "y3b03zx3tznhyo538p4c",
+    "tls": {
+      "enabled": true,
+      "server_name": "speedtest.tinkoff.ru",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 312ms": {
+    "type": "trojan",
+    "server": "skilled-lioness.rooster465.autos",
     "server_port": 443,
     "password": "ND91608427",
     "tls": {
       "enabled": true,
-      "server_name": "fleet-bonefish.rooster465.autos",
+      "server_name": "skilled-lioness.rooster465.autos",
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 415ms": {
+  "🇿🇿 Неизвестно 368ms": {
     "type": "trojan",
     "server": "classic-gator.rooster465.autos",
     "server_port": 443,
@@ -180,73 +149,36 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 444ms": {
+  "🇿🇿 Неизвестно 415ms": {
+    "type": "vless",
+    "server": "fuckfangbinxing.pusytroller.gq",
+    "server_port": 2095,
+    "uuid": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
+    "transport": {
+      "type": "ws"
+    }
+  },
+  "🇿🇿 Неизвестно 415ms-2": {
+    "type": "vless",
+    "server": "nmslfangbinxing.pusytroller.gq",
+    "server_port": 2095,
+    "uuid": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
+    "transport": {
+      "type": "ws"
+    }
+  },
+  "🇿🇿 Неизвестно 391ms": {
     "type": "trojan",
-    "server": "careful-tadpole.rooster465.autos",
+    "server": "fleet-bonefish.rooster465.autos",
     "server_port": 443,
     "password": "ND91608427",
     "tls": {
       "enabled": true,
-      "server_name": "careful-tadpole.rooster465.autos",
+      "server_name": "fleet-bonefish.rooster465.autos",
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 315ms": {
-    "type": "trojan",
-    "server": "devoted-tapir.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "devoted-tapir.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 423ms": {
-    "type": "trojan",
-    "server": "eager-louse.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "eager-louse.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 447ms": {
-    "type": "trojan",
-    "server": "next-turkey.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "next-turkey.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 528ms": {
-    "type": "trojan",
-    "server": "relaxed-gull.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "relaxed-gull.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 540ms": {
-    "type": "trojan",
-    "server": "discrete-basilisk.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "discrete-basilisk.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 426ms": {
+  "🇿🇿 Неизвестно 390ms": {
     "type": "trojan",
     "server": "gentle-raptor.rooster465.autos",
     "server_port": 443,
@@ -257,33 +189,69 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 573ms": {
+  "🇿🇿 Неизвестно 467ms": {
+    "type": "trojan",
+    "server": "relaxed-gull.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "relaxed-gull.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 388ms": {
+    "type": "trojan",
+    "server": "next-turkey.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "next-turkey.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 1190ms": {
+    "type": "trojan",
+    "server": "eager-louse.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "eager-louse.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 766ms": {
+    "type": "trojan",
+    "server": "discrete-basilisk.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "discrete-basilisk.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 458ms": {
+    "type": "trojan",
+    "server": "careful-tadpole.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "careful-tadpole.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 562ms": {
     "type": "shadowsocks",
     "server": "r3mrcg00129437x.cybervena.com",
     "server_port": 50099,
     "method": "chacha20-ietf-poly1305",
     "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
   },
-  "🇿🇿 Неизвестно 544ms": {
-    "type": "trojan",
-    "server": "definite-sturgeon.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "definite-sturgeon.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 159ms": {
-    "type": "vmess",
-    "server": "134.195.196.211",
-    "server_port": 18000,
-    "uuid": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
-    "alter_id": 0,
-    "security": "auto"
-  },
-  "🇿🇿 Неизвестно 563ms": {
+  "🇿🇿 Неизвестно 583ms": {
     "type": "trojan",
     "server": "upright-impala.rooster465.autos",
     "server_port": 443,
@@ -294,18 +262,32 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 551ms": {
+  "🇿🇿 Неизвестно 586ms": {
     "type": "trojan",
-    "server": "relaxing-bluebird.rooster465.autos",
+    "server": "definite-sturgeon.rooster465.autos",
     "server_port": 443,
     "password": "ND91608427",
     "tls": {
       "enabled": true,
-      "server_name": "relaxing-bluebird.rooster465.autos",
+      "server_name": "definite-sturgeon.rooster465.autos",
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 648ms": {
+  "🇿🇿 Неизвестно 574ms": {
+    "type": "shadowsocks",
+    "server": "r3mrcg001286ek2.cybervena.com",
+    "server_port": 50099,
+    "method": "chacha20-ietf-poly1305",
+    "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+  },
+  "🇿🇿 Неизвестно 1769ms": {
+    "type": "shadowsocks",
+    "server": "185.226.172.8",
+    "server_port": 8008,
+    "method": "aes-256-gcm",
+    "password": "XKFKl2rULjIp74"
+  },
+  "🇿🇿 Неизвестно 690ms": {
     "type": "trojan",
     "server": "moved-meerkat.rooster465.autos",
     "server_port": 443,
@@ -316,7 +298,18 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 655ms": {
+  "🇿🇿 Неизвестно 380ms": {
+    "type": "trojan",
+    "server": "devoted-tapir.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "devoted-tapir.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 705ms": {
     "type": "trojan",
     "server": "saving-octopus.rooster465.autos",
     "server_port": 443,
@@ -327,7 +320,25 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 662ms": {
+  "🇿🇿 Неизвестно 421ms": {
+    "type": "hysteria2",
+    "server": "91.196.32.163",
+    "server_port": 443,
+    "password": "mkL3AfdSZIpTWRB9TcWPn9vywPGN89MRHg3ToRDj",
+    "tls": {
+      "enabled": true,
+      "server_name": "germany3.h2corp.local",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 569ms": {
+    "type": "shadowsocks",
+    "server": "r3mrcg001287h3p.cybervena.com",
+    "server_port": 50099,
+    "method": "chacha20-ietf-poly1305",
+    "password": "b1ae0fce-9340-4f2e-882d-fdb2218e2e2b"
+  },
+  "🇿🇿 Неизвестно 724ms": {
     "type": "trojan",
     "server": "definite-malamute.rooster465.autos",
     "server_port": 443,
@@ -338,25 +349,7 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 669ms": {
-    "type": "trojan",
-    "server": "uncommon-feline.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "uncommon-feline.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 473ms": {
-    "type": "shadowsocks",
-    "server": "r3mrcg001287h3p.cybervena.com",
-    "server_port": 50099,
-    "method": "chacha20-ietf-poly1305",
-    "password": "b1ae0fce-9340-4f2e-882d-fdb2218e2e2b"
-  },
-  "🇿🇿 Неизвестно 660ms": {
+  "🇿🇿 Неизвестно 719ms": {
     "type": "hysteria2",
     "server": "de-two.quiet-rogue.site",
     "server_port": 443,
@@ -367,14 +360,29 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 1995ms": {
-    "type": "shadowsocks",
-    "server": "185.226.172.8",
-    "server_port": 8008,
-    "method": "aes-256-gcm",
-    "password": "XKFKl2rULjIp74"
+  "🇿🇿 Неизвестно 597ms": {
+    "type": "trojan",
+    "server": "relaxing-bluebird.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "relaxing-bluebird.rooster465.autos",
+      "insecure": true
+    }
   },
-  "🇿🇿 Неизвестно 796ms": {
+  "🇿🇿 Неизвестно 586ms-2": {
+    "type": "hysteria2",
+    "server": "it-one.quiet-rogue.site",
+    "server_port": 443,
+    "password": "71cada65-d23e-418c-88e4-a06188d14689",
+    "tls": {
+      "enabled": true,
+      "server_name": "it-one.quiet-rogue.site",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 894ms": {
     "type": "trojan",
     "server": "154.90.62.70",
     "server_port": 56127,
@@ -385,7 +393,70 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 795ms": {
+  "🇿🇿 Неизвестно 5136ms": {
+    "type": "vmess",
+    "server": "134.195.196.211",
+    "server_port": 18000,
+    "uuid": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
+    "alter_id": 0,
+    "security": "auto"
+  },
+  "🇿🇿 Неизвестно 854ms": {
+    "type": "trojan",
+    "server": "uncommon-feline.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "uncommon-feline.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 834ms": {
+    "type": "trojan",
+    "server": "ace-starling.rooster465.autos",
+    "server_port": 443,
+    "password": "ND91608427",
+    "tls": {
+      "enabled": true,
+      "server_name": "ace-starling.rooster465.autos",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 3301ms": {
+    "type": "trojan",
+    "server": "157.254.38.210",
+    "server_port": 20129,
+    "password": "41c406e2-12b5-41f2-a329-d0621052d675",
+    "tls": {
+      "enabled": true,
+      "server_name": "hk.catxstar.com",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 1090ms": {
+    "type": "trojan",
+    "server": "oplosgru-c.catcat321.com",
+    "server_port": 20034,
+    "password": "41c406e2-12b5-41f2-a329-d0621052d675",
+    "tls": {
+      "enabled": true,
+      "server_name": "hk.catxstar.com",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 993ms": {
+    "type": "trojan",
+    "server": "hkdcrtc-e.catcat321.com",
+    "server_port": 20066,
+    "password": "41c406e2-12b5-41f2-a329-d0621052d675",
+    "tls": {
+      "enabled": true,
+      "server_name": "hk.catxstar.com",
+      "insecure": true
+    }
+  },
+  "🇿🇿 Неизвестно 983ms": {
     "type": "vless",
     "server": "music1000.melobitmusic1.ir",
     "server_port": 2053,
@@ -399,40 +470,7 @@
       "insecure": true
     }
   },
-  "🇿🇿 Неизвестно 825ms": {
-    "type": "trojan",
-    "server": "ace-starling.rooster465.autos",
-    "server_port": 443,
-    "password": "ND91608427",
-    "tls": {
-      "enabled": true,
-      "server_name": "ace-starling.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 1043ms": {
-    "type": "trojan",
-    "server": "hkdcrtc-e.catcat321.com",
-    "server_port": 20066,
-    "password": "41c406e2-12b5-41f2-a329-d0621052d675",
-    "tls": {
-      "enabled": true,
-      "server_name": "hk.catxstar.com",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 1014ms": {
-    "type": "trojan",
-    "server": "oplosgru-c.catcat321.com",
-    "server_port": 20034,
-    "password": "41c406e2-12b5-41f2-a329-d0621052d675",
-    "tls": {
-      "enabled": true,
-      "server_name": "hk.catxstar.com",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 1965ms": {
+  "🇿🇿 Неизвестно 824ms": {
     "type": "trojan",
     "server": "upright-hamster.rooster465.autos",
     "server_port": 443,
@@ -440,40 +478,6 @@
     "tls": {
       "enabled": true,
       "server_name": "upright-hamster.rooster465.autos",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 598ms": {
-    "type": "hysteria2",
-    "server": "it-one.quiet-rogue.site",
-    "server_port": 443,
-    "password": "71cada65-d23e-418c-88e4-a06188d14689",
-    "tls": {
-      "enabled": true,
-      "server_name": "it-one.quiet-rogue.site",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 5591ms": {
-    "type": "trojan",
-    "server": "157.254.38.210",
-    "server_port": 20129,
-    "password": "41c406e2-12b5-41f2-a329-d0621052d675",
-    "tls": {
-      "enabled": true,
-      "server_name": "hk.catxstar.com",
-      "insecure": true
-    }
-  },
-  "🇿🇿 Неизвестно 468ms": {
-    "type": "vless",
-    "server": "217.154.244.251",
-    "server_port": 8443,
-    "uuid": "8787dd0a-095a-414e-804f-a7d16a1ae166",
-    "flow": "xtls-rprx-vision",
-    "tls": {
-      "enabled": true,
-      "server_name": "de1.hys.braidx.tech",
       "insecure": true
     }
   }

@@ -1,16 +1,5 @@
 {
-  "🇿🇿 Неизвестно 31ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "34.44.49.215",
-          "port": 80
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 38ms": {
+  "🇿🇿 Неизвестно 20ms": {
     "protocol": "http",
     "settings": {
       "servers": [
@@ -21,40 +10,29 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 46ms": {
+  "🇿🇿 Неизвестно 56ms": {
     "protocol": "http",
     "settings": {
       "servers": [
         {
-          "address": "100.28.75.142",
-          "port": 3128
+          "address": "34.44.49.215",
+          "port": 80
         }
       ]
     }
   },
-  "🇿🇿 Неизвестно 52ms": {
+  "🇿🇿 Неизвестно 59ms": {
     "protocol": "http",
     "settings": {
       "servers": [
         {
-          "address": "35.183.127.162",
-          "port": 41400
+          "address": "104.154.186.48",
+          "port": 80
         }
       ]
     }
   },
-  "🇿🇿 Неизвестно 53ms": {
-    "protocol": "http",
-    "settings": {
-      "servers": [
-        {
-          "address": "35.183.127.162",
-          "port": 8703
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 163ms": {
+  "🇿🇿 Неизвестно 146ms": {
     "protocol": "vless",
     "settings": {
       "vnext": [
@@ -76,7 +54,7 @@
       "wsSettings": {}
     }
   },
-  "🇿🇿 Неизвестно 167ms": {
+  "🇿🇿 Неизвестно 143ms": {
     "protocol": "vless",
     "settings": {
       "vnext": [
@@ -98,7 +76,7 @@
       "wsSettings": {}
     }
   },
-  "🇿🇿 Неизвестно 194ms": {
+  "🇿🇿 Неизвестно 206ms": {
     "protocol": "vmess",
     "settings": {
       "vnext": [
@@ -116,20 +94,7 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 255ms": {
-    "protocol": "shadowsocks",
-    "settings": {
-      "servers": [
-        {
-          "address": "70.39.198.35",
-          "port": 54166,
-          "method": "chacha20-ietf-poly1305",
-          "password": "EvLfWGe0AKvK"
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 224ms": {
+  "🇿🇿 Неизвестно 257ms": {
     "protocol": "vmess",
     "settings": {
       "vnext": [
@@ -147,7 +112,20 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 324ms": {
+  "🇿🇿 Неизвестно 325ms": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "address": "70.39.198.35",
+          "port": 54166,
+          "method": "chacha20-ietf-poly1305",
+          "password": "EvLfWGe0AKvK"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 302ms": {
     "protocol": "shadowsocks",
     "settings": {
       "servers": [
@@ -160,7 +138,7 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 412ms": {
+  "🇿🇿 Неизвестно 359ms": {
     "protocol": "vmess",
     "settings": {
       "vnext": [
@@ -178,7 +156,7 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 355ms": {
+  "🇿🇿 Неизвестно 331ms": {
     "protocol": "vless",
     "settings": {
       "vnext": [
@@ -196,7 +174,7 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 359ms": {
+  "🇿🇿 Неизвестно 336ms": {
     "protocol": "vless",
     "settings": {
       "vnext": [
@@ -214,102 +192,25 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 407ms": {
-    "protocol": "vless",
+  "🇿🇿 Неизвестно 367ms": {
+    "protocol": "vmess",
     "settings": {
       "vnext": [
         {
-          "address": "fuckfangbinxing.pusytroller.gq",
-          "port": 2095,
+          "address": "5.188.190.252",
+          "port": 22324,
           "users": [
             {
-              "id": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
-              "encryption": "none",
-              "flow": ""
+              "id": "04621bae-ab36-11ec-b909-0242ac120002",
+              "alterId": 0,
+              "security": "auto"
             }
           ]
         }
       ]
-    },
-    "streamSettings": {
-      "network": "ws",
-      "wsSettings": {}
     }
   },
-  "🇿🇿 Неизвестно 489ms": {
-    "protocol": "shadowsocks",
-    "settings": {
-      "servers": [
-        {
-          "address": "213.202.208.199",
-          "port": 7001,
-          "method": "aes-256-gcm",
-          "password": "RexnBgU7EV5ADxG"
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 450ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "86.106.84.195",
-          "port": 53261,
-          "password": "y3b03zx3tznhyo538p4c"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "speedtest.tinkoff.ru",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 376ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "skilled-lioness.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "skilled-lioness.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 397ms": {
-    "protocol": "vless",
-    "settings": {
-      "vnext": [
-        {
-          "address": "nmslfangbinxing.pusytroller.gq",
-          "port": 2095,
-          "users": [
-            {
-              "id": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
-              "encryption": "none",
-              "flow": ""
-            }
-          ]
-        }
-      ]
-    },
-    "streamSettings": {
-      "network": "ws",
-      "wsSettings": {}
-    }
-  },
-  "🇿🇿 Неизвестно 180ms": {
+  "🇿🇿 Неизвестно 139ms": {
     "protocol": "vless",
     "settings": {
       "vnext": [
@@ -336,12 +237,44 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 337ms": {
+  "🇿🇿 Неизвестно 291ms": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "address": "213.202.208.199",
+          "port": 7001,
+          "method": "aes-256-gcm",
+          "password": "RexnBgU7EV5ADxG"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 403ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
         {
-          "address": "fleet-bonefish.rooster465.autos",
+          "address": "86.106.84.195",
+          "port": 53261,
+          "password": "y3b03zx3tznhyo538p4c"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "speedtest.tinkoff.ru",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 312ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "skilled-lioness.rooster465.autos",
           "port": 443,
           "password": "ND91608427"
         }
@@ -350,12 +283,12 @@
     "streamSettings": {
       "security": "tls",
       "tlsSettings": {
-        "serverName": "fleet-bonefish.rooster465.autos",
+        "serverName": "skilled-lioness.rooster465.autos",
         "allowInsecure": true
       }
     }
   },
-  "🇿🇿 Неизвестно 415ms": {
+  "🇿🇿 Неизвестно 368ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -374,24 +307,56 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 444ms": {
-    "protocol": "trojan",
+  "🇿🇿 Неизвестно 415ms": {
+    "protocol": "vless",
     "settings": {
-      "servers": [
+      "vnext": [
         {
-          "address": "careful-tadpole.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
+          "address": "fuckfangbinxing.pusytroller.gq",
+          "port": 2095,
+          "users": [
+            {
+              "id": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
+              "encryption": "none",
+              "flow": ""
+            }
+          ]
         }
       ]
+    },
+    "streamSettings": {
+      "network": "ws",
+      "wsSettings": {}
     }
   },
-  "🇿🇿 Неизвестно 315ms": {
+  "🇿🇿 Неизвестно 415ms-2": {
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "nmslfangbinxing.pusytroller.gq",
+          "port": 2095,
+          "users": [
+            {
+              "id": "86c50e3a-5b87-49dd-bd20-03c7f2735e40",
+              "encryption": "none",
+              "flow": ""
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "network": "ws",
+      "wsSettings": {}
+    }
+  },
+  "🇿🇿 Неизвестно 391ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
         {
-          "address": "devoted-tapir.rooster465.autos",
+          "address": "fleet-bonefish.rooster465.autos",
           "port": 443,
           "password": "ND91608427"
         }
@@ -400,88 +365,12 @@
     "streamSettings": {
       "security": "tls",
       "tlsSettings": {
-        "serverName": "devoted-tapir.rooster465.autos",
+        "serverName": "fleet-bonefish.rooster465.autos",
         "allowInsecure": true
       }
     }
   },
-  "🇿🇿 Неизвестно 423ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "eager-louse.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "eager-louse.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 447ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "next-turkey.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "next-turkey.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 528ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "relaxed-gull.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "relaxed-gull.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 540ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "discrete-basilisk.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "discrete-basilisk.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 426ms": {
+  "🇿🇿 Неизвестно 390ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -500,7 +389,95 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 573ms": {
+  "🇿🇿 Неизвестно 467ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "relaxed-gull.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "relaxed-gull.rooster465.autos",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 388ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "next-turkey.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "next-turkey.rooster465.autos",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 1190ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "eager-louse.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "eager-louse.rooster465.autos",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 766ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "discrete-basilisk.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "discrete-basilisk.rooster465.autos",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 458ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "careful-tadpole.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 562ms": {
     "protocol": "shadowsocks",
     "settings": {
       "servers": [
@@ -513,44 +490,7 @@
       ]
     }
   },
-  "🇿🇿 Неизвестно 544ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "definite-sturgeon.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "definite-sturgeon.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 159ms": {
-    "protocol": "vmess",
-    "settings": {
-      "vnext": [
-        {
-          "address": "134.195.196.211",
-          "port": 18000,
-          "users": [
-            {
-              "id": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
-              "alterId": 0,
-              "security": "auto"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 563ms": {
+  "🇿🇿 Неизвестно 583ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -569,12 +509,12 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 551ms": {
+  "🇿🇿 Неизвестно 586ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
         {
-          "address": "relaxing-bluebird.rooster465.autos",
+          "address": "definite-sturgeon.rooster465.autos",
           "port": 443,
           "password": "ND91608427"
         }
@@ -583,12 +523,38 @@
     "streamSettings": {
       "security": "tls",
       "tlsSettings": {
-        "serverName": "relaxing-bluebird.rooster465.autos",
+        "serverName": "definite-sturgeon.rooster465.autos",
         "allowInsecure": true
       }
     }
   },
-  "🇿🇿 Неизвестно 648ms": {
+  "🇿🇿 Неизвестно 574ms": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "address": "r3mrcg001286ek2.cybervena.com",
+          "port": 50099,
+          "method": "chacha20-ietf-poly1305",
+          "password": "7e731ec3-f8e1-43f6-92cf-3978d14705c4"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 1769ms": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "address": "185.226.172.8",
+          "port": 8008,
+          "method": "aes-256-gcm",
+          "password": "XKFKl2rULjIp74"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 690ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -607,7 +573,26 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 655ms": {
+  "🇿🇿 Неизвестно 380ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "devoted-tapir.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "devoted-tapir.rooster465.autos",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 705ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -626,7 +611,36 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 662ms": {
+  "🇿🇿 Неизвестно 421ms": {
+    "protocol": "hysteria2",
+    "settings": {
+      "servers": [
+        {
+          "address": "91.196.32.163",
+          "port": 443,
+          "password": "mkL3AfdSZIpTWRB9TcWPn9vywPGN89MRHg3ToRDj",
+          "tls": {
+            "sni": "germany3.h2corp.local",
+            "insecure": true
+          }
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 569ms": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "address": "r3mrcg001287h3p.cybervena.com",
+          "port": 50099,
+          "method": "chacha20-ietf-poly1305",
+          "password": "b1ae0fce-9340-4f2e-882d-fdb2218e2e2b"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 724ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -645,7 +659,84 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 669ms": {
+  "🇿🇿 Неизвестно 719ms": {
+    "protocol": "hysteria2",
+    "settings": {
+      "servers": [
+        {
+          "address": "de-two.quiet-rogue.site",
+          "port": 443,
+          "password": "71cada65-d23e-418c-88e4-a06188d14689",
+          "tls": {
+            "sni": "de-two.quiet-rogue.site",
+            "insecure": true
+          }
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 597ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "relaxing-bluebird.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "relaxing-bluebird.rooster465.autos",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 586ms-2": {
+    "protocol": "hysteria2",
+    "settings": {
+      "servers": [
+        {
+          "address": "it-one.quiet-rogue.site",
+          "port": 443,
+          "password": "71cada65-d23e-418c-88e4-a06188d14689"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 894ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "154.90.62.70",
+          "port": 56127,
+          "password": "p5jTPcffLgi4gaNOJd2KUTb9YEPBBD5B"
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 5136ms": {
+    "protocol": "vmess",
+    "settings": {
+      "vnext": [
+        {
+          "address": "134.195.196.211",
+          "port": 18000,
+          "users": [
+            {
+              "id": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
+              "alterId": 0,
+              "security": "auto"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "🇿🇿 Неизвестно 854ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -664,61 +755,83 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 473ms": {
-    "protocol": "shadowsocks",
-    "settings": {
-      "servers": [
-        {
-          "address": "r3mrcg001287h3p.cybervena.com",
-          "port": 50099,
-          "method": "chacha20-ietf-poly1305",
-          "password": "b1ae0fce-9340-4f2e-882d-fdb2218e2e2b"
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 660ms": {
-    "protocol": "hysteria2",
-    "settings": {
-      "servers": [
-        {
-          "address": "de-two.quiet-rogue.site",
-          "port": 443,
-          "password": "71cada65-d23e-418c-88e4-a06188d14689",
-          "tls": {
-            "sni": "de-two.quiet-rogue.site",
-            "insecure": true
-          }
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 1995ms": {
-    "protocol": "shadowsocks",
-    "settings": {
-      "servers": [
-        {
-          "address": "185.226.172.8",
-          "port": 8008,
-          "method": "aes-256-gcm",
-          "password": "XKFKl2rULjIp74"
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 796ms": {
+  "🇿🇿 Неизвестно 834ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
         {
-          "address": "154.90.62.70",
-          "port": 56127,
-          "password": "p5jTPcffLgi4gaNOJd2KUTb9YEPBBD5B"
+          "address": "ace-starling.rooster465.autos",
+          "port": 443,
+          "password": "ND91608427"
         }
       ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "ace-starling.rooster465.autos",
+        "allowInsecure": true
+      }
     }
   },
-  "🇿🇿 Неизвестно 795ms": {
+  "🇿🇿 Неизвестно 3301ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "157.254.38.210",
+          "port": 20129,
+          "password": "41c406e2-12b5-41f2-a329-d0621052d675"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "hk.catxstar.com",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 1090ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "oplosgru-c.catcat321.com",
+          "port": 20034,
+          "password": "41c406e2-12b5-41f2-a329-d0621052d675"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "hk.catxstar.com",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 993ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "hkdcrtc-e.catcat321.com",
+          "port": 20066,
+          "password": "41c406e2-12b5-41f2-a329-d0621052d675"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "hk.catxstar.com",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇿🇿 Неизвестно 983ms": {
     "protocol": "vless",
     "settings": {
       "vnext": [
@@ -745,64 +858,7 @@
       }
     }
   },
-  "🇿🇿 Неизвестно 825ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "ace-starling.rooster465.autos",
-          "port": 443,
-          "password": "ND91608427"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "ace-starling.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 1043ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "hkdcrtc-e.catcat321.com",
-          "port": 20066,
-          "password": "41c406e2-12b5-41f2-a329-d0621052d675"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "hk.catxstar.com",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 1014ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "oplosgru-c.catcat321.com",
-          "port": 20034,
-          "password": "41c406e2-12b5-41f2-a329-d0621052d675"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "hk.catxstar.com",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 1965ms": {
+  "🇿🇿 Неизвестно 824ms": {
     "protocol": "trojan",
     "settings": {
       "servers": [
@@ -817,62 +873,6 @@
       "security": "tls",
       "tlsSettings": {
         "serverName": "upright-hamster.rooster465.autos",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 598ms": {
-    "protocol": "hysteria2",
-    "settings": {
-      "servers": [
-        {
-          "address": "it-one.quiet-rogue.site",
-          "port": 443,
-          "password": "71cada65-d23e-418c-88e4-a06188d14689"
-        }
-      ]
-    }
-  },
-  "🇿🇿 Неизвестно 5591ms": {
-    "protocol": "trojan",
-    "settings": {
-      "servers": [
-        {
-          "address": "157.254.38.210",
-          "port": 20129,
-          "password": "41c406e2-12b5-41f2-a329-d0621052d675"
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "hk.catxstar.com",
-        "allowInsecure": true
-      }
-    }
-  },
-  "🇿🇿 Неизвестно 468ms": {
-    "protocol": "vless",
-    "settings": {
-      "vnext": [
-        {
-          "address": "217.154.244.251",
-          "port": 8443,
-          "users": [
-            {
-              "id": "8787dd0a-095a-414e-804f-a7d16a1ae166",
-              "encryption": "none",
-              "flow": "xtls-rprx-vision"
-            }
-          ]
-        }
-      ]
-    },
-    "streamSettings": {
-      "security": "tls",
-      "tlsSettings": {
-        "serverName": "de1.hys.braidx.tech",
         "allowInsecure": true
       }
     }
