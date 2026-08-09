@@ -81,26 +81,6 @@
       "enabled": true
     },
     {
-      "url": "https://raw.githubusercontent.com/elliottophellia/proxylist/main/proxies.txt",
-      "enabled": true
-    },
-    {
-      "url": "https://www.proxy-list.download/api/v1/get?type=http",
-      "enabled": true
-    },
-    {
-      "url": "https://www.proxy-list.download/api/v1/get?type=socks5",
-      "enabled": true
-    },
-    {
-      "url": "https://www.proxy-list.download/api/v1/get?type=socks4",
-      "enabled": true
-    },
-    {
-      "url": "https://raw.githubusercontent.com/mertguvencli/http-proxy-list/main/proxy-list/data.txt",
-      "enabled": true
-    },
-    {
       "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt",
       "enabled": true
     },
@@ -133,27 +113,11 @@
       "enabled": true
     },
     {
-      "url": "https://github.com/VPN-Subcription-Links/ClashX-V2Ray-TopFreeProxy",
-      "enabled": true
-    },
-    {
       "url": "https://github.com/zloi-user/hideip.me",
       "enabled": true
     },
     {
-      "url": "https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/master/proxies.txt",
-      "enabled": true
-    },
-    {
       "url": "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt",
-      "enabled": true
-    },
-    {
-      "url": "https://raw.githubusercontent.com/sevushyamamoto-stack/9341be7a058e132154d407d082a60fb1/raw/mysub.txt",
-      "enabled": true
-    },
-    {
-      "url": "https://raw.githubusercontent.com/kort0881/vpn-vless-configs-russia/main/githubmirror/clean/vless.txt",
       "enabled": true
     },
     {
@@ -166,10 +130,6 @@
     },
     {
       "url": "https://raw.githubusercontent.com/pog7x/vpn-configs/master/githubmirror/1.txt",
-      "enabled": true
-    },
-    {
-      "url": "https://free.redscrape.com/api/proxies?format=json",
       "enabled": true
     },
     {
@@ -200,32 +160,18 @@
       "url": "https://sunny9577.github.io/proxy-scraper/proxies.txt",
       "enabled": true
     },
-    {
-      "url": "https://raw.githubusercontent.com/ProxyScraper/ProxyScraper/master/proxies.txt",
-      "enabled": true
-    },
-    "https://raw.githubusercontent.com/VPSLabCloud/VPSLab-Free-Proxy-List/main/http.txt",
-    "https://raw.githubusercontent.com/VPSLabCloud/VPSLab-Free-Proxy-List/main/socks5.txt",
-    "https://raw.githubusercontent.com/iplocate/free-proxy-list/main/proxies.txt",
-    "https://raw.githubusercontent.com/adasd223/http-proxy-list-2026/main/proxies.txt",
-    "https://raw.githubusercontent.com/ProxyScrape/free-proxy-list/main/http.txt",
-    "https://raw.githubusercontent.com/ProxyScrape/free-proxy-list/main/socks5.txt",
-    "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt",
-    "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/socks5.txt",
     "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt",
     "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt",
     "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt",
     "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt",
-    "https://raw.githubusercontent.com/officialputuid/proxyid/main/http.txt",
-    "https://raw.githubusercontent.com/officialputuid/proxyid/main/socks5.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RAYAGG/main/v2ray.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RAYAGG/main/vmess.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RAYAGG/main/vless.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RAYAGG/main/trojan.txt",
-    "https://raw.githubusercontent.com/mahdibland/V2RAYAGG/main/ss.txt",
     "https://github.com/FreeFolksOn/abc-configs-free-vpn-proxy-list",
     "https://github.com/Epodonios/v2ray-configs",
     "https://github.com/ebrasha/free-v2ray-public-list"
   ],
-  "local_files": []
+  "local_files": [],
+  "max_checks": 50000,
+  "limit": 500,
+  "timeout": 8,
+  "producer_timeout": 300,
+  "per_repo_limit": 40
 }

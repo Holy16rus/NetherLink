@@ -39,12 +39,12 @@ async def run():
     print(f"[*] Sources: {len(sources)} remote, {len(local_files)} local")
 
     opts = {
-        "limit": 500,
-        "max_checks": 50000,
-        "timeout": 8,
-        "selection": "fastest",
-        "producer_timeout": 300,
-        "per_repo_limit": 40,
+        "limit": config.get("limit", 500),
+        "max_checks": config.get("max_checks", 50000),
+        "timeout": config.get("timeout", 8),
+        "selection": config.get("selection", "fastest"),
+        "producer_timeout": config.get("producer_timeout", 300),
+        "per_repo_limit": config.get("per_repo_limit", 40),
     }
 
     cancel = asyncio.Event()

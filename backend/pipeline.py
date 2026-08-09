@@ -20,7 +20,7 @@ from backend.config import OUTPUT_FILE, CHECK_CONCURRENCY, ROOT
 from backend.scraper import collect_local_files, discover_repo_files, fetch_and_parse
 from backend.checker import check_node, speed_test_node, protocol_check
 from backend.services import geoip_batch, dnsbl_check_batch
-from backend.generator import select_nodes, generate_configs
+from backend.generator import select_nodes, generate_configs, latency_sort_key
 from backend.web_sources import fetch_web_proxies
 from backend.state import record_check_results, filter_stable, save_history
 
@@ -31,7 +31,7 @@ _QUEUE_SENTINEL = None
 
 EmitFn = Callable[[str, dict], Awaitable[None]]
 
-PROTOCOL_CHECK_CONCURRENCY = 15
+PROTOCOL_CHECK_CONCURRENCY = 30  # было 15 — sing-box бенчмарк показывает 30 стабильно
 TCP_CONCURRENCY = CHECK_CONCURRENCY
 
 
@@ -48,6 +48,7 @@ async def _produce(
     metrics: dict,
     emit: EmitFn,
     per_repo_limit: int = 40,
+    web_sources_fn: Awaitable | None = None,
 ):
     local_nodes = await collect_local_files(local_files)
     if local_nodes:
@@ -62,8 +63,8 @@ async def _produce(
     total_sources = len(sources)
     metrics["total_sources"] = total_sources
 
-    src_sem = asyncio.Semaphore(6)
-    file_sem = asyncio.Semaphore(20)
+    src_sem = asyncio.Semaphore(15)
+    file_sem = asyncio.Semaphore(30)
 
     async def process_source(idx: int, source: str):
         if cancel_event.is_set():
@@ -85,7 +86,7 @@ async def _produce(
                     return
                 async with file_sem:
                     _, nodes = await fetch_and_parse(item, cancel_event)
-                    if nodes:
+                    if nodes and not cancel_event.is_set():
                         metrics["candidates"] += len(nodes)
                         await queue.put(nodes)
                         await emit("log", {
@@ -95,7 +96,15 @@ async def _produce(
 
             await asyncio.gather(*[process_file(f) for f in files])
 
-    await asyncio.gather(*[process_source(i, src) for i, src in enumerate(sources)])
+    # Web-источники запускаем конкурентно с GitHub источниками.
+    # Раньше web_task был отдельной корутиной — producer мог завершиться
+    # раньше web_task и положить sentinel → consumer выходил,
+    # не дождавшись HTTP-прокси из web-источников.
+    # Теперь web_sources_fn — часть _produce, sentinel ждёт её.
+    tasks = [process_source(i, src) for i, src in enumerate(sources)]
+    if web_sources_fn is not None:
+        tasks.append(web_sources_fn)
+    await asyncio.gather(*tasks)
     await queue.put(_QUEUE_SENTINEL)
 
 
@@ -120,11 +129,12 @@ async def _consume(
     tunnel_checked = 0  # для лога
     other_checked = 0   # http/socks5 — для лога
 
-    # Раздельный бюджет: HTTP/socks5 гарантированно получают 40% проверок,
-    # туннельные — 60%. Раньше туннельные съедали весь max_checks,
-    # и HTTP-прокси (которых 7000+ от web-источников) не доходили до проверки.
-    http_budget = int(max_checks * 0.40) if max_checks > 0 else 0
-    tunnel_budget = int(max_checks * 0.60) if max_checks > 0 else 0
+    # Раздельный бюджет: HTTP/socks5 — 80%, туннельные — 20%.
+    # HTTP live rate ~3% (публичные прокси), tunnel ~50%.
+    # Чтобы получить 50/50 в финальном отборе, нужно проверить
+    # в 4 раза больше HTTP чем tunnel — компенсировать низкую выживаемость.
+    http_budget = int(max_checks * 0.80) if max_checks > 0 else 0
+    tunnel_budget = int(max_checks * 0.20) if max_checks > 0 else 0
 
     seen_keys: set = set()
     live_nodes: list[dict] = []
@@ -145,6 +155,13 @@ async def _consume(
         tunnel_part = [n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS]
         other_part = [n for n in batch if n.get("protocol", "").lower() not in TUNNEL_PROTOCOLS]
 
+        # Жёстко обрезаем по бюджету — не перерасходуем.
+        if tunnel_budget > 0 and tunnel_checked + len(tunnel_part) > tunnel_budget:
+            tunnel_part = tunnel_part[:tunnel_budget - tunnel_checked]
+        if http_budget > 0 and other_checked + len(other_part) > http_budget:
+            other_part = other_part[:http_budget - other_checked]
+
+        # Если бюджет уже исчерпан — пустой список.
         if tunnel_budget > 0 and tunnel_checked >= tunnel_budget:
             tunnel_part = []
         if http_budget > 0 and other_checked >= http_budget:
@@ -186,7 +203,7 @@ async def _consume(
                         t.cancel()
                     break
 
-    FLUSH_BATCH = 150
+    FLUSH_BATCH = 50  # меньше батч = точнее бюджет (было 150 — перепроверял 2.5x бюджета)
 
     await emit("log", {"level": "info", "text": f"Consumer: max_checks={max_checks}, limit={opts.get('limit', '?')}"})
 
@@ -196,14 +213,12 @@ async def _consume(
         except asyncio.TimeoutError:
             if len(pending_nodes) >= FLUSH_BATCH // 2:
                 await flush_pending()
-            if max_checks > 0 and metrics["checking_total"] >= max_checks:
-                await flush_pending()
-                await emit("log", {"level": "info", "text": f"Достигнут max_checks={max_checks}, проверено {metrics['checking_total']} (туннельных: {tunnel_checked}, HTTP/socks: {other_checked})"})
-                break
-            # Оба бюджета исчерпаны — выходим
+            # Не выходим по общему max_checks пока HTTP-бюджет не исчерпан.
+            # Раньше туннельные забивали счётчик → HTTP не проверялись.
             if max_checks > 0 and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
                 await flush_pending()
                 await emit("log", {"level": "info", "text": f"Бюджеты исчерпаны: tunnel={tunnel_checked}/{tunnel_budget}, http={other_checked}/{http_budget}"})
+                cancel_event.set()  # остановить producer — иначе queue.put() блокируется
                 break
             continue
 
@@ -235,8 +250,10 @@ async def _consume(
         pending_nodes.extend(new_nodes)
 
         if len(pending_nodes) >= FLUSH_BATCH:
-            if max_checks > 0 and metrics["checking_total"] >= max_checks:
-                await emit("log", {"level": "info", "text": f"max_checks={max_checks} достигнут, выход"})
+            # Выходим только если оба бюджета исчерпаны.
+            if max_checks > 0 and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
+                await emit("log", {"level": "info", "text": f"Бюджеты исчерпаны: tunnel={tunnel_checked}/{tunnel_budget}, http={other_checked}/{http_budget}"})
+                cancel_event.set()
                 break
             else:
                 await flush_pending()
@@ -339,12 +356,7 @@ async def _recheck_top_nodes(nodes, limit, timeout, cancel_event, emit):
             return None
         async with sem:
             result = await check_node(node, timeout, cancel_event)
-            if result:
-                speed = await speed_test_node(result, timeout, cancel_event)
-                if speed is not None:
-                    result["speed_mbps"] = speed
-                return result
-            return None
+            return result
 
     tasks = [asyncio.create_task(recheck_one(n)) for n in top]
     for coro in asyncio.as_completed(tasks):
@@ -386,15 +398,10 @@ async def run_pipeline(
 
     queue: asyncio.Queue = asyncio.Queue(maxsize=50)
 
-    # Сортируем источники: туннельные протоколы (v2ray/vless/trojan/hysteria/ss)
-    # идут первыми в очередь. Иначе жирные http-источники (checker.net,
-    # proxyscrape и т.п.) съедают весь max_checks-бюджет ещё до того, как
-    # producer доберётся до туннельных — и protocol_check получает пустоту.
-    def _is_tunnel_source(url: str) -> bool:
-        u = url.lower()
-        return any(k in u for k in ("v2ray", "vless", "vmess", "trojan", "hysteria", "hy2", "vpn-config", "clashx"))
-
-    sources = sorted(sources, key=lambda s: 0 if _is_tunnel_source(s) else 1)
+    # НЕ сортируем источники: туннельные первыми убивают HTTP.
+    # Раньше туннельные заливали очередь первыми, consumer проверял
+    # только их, а HTTP (от web-источников) не доходили до проверки.
+    # Теперь раздельный бюджет в consumer гарантирует HTTP долю.
 
     producer_task = asyncio.create_task(
         _produce(
@@ -416,19 +423,42 @@ async def run_pipeline(
             web_nodes = await fetch_web_proxies(cancel_event)
             if web_nodes:
                 metrics["candidates"] += len(web_nodes)
-                # Кладём небольшими чанками, а НЕ одним огромным батчем.
-                # Один batch из 3000+ http-нод займёт весь ранний max_checks
-                # раньше, чем producer успеет докинуть туннельные источники.
-                # Запускается КОНКУРЕНТНО с _produce (см. ниже) — не блокирует
-                # старт сбора туннельных источников.
+                # Конвертируем protocol="http" на SOCKS-порту в "socks5".
+                # Web-источники часто отдают SOCKS-прокси (1080, 4145)
+                # с protocol="http" — http_check на SOCKS-порту = None.
+                SOCKS_PORTS = {1080, 1081, 4145, 1085, 9050, 4153, 1020}
+                clean_nodes = []
+                for n in web_nodes:
+                    if n.get("protocol", "").lower() == "http" and n.get("port") in SOCKS_PORTS:
+                        n["protocol"] = "socks5"
+                    clean_nodes.append(n)
+                web_nodes = clean_nodes
+
                 CHUNK = 150
                 for i in range(0, len(web_nodes), CHUNK):
+                    if cancel_event.is_set():
+                        break
                     await queue.put(web_nodes[i:i + CHUNK])
-                await emit("log", {"level": "info", "text": f"Web-источники: +{len(web_nodes)} прокси"})
+                await emit("log", {"level": "info", "text": f"Web-источники: +{len(web_nodes)} прокси (после фильтра SOCKS-портов)"})
         except Exception as e:
             await emit("log", {"level": "warn", "text": f"Web-источники ошибка: {e}"})
 
-    web_task = asyncio.create_task(_feed_web_sources())
+    # Web-источники запускаются ВНУТРИ _produce (как часть producer),
+    # чтобы sentinel гарантированно ждал их завершения.
+    # Раньше web_task был отдельной корутиной — producer мог завершиться
+    # раньше и положить sentinel → consumer выходил, не дождавшись HTTP.
+    producer_task = asyncio.create_task(
+        _produce(
+            sources,
+            local_files,
+            queue,
+            cancel_event,
+            metrics,
+            emit,
+            per_repo_limit=opts.get("per_repo_limit", 40),
+            web_sources_fn=_feed_web_sources(),
+        )
+    )
 
     producer_time_budget = opts.get("producer_timeout", 180)
     producer_limited = asyncio.ensure_future(
@@ -452,12 +482,6 @@ async def run_pipeline(
                 await producer_limited
             except (asyncio.CancelledError, asyncio.TimeoutError, Exception):
                 pass
-        if not web_task.done():
-            web_task.cancel()
-        try:
-            await web_task
-        except (asyncio.CancelledError, Exception):
-            pass
         if not was_cancelled:
             cancel_event.clear()
 
@@ -600,8 +624,11 @@ async def run_pipeline(
     ]
     await emit("geo_points", {"points": geo_points})
 
-    await emit("status", {"status": "running", "message": "Speed test всех живых прокси..."})
-    live_nodes = await _speed_test_batch(live_nodes, timeout, cancel_event, emit)
+    await emit("status", {"status": "running", "message": "Отбор прокси..."})
+    # Speed test отключён — экономит ~30% времени пайплайна.
+    # speed_mbps используется только для сортировки топ-100/50,
+    # но latency_ms достаточно для ранжирования.
+    # live_nodes = await _speed_test_batch(live_nodes, timeout, cancel_event, emit)
 
     stable_nodes = filter_stable(live_nodes)
     await emit("log", {"level": "info", "text": f"История: {len(stable_nodes)}/{len(live_nodes)} стабильны (success_rate >= 0.6 за последние 5 запусков)"})
@@ -619,6 +646,24 @@ async def run_pipeline(
         selected = select_nodes(stable_nodes, limit, strategy)
         if len(selected) < limit:
             selected = select_nodes(live_nodes, limit, strategy)
+
+    # Гарантируем 50% HTTP/socks5 в финальной выборке.
+    # select_nodes("fastest") сортирует по latency_ms — туннельные
+    # (TCP-only, 1-50ms) всегда побеждают HTTP (full HTTP check,
+    # 200-3000ms). Без квоты HTTP вымывают из результата полностью.
+    TUNNEL = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
+    min_http = limit // 2  # 50% HTTP/socks5
+    http_selected = [n for n in selected if n.get("protocol", "").lower() not in TUNNEL]
+    if len(http_selected) < min_http:
+        # Добираем HTTP/socks5 из live_nodes (не из selected)
+        http_candidates = sorted(
+            [n for n in live_nodes if n.get("protocol", "").lower() not in TUNNEL
+             and n not in selected],
+            key=latency_sort_key,
+        )
+        needed = min_http - len(http_selected)
+        selected = selected + http_candidates[:needed]
+        await emit("log", {"level": "info", "text": f"Квота HTTP 50%: добавлено {min(needed, len(http_candidates))} HTTP/socks5 (цель {min_http})"})
 
     countries = {n.get("country", "ZZ") for n in selected}
     metrics["selected"] = len(selected)
