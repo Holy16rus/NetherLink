@@ -42,6 +42,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Download GeoIP database
+        env:
+          GEOIP_LICENSE_KEY: ${{ secrets.GEOIP_LICENSE_KEY }}
+        run: python -m backend.download_geoip
+        continue-on-error: true
+
       - name: Restore state from state branch
         run: |
           git fetch origin state 2>/dev/null && git show state:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json

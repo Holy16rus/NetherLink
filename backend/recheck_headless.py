@@ -18,6 +18,7 @@ import yaml
 
 from backend.checker import check_node, protocol_check
 from backend.generator import generate_config_clash, generate_config_v2ray, generate_config_singbox
+from backend.services import geoip_batch
 from backend.state import record_check_results, save_history
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -192,6 +193,23 @@ async def run():
 
     all_nodes = all_nodes[:MAX_RECHECK_NODES + MAX_FRESH_HTTP]
     print(f"  [*] Total unique (capped at {MAX_RECHECK_NODES + MAX_FRESH_HTTP}): {len(all_nodes)}")
+
+    # ── GeoIP: определяем страны ДО генерации, иначе имена будут «Неизвестно» ──
+    # У нод из YAML country отсутствует (в YAML страна только в имени), а у свежих
+    # web-прокси его нет вообще. Без этого шага все прокси получают флаг 🇿🇿.
+    geo_ips = list(dict.fromkeys(n.get("server", "") for n in all_nodes if n.get("server")))
+    if geo_ips:
+        print(f"  [*] GeoIP: {len(geo_ips)} уникальных IP...")
+        try:
+            geo_data = await geoip_batch(geo_ips, cancel)
+            for n in all_nodes:
+                info = geo_data.get(n.get("server", ""))
+                if info and n.get("country", "ZZ") == "ZZ":
+                    n["country"] = info.get("country", "ZZ")
+            known = sum(1 for n in all_nodes if n.get("country") not in (None, "", "ZZ"))
+            print(f"  [+] GeoIP: {known}/{len(all_nodes)} определено")
+        except Exception as e:
+            print(f"  [~] GeoIP недоступен: {e}")
 
     live_nodes = await check_nodes(all_nodes, timeout, cancel)
 
