@@ -47,7 +47,7 @@ async def _produce(
     cancel_event: asyncio.Event,
     metrics: dict,
     emit: EmitFn,
-    per_repo_limit: int = 80,
+    per_repo_limit: int = 40,
 ):
     local_nodes = await collect_local_files(local_files)
     if local_nodes:
@@ -382,7 +382,15 @@ async def run_pipeline(
     sources = sorted(sources, key=lambda s: 0 if _is_tunnel_source(s) else 1)
 
     producer_task = asyncio.create_task(
-        _produce(sources, local_files, queue, cancel_event, metrics, emit)
+        _produce(
+            sources,
+            local_files,
+            queue,
+            cancel_event,
+            metrics,
+            emit,
+            per_repo_limit=opts.get("per_repo_limit", 40),
+        )
     )
 
     async def _feed_web_sources():
