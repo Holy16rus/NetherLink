@@ -162,12 +162,36 @@ async def run():
                     break
             print(f"  [*] Parsed {len(nodes)} from {config_name}")
 
+    # Подмешиваем свежие HTTP-прокси из web-источников —
+    # иначе HTTP вымирают из конфигов и recheck их не возвращает.
+    MAX_FRESH_HTTP = 100
+    existing_http = sum(1 for n in all_nodes if n.get("protocol", "").lower() in ("http", "https", "socks5"))
+    if existing_http < 30:
+        print("  [*] HTTP мало в конфигах, добавляю свежие из web-источников...")
+        try:
+            from backend.web_sources import fetch_web_proxies
+            fresh = await fetch_web_proxies(cancel)
+            http_fresh = [n for n in fresh if n.get("protocol", "").lower() in ("http", "https")]
+            added = 0
+            for n in http_fresh:
+                key = (n["protocol"], n["server"], n["port"])
+                if key not in seen:
+                    seen.add(key)
+                    all_nodes.append(n)
+                    added += 1
+                    if added >= MAX_FRESH_HTTP:
+                        break
+            if added:
+                print(f"  [+] Добавлено {added} свежих HTTP из web-источников")
+        except Exception as e:
+            print(f"  [~] Web-источники недоступны: {e}")
+
     if not all_nodes:
         print("  [!] No nodes found in configs")
         return
 
-    all_nodes = all_nodes[:MAX_RECHECK_NODES]
-    print(f"  [*] Total unique (capped at {MAX_RECHECK_NODES}): {len(all_nodes)}")
+    all_nodes = all_nodes[:MAX_RECHECK_NODES + MAX_FRESH_HTTP]
+    print(f"  [*] Total unique (capped at {MAX_RECHECK_NODES + MAX_FRESH_HTTP}): {len(all_nodes)}")
 
     live_nodes = await check_nodes(all_nodes, timeout, cancel)
 

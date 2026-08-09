@@ -112,13 +112,19 @@ async def _consume(
     max_checks = opts.get("max_checks", 0)
     limit = opts.get("limit", 100)
     early_stop = limit * 6 if limit > 0 else 0  # 6x — для 500 прокси это 3000 живых
+    # early_stop применяется только к туннельным. HTTP/socks5 проверяются
+    # в рамках своего бюджета (http_budget) — не дают туннельным
+    # переполнить early_stop и убить проверку HTTP полностью.
 
-    # Туннельные протоколы имеют приоритет: когда бюджет max_checks
-    # исчерпан, http/socks5 обрезаются, а vmess/vless/trojan/ss/hy2
-    # проходят ВСЕГДА (в счёт общего бюджета). Так жирные http-источники
-    # не вытесняют туннельные из проверки.
     TUNNEL_PROTOCOLS = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
     tunnel_checked = 0  # для лога
+    other_checked = 0   # http/socks5 — для лога
+
+    # Раздельный бюджет: HTTP/socks5 гарантированно получают 40% проверок,
+    # туннельные — 60%. Раньше туннельные съедали весь max_checks,
+    # и HTTP-прокси (которых 7000+ от web-источников) не доходили до проверки.
+    http_budget = int(max_checks * 0.40) if max_checks > 0 else 0
+    tunnel_budget = int(max_checks * 0.60) if max_checks > 0 else 0
 
     seen_keys: set = set()
     live_nodes: list[dict] = []
@@ -128,29 +134,28 @@ async def _consume(
     pending_nodes: list[dict] = []
 
     async def flush_pending():
-        nonlocal pending_nodes, tunnel_checked
+        nonlocal pending_nodes, tunnel_checked, other_checked
         if not pending_nodes or cancel_event.is_set():
             pending_nodes = []
             return
         batch = pending_nodes
         pending_nodes = []
 
-        # Приоритет туннельных: при исчерпании бюджета обрезаем
-        # только http/socks5, туннельные проходят всегда.
-        remaining = max_checks - metrics["checking_total"] if max_checks > 0 else None
-        if remaining is not None and remaining <= 0:
-            # Бюджет исчерпан — проверяем только туннельные (если есть).
-            batch = [n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS]
-        elif remaining is not None and len(batch) > remaining:
-            # Часть бюджета осталась — сначала туннельные, потом http/socks.
-            tunnel_part = [n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS]
-            other_part = [n for n in batch if n.get("protocol", "").lower() not in TUNNEL_PROTOCOLS]
-            other_part = other_part[:max(0, remaining - len(tunnel_part))]
-            batch = tunnel_part + other_part
+        # Разделяем по типам и применяем раздельный бюджет.
+        tunnel_part = [n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS]
+        other_part = [n for n in batch if n.get("protocol", "").lower() not in TUNNEL_PROTOCOLS]
 
+        if tunnel_budget > 0 and tunnel_checked >= tunnel_budget:
+            tunnel_part = []
+        if http_budget > 0 and other_checked >= http_budget:
+            other_part = []
+
+        batch = tunnel_part + other_part
         if not batch:
             return
-        tunnel_checked += len([n for n in batch if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS])
+
+        tunnel_checked += len(tunnel_part)
+        other_checked += len(other_part)
         metrics["checking_total"] += len(batch)
 
         async def check_one(node):
@@ -172,9 +177,14 @@ async def _consume(
             metrics["live"] = len(live_nodes)
             await emit("metrics", dict(metrics))
             if early_stop > 0 and len(live_nodes) >= early_stop:
-                for t in tasks:
-                    t.cancel()
-                break
+                # Проверяем: не только ли туннельные переполнили лимит?
+                tunnel_live = sum(1 for n in live_nodes if n.get("protocol", "").lower() in TUNNEL_PROTOCOLS)
+                other_live = len(live_nodes) - tunnel_live
+                # Если HTTP/socks5 ещё не проверены — не останавливаем.
+                if other_live > 0 or other_checked >= http_budget:
+                    for t in tasks:
+                        t.cancel()
+                    break
 
     FLUSH_BATCH = 150
 
@@ -188,7 +198,12 @@ async def _consume(
                 await flush_pending()
             if max_checks > 0 and metrics["checking_total"] >= max_checks:
                 await flush_pending()
-                await emit("log", {"level": "info", "text": f"Достигнут max_checks={max_checks}, проверено {metrics['checking_total']} (туннельных: {tunnel_checked})"})
+                await emit("log", {"level": "info", "text": f"Достигнут max_checks={max_checks}, проверено {metrics['checking_total']} (туннельных: {tunnel_checked}, HTTP/socks: {other_checked})"})
+                break
+            # Оба бюджета исчерпаны — выходим
+            if max_checks > 0 and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
+                await flush_pending()
+                await emit("log", {"level": "info", "text": f"Бюджеты исчерпаны: tunnel={tunnel_checked}/{tunnel_budget}, http={other_checked}/{http_budget}"})
                 break
             continue
 

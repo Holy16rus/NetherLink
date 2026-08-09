@@ -11,13 +11,12 @@ WEB_SOURCES = [
     # proxyscrape.com — бесплатный JSON API
     "https://api.proxyscrape.com/v4/free-proxy-list/get?request=displayproxies&protocol=http&country=all&anonymity=elite&timeout=10000&proxy_format=ipport&format=json",
     "https://api.proxyscrape.com/v4/free-proxy-list/get?request=displayproxies&protocol=https&country=all&anonymity=elite&timeout=10000&proxy_format=ipport&format=json",
-    # proxy-list.download — JSON API
-    "https://www.proxy-list.download/api/v2/get?l=en&t=http",
-    "https://www.proxy-list.download/api/v2/get?l=en&t=https",
-    # geonode.com — JSON API (500 за раз)
-    "https://proxylist.geonode.com/api/proxy-list?protocols=http,https&filterLastChecked=5&speed=fast&limit=500&page=1&sort_by=lastChecked&sort_type=desc",
+    # geonode.com — JSON API (500 за раз, без жёсткого фильтра — filterLastChecked=5 даёт 0)
+    "https://proxylist.geonode.com/api/proxy-list?protocols=http,https&limit=500&page=1&sort_by=lastChecked&sort_type=desc",
     # lumiproxy.com — JSON API
     "https://api.lumiproxy.com/web_v1/free-proxy/list?page_size=2000&page=1&language=en-us",
+    # TheSpeedX/SOCKS-List — большой свежий список HTTP на GitHub (2773+ прокси)
+    "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
 ]
 
 # checker.net — архив свежих проверенных прокси по датам.
@@ -56,6 +55,15 @@ async def _fetch_json(client: httpx.AsyncClient, url: str) -> dict | None:
         return None
 
 
+async def _fetch_text(client: httpx.AsyncClient, url: str) -> str | None:
+    try:
+        resp = await client.get(url, timeout=15)
+        resp.raise_for_status()
+        return resp.text
+    except Exception:
+        return None
+
+
 async def fetch_web_proxies(cancel_event: asyncio.Event | None = None) -> list[dict]:
     """Собирает прокси со всех web-источников, возвращает список нод."""
     nodes: list[dict] = []
@@ -63,10 +71,14 @@ async def fetch_web_proxies(cancel_event: asyncio.Event | None = None) -> list[d
 
     limits = httpx.Limits(max_connections=10, max_keepalive_connections=5)
     async with httpx.AsyncClient(timeout=15, limits=limits) as client:
-        tasks = [_fetch_json(client, url) for url in WEB_SOURCES]
+        # Последний источник (TheSpeedX) — raw text, не JSON
+        json_urls = WEB_SOURCES[:-1]
+        text_urls = [WEB_SOURCES[-1]]
+        tasks = [_fetch_json(client, url) for url in json_urls]
+        text_tasks = [_fetch_text(client, url) for url in text_urls]
         # checker.net — отдельно: свой парсер и авто-дата
         checker_task = _fetch_checker_net(client)
-        all_tasks = tasks + [checker_task]
+        all_tasks = tasks + text_tasks + [checker_task]
         results = await asyncio.gather(*all_tasks, return_exceptions=True)
 
         # checker.net — последний индекс
@@ -99,7 +111,7 @@ async def fetch_web_proxies(cancel_event: asyncio.Event | None = None) -> list[d
                 continue
 
             try:
-                _parse_source(i, result, nodes, seen)
+                _parse_source(i, result, nodes, seen)  # type: ignore[arg-type]
             except Exception:
                 continue
 
@@ -123,16 +135,7 @@ def _parse_source(idx: int, data: dict, nodes: list[dict], seen: set):
                     "port": int(port) if port else 0,
                 })
 
-    elif idx in (2, 3):  # proxy-list.download
-        for p in data.get("LISTA", []):
-            ip = p.get("IP", "")
-            port = int(p.get("PORT", 0))
-            key = ("http", ip, port, "")
-            if ip and key not in seen:
-                seen.add(key)
-                nodes.append({"protocol": "http", "server": ip, "port": port})
-
-    elif idx == 4:  # geonode.com
+    elif idx == 2:  # geonode.com
         for p in data.get("data", []):
             ip = p.get("ip", "")
             port = int(p.get("port", 0))
@@ -142,7 +145,7 @@ def _parse_source(idx: int, data: dict, nodes: list[dict], seen: set):
                 seen.add(key)
                 nodes.append({"protocol": proto, "server": ip, "port": port})
 
-    elif idx == 5:  # lumiproxy.com
+    elif idx == 3:  # lumiproxy.com
         for p in data.get("data", {}).get("list", []):
             ip = p.get("ip", "")
             port = int(p.get("port", 0))
@@ -152,3 +155,19 @@ def _parse_source(idx: int, data: dict, nodes: list[dict], seen: set):
             if ip and key not in seen:
                 seen.add(key)
                 nodes.append({"protocol": proto, "server": ip, "port": port})
+
+    elif idx == 4:  # TheSpeedX/SOCKS-List — raw text (ip:port per line)
+        if isinstance(data, str):
+            for line in data.strip().splitlines():
+                line = line.strip()
+                if not line or ":" not in line:
+                    continue
+                host, _, port = line.rpartition(":")
+                try:
+                    port = int(port)
+                except ValueError:
+                    continue
+                key = ("http", host, port, "")
+                if host and key not in seen:
+                    seen.add(key)
+                    nodes.append({"protocol": "http", "server": host, "port": port})
