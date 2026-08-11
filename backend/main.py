@@ -194,11 +194,12 @@ async def list_configs():
     patterns = ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
                 "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
                 "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json",
+                "NetherLink-Xray.txt", "NetherLink-Xray-100.txt", "NetherLink-Xray-50.txt",
                 "live.txt"]
     for name in patterns:
         fp = ROOT / name
         if fp.exists():
-            configs.append({"name": name, "size": fp.stat().st_size, "type": "clash" if name.endswith(".yaml") else "v2ray" if "v2ray" in name else "singbox" if "singbox" in name else "txt"})
+            configs.append({"name": name, "size": fp.stat().st_size, "type": "clash" if name.endswith(".yaml") else "xray" if "Xray" in name else "v2ray" if "v2ray" in name else "singbox" if "singbox" in name else "txt"})
     return {"configs": configs}
 
 
@@ -218,6 +219,7 @@ async def download_named_config(config_name: str):
     allowed = ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
                "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
                "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json",
+               "NetherLink-Xray.txt", "NetherLink-Xray-100.txt", "NetherLink-Xray-50.txt",
                "live.txt"]
     if config_name not in allowed:
         raise HTTPException(404, "Неизвестный конфиг")
@@ -241,11 +243,15 @@ CLIENT_MAP = {
     "hiddifynext": ("json", "application/json"),
     "singbox": ("json", "application/json"),
     "sing-box": ("json", "application/json"),
+    "happ": ("txt", "text/plain"),
+    "hap": ("txt", "text/plain"),
 }
 
 
 def _detect_client(user_agent: str) -> str:
     ua = user_agent.lower()
+    if any(x in ua for x in ("happ", "hap/", "xray")):
+        return "happ"
     if any(x in ua for x in ("hiddify", "hiddifynext")):
         return "hiddify"
     if any(x in ua for x in ("sing-box", "singbox")):
@@ -258,6 +264,9 @@ def _detect_client(user_agent: str) -> str:
 
 
 def _pick_config(client: str, size: str):
+    if client == "happ":
+        # Happ принимает URI-подписку (txt) — только туннельные, Xray-совместимые
+        return f"NetherLink-Xray-{size}.txt" if size else "NetherLink-Xray.txt"
     if client in ("v2ray", "v2raytun", "v2rayng", "v2box"):
         return f"NetherLink-{size}-v2ray.json"
     if client in ("hiddify", "hiddifynext", "singbox", "sing-box"):
@@ -283,15 +292,21 @@ async def subscription(format: str = ""):
 
 @app.get("/sub/500")
 @app.get("/subscription/500")
-async def subscription_500():
-    """500 прокси — всегда FLClash (YAML). Другие клиенты не тянут столько."""
-    fp = ROOT / "NetherLink.yaml"
+async def subscription_500(request: Request, format: str = ""):
+    """500 прокси — авто-определение клиента: FLClash (YAML), Happ (URI-txt),
+    sing-box/v2ray (JSON)."""
+    client = _detect_client(request.headers.get("user-agent", ""))
+    if format:
+        client = {"clash": "clash", "v2ray": "v2ray", "singbox": "singbox", "happ": "happ"}.get(format.lower(), client)
+    config_name = _pick_config(client, "")
+    fp = ROOT / config_name
     if not fp.exists():
-        raise HTTPException(404, "Конфиг ещё не сгенерирован")
+        fp = ROOT / "NetherLink.yaml"
+        config_name = "NetherLink.yaml"
+    mime = "application/yaml" if config_name.endswith(".yaml") else "text/plain" if config_name.endswith(".txt") else "application/json"
     return FileResponse(
-        path=str(fp), filename="NetherLink-500.yaml",
-        media_type="application/yaml",
-        headers={"Content-Disposition": "inline; filename=NetherLink-500.yaml", "Cache-Control": "no-store"},
+        path=str(fp), filename=config_name, media_type=mime,
+        headers={"Content-Disposition": f"inline; filename={config_name}", "Cache-Control": "no-store"},
     )
 
 
@@ -301,7 +316,7 @@ async def subscription_100(request: Request, format: str = ""):
     """100 прокси — авто-определение клиента."""
     client = _detect_client(request.headers.get("user-agent", ""))
     if format:
-        client = {"clash": "clash", "v2ray": "v2ray", "singbox": "singbox"}.get(format.lower(), client)
+        client = {"clash": "clash", "v2ray": "v2ray", "singbox": "singbox", "happ": "happ"}.get(format.lower(), client)
     config_name = _pick_config(client, "100")
     fp = ROOT / config_name
     if not fp.exists():

@@ -35,6 +35,14 @@ jobs:
           echo "deb https://deb.sagernet.org/ * *" | sudo tee /etc/apt/sources.list.d/sagernet.list
           sudo apt-get update && sudo apt-get install -y sing-box
 
+      - name: Install Xray core (Happ-совместимый клиент)
+        run: |
+          curl -fsSL -o /tmp/xray.zip https://github.com/XTLS/Xray-core/releases/download/v25.12.8/Xray-linux-64.zip
+          python3 -c "import zipfile; zipfile.ZipFile('/tmp/xray.zip').extractall('/tmp/xray')"
+          sudo cp /tmp/xray/xray /usr/local/bin/xray
+          sudo cp /tmp/xray/geoip.dat /tmp/xray/geosite.dat /usr/local/bin/
+          sudo chmod +x /usr/local/bin/xray
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"

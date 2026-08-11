@@ -18,7 +18,7 @@ from typing import Callable, Awaitable
 
 from backend.config import OUTPUT_FILE, CHECK_CONCURRENCY, ROOT
 from backend.scraper import collect_local_files, discover_repo_files, fetch_and_parse
-from backend.checker import check_node, speed_test_node, protocol_check
+from backend.checker import check_node, speed_test_node, protocol_check, xray_protocol_check
 from backend.services import geoip_batch, dnsbl_check_batch
 from backend.generator import select_nodes, generate_configs, latency_sort_key
 from backend.web_sources import fetch_web_proxies
@@ -262,7 +262,8 @@ async def _consume(
 
 
 async def _protocol_check_batch(nodes, timeout, cancel_event, emit):
-    """Проверяет туннельные протоколы (VMess/VLESS/Trojan/SS/Hy2) через sing-box.
+    """Проверяет туннельные протоколы через Xray core (как настоящий клиент Happ),
+    fallback на sing-box. hy2 — только sing-box (Xray его не поддерживает).
     Только для нод, уже прошедших TCP-фильтр. Низкая конкурентность (15-20).
     """
     candidates = [n for n in nodes if n.get("protocol", "").lower() in ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")]
@@ -271,7 +272,7 @@ async def _protocol_check_batch(nodes, timeout, cancel_event, emit):
         await emit("log", {"level": "info", "text": "Нет туннельных прокси для протокольной проверки"})
         return nodes
 
-    await emit("log", {"level": "info", "text": f"Protocol check: {len(candidates)} туннельных (sing-box), {PROTOCOL_CHECK_CONCURRENCY} параллельно..."})
+    await emit("log", {"level": "info", "text": f"Protocol check: {len(candidates)} туннельных (xray+sing-box), {PROTOCOL_CHECK_CONCURRENCY} параллельно..."})
 
     sem = asyncio.Semaphore(PROTOCOL_CHECK_CONCURRENCY)
     passed = []
@@ -280,7 +281,16 @@ async def _protocol_check_batch(nodes, timeout, cancel_event, emit):
         if cancel_event.is_set():
             return None
         async with sem:
-            latency = await protocol_check(node, timeout, cancel_event)
+            proto = node.get("protocol", "").lower()
+            latency = None
+            if proto in ("hysteria2", "hy2"):
+                # Xray core не поддерживает hy2 — только sing-box
+                latency = await protocol_check(node, timeout, cancel_event)
+            else:
+                # Xray — как настоящий клиент (Happ), sing-box — fallback
+                latency = await xray_protocol_check(node, timeout, cancel_event)
+                if latency is None:
+                    latency = await protocol_check(node, timeout, cancel_event)
             if latency is not None:
                 node["latency_ms"] = latency
                 return node

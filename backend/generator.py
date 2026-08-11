@@ -1,4 +1,6 @@
 import json
+import base64
+from urllib.parse import quote
 
 COUNTRY_NAMES_RU = {
     "AE": "ОАЭ", "AR": "Аргентина", "AT": "Австрия", "AU": "Австралия",
@@ -88,6 +90,17 @@ def select_nodes(nodes, limit, strategy="fastest"):
 
 
 def node_name(node, used_names):
+    # Готовое имя (напр. «🇺🇸 США 52ms» из пайплайна) уважаем — уникализируем
+    existing = node.get("name")
+    if existing and str(existing).strip():
+        base = str(existing)
+        name = base
+        counter = 2
+        while name in used_names:
+            name = f"{base}-{counter}"
+            counter += 1
+        used_names.add(name)
+        return name
     country = node.get("country") or "ZZ"
     cname = COUNTRY_NAMES_RU.get(country, "Неизвестно")
     flag = flag_emoji(country)
@@ -390,6 +403,216 @@ def generate_config_singbox(nodes):
     return json.dumps(out_obfs, ensure_ascii=False, indent=2)
 
 
+def _b64url(s: str) -> str:
+    return base64.urlsafe_b64encode(s.encode()).decode().rstrip("=")
+
+
+def _uri_frag(name: str) -> str:
+    return quote(name, safe="!~*'()")
+
+
+def _node_uri(node: dict, name: str) -> str | None:
+    """Собирает URI ноды для Happ/v2ray-подписки. Все протоколы, включая
+    http/https/socks5 (Xray поддерживает их outbounds; Happ распознает схемы
+    http:// и socks5:// — неподдерживаемые просто проигнорит)."""
+    proto = node["protocol"].lower()
+    server = node["server"]
+    port = int(node["port"])
+    frag = _uri_frag(name)
+    try:
+        if proto in ("http", "https"):
+            scheme = "https" if proto == "https" else "http"
+            auth = ""
+            if node.get("username"):
+                auth = f"{quote(node['username'], safe='')}:{quote(node.get('password', ''), safe='')}@"
+            return f"{scheme}://{auth}{server}:{port}#{frag}"
+        if proto == "socks5":
+            auth = ""
+            if node.get("username"):
+                auth = f"{quote(node['username'], safe='')}:{quote(node.get('password', ''), safe='')}@"
+            return f"socks5://{auth}{server}:{port}#{frag}"
+        if proto == "vmess":
+            vm = {
+                "v": "2",
+                "ps": name,
+                "add": server,
+                "port": str(port),
+                "id": node.get("uuid", ""),
+                "aid": str(int(node.get("alterId", 0))),
+                "scy": node.get("cipher", "auto"),
+                "net": node.get("network", "tcp"),
+                "type": "grpc" if node.get("network") == "grpc" else "none",
+                "host": node.get("ws_host", "") or "",
+                "path": node.get("grpc_service_name", "") if node.get("network") == "grpc" else (node.get("ws_path", "") or ""),
+                "tls": "tls" if node.get("tls") else "",
+                "sni": node.get("servername", "") or "",
+                "alpn": "",
+                "fp": node.get("fp", "") or "",
+            }
+            return f"vmess://{_b64url(json.dumps(vm, ensure_ascii=False))}#{frag}"
+        if proto == "vless":
+            params = ["encryption=none"]
+            network = node.get("network", "tcp")
+            params.append(f"type={network}")
+            if network in ("ws", "xhttp", "splithttp"):
+                if node.get("ws_path"):
+                    params.append(f"path={quote(node['ws_path'], safe='/:')}")
+                if node.get("ws_host"):
+                    params.append(f"host={quote(node['ws_host'], safe='/:.')}")
+            elif network == "grpc":
+                if node.get("grpc_service_name"):
+                    params.append(f"serviceName={quote(node['grpc_service_name'], safe='/')}")
+            if node.get("tls") or node.get("pbk"):
+                params.append("security=reality" if node.get("pbk") else "security=tls")
+                if node.get("pbk"):
+                    params.append(f"pbk={quote(node['pbk'], safe='')}")
+                if node.get("sid"):
+                    params.append(f"sid={quote(node['sid'], safe='')}")
+                params.append(f"fp={quote(node.get('fp') or 'chrome', safe='')}")
+            sni = node.get("servername") or node.get("sni") or server
+            if node.get("tls") or node.get("pbk"):
+                params.append(f"sni={quote(sni, safe=':.')}")
+            if node.get("flow"):
+                params.append(f"flow={quote(node['flow'], safe='')}")
+            return f"vless://{node.get('uuid', '')}@{server}:{port}?{'&'.join(params)}#{frag}"
+        if proto == "ss":
+            method = node.get("cipher", "aes-256-gcm")
+            password = node.get("password", "")
+            return f"ss://{_b64url(f'{method}:{password}')}@{server}:{port}#{frag}"
+        if proto == "trojan":
+            sni = node.get("servername") or server
+            return f"trojan://{node.get('password', '')}@{server}:{port}?security=tls&sni={quote(sni, safe=':.')}#{frag}"
+        if proto in ("hysteria2", "hy2"):
+            sni = node.get("servername") or server
+            return f"hy2://{node.get('password', '')}@{server}:{port}?sni={quote(sni, safe=':.')}&insecure=1#{frag}"
+    except Exception:
+        return None
+    return None
+
+
+def _xray_outbound(node: dict, name: str) -> dict:
+    """Xray outbound сервер (для JSON-подписки). Включает http/socks5 —
+    Xray core поддерживает их как outbounds."""
+    proto = node["protocol"].lower()
+    tag = name
+    if proto in ("http", "https"):
+        v = {"protocol": "http", "settings": {"servers": [{"address": node["server"], "port": int(node["port"])}]}}
+        if node.get("username"):
+            v["settings"]["servers"][0]["users"] = [{"user": node["username"], "pass": node.get("password", "")}]
+        v["tag"] = tag
+        return v
+    if proto == "socks5":
+        v = {"protocol": "socks", "settings": {"servers": [{"address": node["server"], "port": int(node["port"])}]}}
+        if node.get("username"):
+            v["settings"]["servers"][0]["users"] = [{"user": node["username"], "pass": node.get("password", "")}]
+        v["tag"] = tag
+        return v
+    if proto == "vmess":
+        v = {"protocol": "vmess", "settings": {"vnext": [{"address": node["server"], "port": int(node["port"]), "users": [{"id": node.get("uuid", ""), "alterId": int(node.get("alterId", 0)), "security": node.get("cipher", "auto")}]}]}}
+        if node.get("network") and node["network"] != "tcp":
+            v["streamSettings"] = {"network": node["network"]}
+            if node.get("ws_path"):
+                v["streamSettings"]["wsSettings"] = {"path": node["ws_path"]}
+            if node.get("tls"):
+                v["streamSettings"]["security"] = "tls"
+                if node.get("servername"):
+                    v["streamSettings"]["tlsSettings"] = {"serverName": node["servername"], "allowInsecure": True}
+        v["tag"] = tag
+        return v
+    if proto == "trojan":
+        v = {"protocol": "trojan", "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "password": node.get("password", "")}]}}
+        if node.get("servername"):
+            v["streamSettings"] = {"security": "tls", "tlsSettings": {"serverName": node["servername"], "allowInsecure": True}}
+        v["tag"] = tag
+        return v
+    if proto == "vless":
+        v = {"protocol": "vless", "settings": {"vnext": [{"address": node["server"], "port": int(node["port"]), "users": [{"id": node.get("uuid", ""), "encryption": "none", "flow": node.get("flow", "")}]}]}}
+        network = node.get("network", "tcp")
+        if network != "tcp":
+            v["streamSettings"] = {"network": network}
+            if network == "grpc" and node.get("grpc_service_name"):
+                v["streamSettings"]["grpcSettings"] = {"serviceName": node["grpc_service_name"]}
+            if network == "ws":
+                v["streamSettings"]["wsSettings"] = {}
+                if node.get("ws_path"):
+                    v["streamSettings"]["wsSettings"]["path"] = node["ws_path"]
+                if node.get("ws_host"):
+                    v["streamSettings"]["wsSettings"]["headers"] = {"Host": node["ws_host"]}
+        if node.get("tls") or node.get("pbk"):
+            v["streamSettings"] = v.get("streamSettings", {})
+            v["streamSettings"]["security"] = "reality" if node.get("pbk") else "tls"
+            tls_settings = {"serverName": node.get("servername", node["server"]), "allowInsecure": True}
+            if node.get("pbk"):
+                tls_settings["realitySettings"] = {"publicKey": node["pbk"], "shortId": node.get("sid", ""), "fingerprint": node.get("fp") or "chrome"}
+            v["streamSettings"]["tlsSettings"] = tls_settings
+        v["tag"] = tag
+        return v
+    if proto == "ss":
+        v = {"protocol": "shadowsocks", "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "method": node.get("cipher", "aes-256-gcm"), "password": node.get("password", "")}]}}
+        v["tag"] = tag
+        return v
+    if proto in ("hysteria2", "hy2"):
+        # Xray core не поддерживает hysteria2 — в Xray-JSON подписку не включаем
+        return None
+    return None
+
+
+def generate_config_xray(nodes):
+    """Xray-JSON подписка (XTLS соглашение, Happ его понимает):
+    массив ПОЛНЫХ Xray-конфигов — каждый сервер это изолированное
+    подключение с remarks/inbounds/outbounds/routing. Happ передаёт
+    такой конфиг ядру 1:1 (http/socks5 тоже поддерживаются)."""
+    used_names = set()
+    out = []
+    for node in nodes:
+        name = node_name(node, used_names)
+        ob = _xray_outbound(node, name)
+        if not ob:
+            continue
+        ob["tag"] = "proxy"
+        out.append({
+            "remarks": name,
+            "meta": {"serverDescription": "NetherLink @githoly"},
+            "inbounds": [
+                {"listen": "127.0.0.1", "port": 10808, "protocol": "socks"},
+                {"listen": "127.0.0.1", "port": 10809, "protocol": "http"},
+            ],
+            "outbounds": [
+                ob,
+                {"tag": "direct", "protocol": "freedom"},
+            ],
+            "routing": {
+                "rules": [
+                    {"type": "field", "outboundTag": "direct", "ip": ["geoip:private"]},
+                    {"type": "field", "outboundTag": "direct", "domain": ["geosite:cn"]},
+                ]
+            },
+        })
+    return json.dumps(out, ensure_ascii=False, indent=2)
+
+
+def generate_config_happ(nodes, title="NetherLink | @githoly"):
+    """Xray-подписка (txt, URI): только туннельные (vless/vmess/ss/trojan) +
+    мета-заголовки в теле. Happ (Xray core) принимает именно URI-формат;
+    http/socks5/hy2 не включаем — Happ их не поддерживает как outbounds."""
+    used_names = set()
+    allowed = ("vless", "vmess", "ss", "trojan")
+    tunnel = [n for n in nodes if n.get("protocol", "").lower() in allowed]
+    lines = [
+        f"# profile-title: {title}",
+        "# profile-update-interval: 2",
+        "#announce: 🟢 NetherLink · туннельные прокси (vless/vmess/trojan/ss) · топ обновляется каждый час",
+        f"# Количество: {len(tunnel)}",
+        "",
+    ]
+    for node in tunnel:
+        name = node_name(node, used_names)
+        uri = _node_uri(node, name)
+        if uri:
+            lines.append(uri)
+    return "\n".join(lines)
+
+
 def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None, all_live_nodes=None):
     configs = {}
     configs["NetherLink.yaml"] = generate_config_clash(nodes)
@@ -409,6 +632,13 @@ def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None, all_live_node
         configs["NetherLink-100-singbox.json"] = generate_config_singbox(top_nodes_100)
     if top_nodes_50:
         configs["NetherLink-50-singbox.json"] = generate_config_singbox(top_nodes_50)
+
+    # Xray-подписка (txt, URI): только туннельные — Happ-совместимая
+    configs["NetherLink-Xray.txt"] = generate_config_happ(nodes)
+    if top_nodes_100:
+        configs["NetherLink-Xray-100.txt"] = generate_config_happ(top_nodes_100)
+    if top_nodes_50:
+        configs["NetherLink-Xray-50.txt"] = generate_config_happ(top_nodes_50)
 
     live_source = all_live_nodes if all_live_nodes else nodes
     live_lines = []

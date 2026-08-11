@@ -565,3 +565,248 @@ async def protocol_check(node, timeout, cancel_event):
         return None
     except Exception:
         return None
+
+
+# ── Xray core (проверка как настоящий клиент Happ) ─────────────────────────
+XRAY_BINARY = "/home/githoly/bin/xray"
+
+
+def _xray_assets() -> str | None:
+    """Директория с geoip.dat/geosite.dat — рядом с бинарником или известные пути."""
+    import shutil
+    xray_bin = _find_xray() or ""
+    candidates = [
+        os.environ.get("XRAY_LOCATION_ASSET", ""),
+        os.path.dirname(xray_bin),
+        "/home/githoly/bin",
+        "/usr/local/bin",
+        "/usr/bin",
+    ]
+    for d in candidates:
+        if d and os.path.isfile(os.path.join(d, "geoip.dat")):
+            return d
+    return None
+
+
+def _find_xray() -> str | None:
+    import shutil
+    candidates = [
+        os.environ.get("XRAY_BINARY", ""),
+        XRAY_BINARY,
+        "/usr/local/bin/xray",
+        "/usr/bin/xray",
+        shutil.which("xray") or "",
+    ]
+    for path in candidates:
+        if path and os.path.exists(path):
+            return path
+    return None
+
+
+def _build_xray_config(node: dict, socks_port: int) -> dict:
+    """Xray-конфиг для проверки прокси — та же реализация, что в Happ (Xray core)."""
+    proto = node.get("protocol", "").lower()
+    if proto == "vmess":
+        ob = {
+            "protocol": "vmess",
+            "settings": {"vnext": [{"address": node["server"], "port": int(node["port"]),
+                                    "users": [{"id": node.get("uuid", ""), "alterId": int(node.get("alterId", 0)),
+                                               "security": node.get("cipher", "auto")}]}]},
+        }
+        if node.get("network") and node["network"] != "tcp":
+            ob["streamSettings"] = {"network": node["network"]}
+            if node.get("ws_path"):
+                ob["streamSettings"]["wsSettings"] = {"path": node["ws_path"]}
+            if node.get("ws_host"):
+                ob["streamSettings"]["wsSettings"]["headers"] = {"Host": node["ws_host"]}
+            if node.get("tls"):
+                ob["streamSettings"]["security"] = "tls"
+                ob["streamSettings"]["tlsSettings"] = {"serverName": node.get("servername", node["server"]), "allowInsecure": True}
+    elif proto == "vless":
+        ob = {
+            "protocol": "vless",
+            "settings": {"vnext": [{"address": node["server"], "port": int(node["port"]),
+                                    "users": [{"id": node.get("uuid", ""), "encryption": "none", "flow": node.get("flow", "")}]}]},
+        }
+        network = node.get("network", "tcp")
+        if network != "tcp":
+            ob["streamSettings"] = {"network": network}
+            if network == "ws":
+                ob["streamSettings"]["wsSettings"] = {}
+                if node.get("ws_path"):
+                    ob["streamSettings"]["wsSettings"]["path"] = node["ws_path"]
+                if node.get("ws_host"):
+                    ob["streamSettings"]["wsSettings"]["headers"] = {"Host": node["ws_host"]}
+            elif network == "grpc" and node.get("grpc_service_name"):
+                ob["streamSettings"]["grpcSettings"] = {"serviceName": node["grpc_service_name"]}
+        if node.get("tls") or node.get("pbk"):
+            ob["streamSettings"] = ob.get("streamSettings", {})
+            ob["streamSettings"]["security"] = "reality" if node.get("pbk") else "tls"
+            tls = {"serverName": node.get("servername", node.get("sni", node["server"])), "allowInsecure": True}
+            if node.get("pbk"):
+                tls["realitySettings"] = {
+                    "publicKey": node["pbk"],
+                    "shortId": node.get("sid", ""),
+                    "fingerprint": node.get("fp") or "chrome",
+                    "serverName": node.get("sni", node.get("servername", node["server"])),
+                }
+            ob["streamSettings"]["tlsSettings"] = tls
+    elif proto == "trojan":
+        ob = {
+            "protocol": "trojan",
+            "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "password": node.get("password", "")}]},
+            "streamSettings": {"security": "tls", "tlsSettings": {"serverName": node.get("servername", node.get("sni", node["server"])), "allowInsecure": True}},
+        }
+    elif proto == "ss":
+        ob = {
+            "protocol": "shadowsocks",
+            "settings": {"servers": [{"address": node["server"], "port": int(node["port"]),
+                                      "method": node.get("cipher", "aes-256-gcm"), "password": node.get("password", "")}]},
+        }
+    elif proto in ("hysteria2", "hy2"):
+        ob = {
+            "protocol": "hysteria2",
+            "settings": {"servers": [{"address": node["server"], "port": int(node["port"]), "password": node.get("password", "")}]},
+        }
+        if node.get("servername"):
+            ob["settings"]["servers"][0]["tls"] = {"sni": node["servername"], "insecure": True}
+    else:
+        ob = {"protocol": proto, "settings": {"servers": [{"address": node["server"], "port": int(node["port"])}]}}
+    return {
+        "log": {"loglevel": "warning"},
+        "inbounds": [{"listen": "127.0.0.1", "port": socks_port, "protocol": "socks"}],
+        "outbounds": [ob, {"tag": "direct", "protocol": "freedom"}],
+        "routing": {"rules": [{"type": "field", "outboundTag": "direct", "ip": ["geoip:private"]}]},
+    }
+
+
+async def xray_protocol_check(node, timeout, cancel_event):
+    """Проверяет туннельный протокол через Xray core — как настоящий клиент (Happ).
+    Жёсткий таймаут: весь subprocess + HTTP запрос форсируется через asyncio.wait_for."""
+    protocol = node.get("protocol", "").lower()
+    # Xray core НЕ поддерживает hysteria2 (это протокол sing-box) — пропускаем,
+    # hy2 проверяется через sing-box protocol_check
+    if protocol in ("http", "https", "socks5", "hysteria2", "hy2"):
+        return None
+    if cancel_event.is_set():
+        return None
+    xray_bin = _find_xray()
+    if not xray_bin:
+        return None
+
+    socks_port = 0
+    try:
+        import socket as sock_lib
+        s = sock_lib.socket(sock_lib.AF_INET, sock_lib.SOCK_STREAM)
+        s.bind(("127.0.0.1", 0))
+        socks_port = s.getsockname()[1]
+        s.close()
+    except Exception:
+        return None
+
+    config = _build_xray_config(node, socks_port)
+    tmp_path = None
+    process = None
+    env = dict(os.environ)
+    assets = _xray_assets()
+    if assets:
+        env["XRAY_LOCATION_ASSET"] = assets
+
+    async def _inner():
+        nonlocal process, tmp_path
+        try:
+            tmp_fd, tmp_path = tempfile.mkstemp(suffix=".json", prefix="xray-")
+            os.close(tmp_fd)
+            Path(tmp_path).write_text(json.dumps(config, ensure_ascii=False), "utf-8")
+
+            process = await asyncio.create_subprocess_exec(
+                xray_bin, "run", "-c", tmp_path,
+                stdout=asyncio.subprocess.DEVNULL,
+                stderr=asyncio.subprocess.DEVNULL,
+                env=env,
+            )
+
+            started = time.perf_counter()
+            deadline = started + timeout
+            while time.perf_counter() < deadline:
+                await asyncio.sleep(0.1)
+                try:
+                    reader, writer = await asyncio.wait_for(
+                        asyncio.open_connection("127.0.0.1", socks_port),
+                        timeout=1.0,
+                    )
+                    writer.write(b"\x05\x01\x00")
+                    await writer.drain()
+                    handshake = await asyncio.wait_for(reader.readexactly(2), timeout=3.0)
+                    if handshake != b"\x05\x00":
+                        writer.close()
+                        await writer.wait_closed()
+                        break
+                    target = b"www.gstatic.com"
+                    writer.write(b"\x05\x01\x00\x03" + bytes([len(target)]) + target + (80).to_bytes(2, "big"))
+                    await writer.drain()
+                    connect_resp = await asyncio.wait_for(reader.readexactly(4), timeout=3.0)
+                    if connect_resp[0] != 5 or connect_resp[1] != 0:
+                        writer.close()
+                        await writer.wait_closed()
+                        break
+                    addr_type = connect_resp[3]
+                    if addr_type == 1:
+                        await asyncio.wait_for(reader.readexactly(4), timeout=3.0)
+                    elif addr_type == 3:
+                        addr_len = await asyncio.wait_for(reader.readexactly(1), timeout=3.0)
+                        await asyncio.wait_for(reader.readexactly(addr_len[0]), timeout=3.0)
+                    elif addr_type == 4:
+                        await asyncio.wait_for(reader.readexactly(16), timeout=3.0)
+                    await asyncio.wait_for(reader.readexactly(2), timeout=3.0)
+
+                    request = (
+                        "GET /generate_204 HTTP/1.1\r\n"
+                        "Host: www.gstatic.com\r\n"
+                        "User-Agent: NetherLink/3.1\r\n"
+                        "Connection: close\r\n\r\n"
+                    ).encode("ascii")
+                    writer.write(request)
+                    await writer.drain()
+                    data = await asyncio.wait_for(reader.read(512), timeout=3.0)
+                    writer.close()
+                    await writer.wait_closed()
+                    if b"HTTP/" in data[:16]:
+                        parts = data.split(b"\r\n")[0].split()
+                        if len(parts) >= 2:
+                            status = int(parts[1])
+                            if 200 <= status < 400:
+                                return int((time.perf_counter() - started) * 1000)
+                    break
+                except (asyncio.TimeoutError, ConnectionRefusedError, OSError, Exception):
+                    pass
+            return None
+        finally:
+            if process is not None and process.returncode is None:
+                try:
+                    process.terminate()
+                except Exception:
+                    pass
+                try:
+                    await asyncio.wait_for(process.wait(), timeout=3)
+                except (asyncio.TimeoutError, Exception):
+                    try:
+                        process.kill()
+                    except Exception:
+                        pass
+                    try:
+                        await asyncio.wait_for(process.wait(), timeout=2)
+                    except Exception:
+                        pass
+            if tmp_path and os.path.exists(tmp_path):
+                try:
+                    os.unlink(tmp_path)
+                except Exception:
+                    pass
+
+    try:
+        return await asyncio.wait_for(_inner(), timeout=timeout + 5)
+    except asyncio.TimeoutError:
+        return None
+    except Exception:
+        return None
