@@ -2,7 +2,7 @@
 Recheck headless: только проверка без сбора.
 Запускается часто (каждый час) в отдельном workflow.
 
-1. Парсит NetherLink.yaml (500), NetherLink-100.yaml, NetherLink-50.yaml через yaml.safe_load
+1. Парсит NetherLink-Clash.yaml (500), NetherLink-100.yaml, NetherLink-50.yaml через yaml.safe_load
 2. Извлекает первые 200 прокси из main, дедуплицирует с top-100/50
 3. Проверяет все ноды (TCP + protocol check для туннельных)
 4. Записывает только живые обратно в YAML/JSON
@@ -149,11 +149,11 @@ async def run():
     all_nodes: list[dict] = []
     seen = set()
 
-    for config_name in ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml"]:
+    for config_name in ["NetherLink-Clash.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml"]:
         fp = ROOT / config_name
         if fp.exists():
             nodes = parse_clash_yaml_nodes(fp)
-            limit = MAX_RECHECK_NODES if "NetherLink.yaml" == config_name else None
+            limit = MAX_RECHECK_NODES if "NetherLink-Clash.yaml" == config_name else None
             for n in nodes:
                 key = (n["protocol"], n["server"], n["port"])
                 if key not in seen:

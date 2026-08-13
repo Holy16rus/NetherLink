@@ -21,12 +21,12 @@
 ### FLClash / Clash Meta (YAML)
 
 ```
-https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink.yaml
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-Clash.yaml
 https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-100.yaml
 https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-50.yaml
 ```
 
-- **NetherLink.yaml** — полный набор (~500 прокси)
+- **NetherLink-Clash.yaml** — полный набор (~500 прокси: ~250 туннельных + ~250 HTTP/SOCKS)
 - **NetherLink-100.yaml** — отобранный топ-100
 - **NetherLink-50.yaml** — топ-50, перепроверяется каждый час
 

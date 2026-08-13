@@ -62,7 +62,7 @@ jobs:
 
       - name: Download current configs from subscription branch
         run: |
-          curl -fsSL -o NetherLink.yaml     "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink.yaml"     || echo "No main"
+          curl -fsSL -o NetherLink-Clash.yaml "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink-Clash.yaml" || echo "No main"
           curl -fsSL -o NetherLink-100.yaml "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink-100.yaml" || echo "No top-100"
           curl -fsSL -o NetherLink-50.yaml  "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink-50.yaml"  || echo "No top-50"
 

@@ -14,7 +14,7 @@ if _env_file.exists():
 
 ROOT = _ROOT
 SOURCES_FILE = ROOT / "sources.json"
-OUTPUT_FILE = ROOT / "NetherLink.yaml"
+OUTPUT_FILE = ROOT / "NetherLink-Clash.yaml"
 WEB_DIR = ROOT / "web"
 
 # API keys — set via .env file (see .env.example)

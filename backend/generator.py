@@ -615,7 +615,7 @@ def generate_config_happ(nodes, title="NetherLink | @githoly"):
 
 def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None, all_live_nodes=None):
     configs = {}
-    configs["NetherLink.yaml"] = generate_config_clash(nodes)
+    configs["NetherLink-Clash.yaml"] = generate_config_clash(nodes)
     if top_nodes_100:
         configs["NetherLink-100.yaml"] = generate_config_clash(top_nodes_100)
     if top_nodes_50:

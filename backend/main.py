@@ -191,10 +191,10 @@ async def get_status():
 @app.get("/api/configs")
 async def list_configs():
     configs = []
-    patterns = ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
+    patterns = ["NetherLink-Clash.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
                 "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
                 "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json",
-                "NetherLink-Xray.txt", "NetherLink-Xray-100.txt", "NetherLink-Xray-50.txt",
+                "NetherLink-Xray-100.txt", "NetherLink-Xray-50.txt",
                 "live.txt"]
     for name in patterns:
         fp = ROOT / name
@@ -216,10 +216,10 @@ async def download_config():
 
 @app.get("/api/download/{config_name}")
 async def download_named_config(config_name: str):
-    allowed = ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
+    allowed = ["NetherLink-Clash.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
                "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
                "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json",
-               "NetherLink-Xray.txt", "NetherLink-Xray-100.txt", "NetherLink-Xray-50.txt",
+               "NetherLink-Xray-100.txt", "NetherLink-Xray-50.txt",
                "live.txt"]
     if config_name not in allowed:
         raise HTTPException(404, "Неизвестный конфиг")
@@ -265,13 +265,15 @@ def _detect_client(user_agent: str) -> str:
 
 def _pick_config(client: str, size: str):
     if client == "happ":
-        # Happ принимает URI-подписку (txt) — только туннельные, Xray-совместимые
-        return f"NetherLink-Xray-{size}.txt" if size else "NetherLink-Xray.txt"
+        # Полный Xray (500) убрали — у туннельных только топ-100/50
+        return f"NetherLink-Xray-{size}.txt" if size else "NetherLink-Xray-100.txt"
     if client in ("v2ray", "v2raytun", "v2rayng", "v2box"):
-        return f"NetherLink-{size}-v2ray.json"
+        return f"NetherLink-{size}-v2ray.json" if size else "NetherLink-v2ray.json"
     if client in ("hiddify", "hiddifynext", "singbox", "sing-box"):
-        return f"NetherLink-{size}-singbox.json"
-    return f"NetherLink-{size}.yaml"
+        return f"NetherLink-{size}-singbox.json" if size else "NetherLink-singbox.json"
+    if size:
+        return f"NetherLink-{size}.yaml"
+    return "NetherLink-Clash.yaml"
 
 
 @app.get("/sub")
@@ -301,8 +303,8 @@ async def subscription_500(request: Request, format: str = ""):
     config_name = _pick_config(client, "")
     fp = ROOT / config_name
     if not fp.exists():
-        fp = ROOT / "NetherLink.yaml"
-        config_name = "NetherLink.yaml"
+        fp = ROOT / "NetherLink-Clash.yaml"
+        config_name = "NetherLink-Clash.yaml"
     mime = "application/yaml" if config_name.endswith(".yaml") else "text/plain" if config_name.endswith(".txt") else "application/json"
     return FileResponse(
         path=str(fp), filename=config_name, media_type=mime,

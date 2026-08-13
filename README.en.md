@@ -16,12 +16,12 @@ Copy a link and paste it into your client (long-press → copy):
 ### FLClash / Clash Meta (YAML)
 
 ```
-https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink.yaml
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-Clash.yaml
 https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-100.yaml
 https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-50.yaml
 ```
 
-- **NetherLink.yaml** — full set (~500 proxies)
+- **NetherLink-Clash.yaml** — full set (~500 proxies: ~250 tunnel + ~250 HTTP/SOCKS)
 - **NetherLink-100.yaml** — selected top-100
 - **NetherLink-50.yaml** — top-50, rechecked hourly
 

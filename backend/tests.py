@@ -120,7 +120,7 @@ def test_generator():
     test("generates all 12 configs", len(configs), 12)
     test("live.txt in configs", "live.txt" in configs, True)
 
-    for fname in ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
+    for fname in ["NetherLink-Clash.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
                   "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
                   "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json"]:
         test(f"{fname} exists in configs", fname in configs, True)

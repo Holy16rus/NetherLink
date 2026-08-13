@@ -15,7 +15,7 @@ from backend.generator import select_nodes, generate_config
 
 ROOT = Path(__file__).resolve().parent.parent
 PROXY_FILE = ROOT / "proxy.txt"
-OUTPUT_FILE = ROOT / "NetherLink.yaml"
+OUTPUT_FILE = ROOT / "NetherLink-Clash.yaml"
 RATING_THRESHOLD = 3.6
 
 
