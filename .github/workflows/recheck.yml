@@ -86,12 +86,13 @@ jobs:
             git archive origin/subscription | tar -x -C /tmp/nl-sub 2>/dev/null || true
           fi
           git checkout --orphan subscription
+          git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
-          cp -f /tmp/nl-sub/* . 2>/dev/null || true
+          cp -f /tmp/nl-sub/NetherLink*.yaml /tmp/nl-sub/NetherLink*.json /tmp/nl-sub/NetherLink-Xray*.txt . 2>/dev/null || true
           for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json; do
             [ -f "/tmp/nl-recheck/$f" ] && cp -f "/tmp/nl-recheck/$f" .
           done
-          git add -A
+          git add -f -A
           git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
           git push --force origin subscription
 
@@ -102,9 +103,10 @@ jobs:
             git archive origin/stats | tar -x -C /tmp/nl-stats 2>/dev/null || true
           fi
           git checkout --orphan stats
+          git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
-          cp -f /tmp/nl-stats/* . 2>/dev/null || true
+          cp -f /tmp/nl-stats/*LiveProxy* . 2>/dev/null || true
           cp -f /tmp/nl-recheck/proxy-history.json .
-          git add -A
+          git add -f -A
           git commit --allow-empty -m "History update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
           git push --force origin stats

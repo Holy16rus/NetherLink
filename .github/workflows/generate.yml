@@ -82,9 +82,10 @@ jobs:
 
           # ── subscription: только конфиги (без live.txt) ──
           git checkout --orphan subscription
+          git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
           cp -f /tmp/nl-deploy/NetherLink*.yaml /tmp/nl-deploy/NetherLink*.json /tmp/nl-deploy/NetherLink-Xray*.txt . 2>/dev/null || true
-          git add -A
+          git add -f -A
           git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin subscription
 
@@ -95,10 +96,11 @@ jobs:
             git archive origin/stats | tar -x -C /tmp/nl-stats 2>/dev/null || true
           fi
           git checkout --orphan stats
+          git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
           cp -f /tmp/nl-stats/*LiveProxy* . 2>/dev/null || true
           cp -f /tmp/nl-deploy/live.txt "${DATE}-LiveProxy"
           cp -f /tmp/nl-deploy/proxy-history.json .
-          git add -A
+          git add -f -A
           git commit --allow-empty -m "Stats ${DATE} ($(date -u +'%H:%M UTC'))"
           git push --force origin stats
