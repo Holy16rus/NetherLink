@@ -633,8 +633,8 @@ def generate_configs(nodes, top_nodes_100=None, top_nodes_50=None, all_live_node
     if top_nodes_50:
         configs["NetherLink-50-singbox.json"] = generate_config_singbox(top_nodes_50)
 
-    # Xray-подписка (txt, URI): только туннельные — Happ-совместимая
-    configs["NetherLink-Xray.txt"] = generate_config_happ(nodes)
+    # Xray-подписка (txt, URI): только туннельные — Happ-совместимая.
+    # Полный Xray (500) не нужен — брат хочет Xray только у туннельных топ-100/50.
     if top_nodes_100:
         configs["NetherLink-Xray-100.txt"] = generate_config_happ(top_nodes_100)
     if top_nodes_50:

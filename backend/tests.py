@@ -117,13 +117,18 @@ def test_generator():
     test("singbox json", '"http"' in sb, True)
 
     configs = generate_configs(nodes[:2], nodes[:1], nodes[:1])
-    test("generates all 10 configs", len(configs), 10)
+    test("generates all 12 configs", len(configs), 12)
     test("live.txt in configs", "live.txt" in configs, True)
 
     for fname in ["NetherLink.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml",
                   "NetherLink-v2ray.json", "NetherLink-100-v2ray.json", "NetherLink-50-v2ray.json",
                   "NetherLink-singbox.json", "NetherLink-100-singbox.json", "NetherLink-50-singbox.json"]:
         test(f"{fname} exists in configs", fname in configs, True)
+
+    # Xray только у туннельных топ-100/50, полный NetherLink-Xray.txt не нужен
+    test("Xray-100.txt exists", "NetherLink-Xray-100.txt" in configs, True)
+    test("Xray-50.txt exists", "NetherLink-Xray-50.txt" in configs, True)
+    test("no full Xray.txt", "NetherLink-Xray.txt" not in configs, True)
 
 
 # ── checker.py ──────────────────────────────────────────────────

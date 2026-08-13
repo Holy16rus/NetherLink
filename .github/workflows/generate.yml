@@ -62,34 +62,43 @@ jobs:
         run: python -m backend.download_geoip
         continue-on-error: true
 
-      - name: Restore proxy history from state branch
+      - name: Restore proxy history from stats branch
         run: |
-          git fetch origin state 2>/dev/null && git show state:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          git fetch origin stats 2>/dev/null && git show stats:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
 
       - name: Run proxy generator
         run: python -m backend.headless
 
-      - name: Deploy configs to gh-pages (clean)
+      - name: Deploy configs to subscription + stats branches
         run: |
           git config user.name "NetherLink Bot"
           git config user.email "bot@netherlink.local"
 
+          DATE=$(date -u +'%d.%m.%y')
+
           # Сохраняем сгенерированные файлы ДО переключения ветки
           mkdir -p /tmp/nl-deploy
-          cp -f NetherLink*.yaml NetherLink*.json NetherLink*.txt live.txt proxy-history.json /tmp/nl-deploy/ 2>/dev/null || true
+          cp -f NetherLink*.yaml NetherLink*.json NetherLink-Xray*.txt live.txt proxy-history.json /tmp/nl-deploy/ 2>/dev/null || true
 
-          # ── gh-pages: только конфиги, без мусора ──
-          git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          rm -f NetherLink*.yaml NetherLink*.json NetherLink*.txt live.txt proxy-history.json liveproxy.txt
-          rm -rf backend GeoIP Proxy-Data sub 2>/dev/null || true
-          cp -f /tmp/nl-deploy/NetherLink*.yaml /tmp/nl-deploy/NetherLink*.json /tmp/nl-deploy/NetherLink*.txt /tmp/nl-deploy/live.txt . 2>/dev/null || true
+          # ── subscription: только конфиги (без live.txt) ──
+          git checkout --orphan subscription
+          git clean -fdx 2>/dev/null || true
+          cp -f /tmp/nl-deploy/NetherLink*.yaml /tmp/nl-deploy/NetherLink*.json /tmp/nl-deploy/NetherLink-Xray*.txt . 2>/dev/null || true
           git add -A
           git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push --force origin gh-pages
+          git push --force origin subscription
 
-          # ── state: персистентная история проверок ──
-          git checkout --orphan state-new
-          cp -f /tmp/nl-deploy/proxy-history.json . 2>/dev/null || true
-          git add proxy-history.json 2>/dev/null || true
-          git commit --allow-empty -m "Proxy history $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push --force origin state-new:state
+          # ── stats: накопительные {дата}-LiveProxy + история проверок ──
+          git fetch origin stats 2>/dev/null || true
+          mkdir -p /tmp/nl-stats
+          if git rev-parse --verify origin/stats >/dev/null 2>&1; then
+            git archive origin/stats | tar -x -C /tmp/nl-stats 2>/dev/null || true
+          fi
+          git checkout --orphan stats
+          git clean -fdx 2>/dev/null || true
+          cp -f /tmp/nl-stats/*LiveProxy* . 2>/dev/null || true
+          cp -f /tmp/nl-deploy/live.txt "${DATE}-LiveProxy"
+          cp -f /tmp/nl-deploy/proxy-history.json .
+          git add -A
+          git commit --allow-empty -m "Stats ${DATE} ($(date -u +'%H:%M UTC'))"
+          git push --force origin stats

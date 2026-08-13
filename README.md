@@ -14,21 +14,45 @@
 
 ---
 
-## 🚀 Быстрый старт
+## 🚀 Подписки
 
-| Что нужно | Ссылка |
-|-----------|--------|
-| **500 прокси** — полный набор | [NetherLink.yaml](https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink.yaml) |
-| **100 прокси** — отобранный топ | [NetherLink-100.yaml](https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-100.yaml) |
-| **50 прокси** — топ с перепроверкой каждый час | [NetherLink-50.yaml](https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/NetherLink-50.yaml) |
+Скопируй ссылку и вставь в клиент (долгий тап по ссылке → копировать):
 
-> 💡 Формат — **Clash YAML**. Рекомендуемый клиент: [FLClash](https://github.com/chen08209/FlClash) (Android / Windows / macOS / Linux).
+### FLClash / Clash Meta (YAML)
 
-### Как добавить подписку (3 шага)
+```
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink.yaml
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-100.yaml
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-50.yaml
+```
 
-1. Скопируй ссылку из таблицы выше (нужна именно **RAW**-ссылка)
-2. В FLClash: «Профили» → «Добавить из буфера» / вставь ссылку в поле подписки
-3. Готово — клиент сам подтянет и будет обновлять конфиг
+- **NetherLink.yaml** — полный набор (~500 прокси)
+- **NetherLink-100.yaml** — отобранный топ-100
+- **NetherLink-50.yaml** — топ-50, перепроверяется каждый час
+
+> Рекомендуемый клиент: [FLClash](https://github.com/chen08209/FlClash) (Android / Windows / macOS / Linux).
+
+### Happ / Xray (только туннельные: vless/vmess/trojan/ss)
+
+```
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-Xray-100.txt
+https://raw.githubusercontent.com/Holy16rus/NetherLink/subscription/NetherLink-Xray-50.txt
+```
+
+- **NetherLink-Xray-100.txt** — топ-100 туннельных
+- **NetherLink-Xray-50.txt** — топ-50 туннельных
+
+---
+
+## 📊 Живые прокси (статистика)
+
+Список всех живых прокси лежит в ветке `stats` — файл вида `{дата}-LiveProxy` (обновляется при каждой генерации):
+
+```
+https://raw.githubusercontent.com/Holy16rus/NetherLink/stats/13.08.26-LiveProxy
+```
+
+Смотреть все файлы: [ветка stats](https://github.com/Holy16rus/NetherLink/tree/stats)
 
 ---
 
@@ -39,7 +63,7 @@
 3. **Фильтрация** — удаление спам-прокси (DNSBL), проверка стабильности по истории (5 запусков, success_rate ≥ 0.6)
 4. **Геолокация** — определение страны через MaxMind GeoLite2 + ip-api.com
 5. **Speed test** — замер скорости через скачивание 1MB
-6. **Генерация** — конфиги, деплой на GitHub Pages
+6. **Генерация** — конфиги в ветку `subscription`, живые прокси в ветку `stats`
 
 **Протоколы:** HTTP, HTTPS, SOCKS5, VMess, VLESS, Trojan, Shadowsocks, Hysteria2
 
@@ -83,7 +107,7 @@ python start.py
 ## 📊 Статус
 
 - [Последний workflow](https://github.com/Holy16rus/NetherLink/actions)
-- [Все прокси (live.txt)](https://raw.githubusercontent.com/Holy16rus/NetherLink/gh-pages/live.txt)
+- [Живые прокси (ветка stats)](https://github.com/Holy16rus/NetherLink/tree/stats)
 - Telegram: [@githoly](https://t.me/githoly)
 
 ---

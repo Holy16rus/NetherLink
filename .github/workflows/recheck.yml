@@ -56,20 +56,20 @@ jobs:
         run: python -m backend.download_geoip
         continue-on-error: true
 
-      - name: Restore state from state branch
+      - name: Restore state from stats branch
         run: |
-          git fetch origin state 2>/dev/null && git show state:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          git fetch origin stats 2>/dev/null && git show stats:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
 
-      - name: Download current configs from gh-pages
+      - name: Download current configs from subscription branch
         run: |
-          curl -fsSL -o NetherLink.yaml     "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/NetherLink.yaml"     || echo "No main"
-          curl -fsSL -o NetherLink-100.yaml "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/NetherLink-100.yaml" || echo "No top-100"
-          curl -fsSL -o NetherLink-50.yaml  "https://raw.githubusercontent.com/${{ github.repository }}/gh-pages/NetherLink-50.yaml"  || echo "No top-50"
+          curl -fsSL -o NetherLink.yaml     "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink.yaml"     || echo "No main"
+          curl -fsSL -o NetherLink-100.yaml "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink-100.yaml" || echo "No top-100"
+          curl -fsSL -o NetherLink-50.yaml  "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink-50.yaml"  || echo "No top-50"
 
       - name: Run recheck
         run: python -m backend.recheck_headless
 
-      - name: Deploy rechecked configs to gh-pages (clean)
+      - name: Deploy rechecked configs to subscription + stats branches
         if: success()
         run: |
           git config user.name "NetherLink Recheck Bot"
@@ -77,20 +77,34 @@ jobs:
 
           # Сохраняем ДО переключения ветки
           mkdir -p /tmp/nl-recheck
-          cp -f NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt proxy-history.json /tmp/nl-recheck/ 2>/dev/null || true
+          cp -f NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json proxy-history.json /tmp/nl-recheck/ 2>/dev/null || true
 
-          # ── gh-pages: обновляем топ-50/топ-100, без мусора ──
-          git fetch origin gh-pages 2>/dev/null && git checkout gh-pages || git checkout --orphan gh-pages
-          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json live.txt; do
-            [ -f "/tmp/nl-recheck/$f" ] && cp -f "/tmp/nl-recheck/$f" . 2>/dev/null
+          # ── subscription: обновляем топ-50/топ-100, остальные конфиги сохраняем ──
+          git fetch origin subscription 2>/dev/null || true
+          mkdir -p /tmp/nl-sub
+          if git rev-parse --verify origin/subscription >/dev/null 2>&1; then
+            git archive origin/subscription | tar -x -C /tmp/nl-sub 2>/dev/null || true
+          fi
+          git checkout --orphan subscription
+          git clean -fdx 2>/dev/null || true
+          cp -f /tmp/nl-sub/* . 2>/dev/null || true
+          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json; do
+            [ -f "/tmp/nl-recheck/$f" ] && cp -f "/tmp/nl-recheck/$f" .
           done
           git add -A
           git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
-          git push --force origin gh-pages
+          git push --force origin subscription
 
-          # ── state: история проверок ──
-          git checkout --orphan state-new
-          cp -f /tmp/nl-recheck/proxy-history.json . 2>/dev/null || true
-          git add proxy-history.json 2>/dev/null || true
-          git commit --allow-empty -m "Proxy history $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push --force origin state-new:state
+          # ── stats: обновляем только историю (LiveProxy-файлы не трогаем) ──
+          git fetch origin stats 2>/dev/null || true
+          mkdir -p /tmp/nl-stats
+          if git rev-parse --verify origin/stats >/dev/null 2>&1; then
+            git archive origin/stats | tar -x -C /tmp/nl-stats 2>/dev/null || true
+          fi
+          git checkout --orphan stats
+          git clean -fdx 2>/dev/null || true
+          cp -f /tmp/nl-stats/* . 2>/dev/null || true
+          cp -f /tmp/nl-recheck/proxy-history.json .
+          git add -A
+          git commit --allow-empty -m "History update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
+          git push --force origin stats
