@@ -1,0 +1,594 @@
+{
+  "🇺🇸 США 20ms": {
+    "protocol": "trojan",
+    "settings": {
+      "servers": [
+        {
+          "address": "64.94.95.117",
+          "port": 57142,
+          "password": "kkzh2prsyr2ik47as615"
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "tls",
+      "tlsSettings": {
+        "serverName": "static.rutube.ru",
+        "allowInsecure": true
+      }
+    }
+  },
+  "🇺🇸 США 48ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "192.73.244.36",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 51ms": {
+    "protocol": "shadowsocks",
+    "settings": {
+      "servers": [
+        {
+          "address": "15.204.247.206",
+          "port": 4444,
+          "method": "aes-256-gcm",
+          "password": "pKEW8JPByTVTLtM"
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 57ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "69.87.216.54",
+          "port": 7989
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 37ms": {
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "172.233.139.46",
+          "port": 53734,
+          "users": [
+            {
+              "id": "56a1b253-cde4-490f-9c5e-09a523882bdd",
+              "encryption": "none",
+              "flow": "xtls-rprx-vision"
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "reality",
+      "tlsSettings": {
+        "serverName": "www.tesla.com",
+        "allowInsecure": true,
+        "realitySettings": {
+          "publicKey": "JAG5rl6KEt7KAV0y8Z2x6orWHymCXRSX49SkEnEftWU",
+          "shortId": "a56d7d8da977f860",
+          "fingerprint": "firefox"
+        }
+      }
+    }
+  },
+  "🇺🇸 США 66ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "213.188.208.179",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 70ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "34.44.49.215",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇨🇦 Канада 76ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "184.75.221.82",
+          "port": 3118
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 78ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "137.66.1.45",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 78ms-2": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "67.203.23.79",
+          "port": 8081
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 36ms": {
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "172.235.38.85",
+          "port": 42942,
+          "users": [
+            {
+              "id": "bca46025-bf43-40c0-895b-054a6fbcfd32",
+              "encryption": "none",
+              "flow": "xtls-rprx-vision"
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "reality",
+      "tlsSettings": {
+        "serverName": "www.tesla.com",
+        "allowInsecure": true,
+        "realitySettings": {
+          "publicKey": "JmkfJoDWpAqt6gj4cbc4_cwItsdryMlV7joAGfNTKQU",
+          "shortId": "a56d7d8da977f860",
+          "fingerprint": "chrome"
+        }
+      }
+    }
+  },
+  "🇺🇸 США 107ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.93.202.130",
+          "port": 3128
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 114ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "159.65.230.46",
+          "port": 8888
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 36ms-2": {
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "172.235.43.210",
+          "port": 53957,
+          "users": [
+            {
+              "id": "7ab29f89-6eef-4171-b232-fc4f580ad31b",
+              "encryption": "none",
+              "flow": "xtls-rprx-vision"
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "reality",
+      "tlsSettings": {
+        "serverName": "www.nvidia.com",
+        "allowInsecure": true,
+        "realitySettings": {
+          "publicKey": "XUHlbk5VH5z4E2wxZBhlpLZ33qevyQgqU7dheRDgoGQ",
+          "shortId": "44e82fd7b97b14",
+          "fingerprint": "chrome"
+        }
+      }
+    }
+  },
+  "🇺🇸 США 120ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "107.150.41.226",
+          "port": 18080
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 122ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "45.91.248.107",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 144ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "12.50.107.221",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 35ms": {
+    "protocol": "vless",
+    "settings": {
+      "vnext": [
+        {
+          "address": "192.3.247.109",
+          "port": 43580,
+          "users": [
+            {
+              "id": "25a6a9f3-ad9e-45f2-96e1-be21c9d97789",
+              "encryption": "none",
+              "flow": "xtls-rprx-vision"
+            }
+          ]
+        }
+      ]
+    },
+    "streamSettings": {
+      "security": "reality",
+      "tlsSettings": {
+        "serverName": "apple.com",
+        "allowInsecure": true,
+        "realitySettings": {
+          "publicKey": "smOBJ9RB9nUF3SCGBJ5A1O24Dla9YlQY_YSUjmHRW2g",
+          "shortId": "0123456789abcdef",
+          "fingerprint": "chrome"
+        }
+      }
+    }
+  },
+  "🇺🇸 США 161ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "31.56.65.108",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 242ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "67.201.39.14",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 243ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.235.9",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 243ms-2": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "67.201.35.145",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 247ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "162.253.68.97",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 250ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "68.71.254.6",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇳🇱 Нидерланды 231ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "195.26.224.135",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 244ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "162.214.159.94",
+          "port": 8085
+        }
+      ]
+    }
+  },
+  "🇯🇵 Япония 244ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "172.237.11.129",
+          "port": 3128
+        }
+      ]
+    }
+  },
+  "🇬🇧 Великобритания 251ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "3.10.170.234",
+          "port": 3128
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 245ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "162.214.74.29",
+          "port": 8085
+        }
+      ]
+    }
+  },
+  "🇫🇷 Франция 250ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "152.228.217.116",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇫🇷 Франция 263ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "37.187.74.125",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇩🇪 Германия 257ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "161.35.223.141",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇯🇵 Япония 259ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "45.146.163.31",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇻🇪 Венесуэла 265ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "190.97.236.129",
+          "port": 999
+        }
+      ]
+    }
+  },
+  "🇩🇪 Германия 284ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "164.92.200.113",
+          "port": 80
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 498ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "67.201.59.70",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 495ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "107.152.98.5",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 579ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "23.228.86.236",
+          "port": 8081
+        }
+      ]
+    }
+  },
+  "🇳🇱 Нидерланды 492ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "95.211.174.135",
+          "port": 3128
+        }
+      ]
+    }
+  },
+  "🇳🇱 Нидерланды 585ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "45.90.236.68",
+          "port": 3128
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 1078ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "67.203.23.88",
+          "port": 8081
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 1164ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "141.148.158.143",
+          "port": 1080
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 1252ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.239.1",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 1256ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "72.37.217.3",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇺🇸 США 2537ms": {
+    "protocol": "socks",
+    "settings": {
+      "servers": [
+        {
+          "address": "142.54.226.214",
+          "port": 4145
+        }
+      ]
+    }
+  },
+  "🇷🇺 Россия 4245ms": {
+    "protocol": "http",
+    "settings": {
+      "servers": [
+        {
+          "address": "153.80.240.2",
+          "port": 8080
+        }
+      ]
+    }
+  }
+}

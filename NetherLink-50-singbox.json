@@ -1,0 +1,304 @@
+{
+  "🇺🇸 США 20ms": {
+    "type": "trojan",
+    "server": "64.94.95.117",
+    "server_port": 57142,
+    "password": "kkzh2prsyr2ik47as615",
+    "tls": {
+      "enabled": true,
+      "server_name": "static.rutube.ru",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 48ms": {
+    "type": "http",
+    "server": "192.73.244.36",
+    "server_port": 80
+  },
+  "🇺🇸 США 51ms": {
+    "type": "shadowsocks",
+    "server": "15.204.247.206",
+    "server_port": 4444,
+    "method": "aes-256-gcm",
+    "password": "pKEW8JPByTVTLtM"
+  },
+  "🇺🇸 США 57ms": {
+    "type": "http",
+    "server": "69.87.216.54",
+    "server_port": 7989
+  },
+  "🇺🇸 США 37ms": {
+    "type": "vless",
+    "server": "172.233.139.46",
+    "server_port": 53734,
+    "uuid": "56a1b253-cde4-490f-9c5e-09a523882bdd",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.tesla.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "JAG5rl6KEt7KAV0y8Z2x6orWHymCXRSX49SkEnEftWU",
+        "short_id": "a56d7d8da977f860"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "firefox"
+      }
+    }
+  },
+  "🇺🇸 США 66ms": {
+    "type": "http",
+    "server": "213.188.208.179",
+    "server_port": 80
+  },
+  "🇺🇸 США 70ms": {
+    "type": "http",
+    "server": "34.44.49.215",
+    "server_port": 80
+  },
+  "🇨🇦 Канада 76ms": {
+    "type": "http",
+    "server": "184.75.221.82",
+    "server_port": 3118
+  },
+  "🇺🇸 США 78ms": {
+    "type": "http",
+    "server": "137.66.1.45",
+    "server_port": 80
+  },
+  "🇺🇸 США 78ms-2": {
+    "type": "http",
+    "server": "67.203.23.79",
+    "server_port": 8081
+  },
+  "🇺🇸 США 36ms": {
+    "type": "vless",
+    "server": "172.235.38.85",
+    "server_port": 42942,
+    "uuid": "bca46025-bf43-40c0-895b-054a6fbcfd32",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.tesla.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "JmkfJoDWpAqt6gj4cbc4_cwItsdryMlV7joAGfNTKQU",
+        "short_id": "a56d7d8da977f860"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 107ms": {
+    "type": "http",
+    "server": "142.93.202.130",
+    "server_port": 3128
+  },
+  "🇺🇸 США 114ms": {
+    "type": "http",
+    "server": "159.65.230.46",
+    "server_port": 8888
+  },
+  "🇺🇸 США 36ms-2": {
+    "type": "vless",
+    "server": "172.235.43.210",
+    "server_port": 53957,
+    "uuid": "7ab29f89-6eef-4171-b232-fc4f580ad31b",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.nvidia.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "XUHlbk5VH5z4E2wxZBhlpLZ33qevyQgqU7dheRDgoGQ",
+        "short_id": "44e82fd7b97b14"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 120ms": {
+    "type": "http",
+    "server": "107.150.41.226",
+    "server_port": 18080
+  },
+  "🇺🇸 США 122ms": {
+    "type": "http",
+    "server": "45.91.248.107",
+    "server_port": 80
+  },
+  "🇺🇸 США 144ms": {
+    "type": "http",
+    "server": "12.50.107.221",
+    "server_port": 80
+  },
+  "🇺🇸 США 35ms": {
+    "type": "vless",
+    "server": "192.3.247.109",
+    "server_port": 43580,
+    "uuid": "25a6a9f3-ad9e-45f2-96e1-be21c9d97789",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "apple.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "smOBJ9RB9nUF3SCGBJ5A1O24Dla9YlQY_YSUjmHRW2g",
+        "short_id": "0123456789abcdef"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 161ms": {
+    "type": "http",
+    "server": "31.56.65.108",
+    "server_port": 80
+  },
+  "🇺🇸 США 242ms": {
+    "type": "socks",
+    "server": "67.201.39.14",
+    "server_port": 4145
+  },
+  "🇺🇸 США 243ms": {
+    "type": "socks",
+    "server": "142.54.235.9",
+    "server_port": 4145
+  },
+  "🇺🇸 США 243ms-2": {
+    "type": "socks",
+    "server": "67.201.35.145",
+    "server_port": 4145
+  },
+  "🇺🇸 США 247ms": {
+    "type": "socks",
+    "server": "162.253.68.97",
+    "server_port": 4145
+  },
+  "🇺🇸 США 250ms": {
+    "type": "socks",
+    "server": "68.71.254.6",
+    "server_port": 4145
+  },
+  "🇳🇱 Нидерланды 231ms": {
+    "type": "http",
+    "server": "195.26.224.135",
+    "server_port": 80
+  },
+  "🇺🇸 США 244ms": {
+    "type": "http",
+    "server": "162.214.159.94",
+    "server_port": 8085
+  },
+  "🇯🇵 Япония 244ms": {
+    "type": "http",
+    "server": "172.237.11.129",
+    "server_port": 3128
+  },
+  "🇬🇧 Великобритания 251ms": {
+    "type": "http",
+    "server": "3.10.170.234",
+    "server_port": 3128
+  },
+  "🇺🇸 США 245ms": {
+    "type": "http",
+    "server": "162.214.74.29",
+    "server_port": 8085
+  },
+  "🇫🇷 Франция 250ms": {
+    "type": "http",
+    "server": "152.228.217.116",
+    "server_port": 80
+  },
+  "🇫🇷 Франция 263ms": {
+    "type": "http",
+    "server": "37.187.74.125",
+    "server_port": 80
+  },
+  "🇩🇪 Германия 257ms": {
+    "type": "http",
+    "server": "161.35.223.141",
+    "server_port": 80
+  },
+  "🇯🇵 Япония 259ms": {
+    "type": "http",
+    "server": "45.146.163.31",
+    "server_port": 80
+  },
+  "🇻🇪 Венесуэла 265ms": {
+    "type": "http",
+    "server": "190.97.236.129",
+    "server_port": 999
+  },
+  "🇩🇪 Германия 284ms": {
+    "type": "http",
+    "server": "164.92.200.113",
+    "server_port": 80
+  },
+  "🇺🇸 США 498ms": {
+    "type": "socks",
+    "server": "67.201.59.70",
+    "server_port": 4145
+  },
+  "🇺🇸 США 495ms": {
+    "type": "socks",
+    "server": "107.152.98.5",
+    "server_port": 4145
+  },
+  "🇺🇸 США 579ms": {
+    "type": "http",
+    "server": "23.228.86.236",
+    "server_port": 8081
+  },
+  "🇳🇱 Нидерланды 492ms": {
+    "type": "http",
+    "server": "95.211.174.135",
+    "server_port": 3128
+  },
+  "🇳🇱 Нидерланды 585ms": {
+    "type": "http",
+    "server": "45.90.236.68",
+    "server_port": 3128
+  },
+  "🇺🇸 США 1078ms": {
+    "type": "http",
+    "server": "67.203.23.88",
+    "server_port": 8081
+  },
+  "🇺🇸 США 1164ms": {
+    "type": "socks",
+    "server": "141.148.158.143",
+    "server_port": 1080
+  },
+  "🇺🇸 США 1252ms": {
+    "type": "socks",
+    "server": "142.54.239.1",
+    "server_port": 4145
+  },
+  "🇺🇸 США 1256ms": {
+    "type": "socks",
+    "server": "72.37.217.3",
+    "server_port": 4145
+  },
+  "🇺🇸 США 2537ms": {
+    "type": "socks",
+    "server": "142.54.226.214",
+    "server_port": 4145
+  },
+  "🇷🇺 Россия 4245ms": {
+    "type": "http",
+    "server": "153.80.240.2",
+    "server_port": 8080
+  }
+}
