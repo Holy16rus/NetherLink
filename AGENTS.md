@@ -170,5 +170,6 @@ Retry-цикл на 3 попытки с `git fetch` перед каждым ко
 - **Генерация Clash для FLClash**: vless/vmess получают `reality-opts` + `client-fingerprint`, `skip-cert-verify` при TLS, `udp: true`; xhttp/splithttp → `xhttp-opts`. Раньше reality-ноды уезжали без ключей и были мертвы в клиенте.
 - **Проверки**: конфиги валидируются ядром mihomo (`mihomo -t` — то же ядро, что в FLClash); round-trip «сгенерируй → распарси» — 0 потерь полей.
 - **Источники**: −4 мёртвых (dpangestuw / AvenCores / HalyavusVPNUS / FreeFolksOn), +10 живых (Epodonios ×2, ALIILAPRO, Auto_proxy, NoMoreWalls, ts-sf, Pawdroid, freefq, ermaozi, V2RayAggregator).
+- **Добор топов**: после перечека топ-100/50 добиваются до полного (`_recheck_top_nodes(..., fill_pool, fill_to)`), списки не усыхают; порядок — по рангу.
 
-Живой тестовый прогон (RU-взгляд, ограниченные бюджеты): 120 отобрано, 0 дублей бэкендов, воркерных 2, макс /24 = 3; в топ-50 — 10 reality-нод и 0 CF-воркеров.
+Живой тестовый прогон (RU-взгляд, лимит 500 как в проде): отобрано 500 (0 дублей бэкендов), топ-100 — 100/100, топ-50 — 50/50, воркерных 16/500, 49 стран.

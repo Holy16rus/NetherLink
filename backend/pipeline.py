@@ -21,7 +21,7 @@ from backend.scraper import collect_local_files, discover_repo_files, fetch_and_
 from backend.checker import check_node, speed_test_node, protocol_check, xray_protocol_check
 from backend.services import geoip_batch, dnsbl_check_batch
 from backend.generator import generate_configs
-from backend.quality import collapse_backends, select_quality, describe as describe_selection
+from backend.quality import collapse_backends, select_quality, rank_key, describe as describe_selection
 from backend.web_sources import fetch_web_proxies
 from backend.state import record_check_results, filter_stable, save_history, get_success_rate
 
@@ -348,7 +348,17 @@ async def _speed_test_batch(nodes, timeout, cancel_event, emit):
     return nodes
 
 
-async def _recheck_top_nodes(nodes, limit, timeout, cancel_event, emit):
+def _node_ident(node):
+    """Идентичность ноды (совпадает с TCP-дедупом consumer'а)."""
+    return (
+        str(node.get("protocol", "")).lower(),
+        str(node.get("server", "")).lower(),
+        int(node.get("port", 0) or 0),
+        str(node.get("uuid") or node.get("password") or node.get("username") or "").lower(),
+    )
+
+
+async def _recheck_top_nodes(nodes, limit, timeout, cancel_event, emit, fill_pool=None, fill_to=None):
     if not nodes or limit <= 0:
         return nodes
 
@@ -370,16 +380,55 @@ async def _recheck_top_nodes(nodes, limit, timeout, cancel_event, emit):
             return result
 
     tasks = [asyncio.create_task(recheck_one(n)) for n in top]
-    for coro in asyncio.as_completed(tasks):
-        if cancel_event.is_set():
-            for t in tasks:
-                t.cancel()
-            break
-        result = await coro
-        if result:
-            rechecked.append(result)
+    pending = set(tasks)
+    while pending and not cancel_event.is_set():
+        done, pending = await asyncio.wait(pending, return_when=asyncio.FIRST_COMPLETED)
+        for task in done:
+            result = task.result()
+            if result:
+                rechecked.append(result)
+    for task in pending:
+        task.cancel()
+    if pending:
+        await asyncio.gather(*pending, return_exceptions=True)
 
     await emit("log", {"level": "info", "text": f"Re-check: {len(rechecked)}/{len(top)} живы после перепроверки"})
+
+    # Добор до полного списка: после честной перепроверки топ не должен усыхать —
+    # берём следующих по рангу из пула и проверяем их тем же способом.
+    if fill_to and fill_pool and len(rechecked) < fill_to:
+        seen = {_node_ident(n) for n in top}
+        need = fill_to - len(rechecked)
+        extra = []
+        for n in fill_pool:
+            k = _node_ident(n)
+            if k in seen:
+                continue
+            seen.add(k)
+            extra.append(n)
+            if len(extra) >= need * 3:
+                break
+        if extra:
+            await emit("log", {"level": "info", "text": f"Re-check: добор до {fill_to} — проверяю ещё {len(extra)} из пула (не хватает {need})..."})
+            ex_tasks = [asyncio.create_task(recheck_one(n)) for n in extra]
+            pending2 = set(ex_tasks)
+            while pending2 and len(rechecked) < fill_to and not cancel_event.is_set():
+                done2, pending2 = await asyncio.wait(pending2, return_when=asyncio.FIRST_COMPLETED)
+                for task in done2:
+                    result = task.result()
+                    if result:
+                        rechecked.append(result)
+            for task in pending2:
+                task.cancel()
+            if pending2:
+                await asyncio.gather(*pending2, return_exceptions=True)
+            await emit("log", {"level": "info", "text": f"Re-check: итог с добором — {len(rechecked)}/{fill_to}"})
+
+    try:
+        rechecked.sort(key=lambda n: rank_key(n, get_success_rate))
+    except Exception:
+        rechecked.sort(key=lambda n: n.get("latency_ms") or 999999)
+
     return rechecked
 
 
@@ -679,8 +728,14 @@ async def run_pipeline(
     top_100 = select_quality(selected, 100, get_success_rate)
     top_50 = select_quality(top_100, 50, get_success_rate)
 
-    top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
-    top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
+    top_100_rechecked = await _recheck_top_nodes(
+        top_100, len(top_100), timeout, cancel_event, emit,
+        fill_pool=selected, fill_to=100,
+    )
+    top_50_rechecked = await _recheck_top_nodes(
+        top_50, len(top_50), timeout, cancel_event, emit,
+        fill_pool=top_100_rechecked, fill_to=50,
+    )
 
     configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked, all_live_nodes=live_nodes)
 
@@ -812,8 +867,14 @@ async def run_pipeline_from_nodes(
     top_100 = select_quality(selected, 100, get_success_rate)
     top_50 = select_quality(top_100, 50, get_success_rate)
 
-    top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
-    top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
+    top_100_rechecked = await _recheck_top_nodes(
+        top_100, len(top_100), timeout, cancel_event, emit,
+        fill_pool=selected, fill_to=100,
+    )
+    top_50_rechecked = await _recheck_top_nodes(
+        top_50, len(top_50), timeout, cancel_event, emit,
+        fill_pool=top_100_rechecked, fill_to=50,
+    )
 
     configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked, all_live_nodes=live_nodes)
 
