@@ -4,7 +4,11 @@ import json
 from pathlib import Path
 
 import httpx
-import maxminddb
+
+try:
+    import maxminddb
+except ImportError:  # без библиотеки работаем через ip-api fallback
+    maxminddb = None
 
 from backend.config import PROXYCHECK_KEY, ROOT
 
@@ -20,6 +24,8 @@ def _load_geoip_db():
     global _GEOIP_READER
     if _GEOIP_READER is not None:
         return _GEOIP_READER
+    if maxminddb is None:
+        return None
 
     import tempfile, shutil
 

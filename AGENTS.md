@@ -1,4 +1,4 @@
-# NetherLink — Архитектура системы (v3)
+# NetherLink — Архитектура системы (v3.3)
 
 ## 1. Структура проекта
 
@@ -12,7 +12,8 @@ NetherLink/
 │   ├── checker.py              # TCP check, HTTP check, SOCKS5 check, speed test, protocol check (sing-box)
 │   ├── state.py                # Git-based персистентная история (state-ветка, success_rate >= 0.6)
 │   ├── scraper.py              # Сборщик: GitHub API, raw-ссылки
-│   ├── parser.py               # Парсер URI: vmess://, vless://, ss://, trojan://, hy2://, ip:port
+│   ├── parser.py               # Парсер URI + base64-подписки: vmess://, vless://, ss://, trojan://, hy2://
+│   ├── quality.py              # Отбор: классы (worker/http), ранк по истории, дедуп бэкендов, лимиты
 │   ├── services.py             # GeoIP (MaxMind + ip-api.com), DNS (Cloudflare DoH)
 │   ├── web_sources.py          # JSON API источники (proxyscrape, proxy-list.download, geonode, lumiproxy)
 │   ├── config.py               # Конфиг, .env, load/save источников
@@ -158,3 +159,16 @@ Retry-цикл на 3 попытки с `git fetch` перед каждым ко
 
 ### Кеш sing-box
 `actions/cache@v4` по хэшу workflow-файлов. Установка только при cache-miss.
+
+## 9. Обновление v3.3 — отбор и качество (аудит 30.09)
+
+- **base64-подписки**: `parser.try_decode_b64_subscription()` — популярные подписки отдают весь список одним base64-блоком; теперь декодируются (Epodonios Splitted vless: +5.9k нод, из них ~2.5k reality).
+- **Дедуп бэкендов**: `quality.collapse_backends()` — один CF-воркер через N edge-IP = 1 вход (раньше один uuid занимал до 101 слота из 710).
+- **Ранк**: `quality.rank_key()` — успех по истории (state) как основа, штрафы воркерам (−0.15) и http/socks5 (−0.06), затем задержка. Чистая сортировка «по пингу» убрана: CF edge в паре мс от раннера-в-США забивал весь топ.
+- **Разнообразие**: `quality.select_quality()` — доля http/socks5 ≥50%, лимиты на /24 (3–8), на бэкенд (1–2), на долю воркеров (30%, с релаксацией при нехватке пула); топ-100/50 — подмножества основного списка.
+- **Recheck сохраняет поля**: парсер YAML читает `ws-opts` (path/Host), `reality-opts` (public-key/short-id), `client-fingerprint`, `grpc-opts`, `xhttp-opts` — раньше часовой перечек терял ws-поля (100→0 `ws-opts` при перезаписи) и ломал ноды.
+- **Генерация Clash для FLClash**: vless/vmess получают `reality-opts` + `client-fingerprint`, `skip-cert-verify` при TLS, `udp: true`; xhttp/splithttp → `xhttp-opts`. Раньше reality-ноды уезжали без ключей и были мертвы в клиенте.
+- **Проверки**: конфиги валидируются ядром mihomo (`mihomo -t` — то же ядро, что в FLClash); round-trip «сгенерируй → распарси» — 0 потерь полей.
+- **Источники**: −4 мёртвых (dpangestuw / AvenCores / HalyavusVPNUS / FreeFolksOn), +10 живых (Epodonios ×2, ALIILAPRO, Auto_proxy, NoMoreWalls, ts-sf, Pawdroid, freefq, ermaozi, V2RayAggregator).
+
+Живой тестовый прогон (RU-взгляд, ограниченные бюджеты): 120 отобрано, 0 дублей бэкендов, воркерных 2, макс /24 = 3; в топ-50 — 10 reality-нод и 0 CF-воркеров.

@@ -19,13 +19,15 @@ import yaml
 from backend.checker import check_node, protocol_check
 from backend.generator import generate_config_clash, generate_config_v2ray, generate_config_singbox
 from backend.services import geoip_batch
-from backend.state import record_check_results, save_history
+from backend.state import record_check_results, save_history, get_success_rate
+from backend.quality import select_quality, describe as describe_selection
 
 ROOT = Path(__file__).resolve().parent.parent
 
 PROTOCOL_CHECK_CONCURRENCY = 10
 TCP_CONCURRENCY = 50
-MAX_RECHECK_NODES = 300
+MAX_RECHECK_NODES = 320
+MAX_RECHECK_TOTAL = 500
 
 
 def parse_clash_yaml_nodes(path: Path) -> list[dict]:
@@ -72,6 +74,36 @@ def parse_clash_yaml_nodes(path: Path) -> list[dict]:
         alter_id = p.get("alterId", 0)
         if alter_id:
             node["alterId"] = int(alter_id)
+        ws = p.get("ws-opts") or {}
+        if isinstance(ws, dict):
+            if ws.get("path"):
+                node["ws_path"] = str(ws["path"])
+            hdrs = ws.get("headers") or {}
+            if isinstance(hdrs, dict):
+                host = hdrs.get("Host") or hdrs.get("host")
+                if host:
+                    node["ws_host"] = str(host)
+        xh = p.get("xhttp-opts") or {}
+        if isinstance(xh, dict):
+            if xh.get("path") and not node.get("ws_path"):
+                node["ws_path"] = str(xh["path"])
+            if xh.get("host") and not node.get("ws_host"):
+                node["ws_host"] = str(xh["host"])
+        grpc = p.get("grpc-opts") or {}
+        if isinstance(grpc, dict) and grpc.get("grpc-service-name"):
+            node["grpc_service_name"] = str(grpc["grpc-service-name"])
+        ro = p.get("reality-opts") or {}
+        if isinstance(ro, dict):
+            if ro.get("public-key"):
+                node["pbk"] = str(ro["public-key"])
+            if ro.get("short-id") is not None:
+                node["sid"] = str(ro["short-id"])
+        fp = p.get("client-fingerprint")
+        if fp:
+            node["fp"] = str(fp)
+        sni = p.get("sni")
+        if sni and not node.get("servername"):
+            node["servername"] = str(sni)
         nodes.append(node)
     return nodes
 
@@ -191,8 +223,8 @@ async def run():
         print("  [!] No nodes found in configs")
         return
 
-    all_nodes = all_nodes[:MAX_RECHECK_NODES + MAX_FRESH_HTTP]
-    print(f"  [*] Total unique (capped at {MAX_RECHECK_NODES + MAX_FRESH_HTTP}): {len(all_nodes)}")
+    all_nodes = all_nodes[:MAX_RECHECK_TOTAL + MAX_FRESH_HTTP]
+    print(f"  [*] Total unique (capped at {MAX_RECHECK_TOTAL + MAX_FRESH_HTTP}): {len(all_nodes)}")
 
     # ── GeoIP: определяем страны ДО генерации, иначе имена будут «Неизвестно» ──
     # У нод из YAML country отсутствует (в YAML страна только в имени), а у свежих
@@ -204,8 +236,10 @@ async def run():
             geo_data = await geoip_batch(geo_ips, cancel)
             for n in all_nodes:
                 info = geo_data.get(n.get("server", ""))
-                if info and n.get("country", "ZZ") == "ZZ":
-                    n["country"] = info.get("country", "ZZ")
+                if info:
+                    n["_ip"] = info.get("ip") or n.get("server", "")
+                    if n.get("country", "ZZ") == "ZZ":
+                        n["country"] = info.get("country", "ZZ")
             known = sum(1 for n in all_nodes if n.get("country") not in (None, "", "ZZ"))
             print(f"  [+] GeoIP: {known}/{len(all_nodes)} определено")
         except Exception as e:
@@ -221,24 +255,30 @@ async def run():
 
     record_check_results(live_nodes, all_nodes)
 
+    # Имена пересоберём из свежих стран/пингов (в YAML лежали старые)
     for n in live_nodes:
-        if not n.get("name"):
-            n["name"] = f"{n['server']}:{n['port']}"
+        n.pop("name", None)
 
-    if len(live_nodes) >= 50:
-        gen_50 = generate_config_clash(live_nodes[:50])
+    top_50 = select_quality(live_nodes, 50, get_success_rate)
+    top_100 = select_quality(live_nodes, 100, get_success_rate)
+    d50 = describe_selection(top_50)
+    print(f"  [+] Отбор топ-50: воркерных {d50['workers']}, бэкендов {d50['unique_backends']}, "
+          f"макс/подсеть {d50['max_per_subnet']}, http/socks {d50['http']}")
+
+    if len(top_50) >= 50:
+        gen_50 = generate_config_clash(top_50)
         (ROOT / "NetherLink-50.yaml").write_text(gen_50, "utf-8")
-        gen_50_v2r = generate_config_v2ray(live_nodes[:50])
+        gen_50_v2r = generate_config_v2ray(top_50)
         (ROOT / "NetherLink-50-v2ray.json").write_text(gen_50_v2r, "utf-8")
-        gen_50_sb = generate_config_singbox(live_nodes[:50])
+        gen_50_sb = generate_config_singbox(top_50)
         (ROOT / "NetherLink-50-singbox.json").write_text(gen_50_sb, "utf-8")
 
-    if len(live_nodes) >= 100:
-        gen_100 = generate_config_clash(live_nodes[:100])
+    if len(top_100) >= 100:
+        gen_100 = generate_config_clash(top_100)
         (ROOT / "NetherLink-100.yaml").write_text(gen_100, "utf-8")
-        gen_100_v2r = generate_config_v2ray(live_nodes[:100])
+        gen_100_v2r = generate_config_v2ray(top_100)
         (ROOT / "NetherLink-100-v2ray.json").write_text(gen_100_v2r, "utf-8")
-        gen_100_sb = generate_config_singbox(live_nodes[:100])
+        gen_100_sb = generate_config_singbox(top_100)
         (ROOT / "NetherLink-100-singbox.json").write_text(gen_100_sb, "utf-8")
 
     live_txt = "\n".join(

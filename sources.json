@@ -101,10 +101,6 @@
       "enabled": true
     },
     {
-      "url": "https://raw.githubusercontent.com/dpangestuw/Free-Proxy/main/README.md",
-      "enabled": true
-    },
-    {
       "url": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt",
       "enabled": true
     },
@@ -121,10 +117,6 @@
       "enabled": true
     },
     {
-      "url": "https://raw.githubusercontent.com/AvenCores/goida-vpn-configs/refs/heads/main/githubmirror/26.txt",
-      "enabled": true
-    },
-    {
       "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt",
       "enabled": true
     },
@@ -138,10 +130,6 @@
     },
     {
       "url": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/non_ru.txt",
-      "enabled": true
-    },
-    {
-      "url": "https://raw.githubusercontent.com/HalyavusVPNUS/halyava-vpn-buy/refs/heads/main/vpnus.txt",
       "enabled": true
     },
     {
@@ -164,7 +152,6 @@
     "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt",
     "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt",
     "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt",
-    "https://github.com/FreeFolksOn/abc-configs-free-vpn-proxy-list",
     "https://github.com/Epodonios/v2ray-configs",
     "https://github.com/ebrasha/free-v2ray-public-list",
     "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/1sub.txt",
@@ -172,7 +159,47 @@
     "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/3sub.txt",
     "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/WHITELIST-ALL.txt",
     "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/best_keys.txt",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/good_keys.txt"
+    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/good_keys.txt",
+    {
+      "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/All_Configs_Sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/w1770946466/Auto_proxy/main/Long_term_subscription_num",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ts-sf/fly/main/v2",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/freefq/free/master/v2",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/Eternity.txt",
+      "enabled": true
+    }
   ],
   "local_files": [],
   "max_checks": 50000,

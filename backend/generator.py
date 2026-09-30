@@ -166,12 +166,17 @@ def generate_config_clash(nodes):
         elif protocol == "ss":
             lines.append(f"    cipher: {yaml_quote(node.get('cipher', ''))}")
             lines.append(f"    password: {yaml_quote(node.get('password', ''))}")
+            lines.append("    udp: true")
         elif protocol == "vmess":
             lines.append(f"    uuid: {yaml_quote(node.get('uuid', ''))}")
             lines.append(f"    alterId: {int(node.get('alterId', 0))}")
             lines.append(f"    cipher: {yaml_quote(node.get('cipher', 'auto'))}")
             lines.append(f"    network: {yaml_quote(node.get('network', 'tcp'))}")
             lines.append(f"    tls: {str(bool(node.get('tls'))).lower()}")
+            lines.append("    udp: true")
+            if node.get("tls"):
+                lines.append("    skip-cert-verify: true")
+                lines.append("    client-fingerprint: chrome")
             if node.get("servername"):
                 lines.append(f"    servername: {yaml_quote(node['servername'])}")
             if node.get("ws_path") or node.get("ws_host"):
@@ -187,7 +192,10 @@ def generate_config_clash(nodes):
                 lines.append(f"    flow: {yaml_quote(node['flow'])}")
             network = node.get("network", "tcp")
             lines.append(f"    network: {yaml_quote(network)}")
-            lines.append(f"    tls: {str(bool(node.get('tls'))).lower()}")
+            is_reality = bool(node.get("pbk"))
+            use_tls = bool(node.get("tls")) or is_reality
+            lines.append(f"    tls: {str(use_tls).lower()}")
+            lines.append("    udp: true")
             if node.get("servername"):
                 lines.append(f"    servername: {yaml_quote(node['servername'])}")
             if network == "ws" and (node.get("ws_path") or node.get("ws_host")):
@@ -198,18 +206,29 @@ def generate_config_clash(nodes):
                     lines.append("      headers:")
                     lines.append(f"        Host: {yaml_quote(node['ws_host'])}")
             elif network in ("xhttp", "splithttp") and (node.get("ws_path") or node.get("ws_host")):
-                lines.append("    ws-opts:")
+                lines.append("    xhttp-opts:")
                 if node.get("ws_path"):
                     lines.append(f"      path: {yaml_quote(node['ws_path'])}")
                 if node.get("ws_host"):
-                    lines.append("      headers:")
-                    lines.append(f"        Host: {yaml_quote(node['ws_host'])}")
+                    lines.append(f"      host: {yaml_quote(node['ws_host'])}")
             elif network == "grpc" and node.get("grpc_service_name"):
                 lines.append("    grpc-opts:")
                 lines.append(f"      grpc-service-name: {yaml_quote(node['grpc_service_name'])}")
+            if is_reality:
+                cfp = node.get("fp") or "chrome"
+                if cfp not in ("chrome", "firefox", "safari", "iOS", "android", "edge", "360", "qq", "random"):
+                    cfp = "chrome"
+                lines.append(f"    client-fingerprint: {cfp}")
+                lines.append("    reality-opts:")
+                lines.append(f"      public-key: {yaml_quote(node['pbk'])}")
+                lines.append(f"      short-id: {yaml_quote(node.get('sid') or '')}")
+            elif use_tls:
+                lines.append("    skip-cert-verify: true")
+                lines.append("    client-fingerprint: chrome")
         elif protocol == "trojan":
             lines.append(f"    password: {yaml_quote(node.get('password', ''))}")
             lines.append("    skip-cert-verify: true")
+            lines.append("    udp: true")
             if node.get("servername"):
                 lines.append(f"    sni: {yaml_quote(node['servername'])}")
         elif protocol == "hysteria2":

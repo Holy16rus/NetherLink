@@ -282,6 +282,22 @@ def normalize_proxy_obj(obj, country, source):
             "country": country, "source": source, "raw": proxy_text or f"{server}:{port}"}
 
 
+def try_decode_b64_subscription(text):
+    """Подписки часто целиком в base64 (v2ray-стиль). Пробуем декодировать,
+    только если в начале файла нет обычных ссылок. Возвращает текст или None."""
+    stripped = text.strip().lstrip("\ufeff")
+    if len(stripped) < 64:
+        return None
+    compact = re.sub(r"\s+", "", stripped[:4000])
+    if "://" in compact or not re.fullmatch(r"[A-Za-z0-9+/=_-]+", compact):
+        return None
+    try:
+        decoded = b64_decode_padded(re.sub(r"\s+", "", stripped))
+    except Exception:
+        return None
+    return decoded if "://" in decoded else None
+
+
 def extract_proxies(content, path, source):
     country = infer_country_hint(path, source)
     stripped = content.lstrip()
@@ -290,7 +306,12 @@ def extract_proxies(content, path, source):
             return walk_json(json.loads(content), country, path)
         except Exception:
             pass
-    return extract_from_text(content, country, path)
+    found = extract_from_text(content, country, path)
+    if not found:
+        decoded = try_decode_b64_subscription(content)
+        if decoded:
+            found = extract_from_text(decoded, country, path)
+    return found
 
 
 def dedupe(nodes):

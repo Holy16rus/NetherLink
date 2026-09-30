@@ -20,9 +20,10 @@ from backend.config import OUTPUT_FILE, CHECK_CONCURRENCY, ROOT
 from backend.scraper import collect_local_files, discover_repo_files, fetch_and_parse
 from backend.checker import check_node, speed_test_node, protocol_check, xray_protocol_check
 from backend.services import geoip_batch, dnsbl_check_batch
-from backend.generator import select_nodes, generate_configs, latency_sort_key
+from backend.generator import generate_configs
+from backend.quality import collapse_backends, select_quality, describe as describe_selection
 from backend.web_sources import fetch_web_proxies
-from backend.state import record_check_results, filter_stable, save_history
+from backend.state import record_check_results, filter_stable, save_history, get_success_rate
 
 LIVE_PROXY_RE = re.compile(
     r"^(?P<proto>[a-z][a-z0-9]*)://(?:([^:@]+)(?::([^@]*))?@)?(?P<server>[^:]+):(?P<port>\d+)$"
@@ -474,6 +475,9 @@ async def run_pipeline(
     producer_limited = asyncio.ensure_future(
         asyncio.wait_for(producer_task, timeout=producer_time_budget)
     )
+    # забираем исключение фонового продюсера, чтобы таймаут не всплывал
+    # в логах как «Task exception was never retrieved»
+    producer_limited.add_done_callback(lambda t: t.cancelled() or t.exception())
 
     consumer_task = asyncio.create_task(
         _consume(queue, cancel_event, opts, metrics, emit)
@@ -509,6 +513,13 @@ async def run_pipeline(
     if all_checked:
         record_check_results(live_nodes, all_checked)
         await emit("log", {"level": "info", "text": "История сохранена в proxy-history.json"})
+
+    # ── Клоны бэкендов: один воркер через N edge-IP — это один канал ──
+    before_collapse = len(live_nodes)
+    live_nodes = collapse_backends(live_nodes, get_success_rate)
+    if before_collapse != len(live_nodes):
+        await emit("log", {"level": "info",
+                           "text": f"Клоны бэкендов свёрнуты: {before_collapse} → {len(live_nodes)}"})
 
     timeout = opts.get("timeout", 10)
     live_nodes = await _protocol_check_batch(live_nodes, timeout, cancel_event, emit)
@@ -597,6 +608,7 @@ async def run_pipeline(
         ip = node.get("server", "")
         if ip in geo_data:
             info = geo_data[ip]
+            node["_ip"] = info.get("ip") or ip
             if node.get("country", "ZZ") == "ZZ":
                 node["country"] = info.get("country", "ZZ")
             if info.get("lat") is not None and info.get("lon") is not None:
@@ -641,39 +653,13 @@ async def run_pipeline(
     # live_nodes = await _speed_test_batch(live_nodes, timeout, cancel_event, emit)
 
     stable_nodes = filter_stable(live_nodes)
-    await emit("log", {"level": "info", "text": f"История: {len(stable_nodes)}/{len(live_nodes)} стабильны (success_rate >= 0.6 за последние 5 запусков)"})
+    await emit("log", {"level": "info", "text": f"История: {len(stable_nodes)}/{len(live_nodes)} стабильны (учитывается в ранге)"})
 
-    await emit("status", {"status": "running", "message": "Финальный отбор..."})
+    await emit("status", {"status": "running", "message": "Финальный отбор (ранг: стабильность + пинг + разнообразие)..."})
 
     limit = opts.get("limit", 100)
-    strategy = opts.get("selection", "fastest")
-
-    # Для 500-прокси подписки (NetherLink-Clash.yaml) берём ВСЕ живые по скорости,
-    # а не только стабильные. Стабильный фильтр — для топ-100 и топ-50.
-    if limit >= 500:
-        selected = select_nodes(live_nodes, limit, strategy)
-    else:
-        selected = select_nodes(stable_nodes, limit, strategy)
-        if len(selected) < limit:
-            selected = select_nodes(live_nodes, limit, strategy)
-
-    # Гарантируем 50% HTTP/socks5 в финальной выборке.
-    # select_nodes("fastest") сортирует по latency_ms — туннельные
-    # (TCP-only, 1-50ms) всегда побеждают HTTP (full HTTP check,
-    # 200-3000ms). Без квоты HTTP вымывают из результата полностью.
-    TUNNEL = ("vmess", "vless", "trojan", "ss", "hysteria2", "hy2")
-    min_http = limit // 2  # 50% HTTP/socks5
-    http_selected = [n for n in selected if n.get("protocol", "").lower() not in TUNNEL]
-    if len(http_selected) < min_http:
-        # Добираем HTTP/socks5 из live_nodes (не из selected)
-        http_candidates = sorted(
-            [n for n in live_nodes if n.get("protocol", "").lower() not in TUNNEL
-             and n not in selected],
-            key=latency_sort_key,
-        )
-        needed = min_http - len(http_selected)
-        selected = selected + http_candidates[:needed]
-        await emit("log", {"level": "info", "text": f"Квота HTTP 50%: добавлено {min(needed, len(http_candidates))} HTTP/socks5 (цель {min_http})"})
+    selected = select_quality(live_nodes, limit, get_success_rate)
+    sel = describe_selection(selected)
 
     countries = {n.get("country", "ZZ") for n in selected}
     metrics["selected"] = len(selected)
@@ -683,25 +669,15 @@ async def run_pipeline(
     http   = sum(1 for n in selected if n.get("protocol", "").lower() in ("http", "https"))
     other  = len(selected) - socks5 - http
     await emit("log", {"level": "info",
-                       "text": f"Отобрано: {len(selected)} (SOCKS5:{socks5} HTTP:{http} др:{other})"})
+                       "text": f"Отобрано: {len(selected)} (SOCKS5:{socks5} HTTP:{http} др:{other}) | "
+                               f"воркерных:{sel['workers']} бэкендов:{sel['unique_backends']} макс/подсеть:{sel['max_per_subnet']}"})
     await emit("metrics", dict(metrics))
 
     await emit("status", {"status": "running", "message": "Формирование топ-100 и топ-50..."})
 
-    fast_nodes = sorted(stable_nodes, key=lambda n: (
-        0 if n.get("speed_mbps") is not None and n["speed_mbps"] > 0 else 1,
-        -(n.get("speed_mbps") or 0),
-        n.get("latency_ms") or 999999,
-    ))
-    if len(fast_nodes) < 100:
-        fast_nodes = sorted(live_nodes, key=lambda n: (
-            0 if n.get("speed_mbps") is not None and n["speed_mbps"] > 0 else 1,
-            -(n.get("speed_mbps") or 0),
-            n.get("latency_ms") or 999999,
-        ))
-
-    top_100 = select_nodes(fast_nodes, min(100, len(fast_nodes)), strategy)
-    top_50 = select_nodes(fast_nodes, min(50, len(fast_nodes)), strategy)
+    # топ-100 и топ-50 — подмножества основного списка (тот же ранк и лимиты)
+    top_100 = select_quality(selected, 100, get_success_rate)
+    top_50 = select_quality(top_100, 50, get_success_rate)
 
     top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
     top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
@@ -797,6 +773,7 @@ async def run_pipeline_from_nodes(
         ip = node.get("server", "")
         if ip in geo_data:
             info = geo_data[ip]
+            node["_ip"] = info.get("ip") or ip
             if node.get("country", "ZZ") == "ZZ":
                 node["country"] = info.get("country", "ZZ")
             if info.get("lat") is not None and info.get("lon") is not None:
@@ -820,10 +797,7 @@ async def run_pipeline_from_nodes(
     await emit("status", {"status": "running", "message": "Финальный отбор..."})
 
     limit = opts.get("limit", 100)
-    strategy = opts.get("selection", "fastest")
-    selected = select_nodes(stable_nodes, limit, strategy)
-    if len(selected) < limit:
-        selected = select_nodes(live_nodes, limit, strategy)
+    selected = select_quality(live_nodes, limit, get_success_rate)
 
     countries = {n.get("country", "ZZ") for n in selected}
     metrics["selected"] = len(selected)
@@ -835,13 +809,8 @@ async def run_pipeline_from_nodes(
     await emit("log", {"level": "info",
                        "text": f"Отобрано: {len(selected)} (SOCKS5:{socks5} HTTP:{http} др:{other})"})
 
-    fast_nodes = sorted(stable_nodes if len(stable_nodes) >= 100 else live_nodes, key=lambda n: (
-        0 if n.get("speed_mbps") is not None and n["speed_mbps"] > 0 else 1,
-        -(n.get("speed_mbps") or 0),
-        n.get("latency_ms") or 999999,
-    ))
-    top_100 = select_nodes(fast_nodes, min(100, len(fast_nodes)), strategy)
-    top_50 = select_nodes(fast_nodes, min(50, len(fast_nodes)), strategy)
+    top_100 = select_quality(selected, 100, get_success_rate)
+    top_50 = select_quality(top_100, 50, get_success_rate)
 
     top_100_rechecked = await _recheck_top_nodes(top_100, len(top_100), timeout, cancel_event, emit)
     top_50_rechecked = await _recheck_top_nodes(top_50, len(top_50), timeout, cancel_event, emit)
