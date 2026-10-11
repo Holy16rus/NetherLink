@@ -152,8 +152,20 @@ async def run():
     if len(final) < 10:
         print(f"[fatal] слишком мало живых ({len(final)}), не публикую", flush=True)
         sys.exit(1)
-    for i, n in enumerate(final):
-        n["name"] = f"WL-{i + 1:03d} {n['latency_ms']}ms"
+
+    # Геолокация для человекочитаемых имён: генератор назовёт ноды
+    # «🇩🇪 Германия 123ms» (по country + latency_ms), как в основной подписке.
+    from backend.services import geoip_batch
+
+    geo_cancel = asyncio.Event()
+    try:
+        geo = await geoip_batch([n["server"] for n in final], geo_cancel)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[geo] fail: {exc}", flush=True)
+        geo = {}
+    for n in final:
+        info = geo.get(n["server"]) or {}
+        n["country"] = (info.get("country") or "ZZ").upper()
 
     open("NetherLink-WhiteList.txt", "w").write("\n".join(n["raw"] for n in final) + "\n")
     open("NetherLink-WhiteList.yaml", "w").write(generate_config_clash([dict(n) for n in final]))

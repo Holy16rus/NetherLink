@@ -90,6 +90,23 @@ def b64_decode_padded(text):
     return base64.b64decode(text).decode("utf-8", errors="replace")
 
 
+# Алиасы имён шифров Shadowsocks → канонические имена, которые понимают
+# ядра клиентов (mihomo/FLClash, sing-box, xray). В диких источниках
+# встречается «chacha20-poly1305» без «-ietf-» — mihomo такое отвергает
+# («unknown method»), а по факту это тот же AEAD-алгоритм.
+SS_CIPHER_ALIASES = {
+    "chacha20-poly1305": "chacha20-ietf-poly1305",
+    "xchacha20-poly1305": "xchacha20-ietf-poly1305",
+    "chacha20-ietf": "chacha20-ietf-poly1305",
+}
+
+
+def normalize_ss_cipher(method):
+    if not method:
+        return method
+    return SS_CIPHER_ALIASES.get(method.strip().lower(), method.strip().lower())
+
+
 def parse_http_like_uri(uri, country, source):
     parsed = urllib.parse.urlparse(uri)
     hint = infer_country_hint(parsed.fragment, source)
@@ -171,7 +188,7 @@ def parse_ss_uri(uri, country, source):
     hint = infer_country_hint(fragment, source)
     country = hint if hint != "ZZ" else country
     return {"protocol": "ss", "server": server.strip("[]"), "port": int(port),
-            "cipher": method, "password": urllib.parse.unquote(password),
+            "cipher": normalize_ss_cipher(method), "password": urllib.parse.unquote(password),
             "country": country, "source": source, "raw": uri}
 
 

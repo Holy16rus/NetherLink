@@ -321,6 +321,23 @@ hysteria2://password@9.9.9.9:443?sni=test.com
     test("socks4 parsed", len(socks4_nodes) >= 1, True)
 
 
+# ── parser.py: ss cipher aliases ────────────────────────────────
+
+def test_ss_cipher_aliases():
+    print("\n── parser.py: ss ciphers ──")
+    import base64 as b64
+    from backend.parser import normalize_ss_cipher, parse_uri
+
+    test("alias chacha20-poly1305", normalize_ss_cipher("chacha20-poly1305"), "chacha20-ietf-poly1305")
+    test("alias uppercase", normalize_ss_cipher("CHACHA20-POLY1305"), "chacha20-ietf-poly1305")
+    test("alias xchacha20", normalize_ss_cipher("xchacha20-poly1305"), "xchacha20-ietf-poly1305")
+    test("noop aes-256-gcm", normalize_ss_cipher("aes-256-gcm"), "aes-256-gcm")
+
+    cred = b64.b64encode(b"chacha20-poly1305:pw").decode().rstrip("=")
+    node = parse_uri(f"ss://{cred}@1.2.3.4:8388#t", "ZZ", "test") or {}
+    test("parse_uri normalizes ss cipher", node.get("cipher"), "chacha20-ietf-poly1305")
+
+
 # ── pipeline (limited) ──────────────────────────────────────────
 
 def test_pipeline_limited():
@@ -365,6 +382,7 @@ if __name__ == "__main__":
     test_state()
     test_generator()
     test_parser()
+    test_ss_cipher_aliases()
     test_dnsbl()
 
     print("\n── checker.py (network required) ──")
