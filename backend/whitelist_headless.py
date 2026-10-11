@@ -30,6 +30,7 @@ from backend.parser import parse_uri, try_decode_b64_subscription
 IGA = "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/"
 RJS = "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/"
 ZIENG = "https://raw.githubusercontent.com/zieng2/wl/main/vless_universal.txt"
+WLL = "https://raw.githubusercontent.com/wlunlocker/vpn-configs/main/"
 
 SOURCES = [
     IGA + "Vless-Reality-White-Lists-Rus-Mobile.txt",
@@ -37,6 +38,8 @@ SOURCES = [
     IGA + "WHITE-CIDR-RU-checked.txt",
     IGA + "WHITE-CIDR-RU-all.txt",
     ZIENG,
+    WLL + "whitelist_all.txt",
+    WLL + "white_sni_ru.txt",
 ] + [RJS + f"bypass-{i}.txt" for i in range(1, 16)] + [RJS + "bypass-all.txt"]
 
 URI_RE = re.compile(r"\b((?:vless|vmess|trojan|ss|hysteria2|hy2)://[^\s\"'<>]+)")
