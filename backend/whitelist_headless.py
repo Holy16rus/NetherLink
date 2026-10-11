@@ -40,7 +40,7 @@ SOURCES = [
     ZIENG,
     WLL + "whitelist_all.txt",
     WLL + "white_sni_ru.txt",
-] + [RJS + f"bypass-{i}.txt" for i in range(1, 16)] + [RJS + "bypass-all.txt"]
+] + [RJS + f"bypass-{i}.txt" for i in range(1, 10)] + [RJS + "bypass-all.txt"]
 
 URI_RE = re.compile(r"\b((?:vless|vmess|trojan|ss|hysteria2|hy2)://[^\s\"'<>]+)")
 

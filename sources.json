@@ -114,15 +114,15 @@
     },
     {
       "url": "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/pog7x/vpn-configs/master/githubmirror/1.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/blacklist.txt",
@@ -130,7 +130,7 @@
     },
     {
       "url": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/non_ru.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/feat/ai-crawler-v2/nodes/merged.txt",
@@ -138,20 +138,20 @@
     },
     {
       "url": "https://spys.me/proxy.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://spys.me/socks.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://sunny9577.github.io/proxy-scraper/proxies.txt",
-      "enabled": true
+      "enabled": false
     },
-    "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt",
-    "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt",
-    "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt",
-    "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt",
+    { "url": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt", "enabled": false },
+    { "url": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt", "enabled": false },
+    { "url": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt", "enabled": false },
+    { "url": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt", "enabled": false },
     "https://github.com/Epodonios/v2ray-configs",
     "https://github.com/ebrasha/free-v2ray-public-list",
     "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/1sub.txt",
