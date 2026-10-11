@@ -1,0 +1,63 @@
+name: Build WhiteList Subscription
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: netherlink-whitelist
+  cancel-in-progress: false
+
+jobs:
+  whitelist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache sing-box binary
+        uses: actions/cache@v4
+        id: singbox-cache
+        with:
+          # apt-get install sing-box кладёт бинарник в /usr/bin, а не /usr/local/bin.
+          path: /usr/bin/sing-box
+          key: sing-box-${{ runner.os }}-1.11.5
+          restore-keys: sing-box-${{ runner.os }}-
+
+      - name: Install sing-box
+        if: steps.singbox-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL https://sing-box.app/gpg.key | sudo tee /etc/apt/trusted.gpg.d/sagernet.asc
+          echo "deb https://deb.sagernet.org/ * *" | sudo tee /etc/apt/sources.list.d/sagernet.list
+          sudo apt-get update && sudo apt-get install -y sing-box
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build whitelist set
+        run: python -m backend.whitelist_headless
+
+      - name: Deploy to whitelist branch
+        if: success()
+        run: |
+          git config user.name "NetherLink WhiteList Bot"
+          git config user.email "bot@netherlink.local"
+
+          mkdir -p /tmp/nl-wl
+          cp -f NetherLink-WhiteList.txt NetherLink-WhiteList.yaml whitelist-meta.json /tmp/nl-wl/
+
+          git checkout --orphan whitelist
+          git rm -rf . 2>/dev/null || true
+          git clean -fdx 2>/dev/null || true
+          cp -f /tmp/nl-wl/* .
+          git add -f -A
+          git commit --allow-empty -m "WhiteList update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push --force origin whitelist
