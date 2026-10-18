@@ -47,6 +47,30 @@ COUNTRY_NAMES_RU = {
 
 
 def load_sources():
+    data = _load_sources_raw()
+    # Самонастройка: source-overrides.json (ветка stats, раз в неделю) включает/выключает
+    # источники по реальной отдаче. Сам sources.json остаётся ручным.
+    try:
+        ov_path = ROOT / "source-overrides.json"
+        if ov_path.is_file() and isinstance(data, dict):
+            ov = json.loads(ov_path.read_text("utf-8"))
+            off, on = set(ov.get("disable", [])), set(ov.get("enable", []))
+            if off or on:
+                fixed = []
+                for s in data.get("sources", []):
+                    d = dict(s) if isinstance(s, dict) else {"url": s, "enabled": True}
+                    if d["url"] in off:
+                        d["enabled"] = False
+                    elif d["url"] in on:
+                        d["enabled"] = True
+                    fixed.append(d)
+                data = {**data, "sources": fixed}
+    except Exception:
+        pass
+    return data
+
+
+def _load_sources_raw():
     if not SOURCES_FILE.exists():
         # Fall back to example file so the app works out of the box
         example = ROOT / "sources.example.json"

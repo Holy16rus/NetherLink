@@ -2,6 +2,7 @@
 Headless-режим: запуск pipeline без FastAPI (для GitHub Actions / CLI).
 """
 import asyncio
+import os
 import sys
 import time
 
@@ -45,6 +46,20 @@ async def run():
         "selection": config.get("selection", "fastest"),
         "producer_timeout": config.get("producer_timeout", 300),
         "per_repo_limit": config.get("per_repo_limit", 40),
+        # Строгая проверка ядром клиента (mihomo): данные реально прошли через ноду.
+        # Параметры — в sources.json; STRICT_VERIFY=0 в окружении выключает режим.
+        "strict_verify": bool(config.get("strict_verify", True)) and os.environ.get("STRICT_VERIFY", "1") != "0",
+        "verify_budget": config.get("verify_budget", 1500),
+        "verify_target": config.get("verify_target"),
+        "verify_conc": config.get("verify_conc", 300),
+        "verify_batch": config.get("verify_batch", 450),
+        "tunnel_checks": config.get("tunnel_checks"),
+        "http_checks": config.get("http_checks"),
+        "early_stop": config.get("early_stop", 0),
+        "telegram_channels": config.get("telegram_channels", []),
+        "telegram_pages": config.get("telegram_pages", 6),
+        "use_pool": config.get("use_pool", True),
+        "collapse_exit": config.get("collapse_exit", True),
     }
 
     cancel = asyncio.Event()

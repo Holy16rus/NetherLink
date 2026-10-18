@@ -2,7 +2,7 @@
   "sources": [
     {
       "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks5&timeout=10000&country=all",
@@ -10,7 +10,7 @@
     },
     {
       "url": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks4&timeout=10000&country=all",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
@@ -22,7 +22,7 @@
     },
     {
       "url": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/socks4.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt",
@@ -30,7 +30,7 @@
     },
     {
       "url": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt",
@@ -38,11 +38,11 @@
     },
     {
       "url": "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS5_RAW.txt",
@@ -50,7 +50,7 @@
     },
     {
       "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS4_RAW.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_RAW.txt",
@@ -58,27 +58,27 @@
     },
     {
       "url": "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks5.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/http.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt",
@@ -90,15 +90,15 @@
     },
     {
       "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/socks4/data.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/https/data.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/all/data.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt",
@@ -106,7 +106,7 @@
     },
     {
       "url": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://github.com/zloi-user/hideip.me",
@@ -148,18 +148,54 @@
       "url": "https://sunny9577.github.io/proxy-scraper/proxies.txt",
       "enabled": false
     },
-    { "url": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt", "enabled": false },
-    { "url": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt", "enabled": false },
-    { "url": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt", "enabled": false },
-    { "url": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt", "enabled": false },
-    "https://github.com/Epodonios/v2ray-configs",
-    "https://github.com/ebrasha/free-v2ray-public-list",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/1sub.txt",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/2sub.txt",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/3sub.txt",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/WHITELIST-ALL.txt",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/best_keys.txt",
-    "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/good_keys.txt",
+    {
+      "url": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt",
+      "enabled": false
+    },
+    {
+      "url": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt",
+      "enabled": false
+    },
+    {
+      "url": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt",
+      "enabled": false
+    },
+    {
+      "url": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt",
+      "enabled": false
+    },
+    {
+      "url": "https://github.com/Epodonios/v2ray-configs",
+      "enabled": false
+    },
+    {
+      "url": "https://github.com/ebrasha/free-v2ray-public-list",
+      "enabled": false
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/1sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/2sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/3sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/WHITELIST-ALL.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/best_keys.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/good_keys.txt",
+      "enabled": true
+    },
     {
       "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/All_Configs_Sub.txt",
       "enabled": true
@@ -170,11 +206,11 @@
     },
     {
       "url": "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/w1770946466/Auto_proxy/main/Long_term_subscription_num",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
@@ -182,15 +218,15 @@
     },
     {
       "url": "https://raw.githubusercontent.com/ts-sf/fly/main/v2",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/freefq/free/master/v2",
-      "enabled": true
+      "enabled": false
     },
     {
       "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
@@ -198,6 +234,58 @@
     },
     {
       "url": "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/Eternity.txt",
+      "enabled": false
+    },
+    {
+      "url": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/all/configs.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/barry-far/V2ray-Config/main/All_Configs_Sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/trojan.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/ss.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vmess.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/all_sub.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/vless.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/trojan.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/ss.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/vmess.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/mix.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt",
+      "enabled": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/crackbest/V2ray-Config/main/config.txt",
       "enabled": true
     }
   ],
@@ -206,5 +294,24 @@
   "limit": 500,
   "timeout": 8,
   "producer_timeout": 300,
-  "per_repo_limit": 40
+  "per_repo_limit": 40,
+  "strict_verify": true,
+  "verify_budget": 1500,
+  "verify_conc": 300,
+  "verify_batch": 450,
+  "tunnel_checks": 30000,
+  "http_checks": 15000,
+  "early_stop": 0,
+  "telegram_channels": [
+    "Farah_VPN",
+    "V2ray_Alpha",
+    "proxy_mtm",
+    "V2rayCollector",
+    "v2ray_free_conf",
+    "PrivateVPNs",
+    "vaddress"
+  ],
+  "telegram_pages": 6,
+  "use_pool": true,
+  "collapse_exit": true
 }

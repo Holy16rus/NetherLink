@@ -241,9 +241,12 @@ def infer_protocol_from_path(path):
 def extract_from_text(text, country, source):
     found = []
     protocol_hint = infer_protocol_from_path(source)
-    cleaned = text
 
+    # Вырезаем разобранные URI одним проходом по span'ам. Раньше на каждый URI
+    # делался cleaned.replace() по всему тексту — на файлах в мегабайты со
+    # десятками тысяч ссылок (агрегаторы v2ray) это квадратичное время и подвисание.
     uri_pattern = re.compile(r"\b([a-zA-Z0-9+.-]+://[^\s\"'<>]+)")
+    cut_spans = []
     for match in uri_pattern.finditer(text):
         uri = match.group(1).strip().rstrip(",;)]}")
         scheme = uri.split("://", 1)[0].lower()
@@ -251,7 +254,17 @@ def extract_from_text(text, country, source):
             parsed = parse_uri(uri, country, source)
             if parsed:
                 found.append(parsed)
-            cleaned = cleaned.replace(match.group(1), " ")
+            cut_spans.append(match.span(1))
+    if cut_spans:
+        pieces, pos = [], 0
+        for a, b in cut_spans:
+            pieces.append(text[pos:a])
+            pieces.append(" ")
+            pos = b
+        pieces.append(text[pos:])
+        cleaned = "".join(pieces)
+    else:
+        cleaned = text
 
     ip_port = re.compile(r"(?<![\w./:-])((?:\d{1,3}\.){3}\d{1,3}):(\d{2,5})(?![\w.-])")
     for host, port in ip_port.findall(cleaned):

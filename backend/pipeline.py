@@ -12,7 +12,9 @@ Pipeline: сбор и проверка идут параллельно чере�
 import asyncio
 from datetime import datetime
 import json
+import os
 import re
+import time
 from pathlib import Path
 from typing import Callable, Awaitable
 
@@ -21,9 +23,13 @@ from backend.scraper import collect_local_files, discover_repo_files, fetch_and_
 from backend.checker import check_node, speed_test_node, protocol_check, xray_protocol_check
 from backend.services import geoip_batch, dnsbl_check_batch
 from backend.generator import generate_configs
-from backend.quality import collapse_backends, select_quality, rank_key, describe as describe_selection
+from backend.quality import collapse_backends, collapse_exit, select_quality, rank_key, describe as describe_selection
 from backend.web_sources import fetch_web_proxies
-from backend.state import record_check_results, filter_stable, save_history, get_success_rate
+from backend.state import record_check_results, filter_stable, save_history, get_success_rate, _node_key
+from backend.verify import verify_nodes, find_mihomo
+from backend.telegram_source import fetch_telegram_nodes
+from backend import pool as node_pool
+from backend.status import build_status, write_status
 
 LIVE_PROXY_RE = re.compile(
     r"^(?P<proto>[a-z][a-z0-9]*)://(?:([^:@]+)(?::([^@]*))?@)?(?P<server>[^:]+):(?P<port>\d+)$"
@@ -121,7 +127,9 @@ async def _consume(
     timeout = opts.get("timeout", 10)
     max_checks = opts.get("max_checks", 0)
     limit = opts.get("limit", 100)
-    early_stop = limit * 6 if limit > 0 else 0  # 6x — для 500 прокси это 3000 живых
+    # early_stop: по умолчанию 6x лимита; в строгом режиме headless ставит 0 —
+    # живых по TCP нужно как можно больше, настоящий отсев делает verify.
+    early_stop = opts.get("early_stop", limit * 6 if limit > 0 else 0)
     # early_stop применяется только к туннельным. HTTP/socks5 проверяются
     # в рамках своего бюджета (http_budget) — не дают туннельным
     # переполнить early_stop и убить проверку HTTP полностью.
@@ -134,8 +142,11 @@ async def _consume(
     # HTTP live rate ~3% (публичные прокси), tunnel ~50%.
     # Чтобы получить 50/50 в финальном отборе, нужно проверить
     # в 4 раза больше HTTP чем tunnel — компенсировать низкую выживаемость.
-    http_budget = int(max_checks * 0.80) if max_checks > 0 else 0
-    tunnel_budget = int(max_checks * 0.20) if max_checks > 0 else 0
+    # Бюджеты можно задать явно (tunnel_checks/http_checks). Туннельные берём
+    # широко: TCP-проверка дешёвая, а доля живых в публичных пулах ~1-5%.
+    http_budget = int(opts.get("http_checks") or (max_checks * 0.80 if max_checks > 0 else 0))
+    tunnel_budget = int(opts.get("tunnel_checks") or (max_checks * 0.20 if max_checks > 0 else 0))
+    budget_on = http_budget > 0 or tunnel_budget > 0
 
     seen_keys: set = set()
     live_nodes: list[dict] = []
@@ -216,7 +227,7 @@ async def _consume(
                 await flush_pending()
             # Не выходим по общему max_checks пока HTTP-бюджет не исчерпан.
             # Раньше туннельные забивали счётчик → HTTP не проверялись.
-            if max_checks > 0 and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
+            if budget_on and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
                 await flush_pending()
                 await emit("log", {"level": "info", "text": f"Бюджеты исчерпаны: tunnel={tunnel_checked}/{tunnel_budget}, http={other_checked}/{http_budget}"})
                 cancel_event.set()  # остановить producer — иначе queue.put() блокируется
@@ -252,7 +263,7 @@ async def _consume(
 
         if len(pending_nodes) >= FLUSH_BATCH:
             # Выходим только если оба бюджета исчерпаны.
-            if max_checks > 0 and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
+            if budget_on and tunnel_checked >= tunnel_budget and other_checked >= http_budget:
                 await emit("log", {"level": "info", "text": f"Бюджеты исчерпаны: tunnel={tunnel_checked}/{tunnel_budget}, http={other_checked}/{http_budget}"})
                 cancel_event.set()
                 break
@@ -309,6 +320,40 @@ async def _protocol_check_batch(nodes, timeout, cancel_event, emit):
 
     await emit("log", {"level": "info", "text": f"Protocol check: {len(passed)}/{len(candidates)} прошли sing-box"})
     return non_tunnel + passed
+
+
+async def _strict_verify_batch(nodes, opts, cancel_event, emit):
+    """Строгая проверка ядром клиента (mihomo): HTTPS-проба + закачка >=200 КБ.
+
+    Порядок проверки — по ценности: сперва туннели (reality первыми), потом
+    http/socks5, внутри группы — по TCP-пингу. Бюджет по времени (`verify_budget`,
+    сек) и цель (`verify_target`) не дают растянуть прогон: что не успели — не берём.
+    Возвращает (прошедшие, реально проверенные).
+    """
+    if not nodes:
+        return [], []
+
+    def prio(n):
+        tunnel = n.get("protocol", "").lower() not in ("http", "https", "socks5")
+        # пул (miss==0, уже проходили) первым; затем туннели, reality, пинг
+        in_pool = 0 if n.get("seen_ok") else 1
+        return (in_pool, 0 if tunnel else 1, 0 if n.get("pbk") else 1, n.get("latency_ms") or 99999)
+
+    ordered = sorted(nodes, key=prio)
+    budget = float(opts.get("verify_budget", 1500))
+    target = opts.get("verify_target")
+    await emit("log", {"level": "info",
+                       "text": f"Строгая проверка (mihomo): {len(ordered)} кандидатов, бюджет {budget:.0f}с"
+                               + (f", цель {target}" if target else "")})
+    return await verify_nodes(
+        ordered, cancel_event,
+        conc=int(opts.get("verify_conc", 300)),
+        batch_size=int(opts.get("verify_batch", 450)),
+        parallel=int(opts.get("verify_parallel", 1)),
+        deadline=time.monotonic() + budget,
+        target=int(target) if target else None,
+        emit=emit,
+    )
 
 
 async def _speed_test_batch(nodes, timeout, cancel_event, emit):
@@ -463,17 +508,9 @@ async def run_pipeline(
     # только их, а HTTP (от web-источников) не доходили до проверки.
     # Теперь раздельный бюджет в consumer гарантирует HTTP долю.
 
-    producer_task = asyncio.create_task(
-        _produce(
-            sources,
-            local_files,
-            queue,
-            cancel_event,
-            metrics,
-            emit,
-            per_repo_limit=opts.get("per_repo_limit", 40),
-        )
-    )
+    # Раньше сюда стояла ещё одна копия producer'а (без web-источников): она клала свой
+    # sentinel, и consumer мог выйти до того, как второй producer отдаст web-/Telegram-ноды.
+    # Теперь producer ровно один — с extra-источниками внутри.
 
     async def _feed_web_sources():
         if not opts.get("use_web_sources", True):
@@ -503,10 +540,32 @@ async def run_pipeline(
         except Exception as e:
             await emit("log", {"level": "warn", "text": f"Web-источники ошибка: {e}"})
 
-    # Web-источники запускаются ВНУТРИ _produce (как часть producer),
+    async def _feed_telegram():
+        channels = opts.get("telegram_channels") or []
+        if not channels:
+            return
+        try:
+            async def _push(ch, nodes):
+                metrics["candidates"] += len(nodes)
+                CHUNK = 150
+                for i in range(0, len(nodes), CHUNK):
+                    if cancel_event.is_set():
+                        break
+                    await queue.put(nodes[i:i + CHUNK])
+
+            tg_nodes, per = await fetch_telegram_nodes(
+                channels, int(opts.get("telegram_pages", 6)), cancel_event, on_channel=_push)
+            live_ch = sum(1 for v in per.values() if v)
+            await emit("log", {"level": "info",
+                               "text": f"Telegram: +{len(tg_nodes)} нод из {live_ch}/{len(channels)} каналов"})
+        except Exception as e:
+            await emit("log", {"level": "warn", "text": f"Telegram-источники ошибка: {e}"})
+
+    async def _feed_extra():
+        await asyncio.gather(_feed_web_sources(), _feed_telegram())
+
+    # Extra-источники запускаются ВНУТРИ _produce (как часть producer),
     # чтобы sentinel гарантированно ждал их завершения.
-    # Раньше web_task был отдельной корутиной — producer мог завершиться
-    # раньше и положить sentinel → consumer выходил, не дождавшись HTTP.
     producer_task = asyncio.create_task(
         _produce(
             sources,
@@ -516,15 +575,38 @@ async def run_pipeline(
             metrics,
             emit,
             per_repo_limit=opts.get("per_repo_limit", 40),
-            web_sources_fn=_feed_web_sources(),
+            web_sources_fn=_feed_extra(),
         )
     )
 
     producer_time_budget = opts.get("producer_timeout", 180)
-    producer_limited = asyncio.ensure_future(
-        asyncio.wait_for(producer_task, timeout=producer_time_budget)
-    )
-    # забираем исключение фонового продюсера, чтобы таймаут не всплывал
+
+    async def _guarded_producer():
+        """Продюсер под лимитом времени. Sentinel кладём ВСЕГДА, как бы он ни закончился
+        (штатно, по таймауту, по ошибке): иначе consumer ждёт очередь вечно — штатный
+        sentinel кладёт только сам _produce, а при отмене по таймауту он не доходит."""
+        try:
+            await asyncio.wait_for(producer_task, timeout=producer_time_budget)
+        except asyncio.TimeoutError:
+            await emit("log", {"level": "warn",
+                               "text": f"Сбор источников остановлен по таймауту {producer_time_budget}с — "
+                                       f"работаем с тем, что успели собрать"})
+        except asyncio.CancelledError:
+            raise
+        except Exception as e:
+            await emit("log", {"level": "warn", "text": f"Сбор источников: ошибка {type(e).__name__}: {e}"})
+        finally:
+            # очередь ограничена (maxsize=50): при полной put_nowait упал бы и consumer завис
+            try:
+                queue.put_nowait(_QUEUE_SENTINEL)
+            except asyncio.QueueFull:
+                try:
+                    await asyncio.wait_for(queue.put(_QUEUE_SENTINEL), timeout=60)
+                except Exception:
+                    pass
+
+    producer_limited = asyncio.ensure_future(_guarded_producer())
+    # забираем исключение фонового продюсера, чтобы оно не всплывало
     # в логах как «Task exception was never retrieved»
     producer_limited.add_done_callback(lambda t: t.cancelled() or t.exception())
 
@@ -556,14 +638,19 @@ async def run_pipeline(
     await emit("log", {"level": "info",
                        "text": f"Живых прокси после TCP: {len(live_nodes)} / {metrics['checking_total']} проверено"})
 
+    strict = bool(opts.get("strict_verify")) and find_mihomo() is not None
+    if opts.get("strict_verify") and not strict:
+        await emit("log", {"level": "warn", "text": "mihomo не найден — строгая проверка отключена, работает прежний режим"})
+
     if not live_nodes:
         return {"status": "error", "message": "Нет живых прокси", "selected": [], "metrics": metrics}
 
-    if all_checked:
+    if all_checked and not strict:
         record_check_results(live_nodes, all_checked)
         await emit("log", {"level": "info", "text": "История сохранена в proxy-history.json"})
 
     # ── Клоны бэкендов: один воркер через N edge-IP — это один канал ──
+    pre_collapse_keys = {_node_key(n) for n in live_nodes}
     before_collapse = len(live_nodes)
     live_nodes = collapse_backends(live_nodes, get_success_rate)
     if before_collapse != len(live_nodes):
@@ -571,7 +658,44 @@ async def run_pipeline(
                            "text": f"Клоны бэкендов свёрнуты: {before_collapse} → {len(live_nodes)}"})
 
     timeout = opts.get("timeout", 10)
-    live_nodes = await _protocol_check_batch(live_nodes, timeout, cancel_event, emit)
+    strict_checked = strict_passed = tcp_live_count = pool_size = None
+    if strict:
+        # Строгая проверка ядром клиента (mihomo): данные реально прошли через ноду.
+        tcp_live_count = len(live_nodes)
+        # Резервный пул: ноды, прошедшие проверку в прошлые прогоны, проверяем снова
+        # вместе со свежими — «мигающие» ноды дают списки длиннее одного прохода.
+        pool_nodes = node_pool.pool_candidates() if opts.get("use_pool", True) else []
+        fresh_keys = {node_pool.node_key(n) for n in live_nodes}
+        pool_extra = [n for n in pool_nodes if node_pool.node_key(n) not in fresh_keys]
+        if pool_extra:
+            await emit("log", {"level": "info", "text": f"Резервный пул: +{len(pool_extra)} нод к проверке"})
+        candidates = pool_extra + live_nodes   # пул первым: у него выше шанс пройти
+        live_nodes, verified_checked = await _strict_verify_batch(candidates, opts, cancel_event, emit)
+        await emit("log", {"level": "info",
+                           "text": f"Строгая проверка: {len(live_nodes)} живых из {len(verified_checked)} проверенных "
+                                   f"(TCP-живых было {tcp_live_count}, из пула {len(pool_extra)})"})
+        if opts.get("use_pool", True) and verified_checked:
+            try:
+                merged = node_pool.merge_pool(pool_nodes, live_nodes, verified_checked)
+                node_pool.save_pool(merged)
+                pool_size = len(merged)
+                await emit("log", {"level": "info", "text": f"Резервный пул сохранён: {len(merged)} нод"})
+            except Exception as e:
+                await emit("log", {"level": "warn", "text": f"Пул не сохранён: {e}"})
+        strict_checked, strict_passed = len(verified_checked), len(live_nodes)
+        if all_checked:
+            tcp_dead = [n for n in all_checked if _node_key(n) not in pre_collapse_keys]
+            record_check_results(live_nodes, tcp_dead + verified_checked)
+            await emit("log", {"level": "info", "text": "История сохранена в proxy-history.json"})
+        # Разные входы с одним ВЫХОДНЫМ IP — один канал, а не разнообразие.
+        if opts.get("collapse_exit", True):
+            before_exit = len(live_nodes)
+            live_nodes = collapse_exit(live_nodes, get_success_rate)
+            if before_exit != len(live_nodes):
+                await emit("log", {"level": "info",
+                                   "text": f"Дедуп по выходному IP: {before_exit} → {len(live_nodes)}"})
+    else:
+        live_nodes = await _protocol_check_batch(live_nodes, timeout, cancel_event, emit)
 
     if not live_nodes:
         return {"status": "error", "message": "Нет живых после протокольной проверки", "selected": [], "metrics": metrics}
@@ -707,7 +831,10 @@ async def run_pipeline(
     await emit("status", {"status": "running", "message": "Финальный отбор (ранг: стабильность + пинг + разнообразие)..."})
 
     limit = opts.get("limit", 100)
-    selected = select_quality(live_nodes, limit, get_success_rate)
+    # В строгом режиме пул целиком проверен реальной закачкой — квота на тип
+    # (http_share) не нужна, список заполняется лучшими по рангу.
+    http_share = 0 if strict else 0.5
+    selected = select_quality(live_nodes, limit, get_success_rate, http_share=http_share)
     sel = describe_selection(selected)
 
     countries = {n.get("country", "ZZ") for n in selected}
@@ -725,19 +852,35 @@ async def run_pipeline(
     await emit("status", {"status": "running", "message": "Формирование топ-100 и топ-50..."})
 
     # топ-100 и топ-50 — подмножества основного списка (тот же ранк и лимиты)
-    top_100 = select_quality(selected, 100, get_success_rate)
-    top_50 = select_quality(top_100, 50, get_success_rate)
+    top_100 = select_quality(selected, 100, get_success_rate, http_share=http_share)
+    top_50 = select_quality(top_100, 50, get_success_rate, http_share=http_share)
 
-    top_100_rechecked = await _recheck_top_nodes(
-        top_100, len(top_100), timeout, cancel_event, emit,
-        fill_pool=selected, fill_to=100,
-    )
-    top_50_rechecked = await _recheck_top_nodes(
-        top_50, len(top_50), timeout, cancel_event, emit,
-        fill_pool=top_100_rechecked, fill_to=50,
-    )
+    if strict:
+        # Ноды только что прошли строгую проверку тем же ядром, что у клиента.
+        # Старый перечек (TCP/порт 80) слабее и мог бы выбить живых — пропускаем.
+        top_100_rechecked, top_50_rechecked = top_100, top_50
+    else:
+        top_100_rechecked = await _recheck_top_nodes(
+            top_100, len(top_100), timeout, cancel_event, emit,
+            fill_pool=selected, fill_to=100,
+        )
+        top_50_rechecked = await _recheck_top_nodes(
+            top_50, len(top_50), timeout, cancel_event, emit,
+            fill_pool=top_100_rechecked, fill_to=50,
+        )
 
     configs = generate_configs(selected, top_nodes_100=top_100_rechecked, top_nodes_50=top_50_rechecked, all_live_nodes=live_nodes)
+
+    if strict and strict_checked:
+        try:
+            st = build_status(kind="generate", selected=selected, top_100=top_100_rechecked,
+                              top_50=top_50_rechecked, checked=strict_checked, passed=strict_passed or 0,
+                              pool_size=pool_size, tcp_live=tcp_live_count,
+                              candidates=metrics.get("candidates"),
+                              check_from=os.environ.get("CHECK_FROM", "GitHub Actions"))
+            configs["status.json"] = json.dumps(st, ensure_ascii=False, indent=1)
+        except Exception as e:
+            await emit("log", {"level": "warn", "text": f"status.json: {e}"})
 
     for name, content in configs.items():
         file_path = ROOT / name

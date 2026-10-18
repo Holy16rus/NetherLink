@@ -5,7 +5,7 @@
   <a href="https://t.me/githoly"><img src="https://img.shields.io/badge/📬%20Telegram-@githoly-0088cc" alt="Telegram"></a>
 </p>
 
-**NetherLink** — a proxy subscription generator. Scrapes public proxies, checks availability, measures speed, detects country and latency, and generates configs for **FLClash** and **Happ (Xray)**. Auto-updates every **10 hours**.
+**NetherLink** — a proxy subscription generator. Scrapes public proxy sources (GitHub aggregators and public Telegram channels), **verifies every node with a real client core (mihomo)** — data must actually flow through it — detects the country by exit IP, and generates configs for **FLClash** and **Happ (Xray)**. Only nodes that pass are published. Full rebuild every **4 hours**, hourly re-check of the whole node pool.
 
 ---
 
@@ -55,11 +55,12 @@ Browse all files: [stats branch](https://github.com/Holy16rus/NetherLink/tree/st
 - **Parsing** all formats: HTTP, HTTPS, SOCKS5, Shadowsocks, VMess, VLESS, Trojan, Hysteria2
 - **Validation** with latency measurement (TCP/HTTP/SOCKS5, up to 200 concurrent)
 - **Speed test** — bandwidth measurement via 1MB download
-- **Re-check** — re-verify top-100 and top-50 proxies every hour
+- **Strict verification** — mihomo per-node listener: HTTPS request with certificate check + ≥200 KB download; then Telegram / YouTube / AI-API reachability, plain-HTTP integrity, exit IP/country, speed
+- **Reserve pool** — up to 1500 verified nodes kept in the `stats` branch; the whole pool is re-checked hourly and the lists are rebuilt from what is alive right now
 - **Geolocation** via MaxMind GeoLite2 (local) with ip-api.com fallback
 - **Multi-format output**: Clash YAML, V2Ray JSON, Sing-box JSON
 - **Web interface** with SSE streaming, FULL / DATA mode selection, live logs
-- **Auto-update** every 10 hours via GitHub Actions
+- **Auto-update** — full rebuild every 4 hours, pool re-check hourly (GitHub Actions); see `status.json` in the `subscription` branch for the honest numbers
 
 ---
 
@@ -80,7 +81,7 @@ Open `http://127.0.0.1:1488` in your browser.
 
 ## Automated Generation (CI/CD)
 
-The repository automatically regenerates all subscriptions every **10 hours** via GitHub Actions. Configs go to the `subscription` branch, live proxies to the `stats` branch.
+The repository automatically regenerates all subscriptions every **4 hours** (and re-checks the pool hourly) via GitHub Actions. Configs go to the `subscription` branch, live proxies to the `stats` branch.
 
 A [free MaxMind license key](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) is required as `GEOIP_LICENSE_KEY` in repository secrets.
 

@@ -372,6 +372,153 @@ def test_pipeline_limited():
     asyncio.run(run())
 
 
+# ── pool.py / quality.collapse_exit / status.py / config overrides / telegram ──
+
+def test_pool_and_extras():
+    from backend import pool as P
+    from backend.quality import collapse_exit, rank_score
+    from backend.status import build_status
+    from backend.telegram_source import _extract
+    import backend.config as C
+
+    def nd(host, uid="u", **kw):
+        return {"protocol": "vless", "server": host, "port": 443, "uuid": uid, **kw}
+
+    a, b, c = nd("a.example"), nd("b.example"), nd("c.example")
+
+    # merge_pool: прошедшие -> miss 0; проваленные -> miss+1; не проверявшиеся не трогаем
+    pool = P.merge_pool([], [a, b], [a, b, c])
+    keys = {P.node_key(n): n for n in pool}
+    test("pool: прошедшие в пуле, проваленные новичками нет", len(pool), 2)
+    test("pool: miss=0 у прошедших", all(n["miss"] == 0 for n in pool), True)
+
+    pool = P.merge_pool(pool, [a], [a, b])            # b провалилась
+    keys = {P.node_key(n): n for n in pool}
+    test("pool: miss+1 у проваленной", keys[P.node_key(b)]["miss"], 1)
+    pool = P.merge_pool(pool, [a], [a])               # b не проверялась — miss не растёт
+    keys = {P.node_key(n): n for n in pool}
+    test("pool: непроверенная не штрафуется", keys[P.node_key(b)]["miss"], 1)
+    for _ in range(2):
+        pool = P.merge_pool(pool, [a], [a, b])
+    test("pool: после 3 провалов нода вылетает", {P.node_key(n) for n in pool}, {P.node_key(a)})
+
+    first = [n for n in pool if P.node_key(n) == P.node_key(a)][0]["first_seen"]
+    pool = P.merge_pool(pool, [dict(a)], [a])
+    test("pool: first_seen сохраняется", [n for n in pool if P.node_key(n) == P.node_key(a)][0]["first_seen"], first)
+
+    big = [nd(f"h{i}.example", kbps=i) for i in range(30)]
+    test("pool: потолок размера", len(P.merge_pool([], big, big, max_size=10)), 10)
+
+    with tempfile.TemporaryDirectory() as td:
+        f = Path(td) / "pool.json"
+        P.save_pool(pool, f)
+        test("pool: save/load round-trip", len(P.load_pool(f)), len(pool))
+        test("pool: нет файла -> []", P.load_pool(Path(td) / "nope.json"), [])
+        f.write_text("{битый json")
+        test("pool: битый файл -> []", P.load_pool(f), [])
+        # служебные поля не пишутся
+        P.save_pool([P._clean({**a, "_tcp": 5, "_src": "x", "name": "n", "tampered": True})], f)
+        saved = P.load_pool(f)[0]
+        test("pool: эфемерные поля вычищены", any(k in saved for k in ("_tcp", "_src", "name", "tampered")), False)
+
+    # collapse_exit: один выходной IP -> лучший по рангу; без exit_ip не трогаем
+    n1 = nd("x1", exit_ip="1.1.1.1", kbps=900)
+    n2 = nd("x2", exit_ip="1.1.1.1", kbps=100)
+    n3 = nd("x3", exit_ip="2.2.2.2")
+    n4 = nd("x4")                                    # без exit_ip
+    out = collapse_exit([n1, n2, n3, n4], lambda n: 0.5)
+    hosts = sorted(n["server"] for n in out)
+    test("collapse_exit: клоны одного выхода схлопнуты", hosts, ["x1", "x3", "x4"])
+
+    # ранг: скорость — мягкий бонус, не ломает порядок по истории
+    fast, slow = nd("f", kbps=1000), nd("s", kbps=50)
+    test("rank: быстрее — выше при равной истории", rank_score(fast, lambda n: 0.5) > rank_score(slow, lambda n: 0.5), True)
+    test("rank: бонус скорости ограничен", rank_score(fast, lambda n: 0.5) - 0.5 <= 0.10 + 1e-9, True)
+
+    # status.json
+    st = build_status(kind="generate", selected=[nd("a", kbps=300, svc=["tg", "yt"], country="DE"), nd("b", kbps=100, svc=["tg"], country="NL")],
+                      top_100=[], top_50=[], checked=40, passed=2)
+    test("status: pass_rate", st["verify"]["pass_rate"], 5.0)
+    test("status: сервисы посчитаны", st["services"], {"telegram": 2, "youtube": 1, "ai": 0})
+    test("status: страны", st["main"]["countries"], 2)
+    test("status: медиана скорости", st["main"]["median_kbps"], 200)
+    test("status: json-сериализуем", bool(json.dumps(st)), True)
+
+    # telegram: URI из HTML-поста (br, html-сущности, хвостовая пунктуация)
+    html = ('<div class="tgme_widget_message_text">vless://11111111-1111-1111-1111-111111111111@1.2.3.4:443'
+            '?security=tls&amp;type=ws&amp;path=%2Fx#tag<br/>ss://YWVzLTI1Ni1nY206cGFzcw@5.6.7.8:8388#ss1</div>')
+    got = _extract(html, "chan")
+    test("telegram: из поста вытащено 2 ноды", len(got), 2)
+    test("telegram: источник помечен", all(n.get("_src") == "tg:chan" for n in got), True)
+    test("telegram: &amp; раскрыт (security=tls)", any(n.get("tls") or n.get("security") == "tls" for n in got if n["protocol"] == "vless"), True)
+
+    # overrides источников
+    with tempfile.TemporaryDirectory() as td:
+        old, old_sf = C.ROOT, C.SOURCES_FILE
+        try:
+            C.ROOT = Path(td)
+            (Path(td) / "sources.json").write_text(json.dumps({"sources": ["https://a", {"url": "https://b", "enabled": False}, "https://c"]}))
+            (Path(td) / "source-overrides.json").write_text(json.dumps({"disable": ["https://a"], "enable": ["https://b"]}))
+            C.SOURCES_FILE = Path(td) / "sources.json"
+            res = {(s["url"] if isinstance(s, dict) else s): (s.get("enabled", True) if isinstance(s, dict) else True)
+                   for s in C.load_sources()["sources"]}
+            test("overrides: a выключен, b включён, c как был", res, {"https://a": False, "https://b": True, "https://c": True})
+            (Path(td) / "source-overrides.json").write_text("{мусор")
+            res = {(s["url"] if isinstance(s, dict) else s): (s.get("enabled", True) if isinstance(s, dict) else True)
+                   for s in C.load_sources()["sources"]}
+            test("overrides: битый файл игнорируется", res["https://a"], True)
+        finally:
+            C.ROOT = old
+            C.SOURCES_FILE = old_sf
+
+
+def test_generator_service_groups():
+    import yaml
+    from backend.generator import generate_config_clash
+
+    def nd(i, svc):
+        return {"protocol": "vless", "server": f"s{i}.example", "port": 443, "uuid": f"00000000-0000-0000-0000-{i:012d}",
+                "network": "tcp", "tls": True, "sni": "x.example", "country": "DE", "latency_ms": 100 + i, "svc": svc}
+
+    nodes = [nd(1, ["tg", "yt", "ai"]), nd(2, ["tg"]), nd(3, [])]
+    d = yaml.safe_load(generate_config_clash(nodes))
+    groups = {g["name"]: g for g in d["proxy-groups"]}
+    test("clash: группа Telegram из 2 нод", len(groups["✈️ Telegram"]["proxies"]), 2)
+    test("clash: группа ИИ из 1 ноды", len(groups["🤖 ИИ"]["proxies"]), 1)
+    test("clash: PROXY содержит сервисные группы", all(g in groups["PROXY"]["proxies"] for g in ("✈️ Telegram", "▶️ YouTube", "🤖 ИИ")), True)
+    test("clash: правило telegram -> группа", any(r == "DOMAIN-SUFFIX,telegram.org,✈️ Telegram" for r in d["rules"]), True)
+    d2 = yaml.safe_load(generate_config_clash([nd(1, ["tg"]), nd(2, [])]))
+    names2 = {g["name"] for g in d2["proxy-groups"]}
+    test("clash: нет нод с ИИ -> нет группы, правило на PROXY",
+         "🤖 ИИ" not in names2 and "DOMAIN-SUFFIX,openai.com,PROXY" in d2["rules"], True)
+
+
+def test_tune_decisions():
+    from backend.tune_sources import decide_overrides
+
+    K = lambda i: ("vless", f"h{i}", 443, "u")
+    srcs = [("on_good", True), ("on_dead", True), ("on_small", True),
+            ("off_dup", False), ("off_noise", False), ("off_lowrate", False), ("off_new", False)]
+    checked = {"on_good": 100, "on_dead": 80, "on_small": 10, "off_dup": 100, "off_noise": 100,
+               "off_lowrate": 100, "off_new": 100}
+    alive_keys = {
+        "on_good": {K(i) for i in range(20)},
+        "off_dup": {K(i) for i in range(10)},               # 10 живых, но все уже есть в on_good
+        "off_noise": {K(100), K(101), K(102)},              # 3 живых < ENABLE_MIN_ALIVE
+        "off_lowrate": {K(200 + i) for i in range(6)},      # 6 живых, но на 100 проверенных = 6% < 8%
+        "off_new": {K(300 + i) for i in range(12)},         # 12%, и все 12 — новые
+    }
+    alive = {u: len(s) for u, s in alive_keys.items()}
+    dis, ena, new = decide_overrides(srcs, checked, alive, alive_keys, min_sample=60)
+    test("tune: пустой источник с достаточной выборкой выключается", dis, ["on_dead"])
+    test("tune: мало данных (10 проверено) — не трогаем", "on_small" in dis, False)
+    test("tune: источник-дубль (все живые уже есть) не включается", "off_dup" in ena, False)
+    test("tune: 3 живых — шум, не включается", "off_noise" in ena, False)
+    test("tune: доля < 8% не включается", "off_lowrate" in ena, False)
+    test("tune: источник с новыми живыми включается", ena, ["off_new"])
+    test("tune: считает вклад (new_alive)", (new["off_dup"], new["off_new"]), (0, 12))
+
+
 # ── main ────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -384,6 +531,9 @@ if __name__ == "__main__":
     test_parser()
     test_ss_cipher_aliases()
     test_dnsbl()
+    test_pool_and_extras()
+    test_generator_service_groups()
+    test_tune_decisions()
 
     print("\n── checker.py (network required) ──")
     try:

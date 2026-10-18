@@ -35,6 +35,21 @@ jobs:
           echo "deb https://deb.sagernet.org/ * *" | sudo tee /etc/apt/sources.list.d/sagernet.list
           sudo apt-get update && sudo apt-get install -y sing-box
 
+      - name: Cache mihomo binary (ядро FLClash — строгая проверка нод)
+        uses: actions/cache@v4
+        id: mihomo-cache
+        with:
+          path: /usr/local/bin/mihomo
+          key: mihomo-${{ runner.os }}-1.19.32
+
+      - name: Install mihomo
+        if: steps.mihomo-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL -o /tmp/mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-linux-amd64-compatible-v1.19.32.gz
+          gunzip -c /tmp/mihomo.gz | sudo tee /usr/local/bin/mihomo > /dev/null
+          sudo chmod +x /usr/local/bin/mihomo
+          /usr/local/bin/mihomo -v
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"

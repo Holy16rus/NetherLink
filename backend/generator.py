@@ -251,6 +251,33 @@ def generate_config_clash(nodes):
         lines.append(f"      - {yaml_quote(group_name)}")
     lines.append("      - DIRECT")
     lines.append("")
+
+    # Группы по сервисам: ноды, у которых реально открылись Telegram / YouTube / ИИ-API
+    # (тег svc ставит строгая проверка). Пустую группу не создаём — mihomo такое не примет.
+    svc_groups = []
+    for tag, gname in (("tg", "✈️ Telegram"), ("yt", "▶️ YouTube"), ("ai", "🤖 ИИ")):
+        members = [p for p, nd in zip(proxy_names, nodes) if tag in (nd.get("svc") or [])]
+        if members:
+            svc_groups.append((tag, gname, members))
+    svc_name = {tag: gname for tag, gname, _ in svc_groups}
+    for tag, gname, members in svc_groups:
+        lines.extend([
+            f"  - name: {yaml_quote(gname)}",
+            "    type: url-test",
+            "    url: http://www.gstatic.com/generate_204",
+            "    interval: 300",
+            "    tolerance: 50",
+            "    proxies:",
+        ])
+        for m in members:
+            lines.append(f"      - {yaml_quote(m)}")
+        lines.append("")
+    if svc_groups:
+        # добавляем сервисные группы в селектор PROXY (вставка после 'Auto-Смена')
+        marker = f"      - {yaml_quote('Auto-Смена')}"
+        idx = lines.index(marker)
+        for off, (_, gname, _) in enumerate(svc_groups, start=1):
+            lines.insert(idx + off, f"      - {yaml_quote(gname)}")
     lines.extend([
         f"  - name: {yaml_quote('Auto-Смена')}",
         "    type: url-test",
@@ -273,14 +300,24 @@ def generate_config_clash(nodes):
             lines.append(f"      - {yaml_quote(name)}")
         lines.append("      - DIRECT")
         lines.append("")
+    # В правилах цель — ГОЛОЕ имя группы (кавычки YAML ставим вокруг всей строки правила),
+    # иначе mihomo ищет группу вместе с кавычками: «proxy ["▶️ YouTube"] not found».
+    tg_t = svc_name.get("tg", "PROXY")
+    yt_t = svc_name.get("yt", "PROXY")
+    ai_t = svc_name.get("ai", "PROXY")
+
+    def _rule(kind, value, target):
+        return "  - " + yaml_quote(f"{kind},{value},{target}") if target != "PROXY" else f"  - {kind},{value},PROXY"
     lines.extend([
         "rules:",
         "  - DOMAIN-SUFFIX,google.com,PROXY",
-        "  - DOMAIN-SUFFIX,youtube.com,PROXY",
+        _rule("DOMAIN-SUFFIX", "youtube.com", yt_t),
+        _rule("DOMAIN-SUFFIX", "googlevideo.com", yt_t),
+        _rule("DOMAIN-SUFFIX", "ytimg.com", yt_t),
         "  - DOMAIN-SUFFIX,github.com,PROXY",
-        "  - DOMAIN-SUFFIX,telegram.org,PROXY",
-        "  - DOMAIN-SUFFIX,t.me,PROXY",
-        "  - DOMAIN-KEYWORD,telegram,PROXY",
+        _rule("DOMAIN-SUFFIX", "telegram.org", tg_t),
+        _rule("DOMAIN-SUFFIX", "t.me", tg_t),
+        _rule("DOMAIN-KEYWORD", "telegram", tg_t),
         "  - DOMAIN-SUFFIX,instagram.com,PROXY",
         "  - DOMAIN-SUFFIX,twitter.com,PROXY",
         "  - DOMAIN-SUFFIX,x.com,PROXY",
@@ -288,8 +325,10 @@ def generate_config_clash(nodes):
         "  - DOMAIN-SUFFIX,tiktok.com,PROXY",
         "  - DOMAIN-SUFFIX,netflix.com,PROXY",
         "  - DOMAIN-SUFFIX,spotify.com,PROXY",
-        "  - DOMAIN-SUFFIX,openai.com,PROXY",
-        "  - DOMAIN-SUFFIX,chatgpt.com,PROXY",
+        _rule("DOMAIN-SUFFIX", "openai.com", ai_t),
+        _rule("DOMAIN-SUFFIX", "chatgpt.com", ai_t),
+        _rule("DOMAIN-SUFFIX", "anthropic.com", ai_t),
+        _rule("DOMAIN-SUFFIX", "claude.ai", ai_t),
         "  - DOMAIN-SUFFIX,reddit.com,PROXY",
         "  - DOMAIN-SUFFIX,discord.com,PROXY",
         "  - MATCH,DIRECT",
@@ -610,13 +649,31 @@ def generate_config_xray(nodes):
     return json.dumps(out, ensure_ascii=False, indent=2)
 
 
+XRAY_SS_CIPHERS = {
+    "aes-128-gcm", "aes-256-gcm", "chacha20-ietf-poly1305", "xchacha20-ietf-poly1305",
+    "2022-blake3-aes-128-gcm", "2022-blake3-aes-256-gcm", "2022-blake3-chacha20-poly1305",
+}
+
+
+def _happ_ok(node: dict) -> bool:
+    """Подходит ли нода ядру Xray (= Happ). mihomo принимает больше (cfb/rc4-md5 и т.п.),
+    Xray — нет: такая нода в Happ-подписке мертва, хотя в Clash работает."""
+    proto = node.get("protocol", "").lower()
+    if proto == "ss":
+        return str(node.get("cipher", "")).lower() in XRAY_SS_CIPHERS
+    if proto == "vless" and str(node.get("network", "tcp")).lower() == "hy2":
+        return False
+    return True
+
+
 def generate_config_happ(nodes, title="NetherLink | @githoly"):
     """Xray-подписка (txt, URI): только туннельные (vless/vmess/ss/trojan) +
     мета-заголовки в теле. Happ (Xray core) принимает именно URI-формат;
-    http/socks5/hy2 не включаем — Happ их не поддерживает как outbounds."""
+    http/socks5/hy2 не включаем — Happ их не поддерживает как outbounds.
+    SS с шифрами, которых нет в Xray (cfb, rc4-md5…), отсекаются."""
     used_names = set()
     allowed = ("vless", "vmess", "ss", "trojan")
-    tunnel = [n for n in nodes if n.get("protocol", "").lower() in allowed]
+    tunnel = [n for n in nodes if n.get("protocol", "").lower() in allowed and _happ_ok(n)]
     lines = [
         f"# profile-title: {title}",
         "# profile-update-interval: 2",

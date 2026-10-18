@@ -26,6 +26,7 @@ from urllib.request import Request, urlopen
 from backend.checker import protocol_check, tcp_check
 from backend.generator import generate_config_clash
 from backend.parser import parse_uri, try_decode_b64_subscription
+from backend.verify import verify_nodes, find_mihomo
 
 IGA = "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/"
 RJS = "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/"
@@ -116,32 +117,53 @@ async def run():
     live = {f"{h}:{p}" for (h, p), lat in res if lat is not None}
     print(f"[tcp] живых host:port {len(live)}/{len(hosts)} ({time.time() - t0:.0f}s)", flush=True)
 
-    # ── protocol check (sing-box) ──
+    # ── protocol check ──
     cand = [n for n in nodes if f"{n['server']}:{n['port']}" in live]
     cand.sort(key=priority)
     cap = int(os.environ.get("WHITELIST_MAX_PROTO", "2000"))
     cand = cand[:cap]
-    print(f"[proto] проверяю {len(cand)} (cap {cap})", flush=True)
-    sem = asyncio.Semaphore(15)
-    cancel = asyncio.Event()
-    done = 0
-
-    async def proto_one(n):
-        nonlocal done
-        async with sem:
-            lat = await protocol_check(n, 8.0, cancel)
-        done += 1
-        if done % 100 == 0:
-            print(f"[proto] {done}/{len(cand)} ({time.time() - t0:.0f}s)", flush=True)
-        return n, lat
-
+    strict = find_mihomo() is not None and os.environ.get("STRICT_VERIFY", "1") != "0"
     live_nodes = []
-    for n, lat in await asyncio.gather(*(proto_one(n) for n in cand)):
-        if lat is not None:
+
+    if strict:
+        # Строгая проверка ядром клиента (mihomo): HTTPS-проба + закачка >=200 КБ.
+        # Белые списки РФ режут «зависшие» TCP-сессии после ~16-20 КБ — проба одним
+        # generate_204 такие ноды пропускает, закачка 200 КБ — нет.
+        print(f"[verify] строгая проверка {len(cand)} (cap {cap})", flush=True)
+
+        async def emit(ev, d):
+            if ev == "log":
+                print("   ", d.get("text"), flush=True)
+
+        passed, checked = await verify_nodes(
+            cand, None, conc=300, batch_size=450,
+            deadline=time.monotonic() + float(os.environ.get("WHITELIST_VERIFY_BUDGET", "1500")),
+            emit=emit)
+        print(f"[verify] живых: {len(passed)}/{len(checked)}", flush=True)
+        for n in passed:
             m = dict(n)
-            m["latency_ms"] = lat
             live_nodes.append(m)
-    print(f"[proto] живых: {len(live_nodes)}/{len(cand)}", flush=True)
+    else:
+        print(f"[proto] проверяю {len(cand)} (cap {cap}) — sing-box, прежний режим", flush=True)
+        sem = asyncio.Semaphore(15)
+        cancel = asyncio.Event()
+        done = 0
+
+        async def proto_one(n):
+            nonlocal done
+            async with sem:
+                lat = await protocol_check(n, 8.0, cancel)
+            done += 1
+            if done % 100 == 0:
+                print(f"[proto] {done}/{len(cand)} ({time.time() - t0:.0f}s)", flush=True)
+            return n, lat
+
+        for n, lat in await asyncio.gather(*(proto_one(n) for n in cand)):
+            if lat is not None:
+                m = dict(n)
+                m["latency_ms"] = lat
+                live_nodes.append(m)
+        print(f"[proto] живых: {len(live_nodes)}/{len(cand)}", flush=True)
 
     best = {}
     for n in live_nodes:
@@ -165,7 +187,8 @@ async def run():
         geo = {}
     for n in final:
         info = geo.get(n["server"]) or {}
-        n["country"] = (info.get("country") or "ZZ").upper()
+        # страна ВЫХОДА (CF trace из проверки) точнее GeoIP по IP сервера; GeoIP — запасной путь
+        n["country"] = (n.get("exit_loc") or info.get("country") or "ZZ").upper()
 
     open("NetherLink-WhiteList.txt", "w").write("\n".join(n["raw"] for n in final) + "\n")
     open("NetherLink-WhiteList.yaml", "w").write(generate_config_clash([dict(n) for n in final]))
@@ -180,6 +203,10 @@ async def run():
         "unique_servers": len(final),
         "protocols": dict(Counter(n["protocol"] for n in final)),
         "reality": sum(1 for n in final if n.get("pbk")),
+        "verifier": "mihomo: HTTPS-проба + закачка ≥200 КБ" if strict else "sing-box: generate_204",
+        "services": {"telegram": sum(1 for n in final if "tg" in (n.get("svc") or [])),
+                     "youtube": sum(1 for n in final if "yt" in (n.get("svc") or [])),
+                     "ai": sum(1 for n in final if "ai" in (n.get("svc") or []))},
     }
     json.dump(meta, open("whitelist-meta.json", "w"), ensure_ascii=False, indent=1)
     print(json.dumps(meta, ensure_ascii=False, indent=1), flush=True)

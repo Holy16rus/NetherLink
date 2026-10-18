@@ -2,7 +2,7 @@ name: Generate Proxy Config
 
 on:
   schedule:
-    - cron: "0 */10 * * *"
+    - cron: "15 */4 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -49,6 +49,21 @@ jobs:
           sudo cp /tmp/xray/geoip.dat /tmp/xray/geosite.dat /usr/local/bin/
           sudo chmod +x /usr/local/bin/xray
 
+      - name: Cache mihomo binary (ядро FLClash — строгая проверка нод)
+        uses: actions/cache@v4
+        id: mihomo-cache
+        with:
+          path: /usr/local/bin/mihomo
+          key: mihomo-${{ runner.os }}-1.19.32
+
+      - name: Install mihomo
+        if: steps.mihomo-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL -o /tmp/mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-linux-amd64-compatible-v1.19.32.gz
+          gunzip -c /tmp/mihomo.gz | sudo tee /usr/local/bin/mihomo > /dev/null
+          sudo chmod +x /usr/local/bin/mihomo
+          /usr/local/bin/mihomo -v
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -62,11 +77,21 @@ jobs:
         run: python -m backend.download_geoip
         continue-on-error: true
 
-      - name: Restore proxy history from stats branch
+      - name: Restore proxy history + node pool from stats branch
         run: |
-          git fetch origin stats 2>/dev/null && git show stats:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          # actions/checkout ставит depth=1 и refspec только на текущую ветку, поэтому
+          # `git fetch origin stats` НЕ создаёт локальную ветку stats — `git show stats:...`
+          # молча падал и история сбрасывалась в {} на каждом запуске.
+          git fetch --no-tags --depth=1 origin +refs/heads/stats:refs/remotes/origin/stats 2>/dev/null || true
+          git show origin/stats:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          git show origin/stats:pool.json > pool.json 2>/dev/null || true
+          git show origin/stats:source-overrides.json > source-overrides.json 2>/dev/null || true
+          echo "history entries: $(python3 -c "import json;print(len(json.load(open('proxy-history.json'))))")"
+          [ -f pool.json ] && echo "pool restored" || echo "no pool yet"
 
       - name: Run proxy generator
+        env:
+          CHECK_FROM: GitHub Actions
         run: python -m backend.headless
 
       - name: Deploy configs to subscription + stats branches
@@ -78,13 +103,13 @@ jobs:
 
           # Сохраняем сгенерированные файлы ДО переключения ветки
           mkdir -p /tmp/nl-deploy
-          cp -f NetherLink*.yaml NetherLink*.json NetherLink-Xray*.txt live.txt proxy-history.json /tmp/nl-deploy/ 2>/dev/null || true
+          cp -f NetherLink*.yaml NetherLink*.json NetherLink-Xray*.txt live.txt proxy-history.json pool.json status.json /tmp/nl-deploy/ 2>/dev/null || true
 
           # ── subscription: только конфиги (без live.txt) ──
           git checkout --orphan subscription
           git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
-          cp -f /tmp/nl-deploy/NetherLink*.yaml /tmp/nl-deploy/NetherLink*.json /tmp/nl-deploy/NetherLink-Xray*.txt . 2>/dev/null || true
+          cp -f /tmp/nl-deploy/NetherLink*.yaml /tmp/nl-deploy/NetherLink*.json /tmp/nl-deploy/NetherLink-Xray*.txt /tmp/nl-deploy/status.json . 2>/dev/null || true
           git add -f -A
           git commit --allow-empty -m "Auto-generate proxy configs $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push --force origin subscription
@@ -98,9 +123,10 @@ jobs:
           git checkout --orphan stats
           git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
-          cp -f /tmp/nl-stats/*LiveProxy* . 2>/dev/null || true
+          cp -f /tmp/nl-stats/*LiveProxy* /tmp/nl-stats/source-overrides.json . 2>/dev/null || true
           cp -f /tmp/nl-deploy/live.txt "${DATE}-LiveProxy"
           cp -f /tmp/nl-deploy/proxy-history.json .
+          cp -f /tmp/nl-deploy/pool.json . 2>/dev/null || true
           git add -f -A
           git commit --allow-empty -m "Stats ${DATE} ($(date -u +'%H:%M UTC'))"
           git push --force origin stats

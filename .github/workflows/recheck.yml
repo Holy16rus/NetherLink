@@ -12,7 +12,7 @@ concurrency:
 jobs:
   recheck:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     permissions:
       contents: write
 
@@ -43,6 +43,21 @@ jobs:
           sudo cp /tmp/xray/geoip.dat /tmp/xray/geosite.dat /usr/local/bin/
           sudo chmod +x /usr/local/bin/xray
 
+      - name: Cache mihomo binary (ядро FLClash — строгая проверка нод)
+        uses: actions/cache@v4
+        id: mihomo-cache
+        with:
+          path: /usr/local/bin/mihomo
+          key: mihomo-${{ runner.os }}-1.19.32
+
+      - name: Install mihomo
+        if: steps.mihomo-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL -o /tmp/mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-linux-amd64-compatible-v1.19.32.gz
+          gunzip -c /tmp/mihomo.gz | sudo tee /usr/local/bin/mihomo > /dev/null
+          sudo chmod +x /usr/local/bin/mihomo
+          /usr/local/bin/mihomo -v
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -56,9 +71,14 @@ jobs:
         run: python -m backend.download_geoip
         continue-on-error: true
 
-      - name: Restore state from stats branch
+      - name: Restore state + node pool from stats branch
         run: |
-          git fetch origin stats 2>/dev/null && git show stats:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          # см. generate.yml: без явного refspec `stats:` не резолвится и история = {}
+          git fetch --no-tags --depth=1 origin +refs/heads/stats:refs/remotes/origin/stats 2>/dev/null || true
+          git show origin/stats:proxy-history.json > proxy-history.json 2>/dev/null || echo "{}" > proxy-history.json
+          git show origin/stats:pool.json > pool.json 2>/dev/null || true
+          git show origin/stats:source-overrides.json > source-overrides.json 2>/dev/null || true
+          [ -f pool.json ] && echo "pool restored" || echo "no pool yet"
 
       - name: Download current configs from subscription branch
         run: |
@@ -67,6 +87,8 @@ jobs:
           curl -fsSL -o NetherLink-50.yaml  "https://raw.githubusercontent.com/${{ github.repository }}/subscription/NetherLink-50.yaml"  || echo "No top-50"
 
       - name: Run recheck
+        env:
+          CHECK_FROM: GitHub Actions
         run: python -m backend.recheck_headless
 
       - name: Deploy rechecked configs to subscription + stats branches
@@ -77,7 +99,7 @@ jobs:
 
           # Сохраняем ДО переключения ветки
           mkdir -p /tmp/nl-recheck
-          cp -f NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json proxy-history.json /tmp/nl-recheck/ 2>/dev/null || true
+          cp -f NetherLink*.yaml NetherLink*.json NetherLink-Xray*.txt status.json proxy-history.json pool.json /tmp/nl-recheck/ 2>/dev/null || true
 
           # ── subscription: обновляем топ-50/топ-100, остальные конфиги сохраняем ──
           git fetch origin subscription 2>/dev/null || true
@@ -89,8 +111,10 @@ jobs:
           git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
           cp -f /tmp/nl-sub/NetherLink*.yaml /tmp/nl-sub/NetherLink*.json /tmp/nl-sub/NetherLink-Xray*.txt . 2>/dev/null || true
-          for f in NetherLink-50*.yaml NetherLink-50*.json NetherLink-100*.yaml NetherLink-100*.json; do
-            [ -f "/tmp/nl-recheck/$f" ] && cp -f "/tmp/nl-recheck/$f" .
+          # Строгий recheck пересобирает все списки из живых (пул + текущие). Перекрываем всё, что
+          # он записал; если запуск ничего не записал (все мертвы — сбой сети), остаются прежние файлы.
+          for f in /tmp/nl-recheck/NetherLink*.yaml /tmp/nl-recheck/NetherLink*.json /tmp/nl-recheck/NetherLink-Xray*.txt /tmp/nl-recheck/status.json; do
+            [ -f "$f" ] && cp -f "$f" .
           done
           git add -f -A
           git commit --allow-empty -m "Recheck update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
@@ -105,8 +129,9 @@ jobs:
           git checkout --orphan stats
           git rm -rf . 2>/dev/null || true
           git clean -fdx 2>/dev/null || true
-          cp -f /tmp/nl-stats/*LiveProxy* . 2>/dev/null || true
+          cp -f /tmp/nl-stats/*LiveProxy* /tmp/nl-stats/source-overrides.json . 2>/dev/null || true
           cp -f /tmp/nl-recheck/proxy-history.json .
+          cp -f /tmp/nl-recheck/pool.json . 2>/dev/null || true
           git add -f -A
           git commit --allow-empty -m "History update $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes"
           git push --force origin stats

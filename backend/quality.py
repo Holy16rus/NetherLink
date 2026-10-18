@@ -108,6 +108,28 @@ def collapse_backends(nodes, rate_fn):
 # ── ранжирование ─────────────────────────────────────────────────────────
 WORKER_PENALTY = 0.15   # воркерные отстают от «прямых» при равной истории
 HTTP_PENALTY = 0.06     # публичные http/socks5 чуть ниже туннелей при равенстве
+SPEED_WEIGHT = 0.10     # максимум бонуса за скорость закачки
+SPEED_CAP_KBPS = 1000.0  # выше этой скорости бонус не растёт
+
+
+def collapse_exit(nodes, rate_fn, per_exit=1):
+    """Схлопывает ноды с одинаковым ВЫХОДНЫМ IP, оставляя лучшие по рангу.
+
+    Разные входы, ведущие в один и тот же выход, — не разнообразие, а один канал
+    (клоны воркеров, мосты одного провайдера). Ноды без известного exit_ip не трогаем.
+    """
+    groups = {}
+    keep = []
+    for n in nodes:
+        ip = n.get("exit_ip")
+        if not ip:
+            keep.append(n)
+        else:
+            groups.setdefault(ip, []).append(n)
+    for lst in groups.values():
+        lst.sort(key=lambda n: rank_key(n, rate_fn))
+        keep.extend(lst[:per_exit])
+    return keep
 
 
 def rank_score(node, rate_fn) -> float:
@@ -120,6 +142,15 @@ def rank_score(node, rate_fn) -> float:
         score -= WORKER_PENALTY
     if is_http_like(node):
         score -= HTTP_PENALTY
+    # Скорость закачки (замерена строгой проверкой): мягкий бонус до +SPEED_WEIGHT.
+    # Замер идёт под нагрузкой, поэтому величина относительная — как тай-брейкер,
+    # а не жёсткий порог.
+    try:
+        kb = float(node.get("kbps") or 0)
+    except (TypeError, ValueError):
+        kb = 0.0
+    if kb > 0:
+        score += min(kb, SPEED_CAP_KBPS) / SPEED_CAP_KBPS * SPEED_WEIGHT
     return score
 
 
@@ -160,9 +191,16 @@ def select_quality(nodes, limit, rate_fn, http_share=0.5):
         return []
 
     ranked = sorted(nodes, key=lambda n: rank_key(n, rate_fn))
-    http_pool = [n for n in ranked if is_http_like(n)]
-    tun_pool = [n for n in ranked if not is_http_like(n)]
-    want_http = min(len(http_pool), int(math.ceil(limit * http_share)))
+    if http_share and http_share > 0:
+        http_pool = [n for n in ranked if is_http_like(n)]
+        tun_pool = [n for n in ranked if not is_http_like(n)]
+        want_http = min(len(http_pool), int(math.ceil(limit * http_share)))
+    else:
+        # Строгий режим: в пуле только реально проверенные ноды, квота на тип
+        # не нужна — иначе она тащит в список слабых ради «пропорции».
+        http_pool = []
+        tun_pool = ranked
+        want_http = 0
 
     base_subnet, base_backend, base_worker = _caps_for(limit)
     picked = []

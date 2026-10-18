@@ -9,6 +9,7 @@ Recheck headless: только проверка без сбора.
 5. Обновляет proxy-history.json
 """
 import asyncio
+import os
 import sys
 import time
 import json
@@ -21,6 +22,7 @@ from backend.generator import generate_config_clash, generate_config_v2ray, gene
 from backend.services import geoip_batch
 from backend.state import record_check_results, save_history, get_success_rate
 from backend.quality import select_quality, describe as describe_selection
+from backend.verify import verify_nodes, find_mihomo
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -117,7 +119,28 @@ async def _emit(event: str, data: dict):
         print(f"  [*] {data.get('message', '')}")
 
 
+def strict_enabled() -> bool:
+    """Строгая проверка ядром клиента (mihomo) — по умолчанию вкл., если mihomo найден."""
+    return find_mihomo() is not None and os.environ.get("STRICT_VERIFY", "1") != "0"
+
+
 async def check_nodes(nodes: list[dict], timeout: int, cancel: asyncio.Event) -> list[dict]:
+    if strict_enabled():
+        # Те же критерии, что и при генерации: данные реально прошли через ноду
+        # (HTTPS-проба + закачка >=200 КБ), а не просто TCP/порт 80. Иначе часовой
+        # recheck разбавлял бы топы «живыми на бумаге».
+        print(f"  [*] Strict verify (mihomo): {len(nodes)} нод")
+
+        async def _emit_log(event, data):
+            if event == "log":
+                print(f"     {data.get('text', '')}")
+
+        passed, _checked = await verify_nodes(
+            nodes, cancel, conc=300, batch_size=450,
+            deadline=time.monotonic() + 600, emit=_emit_log)
+        print(f"  [+] Strict pass: {len(passed)}/{len(nodes)}")
+        return passed
+
     sem = asyncio.Semaphore(TCP_CONCURRENCY)
     live = []
 
@@ -175,7 +198,7 @@ async def check_nodes(nodes: list[dict], timeout: int, cancel: asyncio.Event) ->
     return live
 
 
-async def run():
+async def run_legacy():
     cancel = asyncio.Event()
     timeout = 8
     all_nodes: list[dict] = []
@@ -198,8 +221,9 @@ async def run():
     # Подмешиваем свежие HTTP-прокси из web-источников —
     # иначе HTTP вымирают из конфигов и recheck их не возвращает.
     MAX_FRESH_HTTP = 100
+    strict = strict_enabled()
     existing_http = sum(1 for n in all_nodes if n.get("protocol", "").lower() in ("http", "https", "socks5"))
-    if existing_http < 30:
+    if existing_http < 30 and not strict:
         print("  [*] HTTP мало в конфигах, добавляю свежие из web-источников...")
         try:
             from backend.web_sources import fetch_web_proxies
@@ -259,8 +283,9 @@ async def run():
     for n in live_nodes:
         n.pop("name", None)
 
-    top_50 = select_quality(live_nodes, 50, get_success_rate)
-    top_100 = select_quality(live_nodes, 100, get_success_rate)
+    hs = 0 if strict else 0.5   # строгий режим: квоты на тип нет, берём лучших по рангу
+    top_50 = select_quality(live_nodes, 50, get_success_rate, http_share=hs)
+    top_100 = select_quality(live_nodes, 100, get_success_rate, http_share=hs)
     d50 = describe_selection(top_50)
     print(f"  [+] Отбор топ-50: воркерных {d50['workers']}, бэкендов {d50['unique_backends']}, "
           f"макс/подсеть {d50['max_per_subnet']}, http/socks {d50['http']}")
@@ -289,6 +314,131 @@ async def run():
 
     print(f"\n[+] Done: {len(live_nodes)} live (was {len(all_nodes)})")
     print(f"    Updated: NetherLink-50.yaml, NetherLink-100.yaml + v2ray/singbox variants")
+
+
+MIN_MAIN = 50      # меньше — не перезаписываем основной список (сбой раннера/сети ≠ «все умерли»)
+MIN_TOP100 = 30
+MIN_TOP50 = 20
+STRICT_DEADLINE_S = 780
+
+
+async def run_strict():
+    """Часовой recheck в строгом режиме.
+
+    Кандидаты = текущие списки подписки ∪ резервный пул (до 1500 нод, накоплен
+    прошлыми прогонами). Всё проверяется ядром клиента (mihomo), списки
+    пересобираются ИЗ ЖИВЫХ — основной, топ-100/50 и Xray — а не просто
+    урезаются. Пул обновляется (miss-счётчики), мёртвые вылетают после 3 провалов.
+    """
+    from backend import pool as node_pool
+    from backend.generator import generate_configs
+    from backend.quality import collapse_backends, collapse_exit
+    from backend.status import build_status
+
+    cancel = asyncio.Event()
+    cands: dict[tuple, dict] = {}
+
+    for n in node_pool.pool_candidates():
+        cands[node_pool.node_key(n)] = n
+    from_pool = len(cands)
+
+    from_lists = 0
+    for config_name in ["NetherLink-Clash.yaml", "NetherLink-100.yaml", "NetherLink-50.yaml"]:
+        fp = ROOT / config_name
+        if not fp.exists():
+            continue
+        nodes = parse_clash_yaml_nodes(fp)
+        added = 0
+        for n in nodes:
+            k = node_pool.node_key(n)
+            if k not in cands:      # версия из пула богаче (reality/ws/svc) — её не затираем
+                cands[k] = n
+                added += 1
+        from_lists += added
+        print(f"  [*] Parsed {len(nodes)} from {config_name} (новых к пулу: {added})")
+
+    all_nodes = list(cands.values())
+    if not all_nodes:
+        print("  [!] No nodes found in configs/pool")
+        return
+    print(f"  [*] Кандидатов: {len(all_nodes)} (пул {from_pool}, из списков +{from_lists})")
+
+    async def _emit_log(event, data):
+        if event == "log":
+            print(f"     {data.get('text', '')}")
+
+    passed, attempted = await verify_nodes(
+        all_nodes, cancel, conc=300, batch_size=450,
+        deadline=time.monotonic() + STRICT_DEADLINE_S, emit=_emit_log)
+    print(f"  [+] Strict pass: {len(passed)}/{len(attempted)} проверено (из {len(all_nodes)})")
+
+    if not passed:
+        print("  [!] Ни одна нода не прошла — подписки не трогаем (вероятно, сбой сети раннера)")
+        return
+
+    # пул — всегда обновляем (и miss-счётчики тоже)
+    merged = node_pool.merge_pool(node_pool.load_pool(), passed, attempted)
+    node_pool.save_pool(merged)
+    print(f"  [+] Пул: {len(merged)} нод")
+    record_check_results(passed, attempted)
+
+    # страна: у большинства уже есть (выходной IP); остальным — GeoIP
+    need_geo = [n for n in passed if n.get("country") in (None, "", "ZZ")]
+    if need_geo:
+        try:
+            ips = list(dict.fromkeys(n["server"] for n in need_geo))
+            geo = await geoip_batch(ips, cancel)
+            for n in need_geo:
+                info = geo.get(n["server"])
+                if info:
+                    n["_ip"] = info.get("ip") or n["server"]
+                    n["country"] = info.get("country", "ZZ")
+        except Exception as e:
+            print(f"  [~] GeoIP недоступен: {e}")
+
+    for n in passed:
+        n.pop("name", None)     # имена из свежих страны/пинга
+
+    live = collapse_backends(passed, get_success_rate)
+    live = collapse_exit(live, get_success_rate)
+    selected = select_quality(live, 500, get_success_rate, http_share=0)
+    top_100 = select_quality(selected, 100, get_success_rate, http_share=0)
+    top_50 = select_quality(top_100, 50, get_success_rate, http_share=0)
+    print(f"  [+] Списки: main {len(selected)}, top-100 {len(top_100)}, top-50 {len(top_50)}")
+
+    configs = generate_configs(selected, top_nodes_100=top_100, top_nodes_50=top_50, all_live_nodes=live)
+    write_all = len(selected) >= MIN_MAIN
+    for name, content in configs.items():
+        is_main = name in ("NetherLink-Clash.yaml", "NetherLink-v2ray.json", "NetherLink-singbox.json")
+        is_100 = "100" in name
+        is_50 = "-50" in name
+        if is_main and len(selected) < MIN_MAIN:
+            continue
+        if is_100 and len(top_100) < MIN_TOP100:
+            continue
+        if is_50 and len(top_50) < MIN_TOP50:
+            continue
+        (ROOT / name).write_text(content, "utf-8")
+    if not write_all:
+        print(f"  [~] Основной список короче {MIN_MAIN} — main-файлы не перезаписаны")
+
+    try:
+        st = build_status(kind="recheck", selected=selected, top_100=top_100, top_50=top_50,
+                          checked=len(attempted), passed=len(passed), pool_size=len(merged),
+                          check_from=os.environ.get("CHECK_FROM", "GitHub Actions"))
+        (ROOT / "status.json").write_text(json.dumps(st, ensure_ascii=False, indent=1), "utf-8")
+    except Exception as e:
+        print(f"  [~] status.json: {e}")
+
+    print(f"\n[+] Done: {len(passed)} живых из {len(attempted)} проверенных; "
+          f"main {len(selected)} / top-100 {len(top_100)} / top-50 {len(top_50)} / пул {len(merged)}")
+
+
+async def run():
+    if strict_enabled():
+        await run_strict()
+    else:
+        await run_legacy()
 
 
 if __name__ == "__main__":
