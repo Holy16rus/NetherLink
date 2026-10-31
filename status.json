@@ -1,0 +1,46 @@
+{
+ "updated_at": "2026-10-31T13:26:21+00:00",
+ "updated_label": "31.10 13:26 UTC",
+ "kind": "recheck",
+ "verifier": "mihomo: HTTPS-проба + закачка ≥200 КБ + сервисы + целостность",
+ "check_from": "GitHub Actions",
+ "main": {
+  "count": 500,
+  "tunnels": 430,
+  "http_socks": 70,
+  "reality": 157,
+  "countries": 52,
+  "median_kbps": 142
+ },
+ "top100": {
+  "count": 100,
+  "tunnels": 100,
+  "http_socks": 0,
+  "reality": 21,
+  "countries": 7,
+  "median_kbps": 370
+ },
+ "top50": {
+  "count": 50,
+  "tunnels": 50,
+  "http_socks": 0,
+  "reality": 9,
+  "countries": 4,
+  "median_kbps": 431
+ },
+ "verify": {
+  "checked": 1500,
+  "passed": 967,
+  "pass_rate": 64.5,
+  "tcp_live": null,
+  "candidates": null
+ },
+ "pool": {
+  "size": 1500
+ },
+ "services": {
+  "telegram": 451,
+  "youtube": 446,
+  "ai": 439
+ }
+}

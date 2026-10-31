@@ -1,0 +1,617 @@
+{
+  "🇺🇸 США 103ms": {
+    "type": "vless",
+    "server": "47.251.108.158",
+    "server_port": 443,
+    "uuid": "975fc322-6e38-434b-a53c-d39fed49b9a9",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.cloudflare.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "SmgYcFIvvFXW3xh4gvGhIJuQsaZvWkAylcjB6TEddEs",
+        "short_id": "896f52ba2cfca903"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇨🇦 Канада 616ms": {
+    "type": "vless",
+    "server": "ccc.010304.xyz",
+    "server_port": 443,
+    "uuid": "d342d11e-d224-4463-b982-532309285094",
+    "transport": {
+      "type": "ws",
+      "path": "/"
+    },
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇳🇱 Нидерланды 700ms": {
+    "type": "vless",
+    "server": "188.164.248.216",
+    "server_port": 443,
+    "uuid": "d342d11e-d224-4463-b982-532309285094",
+    "transport": {
+      "type": "ws",
+      "path": "/",
+      "headers": {
+        "Host": "ccc.010304.xyz"
+      }
+    },
+    "tls": {
+      "enabled": true,
+      "server_name": "ccc.010304.xyz",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 90ms": {
+    "type": "shadowsocks",
+    "server": "156.146.38.170",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 172ms": {
+    "type": "vmess",
+    "server": "67.220.95.3",
+    "server_port": 18000,
+    "uuid": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
+    "alter_id": 0,
+    "security": "auto"
+  },
+  "🇺🇸 США 196ms": {
+    "type": "trojan",
+    "server": "216.152.156.49",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "api.unlockyourfuturefindyourperfectcareer.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 90ms-2": {
+    "type": "shadowsocks",
+    "server": "156.146.38.168",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 95ms": {
+    "type": "vless",
+    "server": "47.251.25.74",
+    "server_port": 443,
+    "uuid": "18805ff3-b420-45de-af18-93be14024ae8",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.amazon.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "H56cOJhw0xw76lDEpt7IuJJmVGemK6_CK34KtHwDMX8",
+        "short_id": ""
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 203ms": {
+    "type": "shadowsocks",
+    "server": "138.199.42.68",
+    "server_port": 8080,
+    "method": "rc4-md5",
+    "password": "14fFPrbezE3HDZzsMOr6"
+  },
+  "🇺🇸 США 60ms": {
+    "type": "trojan",
+    "server": "66.163.112.242",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 132ms": {
+    "type": "trojan",
+    "server": "66.163.114.106",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.findconnectwithemployersandbuildprofessionalnetwork.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 144ms": {
+    "type": "trojan",
+    "server": "blog.findlocaljobnetworkandbuildcommunityconnections.com",
+    "server_port": 443,
+    "password": "dba20dcb635e430fa4d3bfc303a149d2",
+    "tls": {
+      "enabled": true,
+      "server_name": "blog.findlocaljobnetworkandbuildcommunityconnections.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 102ms": {
+    "type": "shadowsocks",
+    "server": "156.146.38.169",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 113ms": {
+    "type": "vless",
+    "server": "3h-unitedstates1.09vpn.com",
+    "server_port": 80,
+    "uuid": "18cf8db1-9f86-43f7-baa0-382efb7f2dfa",
+    "transport": {
+      "type": "ws",
+      "path": "/vless/"
+    }
+  },
+  "🇺🇸 США 111ms": {
+    "type": "trojan",
+    "server": "167.88.61.193",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "browseseniorrolesandenhanceyourcareertoday.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 64ms": {
+    "type": "shadowsocks",
+    "server": "95.215.201.18",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 58ms": {
+    "type": "trojan",
+    "server": "66.163.112.142",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 87ms": {
+    "type": "shadowsocks",
+    "server": "173.244.56.6",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 142ms": {
+    "type": "trojan",
+    "server": "216.106.186.66",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.findlocaljobnetworkandbuildcommunityconnections.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 98ms": {
+    "type": "vmess",
+    "server": "169.197.142.22",
+    "server_port": 18000,
+    "uuid": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
+    "alter_id": 0,
+    "security": "auto"
+  },
+  "🇺🇸 США 144ms-2": {
+    "type": "vless",
+    "server": "15.204.97.198",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": ""
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 123ms": {
+    "type": "vless",
+    "server": "31.172.69.31",
+    "server_port": 8443,
+    "uuid": "9c6e83fc-b755-4ad4-9b0a-14b610153d8f",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.samsung.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "H43_itYl9CE0AJiCktUfriENFmixY_MTHgX8slCrN2Q",
+        "short_id": "a4e32c324d86cfdf"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 128ms": {
+    "type": "trojan",
+    "server": "66.163.114.45",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 112ms": {
+    "type": "vmess",
+    "server": "www.shopify.com",
+    "server_port": 443,
+    "uuid": "6a89a215-22bf-4bd7-9642-b95b2e09583a",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "guanwang.awsno.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 143ms": {
+    "type": "shadowsocks",
+    "server": "185.215.132.9",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇲🇽 Мексика 177ms": {
+    "type": "trojan",
+    "server": "216.238.80.100",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 62ms": {
+    "type": "trojan",
+    "server": "66.163.112.147",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "courses.unlockyourfuturefindyourperfectcareer.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 124ms": {
+    "type": "vmess",
+    "server": "47.88.79.34",
+    "server_port": 443,
+    "uuid": "9b31490d-190e-4ef1-af0a-7ccab3e7c3b5",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "rib9jxayoqjgn2kw.v.3dns.vip",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 278ms": {
+    "type": "vless",
+    "server": "fast.145779.xyz",
+    "server_port": 2053,
+    "uuid": "e3149c82-00f6-4227-b2c0-b78f1dd81279",
+    "transport": {
+      "type": "ws",
+      "path": "/ws-tesla",
+      "headers": {
+        "Host": "fast.145779.xyz"
+      }
+    },
+    "tls": {
+      "enabled": true,
+      "server_name": "fast.145779.xyz",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 144ms-3": {
+    "type": "trojan",
+    "server": "www.findlocaljobnetworkandbuildcommunityconnections.com",
+    "server_port": 443,
+    "password": "242a3d8eee5e4ed1a6bfa4141d549a25",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.findlocaljobnetworkandbuildcommunityconnections.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 90ms-3": {
+    "type": "shadowsocks",
+    "server": "103.11.76.248",
+    "server_port": 28679,
+    "method": "2022-blake3-aes-128-gcm",
+    "password": "NzJlOTQ5NWYtM2ZkYi00Cg=="
+  },
+  "🇺🇸 США 119ms": {
+    "type": "trojan",
+    "server": "167.88.61.85",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "resources.browseseniorrolesandenhanceyourcareertoday.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 206ms": {
+    "type": "vless",
+    "server": "38.107.236.166",
+    "server_port": 8443,
+    "uuid": "48572af1-d091-457b-a86e-4a457e99927f",
+    "transport": {
+      "type": "ws",
+      "path": "/vless/",
+      "headers": {
+        "Host": "3h-unitedstates3.09vpn.com"
+      }
+    },
+    "tls": {
+      "enabled": true,
+      "server_name": "3h-unitedstates3.09vpn.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 142ms-2": {
+    "type": "vless",
+    "server": "ww13.levikogjgfdd.ir",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": "01"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 148ms": {
+    "type": "shadowsocks",
+    "server": "185.215.132.18",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 110ms": {
+    "type": "trojan",
+    "server": "167.88.61.175",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "blog.browseseniorrolesandenhanceyourcareertoday.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 66ms": {
+    "type": "vless",
+    "server": "67.209.184.133",
+    "server_port": 443,
+    "uuid": "96ebc166-565c-474f-9712-7990b55c368a",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.bing.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "Tp015Ga5LodBwKs4z7Wz4hTvqeh8-4q1EQPZqvZfWR0",
+        "short_id": "ad09494d431b2b92"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 147ms": {
+    "type": "vless",
+    "server": "15.204.97.197",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": "01"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 134ms": {
+    "type": "trojan",
+    "server": "66.163.114.166",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "blog.findconnectwithemployersandbuildprofessionalnetwork.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 152ms": {
+    "type": "trojan",
+    "server": "66.23.203.21",
+    "server_port": 59689,
+    "password": "ae7eb4dwyaz25pxwgq59",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 204ms": {
+    "type": "vless",
+    "server": "51.81.203.63",
+    "server_port": 443,
+    "uuid": "cb2dbb6a-a1ea-4023-9ace-6466cee57241",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.icloud.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "nqwCf6oW49tEtmQ0EzxigZ0uu1pg0E30CS54G40Iti0",
+        "short_id": "4477382ff6d3d41c"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "firefox"
+      }
+    }
+  },
+  "🇺🇸 США 142ms-3": {
+    "type": "trojan",
+    "server": "216.106.186.66",
+    "server_port": 443,
+    "password": "242a3d8eee5e4ed1a6bfa4141d549a25",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.findlocaljobnetworkandbuildcommunityconnections.com",
+      "insecure": true
+    }
+  },
+  "🇲🇽 Мексика 223ms": {
+    "type": "trojan",
+    "server": "mx001.zestapp778.com",
+    "server_port": 15083,
+    "password": "5t6i121em5lkmsmk",
+    "tls": {
+      "enabled": true,
+      "server_name": "mx001.zestapp778.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 149ms": {
+    "type": "vless",
+    "server": "15.204.97.219",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": ""
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 206ms-2": {
+    "type": "trojan",
+    "server": "216.152.156.81",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 180ms": {
+    "type": "shadowsocks",
+    "server": "37.19.198.160",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 162ms": {
+    "type": "vmess",
+    "server": "84.17.41.2",
+    "server_port": 18000,
+    "uuid": "f8c8dc3d-0d37-46b0-8b34-a7232882fcfe",
+    "alter_id": 0,
+    "security": "auto"
+  },
+  "🇺🇸 США 244ms": {
+    "type": "trojan",
+    "server": "170.101.101.131",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "blog.explorecreativejobsandenhanceyourcareerportfolio.com",
+      "insecure": true
+    }
+  },
+  "🇨🇦 Канада 137ms": {
+    "type": "shadowsocks",
+    "server": "149.22.95.183",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 265ms": {
+    "type": "hysteria2",
+    "server": "66.94.121.46",
+    "server_port": 443,
+    "password": "gf1:gfhysteria2024",
+    "tls": {
+      "enabled": true,
+      "server_name": "",
+      "insecure": true
+    }
+  }
+}
