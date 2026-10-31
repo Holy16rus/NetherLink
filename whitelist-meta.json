@@ -1,0 +1,37 @@
+{
+ "generated_at": "2026-10-31T11:33:48.338952+00:00",
+ "sources": [
+  "Vless-Reality-White-Lists-Rus-Mobile.txt",
+  "WHITE-SNI-RU-all.txt",
+  "WHITE-CIDR-RU-checked.txt",
+  "WHITE-CIDR-RU-all.txt",
+  "vless_universal.txt",
+  "whitelist_all.txt",
+  "white_sni_ru.txt",
+  "bypass-1.txt",
+  "bypass-2.txt",
+  "bypass-3.txt",
+  "bypass-4.txt",
+  "bypass-5.txt",
+  "bypass-6.txt",
+  "bypass-7.txt",
+  "bypass-8.txt",
+  "bypass-9.txt",
+  "bypass-all.txt"
+ ],
+ "parsed": 3380,
+ "tcp_alive": 1306,
+ "proto_checked": 2000,
+ "live_configs": 584,
+ "unique_servers": 237,
+ "protocols": {
+  "vless": 237
+ },
+ "reality": 193,
+ "verifier": "mihomo: HTTPS-проба + закачка ≥200 КБ",
+ "services": {
+  "telegram": 204,
+  "youtube": 211,
+  "ai": 197
+ }
+}
