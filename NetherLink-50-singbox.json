@@ -1,0 +1,571 @@
+{
+  "🇺🇸 США 98ms": {
+    "type": "vless",
+    "server": "169.128.83.4",
+    "server_port": 57259,
+    "uuid": "a1962f23-f8f8-412d-f2ce-3361e7b72889"
+  },
+  "🇺🇸 США 145ms": {
+    "type": "vmess",
+    "server": "rib9jxayoqjgn2kw.v.3dns.vip",
+    "server_port": 443,
+    "uuid": "9b31490d-190e-4ef1-af0a-7ccab3e7c3b5",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "Rib9JXAYoqjGN2KW.v.3dns.vip",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 201ms": {
+    "type": "vmess",
+    "server": "167.88.63.39",
+    "server_port": 1270,
+    "uuid": "5c040f1d-45db-43bd-8d46-e4950e433735",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "xmfhlpy.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 112ms": {
+    "type": "trojan",
+    "server": "216.152.155.59",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "api.nextjobopportunityandclaimyouridealrole.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 201ms-2": {
+    "type": "trojan",
+    "server": "167.88.61.85",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "resources.browseseniorrolesandenhanceyourcareertoday.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 121ms": {
+    "type": "trojan",
+    "server": "216.152.155.54",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "learn.nextjobopportunityandclaimyouridealrole.com",
+      "insecure": true
+    }
+  },
+  "🇨🇦 Канада 166ms": {
+    "type": "trojan",
+    "server": "ca001.zestapp778.com",
+    "server_port": 46977,
+    "password": "5t6i121em5lkmsmk",
+    "tls": {
+      "enabled": true,
+      "server_name": "ca001.zestapp778.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 183ms": {
+    "type": "trojan",
+    "server": "216.106.186.66",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.findlocaljobnetworkandbuildcommunityconnections.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 176ms": {
+    "type": "shadowsocks",
+    "server": "107.155.57.11",
+    "server_port": 8080,
+    "method": "rc4-md5",
+    "password": "14fFPrbezE3HDZzsMOr6"
+  },
+  "🇨🇦 Канада 258ms": {
+    "type": "vless",
+    "server": "209.200.246.148",
+    "server_port": 443,
+    "uuid": "ca52e2b6-fb9f-4dac-b6dc-49da9923f251",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.cloudflare.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "uTmb-ytXsx8p0fkBz7A76SHpWk7_oVutIA4LGTE8BQk",
+        "short_id": "f98843107912e782"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 199ms": {
+    "type": "vless",
+    "server": "us2.japancase.site",
+    "server_port": 443,
+    "uuid": "db80088c-32a1-4cb8-a907-0f3cb7844152",
+    "flow": "xtls-rprx-vision",
+    "transport": {
+      "type": "raw"
+    },
+    "tls": {
+      "enabled": true,
+      "server_name": "us2.japancase.site",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "zEntiD6D81wY__YHPvIw78e09CBIgYkyQ5meIo7c_hg",
+        "short_id": "41ae8e266bc3346f"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇨🇦 Канада 222ms": {
+    "type": "vmess",
+    "server": "158.51.121.246",
+    "server_port": 1270,
+    "uuid": "5c040f1d-45db-43bd-8d46-e4950e433735",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "xmfhlpy.com",
+      "insecure": true
+    }
+  },
+  "🇨🇦 Канада 191ms": {
+    "type": "shadowsocks",
+    "server": "137.184.174.93",
+    "server_port": 8080,
+    "method": "rc4-md5",
+    "password": "14fFPrbezE3HDZzsMOr6"
+  },
+  "🇺🇸 США 239ms": {
+    "type": "vless",
+    "server": "169.40.42.163",
+    "server_port": 443,
+    "uuid": "d65cc14c-f53f-4fe2-b262-97856601319c",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "yahoo.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg",
+        "short_id": "c39cc7310a"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "random"
+      }
+    }
+  },
+  "🇲🇽 Мексика 143ms": {
+    "type": "shadowsocks",
+    "server": "64.177.90.30",
+    "server_port": 8388,
+    "method": "aes-256-gcm",
+    "password": "BWyPPTusFKhGgzKh"
+  },
+  "🇺🇸 США 142ms": {
+    "type": "shadowsocks",
+    "server": "37.19.198.236",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 221ms": {
+    "type": "vless",
+    "server": "45.144.112.55",
+    "server_port": 443,
+    "uuid": "d65cc14c-f53f-4fe2-b262-97856601319c",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "yahoo.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg",
+        "short_id": "c39cc7310a"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 163ms": {
+    "type": "shadowsocks",
+    "server": "38.22.17.219",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 89ms": {
+    "type": "shadowsocks",
+    "server": "38.145.220.193",
+    "server_port": 8443,
+    "method": "2022-blake3-aes-128-gcm",
+    "password": "jUbDNsFamcyDfpm+rI3Zyw=="
+  },
+  "🇺🇸 США 140ms": {
+    "type": "shadowsocks",
+    "server": "37.19.198.160",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 163ms-2": {
+    "type": "shadowsocks",
+    "server": "173.244.56.6",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 154ms": {
+    "type": "shadowsocks",
+    "server": "193.151.160.18",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 211ms": {
+    "type": "trojan",
+    "server": "us001.zestapp778.com",
+    "server_port": 57277,
+    "password": "5t6i121em5lkmsmk",
+    "tls": {
+      "enabled": true,
+      "server_name": "us001.zestapp778.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 64ms": {
+    "type": "hysteria2",
+    "server": "promo3.goonars.com",
+    "server_port": 443,
+    "password": "63e1b9462d708b56d5d5a0267cffecdc",
+    "tls": {
+      "enabled": true,
+      "server_name": "promo3.goonars.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 69ms": {
+    "type": "shadowsocks",
+    "server": "167.88.62.203",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 203ms": {
+    "type": "trojan",
+    "server": "169.197.140.224",
+    "server_port": 443,
+    "password": "0ab6c98dae3b48e8b9c4a776b6c9c19a",
+    "tls": {
+      "enabled": true,
+      "server_name": "resources.discoverfreshgraduatejobsstartyourprofessionaljourney.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 227ms": {
+    "type": "vless",
+    "server": "169.40.42.89",
+    "server_port": 443,
+    "uuid": "d65cc14c-f53f-4fe2-b262-97856601319c",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "yahoo.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg",
+        "short_id": "c39cc7310a"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "qq"
+      }
+    }
+  },
+  "🇺🇸 США 113ms": {
+    "type": "vmess",
+    "server": "162.251.61.46",
+    "server_port": 1270,
+    "uuid": "5c040f1d-45db-43bd-8d46-e4950e433735",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "xmfhlpy.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 123ms": {
+    "type": "vmess",
+    "server": "38.128.66.241",
+    "server_port": 1270,
+    "uuid": "5c040f1d-45db-43bd-8d46-e4950e433735",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "xmfhlpy.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 158ms": {
+    "type": "shadowsocks",
+    "server": "38.121.43.225",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 161ms": {
+    "type": "shadowsocks",
+    "server": "38.22.17.214",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 69ms-2": {
+    "type": "shadowsocks",
+    "server": "167.88.62.56",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 94ms": {
+    "type": "shadowsocks",
+    "server": "137.184.89.151",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 71ms": {
+    "type": "shadowsocks",
+    "server": "167.17.67.171",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 97ms": {
+    "type": "shadowsocks",
+    "server": "216.106.178.169",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 89ms-2": {
+    "type": "shadowsocks",
+    "server": "156.146.38.170",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 137ms": {
+    "type": "shadowsocks",
+    "server": "185.230.230.18",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 167ms": {
+    "type": "shadowsocks",
+    "server": "38.91.107.188",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 295ms": {
+    "type": "vless",
+    "server": "23.95.115.116",
+    "server_port": 2053,
+    "uuid": "2739258b-a278-4bed-bc5d-f88830824dce",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "www.cloudflare.com",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "plwyjJZIVDt1OtwDAxfcLjDsR7dseVCe9Ia3HceIKEg",
+        "short_id": "a1b2c3d4"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 142ms-2": {
+    "type": "vless",
+    "server": "15.204.97.206",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "transport": {
+      "type": "raw"
+    },
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": "01"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 95ms": {
+    "type": "vmess",
+    "server": "167.88.62.51",
+    "server_port": 1270,
+    "uuid": "5c040f1d-45db-43bd-8d46-e4950e433735",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "xmfhlpy.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 153ms": {
+    "type": "shadowsocks",
+    "server": "193.151.160.9",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 87ms": {
+    "type": "shadowsocks",
+    "server": "156.146.38.169",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 88ms": {
+    "type": "shadowsocks",
+    "server": "156.146.38.168",
+    "server_port": 443,
+    "method": "aes-128-gcm",
+    "password": "shadowsocks"
+  },
+  "🇺🇸 США 127ms": {
+    "type": "shadowsocks",
+    "server": "23.150.152.38",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  },
+  "🇺🇸 США 143ms": {
+    "type": "vless",
+    "server": "15.204.97.219",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": ""
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 149ms": {
+    "type": "vless",
+    "server": "15.204.97.216",
+    "server_port": 23576,
+    "uuid": "48ff2b70-e180-582f-8866-d9a2edeed5f5",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "fuck.rkn",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s",
+        "short_id": ""
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 126ms": {
+    "type": "vmess",
+    "server": "38.128.66.249",
+    "server_port": 1270,
+    "uuid": "5c040f1d-45db-43bd-8d46-e4950e433735",
+    "alter_id": 0,
+    "security": "auto",
+    "tls": {
+      "enabled": true,
+      "server_name": "xmfhlpy.com",
+      "insecure": true
+    }
+  },
+  "🇺🇸 США 118ms": {
+    "type": "vless",
+    "server": "148.135.86.162",
+    "server_port": 10000,
+    "uuid": "327b1113-049e-4256-8d72-8815643dbb65",
+    "flow": "xtls-rprx-vision",
+    "tls": {
+      "enabled": true,
+      "server_name": "addons.mozilla.org",
+      "insecure": true,
+      "reality": {
+        "enabled": true,
+        "public_key": "DCbnS4mIPc1W2-wI0MGHhykwzf2nVuZvBadErSE6MxU",
+        "short_id": "a1b2c3d4"
+      },
+      "utls": {
+        "enabled": true,
+        "fingerprint": "chrome"
+      }
+    }
+  },
+  "🇺🇸 США 151ms": {
+    "type": "shadowsocks",
+    "server": "38.143.66.146",
+    "server_port": 19999,
+    "method": "aes-256-gcm",
+    "password": "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+  }
+}
