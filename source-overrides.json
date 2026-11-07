@@ -1,0 +1,738 @@
+{
+ "generated_at": "2026-11-02T11:49:04+00:00",
+ "sample": 250,
+ "min_sample": 60,
+ "disable": [],
+ "enable": [
+  "https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/http.txt",
+  "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt",
+  "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt",
+  "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/non_ru.txt",
+  "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/Eternity.txt",
+  "https://raw.githubusercontent.com/pog7x/vpn-configs/master/githubmirror/1.txt",
+  "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/all/data.txt",
+  "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt"
+ ],
+ "report": [
+  {
+   "src": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all",
+   "enabled": false,
+   "parsed": 1342,
+   "tcp": 0.172,
+   "checked": 43,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks5&timeout=10000&country=all",
+   "enabled": true,
+   "parsed": 2290,
+   "tcp": 0.548,
+   "checked": 137,
+   "alive": 42,
+   "new_alive": 0,
+   "strict": 0.3066
+  },
+  {
+   "src": "https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks4&timeout=10000&country=all",
+   "enabled": false,
+   "parsed": 260,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
+   "enabled": true,
+   "parsed": 1180,
+   "tcp": 0.424,
+   "checked": 106,
+   "alive": 42,
+   "new_alive": 0,
+   "strict": 0.3962
+  },
+  {
+   "src": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/socks5.txt",
+   "enabled": true,
+   "parsed": 1263,
+   "tcp": 0.596,
+   "checked": 149,
+   "alive": 46,
+   "new_alive": 0,
+   "strict": 0.3087
+  },
+  {
+   "src": "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/socks4.txt",
+   "enabled": false,
+   "parsed": 460,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt",
+   "enabled": true,
+   "parsed": 2933,
+   "tcp": 0.24,
+   "checked": 60,
+   "alive": 8,
+   "new_alive": 0,
+   "strict": 0.1333
+  },
+  {
+   "src": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt",
+   "enabled": false,
+   "parsed": 2331,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt",
+   "enabled": true,
+   "parsed": 3340,
+   "tcp": 0.34,
+   "checked": 85,
+   "alive": 11,
+   "new_alive": 0,
+   "strict": 0.1294
+  },
+  {
+   "src": "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies.txt",
+   "enabled": false,
+   "parsed": 4232,
+   "tcp": 0.064,
+   "checked": 16,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt",
+   "enabled": false,
+   "parsed": 137,
+   "tcp": 0.161,
+   "checked": 22,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS5_RAW.txt",
+   "enabled": true,
+   "parsed": 9,
+   "tcp": 0.222,
+   "checked": 2,
+   "alive": 2,
+   "new_alive": 0,
+   "strict": 1.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/SOCKS4_RAW.txt",
+   "enabled": false,
+   "parsed": 150,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_RAW.txt",
+   "enabled": true,
+   "parsed": 150,
+   "tcp": 0.951,
+   "checked": 117,
+   "alive": 96,
+   "new_alive": 0,
+   "strict": 0.8205
+  },
+  {
+   "src": "https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt",
+   "enabled": false,
+   "parsed": 1639,
+   "tcp": 0.304,
+   "checked": 76,
+   "alive": 8,
+   "new_alive": 7,
+   "strict": 0.1053
+  },
+  {
+   "src": "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt",
+   "enabled": false,
+   "parsed": 4928,
+   "tcp": 0.156,
+   "checked": 39,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt",
+   "enabled": false,
+   "parsed": 40,
+   "tcp": 0.275,
+   "checked": 11,
+   "alive": 7,
+   "new_alive": 4,
+   "strict": 0.6364
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks5.txt",
+   "enabled": false,
+   "parsed": 279,
+   "tcp": 0.34,
+   "checked": 85,
+   "alive": 1,
+   "new_alive": 0,
+   "strict": 0.0118
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/socks4.txt",
+   "enabled": false,
+   "parsed": 661,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/http.txt",
+   "enabled": false,
+   "parsed": 1265,
+   "tcp": 0.26,
+   "checked": 65,
+   "alive": 11,
+   "new_alive": 11,
+   "strict": 0.1692
+  },
+  {
+   "src": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt",
+   "enabled": true,
+   "parsed": 4635,
+   "tcp": 0.38,
+   "checked": 95,
+   "alive": 9,
+   "new_alive": 0,
+   "strict": 0.0947
+  },
+  {
+   "src": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/socks5/data.txt",
+   "enabled": true,
+   "parsed": 4928,
+   "tcp": 0.168,
+   "checked": 42,
+   "alive": 10,
+   "new_alive": 0,
+   "strict": 0.2381
+  },
+  {
+   "src": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/socks4/data.txt",
+   "enabled": false,
+   "parsed": 439,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/https/data.txt",
+   "enabled": false,
+   "parsed": 914,
+   "tcp": 0.984,
+   "checked": 200,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/all/data.txt",
+   "enabled": false,
+   "parsed": 10916,
+   "tcp": 0.344,
+   "checked": 86,
+   "alive": 7,
+   "new_alive": 7,
+   "strict": 0.0814
+  },
+  {
+   "src": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt",
+   "enabled": true,
+   "parsed": 451,
+   "tcp": 0.996,
+   "checked": 182,
+   "alive": 12,
+   "new_alive": 0,
+   "strict": 0.0659
+  },
+  {
+   "src": "https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt",
+   "enabled": false,
+   "parsed": 460,
+   "tcp": 0.964,
+   "checked": 198,
+   "alive": 46,
+   "new_alive": 22,
+   "strict": 0.2323
+  },
+  {
+   "src": "https://github.com/zloi-user/hideip.me",
+   "enabled": true,
+   "parsed": 4487,
+   "tcp": 0.396,
+   "checked": 99,
+   "alive": 15,
+   "new_alive": 0,
+   "strict": 0.1515
+  },
+  {
+   "src": "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt",
+   "enabled": false,
+   "parsed": 400,
+   "tcp": 0.056,
+   "checked": 14,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt",
+   "enabled": false,
+   "parsed": 59,
+   "tcp": 0.917,
+   "checked": 11,
+   "alive": 3,
+   "new_alive": 3,
+   "strict": 0.2727
+  },
+  {
+   "src": "https://raw.githubusercontent.com/pog7x/vpn-configs/master/githubmirror/1.txt",
+   "enabled": false,
+   "parsed": 12941,
+   "tcp": 0.42,
+   "checked": 105,
+   "alive": 32,
+   "new_alive": 22,
+   "strict": 0.3048
+  },
+  {
+   "src": "https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/blacklist.txt",
+   "enabled": true,
+   "parsed": 2,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/luxxuria/harvester/refs/heads/main/non_ru.txt",
+   "enabled": false,
+   "parsed": 49,
+   "tcp": 0.939,
+   "checked": 46,
+   "alive": 18,
+   "new_alive": 17,
+   "strict": 0.3913
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/feat/ai-crawler-v2/nodes/merged.txt",
+   "enabled": true,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://spys.me/proxy.txt",
+   "enabled": false,
+   "parsed": 400,
+   "tcp": 0.348,
+   "checked": 87,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://spys.me/socks.txt",
+   "enabled": false,
+   "parsed": 400,
+   "tcp": 0.368,
+   "checked": 92,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://sunny9577.github.io/proxy-scraper/proxies.txt",
+   "enabled": false,
+   "parsed": 1639,
+   "tcp": 0.376,
+   "checked": 94,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt",
+   "enabled": false,
+   "parsed": 528,
+   "tcp": 0.644,
+   "checked": 161,
+   "alive": 1,
+   "new_alive": 0,
+   "strict": 0.0062
+  },
+  {
+   "src": "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/socks5.txt",
+   "enabled": false,
+   "parsed": 21,
+   "tcp": 0.286,
+   "checked": 6,
+   "alive": 3,
+   "new_alive": 3,
+   "strict": 0.5
+  },
+  {
+   "src": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt",
+   "enabled": false,
+   "parsed": 554,
+   "tcp": 0.012,
+   "checked": 3,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/socks5.txt",
+   "enabled": false,
+   "parsed": 247,
+   "tcp": 0.215,
+   "checked": 53,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://github.com/Epodonios/v2ray-configs",
+   "enabled": false,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://github.com/ebrasha/free-v2ray-public-list",
+   "enabled": false,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/1sub.txt",
+   "enabled": true,
+   "parsed": 100,
+   "tcp": 0.275,
+   "checked": 19,
+   "alive": 14,
+   "new_alive": 0,
+   "strict": 0.7368
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/2sub.txt",
+   "enabled": true,
+   "parsed": 100,
+   "tcp": 0.347,
+   "checked": 17,
+   "alive": 7,
+   "new_alive": 0,
+   "strict": 0.4118
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/subscriptions/3sub.txt",
+   "enabled": true,
+   "parsed": 100,
+   "tcp": 0.145,
+   "checked": 8,
+   "alive": 5,
+   "new_alive": 0,
+   "strict": 0.625
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/WHITELIST-ALL.txt",
+   "enabled": true,
+   "parsed": 318,
+   "tcp": 0.23,
+   "checked": 32,
+   "alive": 19,
+   "new_alive": 0,
+   "strict": 0.5938
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/best_keys.txt",
+   "enabled": true,
+   "parsed": 174,
+   "tcp": 0.291,
+   "checked": 23,
+   "alive": 16,
+   "new_alive": 0,
+   "strict": 0.6957
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ksenkovsolo/HardVPN-bypass-WhiteLists-/main/vpn-lte/good_keys.txt",
+   "enabled": true,
+   "parsed": 144,
+   "tcp": 0.231,
+   "checked": 18,
+   "alive": 10,
+   "new_alive": 0,
+   "strict": 0.5556
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/All_Configs_Sub.txt",
+   "enabled": true,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vless.txt",
+   "enabled": true,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ALIILAPRO/v2rayNG-Config/main/sub.txt",
+   "enabled": false,
+   "parsed": 4103,
+   "tcp": 0.46,
+   "checked": 115,
+   "alive": 14,
+   "new_alive": 10,
+   "strict": 0.1217
+  },
+  {
+   "src": "https://raw.githubusercontent.com/w1770946466/Auto_proxy/main/Long_term_subscription_num",
+   "enabled": false,
+   "parsed": 555,
+   "tcp": 0.272,
+   "checked": 68,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
+   "enabled": true,
+   "parsed": 481,
+   "tcp": 0.844,
+   "checked": 200,
+   "alive": 43,
+   "new_alive": 0,
+   "strict": 0.215
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ts-sf/fly/main/v2",
+   "enabled": false,
+   "parsed": 201,
+   "tcp": 0.323,
+   "checked": 65,
+   "alive": 5,
+   "new_alive": 3,
+   "strict": 0.0769
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
+   "enabled": false,
+   "parsed": 11,
+   "tcp": 0.909,
+   "checked": 10,
+   "alive": 9,
+   "new_alive": 4,
+   "strict": 0.9
+  },
+  {
+   "src": "https://raw.githubusercontent.com/freefq/free/master/v2",
+   "enabled": false,
+   "parsed": 15,
+   "tcp": 0.2,
+   "checked": 3,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": 0.0
+  },
+  {
+   "src": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
+   "enabled": true,
+   "parsed": 62,
+   "tcp": 0.82,
+   "checked": 50,
+   "alive": 15,
+   "new_alive": 0,
+   "strict": 0.3
+  },
+  {
+   "src": "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/Eternity.txt",
+   "enabled": false,
+   "parsed": 199,
+   "tcp": 0.934,
+   "checked": 184,
+   "alive": 154,
+   "new_alive": 38,
+   "strict": 0.837
+  },
+  {
+   "src": "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/all/configs.txt",
+   "enabled": true,
+   "parsed": 10779,
+   "tcp": 0.588,
+   "checked": 147,
+   "alive": 28,
+   "new_alive": 0,
+   "strict": 0.1905
+  },
+  {
+   "src": "https://raw.githubusercontent.com/barry-far/V2ray-Config/main/All_Configs_Sub.txt",
+   "enabled": true,
+   "parsed": 8745,
+   "tcp": 0.572,
+   "checked": 143,
+   "alive": 29,
+   "new_alive": 0,
+   "strict": 0.2028
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/trojan.txt",
+   "enabled": true,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/ss.txt",
+   "enabled": true,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/vmess.txt",
+   "enabled": true,
+   "parsed": 0,
+   "tcp": 0.0,
+   "checked": 0,
+   "alive": 0,
+   "new_alive": 0,
+   "strict": null
+  },
+  {
+   "src": "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/all_sub.txt",
+   "enabled": true,
+   "parsed": 3974,
+   "tcp": 0.388,
+   "checked": 97,
+   "alive": 12,
+   "new_alive": 0,
+   "strict": 0.1237
+  },
+  {
+   "src": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/vless.txt",
+   "enabled": true,
+   "parsed": 6645,
+   "tcp": 0.804,
+   "checked": 200,
+   "alive": 30,
+   "new_alive": 0,
+   "strict": 0.15
+  },
+  {
+   "src": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/trojan.txt",
+   "enabled": true,
+   "parsed": 1612,
+   "tcp": 0.852,
+   "checked": 200,
+   "alive": 40,
+   "new_alive": 0,
+   "strict": 0.2
+  },
+  {
+   "src": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/ss.txt",
+   "enabled": true,
+   "parsed": 1542,
+   "tcp": 0.828,
+   "checked": 200,
+   "alive": 134,
+   "new_alive": 0,
+   "strict": 0.67
+  },
+  {
+   "src": "https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/vmess.txt",
+   "enabled": true,
+   "parsed": 1665,
+   "tcp": 0.788,
+   "checked": 197,
+   "alive": 7,
+   "new_alive": 0,
+   "strict": 0.0355
+  },
+  {
+   "src": "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/mix.txt",
+   "enabled": true,
+   "parsed": 1829,
+   "tcp": 0.832,
+   "checked": 200,
+   "alive": 21,
+   "new_alive": 0,
+   "strict": 0.105
+  },
+  {
+   "src": "https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/main/Config/vless.txt",
+   "enabled": true,
+   "parsed": 263,
+   "tcp": 0.49,
+   "checked": 98,
+   "alive": 10,
+   "new_alive": 0,
+   "strict": 0.102
+  },
+  {
+   "src": "https://raw.githubusercontent.com/crackbest/V2ray-Config/main/config.txt",
+   "enabled": true,
+   "parsed": 514,
+   "tcp": 0.48,
+   "checked": 120,
+   "alive": 24,
+   "new_alive": 0,
+   "strict": 0.2
+  }
+ ]
+}
